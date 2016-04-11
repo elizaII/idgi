@@ -1,1 +1,0 @@
-Clone this repository.
