@@ -17,7 +17,7 @@ public class Option {
 	public void select() {
 		this.isSelected = true;
 	}
-	
+
 	public void deselect() {
 		this.isSelected = false;
 	}
@@ -52,5 +52,9 @@ public class Option {
 		result = prime * result + (this.isSelected ? 1231 : 1237);
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		return result;
+	}
+
+	public boolean isDeselectedAndCorrect() {
+		return !this.isSelected && this.isCorrect;
 	}
 }
