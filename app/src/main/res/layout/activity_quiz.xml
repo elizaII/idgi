@@ -25,8 +25,9 @@
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical|center_horizontal"/>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/answer_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_height="wrap_content"></LinearLayout>
 </RelativeLayout>
