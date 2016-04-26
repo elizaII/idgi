@@ -28,7 +28,7 @@ public class Question {
 	
 	public boolean isCorrectlyAnswered() {
 		for (Option option : options)
-			if (option.isSelectedAndIncorrect())
+			if (option.isSelectedAndIncorrect() || option.isDeselectedAndCorrect()) //kollar inte om man har missat ett rätt svar.
 				return false;
 		
 		return true;
