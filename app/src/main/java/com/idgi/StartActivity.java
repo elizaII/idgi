@@ -24,22 +24,6 @@ public class StartActivity extends AppCompatActivity {
 
 		if (savedInstanceState != null)
 			return;
-
-		final TestFragment firstFragment = new TestFragment();
-
-		firstFragment.setArguments(getIntent().getExtras());
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
-
-		FrameLayout container = (FrameLayout) findViewById(R.id.fragment_container);
-		container.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				//Toast.makeText(StartActivity.this, "Removing fragment.", Toast.LENGTH_SHORT).show();
-				getSupportFragmentManager().beginTransaction().remove(firstFragment).commit();
-			}
-		});
-
     }
 
     public void showVideoActivity(View view) {
