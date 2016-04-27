@@ -13,17 +13,13 @@ public class Option {
 	public String getText() {
 		return this.text;
 	}
-	
-	public void select() {
-		this.isSelected = true;
-	}
 
-	public void deselect() {
-		this.isSelected = false;
+	public void setSelected(boolean selected) {
+		this.isSelected = selected;
 	}
 	
-	public void setCorrect(boolean isCorrect) {
-		this.isCorrect = isCorrect;
+	public void setCorrect(boolean correct) {
+		this.isCorrect = correct;
 	}
 	
 	public boolean isSelected() {

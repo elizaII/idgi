@@ -48,8 +48,8 @@ public class QuizTest {
 		
 		assertTrue(quiz.getCurrentQuestion().equals(question2));
 	}
-	
-	@Test(expected = IllegalStateException.class)
+
+	@Test
 	public void testNextQuestion() {
 		Quiz quiz = new Quiz();
 		
@@ -59,6 +59,8 @@ public class QuizTest {
 		quiz.nextQuestion();
 		quiz.nextQuestion();
 		quiz.nextQuestion();
+
+		assertTrue(quiz.isFinished());
 	}
 	
 	@Test

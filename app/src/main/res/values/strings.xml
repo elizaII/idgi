@@ -7,6 +7,9 @@
     <string name="seek_to">Jump To</string>
     <string name="seek_to_hint">Seconds</string>
 
+    <string name="quiz_next_question">Next Question</string>
+    <string name="quiz_finish">Finish</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

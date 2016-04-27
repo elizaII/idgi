@@ -1,5 +1,6 @@
 package com.idgi;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class QuizActivity extends AppCompatActivity {
 
 	private Quiz quiz;
 	private TextView txtQuestion;
+	private LinearLayout buttonContainer;
+	private Button btnNext;
 
 	private static final int BUTTONS_PER_ROW = 2;
 
@@ -32,7 +35,9 @@ public class QuizActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
 
-		txtQuestion = (TextView) findViewById(R.id.txtQuestion);
+		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
+
+		txtQuestion = (TextView) findViewById(R.id.quiz_txt_question);
 
 		Bundle extras = getIntent().getExtras();
 
@@ -42,26 +47,40 @@ public class QuizActivity extends AppCompatActivity {
 				quiz = Database.getInstance().getQuiz(quizKey);
 		}
 
-		createOptionButtons();
-	}
+		btnNext = (Button) findViewById(R.id.quiz_btn_next_question);
+		btnNext.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				changeToNextQuestion();
+			}
+		});
 
-	private void nextQuestion() {
-		quiz.nextQuestion();
 		txtQuestion.setText(quiz.getCurrentQuestion().getText());
+		createOptionButtons(quiz.getCurrentQuestion());
 	}
 
-	private void createOptionButtons() {
-		LinearLayout container = (LinearLayout) findViewById(R.id.answer_container);
+	private void changeToNextQuestion() {
+		quiz.nextQuestion();
 
-		Set<Option> options = quiz.getCurrentQuestion().getOptions();
+		if (quiz.isFinished())
+			startActivity(new Intent(this, StartActivity.class));
+		else {
+			txtQuestion.setText(quiz.getCurrentQuestion().getText());
+			buttonContainer.removeAllViews();
+			createOptionButtons(quiz.getCurrentQuestion());
+			if (quiz.isLastQuestion())
+				btnNext.setText(R.string.quiz_finish);
+		}
+	}
+
+	private void createOptionButtons(Question question) {
+		Set<Option> options = question.getOptions();
 
 		LinearLayout buttonRow = createNewButtonRow();
 
 		for (Option option : options) {
 			buttonRow.addView(ButtonFactory.createAnswerButton(this, option));
-
 			if (buttonRowIsFull(buttonRow)) {
-				container.addView(buttonRow);
+				buttonContainer.addView(buttonRow);
 				buttonRow = createNewButtonRow();
 			}
 		}

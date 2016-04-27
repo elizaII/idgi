@@ -10,7 +10,7 @@ public class Quiz {
 	List<Question> questions;
 	
 	public Quiz() {
-		questions = new ArrayList<Question>();
+		questions = new ArrayList<>();
 	}
 	
 	public void addQuestion(Question question) {
@@ -42,9 +42,15 @@ public class Quiz {
 	 * @throws IllegalStateException if there are no more questions.
 	 */
 	public void nextQuestion() throws IllegalStateException {
-		++currentIndex;
-		
-		if (currentIndex >= questions.size())
-			throw new IllegalStateException("There is no next question. (Model.Quiz.java)");
+		if (!isFinished())
+			++currentIndex;
+	}
+
+	public boolean isLastQuestion() {
+		return currentIndex == length() - 1;
+	}
+
+	public boolean isFinished() {
+		return currentIndex == length();
 	}
 }

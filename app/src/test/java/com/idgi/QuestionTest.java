@@ -23,7 +23,7 @@ public class QuestionTest {
 		question1.addOption(optionCat);
 		question1.addOption(optionDog);
 		
-		optionCat.select();
+		optionCat.setSelected(true);
 		
 		assertTrue(question1.isCorrectlyAnswered());
 	}
@@ -38,8 +38,8 @@ public class QuestionTest {
 		
 		question1.addOptions(option10, option12, option2);
 		
-		option12.select();
-		option2.select();
+		option12.setSelected(true);
+		option2.setSelected(true);
 		
 		Set<Option> mistakes = question1.getMistakes();
 		
