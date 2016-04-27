@@ -43,6 +43,18 @@ public class StartActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
+	public void onLogInButtonClick(View view) {
+		startActivity(new Intent(StartActivity.this, LoginActivity.class));
+	}
+
+	public void onCreateAccountButtonClick(View view) {
+		startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
+	}
+
+	public void onAccountButtonClick(View view) {
+		startActivity(new Intent(StartActivity.this, AccountActivity.class));
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

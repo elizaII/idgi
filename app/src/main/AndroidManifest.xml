@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.idgi">
+    package="com.idgi">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application>
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,21 +17,31 @@
         android:theme="@style/AppTheme">
         <activity android:name=".StartActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".VideoActivity"
             android:label="@string/title_activity_video"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/Theme.AppCompat.Light">
-        </activity>
-        <activity android:name=".QuizActivity">
-        </activity>
-        <activity android:name=".SchoolListActivity">
-        </activity>
+
+            android:theme="@style/Theme.AppCompat.Light" />
+    <activity android:name=".QuizActivity">
+    </activity>
+    <activity android:name=".SchoolListActivity">
+    </activity>
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:label="@string/title_activity_create_account"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
