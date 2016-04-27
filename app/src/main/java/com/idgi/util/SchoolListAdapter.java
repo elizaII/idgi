@@ -49,7 +49,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
         public ViewHolder(View v){
             super(v);
-            schoolTextView =(TextView) v.findViewById(R.id.schoolText);
+            schoolTextView =(TextView) v.findViewById(R.id.schoolTextView);
         }
 
     }

@@ -7,7 +7,7 @@
     android:background="@drawable/list_border">
 
     <TextView
-        android:id="@+id/schoolText"
+        android:id="@+id/schoolTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24dp"
