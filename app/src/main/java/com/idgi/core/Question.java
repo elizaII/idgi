@@ -33,6 +33,14 @@ public class Question {
 		
 		return true;
 	}
+
+	public Set<Option> getOptions() {
+		return options;
+	}
+
+	public int getOptionAmount() {
+		return options.size();
+	}
 	
 	public Set<Option> getMistakes() {
 		Set<Option> mistakes = new HashSet<>();

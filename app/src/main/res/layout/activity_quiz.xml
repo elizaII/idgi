@@ -12,12 +12,12 @@
     tools:context="com.idgi.QuizActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtQuestion"
+        android:layout_width="match_parent"
         android:background="@color/colorAccent"
         android:layout_height="100dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Vad är 5 + 5?"
-        android:id="@+id/txtQuestion"
         android:layout_alignParentTop="true"
         android:textSize="25dp"
         android:layout_alignParentLeft="true"
@@ -29,6 +29,6 @@
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/answer_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"></LinearLayout>
 </LinearLayout>

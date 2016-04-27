@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.idgi.core.Option;
+import com.idgi.core.Question;
+import com.idgi.core.Quiz;
+
 public class StartActivity extends AppCompatActivity {
 
 	private Toolbar toolbar;
@@ -32,7 +36,11 @@ public class StartActivity extends AppCompatActivity {
     }
 
 	public void showQuizActivity(View view) {
-		startActivity(new Intent(StartActivity.this, QuizActivity.class));
+
+		Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+		intent.putExtra("quiz_key", "Quiz123");
+
+		startActivity(intent);
 	}
 
 	@Override
