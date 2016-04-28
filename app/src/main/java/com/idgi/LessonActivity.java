@@ -15,9 +15,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LessonActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    @Bind(R.id.lesson_toolbar) private Toolbar toolbar;
-    @Bind(R.id.lesson_layout_drawer) private DrawerLayout drawer;
-    @Bind(R.id.nav_view) private NavigationView navigationView;
+    @Bind(R.id.lesson_toolbar) Toolbar toolbar;
+    @Bind(R.id.lesson_layout_drawer) DrawerLayout drawer;
+    @Bind(R.id.nav_view) NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
