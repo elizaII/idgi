@@ -28,7 +28,7 @@ public class Question {
 	
 	public boolean isCorrectlyAnswered() {
 		for (Answer answer : answers)
-			if (answer.isSelectedAndIncorrect() || answer.isDeselectedAndCorrect()) //kollar inte om man har missat ett rätt svar.
+			if (answer.isSelectedAndIncorrect() || answer.isDeselectedAndCorrect())
 				return false;
 		
 		return true;
@@ -41,16 +41,6 @@ public class Question {
 	public int getAnswerAmount() {
 		return answers.size();
 	}
-	
-	public Set<Answer> getMistakes() {
-		Set<Answer> mistakes = new HashSet<>();
-
-		for (Answer answer : answers)
-		if (answer.isSelectedAndIncorrect())
-			mistakes.add(answer);
-		
-		return mistakes;
-	}
 
 	public Question(String text) {
 		this(text, NO_HINTS_MESSAGE, new HashSet<Answer>());
@@ -62,10 +52,6 @@ public class Question {
 	
 	public String getHint() {
 		return this.hint;
-	}
-	
-	public void addOption(Answer answer) {
-		answers.add(answer);
 	}
 	
 	public boolean hasAnswer(Answer answer) {
@@ -88,5 +74,18 @@ public class Question {
 				return false;
 		
 		return true;
+	}
+
+	public void addNewCorrectAnswer(String text) {
+		Answer answer = new Answer(text);
+		answer.setCorrect(true);
+
+		answers.add(answer);
+	}
+
+	public void addNewAnswer(String text) {
+		Answer answer = new Answer(text);
+
+		answers.add(answer);
 	}
 }

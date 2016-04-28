@@ -37,25 +37,48 @@ public class QuizActivity extends AppCompatActivity {
 
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
-		txtQuestion = (TextView) findViewById(R.id.quiz_txt_question);
+		loadQuiz();
 
-		Bundle extras = getIntent().getExtras();
+		initializeNextButton();
+		initializeQuestionView();
 
-		if (extras != null) {
-			String quizKey = extras.getString("quiz_key");
-			if (quizKey != null)
-				quiz = Database.getInstance().getQuiz(quizKey);
-		}
+		createAnswerButtons(quiz.getCurrentQuestion());
+	}
 
+	private void initializeNextButton() {
 		btnNext = (Button) findViewById(R.id.quiz_btn_next_question);
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				changeToNextQuestion();
 			}
 		});
+	}
+
+	private void loadQuiz() {
+		Bundle extras = getIntent().getExtras();
+
+		if (extras != null) {
+			String quizKey = extras.getString("quiz_key");
+			if (quizKey != null)
+				quiz = Database.getInstance().getQuiz(quizKey);
+			else
+				throw new NullPointerException("A Quiz must be passed as an extra with key 'quiz_key' from the previous activity.");
+		}
+	}
+
+	private void initializeQuestionView() {
+		txtQuestion = (TextView) findViewById(R.id.quiz_txt_question);
 
 		txtQuestion.setText(quiz.getCurrentQuestion().getText());
-		createAnswerButtons(quiz.getCurrentQuestion());
+		txtQuestion.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				String text = quiz.getCurrentQuestion().getText();
+				String hint = quiz.getCurrentQuestion().getHint();
+
+				String newText = txtQuestion.getText().equals(text) ? hint : text;
+				txtQuestion.setText(newText);
+			}
+		});
 	}
 
 	private void changeToNextQuestion() {
