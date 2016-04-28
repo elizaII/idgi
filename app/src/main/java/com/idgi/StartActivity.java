@@ -36,15 +36,14 @@ public class StartActivity extends AppCompatActivity {
     }
 
 	public void showQuizActivity(View view) {
+		startActivity(new Intent(StartActivity.this, SchoolListActivity.class));
+	}
 
+	public void onLogInButtonClick(View view) {
 		Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
 		intent.putExtra("quiz_key", "Quiz123");
 
 		startActivity(intent);
-	}
-
-	public void onLogInButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, LoginActivity.class));
 	}
 
 	public void onCreateAccountButtonClick(View view) {
