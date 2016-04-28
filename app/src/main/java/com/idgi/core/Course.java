@@ -12,7 +12,7 @@ public class Course {
 	public Course(String name) {
 		this.id = "N/A";
 		this.name = name;
-		lessons = new ArrayList<Lesson>();
+		lessons = new ArrayList<>();
 	}
 	
 	/**

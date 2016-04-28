@@ -1,6 +1,6 @@
 package com.idgi;
 
-import com.idgi.core.Option;
+import com.idgi.core.Answer;
 import com.idgi.core.Question;
 
 import static org.junit.Assert.*;
@@ -16,9 +16,9 @@ public class QuestionTest {
 	public void testisCorrectlyAnswered() {
 		resetQuestion();
 		
-		Option optionCat = new Option("Cat");
+		Answer optionCat = new Answer("Cat");
 		optionCat.setCorrect(true);
-		Option optionDog = new Option("Dog");
+		Answer optionDog = new Answer("Dog");
 		
 		question1.addOption(optionCat);
 		question1.addOption(optionDog);
@@ -31,17 +31,17 @@ public class QuestionTest {
 	public void testGetMistakes() {
 		resetQuestion();
 		
-		Option option10 = new Option("10");
+		Answer option10 = new Answer("10");
 		option10.setCorrect(true);
-		Option option12 = new Option("12");
-		Option option2 = new Option("2");
+		Answer option12 = new Answer("12");
+		Answer option2 = new Answer("2");
 		
-		question1.addOptions(option10, option12, option2);
+		question1.addAnswers(option10, option12, option2);
 		
 		option12.setSelected(true);
 		option2.setSelected(true);
 		
-		Set<Option> mistakes = question1.getMistakes();
+		Set<Answer> mistakes = question1.getMistakes();
 		
 		assertTrue(mistakes.contains(option12) && mistakes.contains(option2));
 	}

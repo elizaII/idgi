@@ -1,12 +1,12 @@
 package com.idgi.core;
 
-public class Option {
+public class Answer {
 
 	private String text;
 	private boolean isSelected = false;
 	private boolean isCorrect = false;
 	
-	public Option(String text) {
+	public Answer(String text) {
 		this.text = text;
 	}
 	
@@ -32,7 +32,7 @@ public class Option {
 		if (this == other) return true;
 		if (other.getClass() != this.getClass()) return false;
 		
-		Option that = (Option) other;
+		Answer that = (Answer) other;
 		
 		return this.text.equals(that.text) && this.isSelected() == that.isSelected();
 	}
@@ -40,7 +40,10 @@ public class Option {
 	public boolean isSelectedAndIncorrect() {
 		return this.isSelected && !this.isCorrect;
 	}
-	
+
+	public boolean isCorrect() {
+		return this.isCorrect;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

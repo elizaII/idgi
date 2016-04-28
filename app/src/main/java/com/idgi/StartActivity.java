@@ -1,18 +1,11 @@
 package com.idgi;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import com.idgi.core.Option;
-import com.idgi.core.Question;
-import com.idgi.core.Quiz;
 
 public class StartActivity extends AppCompatActivity {
 

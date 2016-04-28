@@ -1,24 +1,21 @@
 package com.idgi;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.idgi.core.Option;
+import com.idgi.widgets.AnswerButton;
+import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.services.Database;
 import com.idgi.util.ButtonFactory;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class QuizActivity extends AppCompatActivity {
@@ -27,6 +24,9 @@ public class QuizActivity extends AppCompatActivity {
 	private TextView txtQuestion;
 	private LinearLayout buttonContainer;
 	private Button btnNext;
+	private AnswerButton[] answerButtons;
+
+	private boolean showingCorrectAnswers = false;
 
 	private static final int BUTTONS_PER_ROW = 2;
 
@@ -55,30 +55,63 @@ public class QuizActivity extends AppCompatActivity {
 		});
 
 		txtQuestion.setText(quiz.getCurrentQuestion().getText());
-		createOptionButtons(quiz.getCurrentQuestion());
+		createAnswerButtons(quiz.getCurrentQuestion());
 	}
 
 	private void changeToNextQuestion() {
-		quiz.nextQuestion();
+		CountDownTimer timer = new CountDownTimer(3000, 500) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+				flashCorrectAnswers();
+			}
 
-		if (quiz.isFinished())
-			startActivity(new Intent(this, StartActivity.class));
-		else {
-			txtQuestion.setText(quiz.getCurrentQuestion().getText());
-			buttonContainer.removeAllViews();
-			createOptionButtons(quiz.getCurrentQuestion());
-			if (quiz.isLastQuestion())
-				btnNext.setText(R.string.quiz_finish);
-		}
+			@Override
+			public void onFinish() {
+				quiz.nextQuestion();
+
+				if (quiz.isFinished())
+					startActivity(new Intent(QuizActivity.this, StartActivity.class));
+				else {
+					showQuestion(quiz.getCurrentQuestion());
+				}
+			}
+		};
+
+		timer.start();
 	}
 
-	private void createOptionButtons(Question question) {
-		Set<Option> options = question.getOptions();
+	private void flashCorrectAnswers() {
+		for (AnswerButton answerButton : answerButtons)
+			answerButton.setDisplayMode(showingCorrectAnswers ? AnswerButton.DisplayMode.HIGHLIGHT : AnswerButton.DisplayMode.NORMAL);
+
+		showingCorrectAnswers = !showingCorrectAnswers;
+	}
+
+	private void showQuestion(Question question) {
+		txtQuestion.setText(question.getText());
+		buttonContainer.removeAllViews();
+		showingCorrectAnswers = false;
+
+		createAnswerButtons(question);
+		if (quiz.isLastQuestion())
+			btnNext.setText(R.string.quiz_finish);
+	}
+
+	private void createAnswerButtons(Question question) {
+		Set<Answer> answers = question.getAnswers();
+
+		answerButtons = new AnswerButton[answers.size()];
 
 		LinearLayout buttonRow = createNewButtonRow();
 
-		for (Option option : options) {
-			buttonRow.addView(ButtonFactory.createAnswerButton(this, option));
+		int i = 0;
+
+		for (Answer answer : answers) {
+			AnswerButton answerButton = ButtonFactory.createAnswerButton(this, answer);
+
+			answerButtons[i++] = answerButton;
+			buttonRow.addView(answerButton);
+
 			if (buttonRowIsFull(buttonRow)) {
 				buttonContainer.addView(buttonRow);
 				buttonRow = createNewButtonRow();

@@ -10,50 +10,50 @@ public class Question {
 	
 	private String text;
 	private String hint;
-	private Set<Option> options;
+	private Set<Answer> answers;
 	
-	public Question(String text, String hint, Set<Option> options) {
+	public Question(String text, String hint, Set<Answer> answers) {
 		this.text = text;
 		this.hint = hint;
-		this.options = options;
+		this.answers = answers;
 	}
 	
 	public Question(String text, String hint) {
-		this(text, hint, new HashSet<Option>());
+		this(text, hint, new HashSet<Answer>());
 	}
 	
-	public void addOptions(Option... options) {
-		this.options.addAll(Arrays.asList(options));
+	public void addAnswers(Answer... answers) {
+		this.answers.addAll(Arrays.asList(answers));
 	}
 	
 	public boolean isCorrectlyAnswered() {
-		for (Option option : options)
-			if (option.isSelectedAndIncorrect() || option.isDeselectedAndCorrect()) //kollar inte om man har missat ett rätt svar.
+		for (Answer answer : answers)
+			if (answer.isSelectedAndIncorrect() || answer.isDeselectedAndCorrect()) //kollar inte om man har missat ett rätt svar.
 				return false;
 		
 		return true;
 	}
 
-	public Set<Option> getOptions() {
-		return options;
+	public Set<Answer> getAnswers() {
+		return answers;
 	}
 
-	public int getOptionAmount() {
-		return options.size();
+	public int getAnswerAmount() {
+		return answers.size();
 	}
 	
-	public Set<Option> getMistakes() {
-		Set<Option> mistakes = new HashSet<>();
+	public Set<Answer> getMistakes() {
+		Set<Answer> mistakes = new HashSet<>();
 
-		for (Option option : options)
-		if (option.isSelectedAndIncorrect())
-			mistakes.add(option);
+		for (Answer answer : answers)
+		if (answer.isSelectedAndIncorrect())
+			mistakes.add(answer);
 		
 		return mistakes;
 	}
 
 	public Question(String text) {
-		this(text, NO_HINTS_MESSAGE, new HashSet<Option>());
+		this(text, NO_HINTS_MESSAGE, new HashSet<Answer>());
 	}
 	
 	public String getText() {
@@ -64,12 +64,12 @@ public class Question {
 		return this.hint;
 	}
 	
-	public void addOption(Option option) {
-		options.add(option);
+	public void addOption(Answer answer) {
+		answers.add(answer);
 	}
 	
-	public boolean hasOption(Option option) {
-		return options.contains(option);
+	public boolean hasAnswer(Answer answer) {
+		return answers.contains(answer);
 	}
 	
 	@Override
@@ -83,8 +83,8 @@ public class Question {
 		if ( !(this.text.equals(that.text) && this.hint.equals(that.hint)) )
 			return false;
 		
-		for (Option option : options)
-			if (!that.hasOption(option))
+		for (Answer answer : answers)
+			if (!that.hasAnswer(answer))
 				return false;
 		
 		return true;
