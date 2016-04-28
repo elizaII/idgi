@@ -25,24 +25,23 @@
             android:name=".VideoActivity"
             android:label="@string/title_activity_video"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/Theme.AppCompat.Light"/>
-    <activity android:name=".QuizActivity">
-    </activity>
-    <activity android:name=".SchoolListActivity">
-    </activity>
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".SchoolListActivity"></activity>
+        android:name=".LoginActivity"
+        android:label="@string/title_activity_login" />
         <activity
             android:name=".CreateAccountActivity"
             android:label="@string/title_activity_create_account"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AccountActivity"
-            android:label="@string/title_activity_account"/>
+            android:label="@string/title_activity_account" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".LessonActivity"></activity>
     </application>
 
 </manifest>
