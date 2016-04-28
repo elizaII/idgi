@@ -51,7 +51,7 @@ public class StartActivity extends AppCompatActivity {
 	}
 
 	public void onAccountButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, AccountActivity.class));
+		startActivity(new Intent(StartActivity.this, ProfileActivity.class));
 	}
 
 	@Override
