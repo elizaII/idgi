@@ -14,6 +14,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<<<<<<< 2601fae473c3e8a9948380b3c025e918400b7c48
 
     <style name="quiz_answer_button" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
@@ -25,5 +26,7 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>
+=======
+>>>>>>> Profile view is added
 
 </resources>
