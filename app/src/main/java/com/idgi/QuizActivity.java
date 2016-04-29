@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Storage;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
@@ -19,7 +20,7 @@ import com.idgi.widgets.AnswerButton;
 
 import java.util.Set;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivityWithDrawer {
 
 	private Quiz quiz;
 	private TextView txtQuestion;
@@ -35,6 +36,8 @@ public class QuizActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
+
+		initializeDrawer();
 
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            tools:openDrawer="start">
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.idgi.QuizActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar"/>
 
     <TextView
         android:id="@+id/quiz_txt_question"
@@ -15,12 +26,8 @@
         android:layout_height="150dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
-        android:layout_alignParentTop="true"
         android:textSize="25sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/toolbar"
         android:gravity="center_vertical|center_horizontal"/>
 
     <LinearLayout
@@ -42,4 +49,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
-</RelativeLayout>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/nav_drawer"/>
+
+</android.support.v4.widget.DrawerLayout>
