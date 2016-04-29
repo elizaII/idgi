@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.idgi.R;
+import com.idgi.util.Navigation;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +46,8 @@ public class LessonActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
+        Navigation.onMenuItemSelected(item);
+
+        return true;
     }
 }
