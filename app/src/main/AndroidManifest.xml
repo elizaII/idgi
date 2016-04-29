@@ -26,8 +26,8 @@
             android:label="@string/title_activity_video"
             android:parentActivityName=".StartActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".QuizActivity"></activity>
-        <activity android:name=".SchoolListActivity"></activity>
+        <activity android:name=".QuizActivity"/>
+        <activity android:name=".SchoolListActivity"/>
         android:name=".LoginActivity"
         android:label="@string/title_activity_login" />
         <activity
@@ -41,7 +41,11 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
-        <activity android:name=".LessonActivity"></activity>
+        <activity android:name=".LessonActivity"/>
+        <activity
+            android:name=".BrowseActivity"
+            android:label="@string/title_activity_browse"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

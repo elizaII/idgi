@@ -28,8 +28,8 @@ public class StartActivity extends AppCompatActivity {
         startActivity(new Intent(StartActivity.this, VideoActivity.class));
     }
 
-	public void showQuizActivity(View view) {
-		startActivity(new Intent(StartActivity.this, SchoolListActivity.class));
+	public void onStartButtonClick(View view) {
+		startActivity(new Intent(StartActivity.this, BrowseActivity.class));
 	}
 
 	public void onLogInButtonClick(View view) {
