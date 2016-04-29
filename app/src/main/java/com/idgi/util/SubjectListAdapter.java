@@ -8,20 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.idgi.CourseListActivity;
 import com.idgi.R;
+import com.idgi.SchoolListActivity;
 import com.idgi.SubjectListActivity;
+import com.idgi.core.Course;
 
 import java.util.ArrayList;
 
 /**
  * Created by Emil on 27/04/2016.
  */
-public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
+public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
 
     private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, ArrayList<String> data){
+    public SubjectListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -38,7 +41,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data.get(position));
+        holder.subjectTextView.setText(data.get(position));
     }
 
     @Override
@@ -49,19 +52,19 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView schoolTextView;
+        public TextView subjectTextView;
 
         public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
-            schoolTextView =(TextView) v.findViewById(R.id.rowTextView);
+            subjectTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View v){
-            String s = schoolTextView.getText().toString();
+            String s = subjectTextView.getText().toString();
             System.out.println(s);
-            Intent intent = new Intent(v.getContext(), SubjectListActivity.class);
-            intent.putExtra("schoolName", s);
+            Intent intent = new Intent(v.getContext(), CourseListActivity.class);
+            intent.putExtra("subjectName", s);
             v.getContext().startActivity(intent);
         }
 
