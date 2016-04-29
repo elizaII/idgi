@@ -32,13 +32,13 @@ public class StartActivity extends AppCompatActivity
 		if (savedInstanceState != null)
 			return;
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
+		/*fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 						.setAction("Action", null).show();
 			}
-		});
+		});*/
 
 		//Copied from ProfileActivity
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -111,7 +111,7 @@ public class StartActivity extends AppCompatActivity
 
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
-		Navigation.onMenuItemSelected(item);
+		Navigation.onMenuItemSelected(this, item);
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);

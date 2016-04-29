@@ -46,7 +46,7 @@ public class LessonActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Navigation.onMenuItemSelected(item);
+        Navigation.onMenuItemSelected(this,item);
 
         return true;
     }
