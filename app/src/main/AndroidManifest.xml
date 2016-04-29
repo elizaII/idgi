@@ -28,6 +28,8 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity android:name=".QuizActivity"/>
         <activity android:name=".SchoolListActivity"/>
+        <activity android:name=".SubjectListActivity"/>
+        <activity android:name=".CourseListActivity"/>
         android:name=".LoginActivity"
         android:label="@string/title_activity_login" />
         <activity
