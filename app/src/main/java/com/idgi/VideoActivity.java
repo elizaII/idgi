@@ -4,6 +4,10 @@ package com.idgi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +19,10 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.idgi.util.Config;
+import com.idgi.util.Navigation;
 
-public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
-
+public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, NavigationView.OnNavigationItemSelectedListener{
+	private Toolbar toolbar;
 	private static final int RECOVERY_REQUEST = 1;
 	private YouTubePlayerView youTubeView;
 
@@ -28,6 +33,15 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 
 		youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
 		youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawer.setDrawerListener(toggle);
+		toggle.syncState();
+
+		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
 	}
 
 	@Override
@@ -59,12 +73,6 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		return youTubeView;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -79,5 +87,27 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+	public void onBackPressed() {
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		if (drawer.isDrawerOpen(GravityCompat.START)) {
+			drawer.closeDrawer(GravityCompat.START);
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.profile, menu);
+		return true;
+	}
+	@Override
+	public boolean onNavigationItemSelected(MenuItem item) {
+		Navigation.onMenuItemSelected(this,item);
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawer.closeDrawer(GravityCompat.START);
+		return true;
 	}
 }
