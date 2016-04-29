@@ -15,15 +15,17 @@ import com.idgi.StartActivity;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by Emil on 27/04/2016.
  */
 public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
 
-    private String[] data;
+    private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, String[] data){
+    public SchoolListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -40,12 +42,12 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data[position]);
+        holder.schoolTextView.setText(data.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return data.size();
     }
 
 
