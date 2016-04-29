@@ -1,6 +1,8 @@
 package com.idgi.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.SchoolListActivity;
+import com.idgi.StartActivity;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Emil on 27/04/2016.
@@ -43,13 +49,22 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView schoolTextView;
 
         public ViewHolder(View v){
             super(v);
+            v.setOnClickListener(this);
             schoolTextView =(TextView) v.findViewById(R.id.schoolTextView);
+        }
+
+        public void onClick(View v){
+            String s = schoolTextView.getText().toString();
+            System.out.println(s);
+            Intent intent = new Intent(v.getContext(), StartActivity.class);
+            intent.putExtra("schoolName", s);
+            v.getContext().startActivity(intent);
         }
 
     }
