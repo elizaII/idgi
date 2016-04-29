@@ -25,7 +25,11 @@ public class Navigation {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
+        if (id == R.id.nav_start) {
+            a.startActivity(new Intent(a.getApplicationContext(), StartActivity.class));
+        } else if(id==R.id.nav_profile){
+            a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
+        } else if(id==R.id.nav_my_courses){
             a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
         } else if (id == R.id.nav_my_courses) {
             a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
