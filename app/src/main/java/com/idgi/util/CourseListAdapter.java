@@ -8,23 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.idgi.CourseListActivity;
 import com.idgi.R;
-import com.idgi.SchoolListActivity;
-import com.idgi.SubjectListActivity;
-import com.idgi.core.Course;
+import com.idgi.VideoActivity;
 
 import java.util.ArrayList;
 
 /**
- * Created by Emil on 27/04/2016.
+ * Created by Emil on 29/04/2016.
  */
-public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
+public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
     private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SubjectListAdapter(Context context, ArrayList<String> data){
+    public CourseListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -63,12 +60,10 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         public void onClick(View v){
             String s = subjectTextView.getText().toString();
             System.out.println(s);
-            Intent intent = new Intent(v.getContext(), CourseListActivity.class);
-            intent.putExtra("subjectName", s);
+            Intent intent = new Intent(v.getContext(), VideoActivity.class);
+            intent.putExtra("courseName", s);
             v.getContext().startActivity(intent);
         }
 
     }
-
-
 }
