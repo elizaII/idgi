@@ -46,11 +46,25 @@ public class Quiz {
 			++currentIndex;
 	}
 
+	public List<Question> getQuestions() {
+		return this.questions;
+	}
+
 	public boolean isLastQuestion() {
 		return currentIndex == length() - 1;
 	}
 
 	public boolean isFinished() {
 		return currentIndex == length();
+	}
+
+	public int getCorrectAnswerAmount() {
+		int n = 0;
+
+		for (Question question : questions)
+			if (question.isCorrectlyAnswered())
+				++n;
+
+		return n;
 	}
 }

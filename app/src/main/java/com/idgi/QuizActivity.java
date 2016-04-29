@@ -9,12 +9,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.idgi.widgets.AnswerButton;
+import com.idgi.util.Storage;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.services.Database;
 import com.idgi.util.ButtonFactory;
+import com.idgi.widgets.AnswerButton;
 
 import java.util.Set;
 
@@ -93,7 +94,7 @@ public class QuizActivity extends AppCompatActivity {
 				quiz.nextQuestion();
 
 				if (quiz.isFinished())
-					startActivity(new Intent(QuizActivity.this, StartActivity.class));
+					switchToQuizResultActivity();
 				else {
 					showQuestion(quiz.getCurrentQuestion());
 				}
@@ -101,6 +102,11 @@ public class QuizActivity extends AppCompatActivity {
 		};
 
 		timer.start();
+	}
+
+	public void switchToQuizResultActivity() {
+		Storage.setCurrentQuiz(quiz);
+		startActivity(new Intent(QuizActivity.this, QuizResultActivity.class));
 	}
 
 	private void flashCorrectAnswers() {
@@ -148,8 +154,12 @@ public class QuizActivity extends AppCompatActivity {
 
 	private LinearLayout createNewButtonRow() {
 		LinearLayout row = new LinearLayout(this);
-		row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT));
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+
+		row.setLayoutParams(params);
+
 		row.setOrientation(LinearLayout.HORIZONTAL);
 
 		return row;

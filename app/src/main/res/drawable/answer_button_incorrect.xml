@@ -4,6 +4,6 @@
         android:radius="0dp"
         />
     <solid
-        android:color="#f44336"
+        android:color="@color/colorAnswerButtonIncorrect"
         />
 </shape>

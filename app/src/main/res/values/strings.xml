@@ -33,4 +33,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_browse">BrowseActivity</string>
+
+    <!-- For Quiz & Quiz result Activities -->
+    <string name="quiz_result_finished_text">Finished!</string>
+    <string name="quiz_result_retake_quiz">Retake Quiz</string>
+    <string name="quiz_result_done">Done</string>
 </resources>
