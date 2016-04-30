@@ -14,6 +14,6 @@
         android:id="@+id/content_lesson_youtube_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.idgi.Widgets.YoutubeFragment" />
+        android:name="com.idgi.widgets.YoutubeFragment" />
 
 </RelativeLayout>
