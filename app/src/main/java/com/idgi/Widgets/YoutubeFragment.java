@@ -1,22 +1,12 @@
-package com.idgi.Widgets;
+package com.idgi.widgets;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.idgi.R;
-import com.idgi.core.Video;
 import com.idgi.util.Config;
-import com.idgi.util.Storage;
 
 /**
  * Use the {@link YoutubeFragment#newInstance} factory method to
