@@ -75,6 +75,10 @@ public class StartActivity extends AppCompatActivity
 		startActivity(new Intent(StartActivity.this, ProfileActivity.class));
 	}
 
+	public void onLessonButtonClick(View view) {
+		startActivity(new Intent(StartActivity.this, LessonActivity.class));
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

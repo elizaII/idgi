@@ -71,6 +71,16 @@
         android:textSize="25dp"
         android:onClick="onAccountButtonClick" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Lesson"
+        android:id="@+id/start_btn_lesson"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:textSize="25dp"
+        android:onClick="onLessonButtonClick" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
