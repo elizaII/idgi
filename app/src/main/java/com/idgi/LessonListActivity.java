@@ -21,6 +21,7 @@ public class LessonListActivity extends AppCompatActivity {
 
     private Database database = Database.getInstance();
 
+    //should be list of Lessons, when working
     private ArrayList<String> lessons = new ArrayList<>();
 
     @Override
@@ -31,11 +32,11 @@ public class LessonListActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("courseName");
 
-        String lesson = "matte 3c";
-        lessons.add(lesson);
-
         TextView txt = (TextView)findViewById(R.id.lesson_list_course);
         txt.setText(s);
+
+        String lesson = "Integraler 2";
+        lessons.add(lesson);
 
 
         manager = new LinearLayoutManager(this);

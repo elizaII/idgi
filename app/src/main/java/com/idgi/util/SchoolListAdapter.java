@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.SubjectListActivity;
+import com.idgi.core.School;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  */
 public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private ArrayList<School> data;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, ArrayList<String> data){
+    public SchoolListAdapter(Context context, ArrayList<School> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -38,7 +39,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data.get(position));
+        holder.schoolTextView.setText(data.get(position).getValue());
     }
 
     @Override

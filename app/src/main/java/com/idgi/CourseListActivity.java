@@ -11,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.idgi.core.Course;
 import com.idgi.util.CourseListAdapter;
 import com.idgi.util.Navigation;
 import com.idgi.util.SubjectListAdapter;
@@ -24,7 +26,7 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private ArrayList<String> courses = new ArrayList<>();
+    private ArrayList<Course> courses = new ArrayList<>();
 
 
     @Override
@@ -32,12 +34,17 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
+        Bundle bundle = getIntent().getExtras();
+        String s = bundle.getString("subjectName");
+
+        TextView txt = (TextView)findViewById(R.id.course_list_subject);
+        txt.setText(s);
 
         manager = new LinearLayoutManager(this);
         adapter = new CourseListAdapter(this, courses);
 
-        String s = "hej";
-        courses.add(s);
+        Course course = new Course("Matte 3c");
+        courses.add(course);
 
         recycler = (RecyclerView) findViewById(R.id.course_list_recycler_view);
         recycler.setAdapter(adapter);

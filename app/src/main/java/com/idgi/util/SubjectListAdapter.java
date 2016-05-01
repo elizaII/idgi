@@ -13,6 +13,7 @@ import com.idgi.R;
 import com.idgi.SchoolListActivity;
 import com.idgi.SubjectListActivity;
 import com.idgi.core.Course;
+import com.idgi.core.Subject;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,10 @@ import java.util.ArrayList;
  */
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private ArrayList<Subject> data;
     private LayoutInflater inflater;
 
-    public SubjectListAdapter(Context context, ArrayList<String> data){
+    public SubjectListAdapter(Context context, ArrayList<Subject> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -41,7 +42,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.subjectTextView.setText(data.get(position));
+        holder.subjectTextView.setText(data.get(position).getValue());
     }
 
     @Override

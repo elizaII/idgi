@@ -29,7 +29,7 @@ public class SchoolListActivity extends AppCompatActivity implements NavigationV
 
     private Database database = Database.getInstance();
 
-    private ArrayList<String> schools = new ArrayList<>();
+    private ArrayList<School> schools = new ArrayList<>();
 
 
     @Override
@@ -44,12 +44,12 @@ public class SchoolListActivity extends AppCompatActivity implements NavigationV
         School s5 = database.getSchool("5");
         School s6 = database.getSchool("6");
 
-        schools.add(s1.getValue());
-        schools.add(s2.getValue());
-        schools.add(s3.getValue());
-        schools.add(s4.getValue());
-        schools.add(s5.getValue());
-        schools.add(s6.getValue());
+        schools.add(s1);
+        schools.add(s2);
+        schools.add(s3);
+        schools.add(s4);
+        schools.add(s5);
+        schools.add(s6);
 
 
 

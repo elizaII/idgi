@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.idgi.LessonListActivity;
 import com.idgi.R;
 import com.idgi.VideoActivity;
+import com.idgi.core.Course;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,10 @@ import java.util.ArrayList;
  */
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private ArrayList<Course> data;
     private LayoutInflater inflater;
 
-    public CourseListAdapter(Context context, ArrayList<String> data){
+    public CourseListAdapter(Context context, ArrayList<Course> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -39,7 +40,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.subjectTextView.setText(data.get(position));
+        holder.courseTextView.setText(data.get(position).getName());
     }
 
     @Override
@@ -50,16 +51,16 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView subjectTextView;
+        public TextView courseTextView;
 
         public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
-            subjectTextView =(TextView) v.findViewById(R.id.rowTextView);
+            courseTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View v){
-            String s = subjectTextView.getText().toString();
+            String s = courseTextView.getText().toString();
             System.out.println(s);
             Intent intent = new Intent(v.getContext(), LessonListActivity.class);
             intent.putExtra("courseName", s);

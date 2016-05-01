@@ -28,7 +28,7 @@ public class SubjectListActivity extends AppCompatActivity implements Navigation
 
     private Database database = Database.getInstance();
 
-    private ArrayList<String> subjects = new ArrayList<>();
+    private ArrayList<Subject> subjects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class SubjectListActivity extends AppCompatActivity implements Navigation
         txt.setText(s);
 
         Subject math = database.getSubject("1");
-        subjects.add(math.getValue());
+        subjects.add(math);
 
         manager = new LinearLayoutManager(this);
         adapter = new SubjectListAdapter(this, subjects);
