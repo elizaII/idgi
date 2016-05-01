@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,12 +23,12 @@ import android.widget.TextView;
 
 import com.idgi.core.Quiz;
 import com.idgi.util.AppCompatActivityWithDrawer;
+import com.idgi.util.ExpandAnimation;
 import com.idgi.util.Navigation;
 import com.idgi.util.Storage;
 
 public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
-	private Toolbar toolbar;
 	private LinearLayout starContainer;
 	private Quiz quiz;
 	private RecyclerView recyclerView;
@@ -115,8 +117,8 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
 		QuizResultAdapter adapter = new QuizResultAdapter(quiz.getQuestions());
 		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+		recyclerView.setHasFixedSize(false);
 		recyclerView.setLayoutManager(layoutManager);
-		recyclerView.setItemAnimator(new DefaultItemAnimator());
 		recyclerView.setAdapter(adapter);
 	}
 }
