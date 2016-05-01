@@ -1,8 +1,10 @@
 package com.idgi;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.idgi.util.Navigation;
 
@@ -37,7 +42,9 @@ public class ProfileActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        if (drawer != null) {
+            drawer.setDrawerListener(toggle);
+        }
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -74,6 +81,24 @@ public class ProfileActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void enableInputFieldButtonClicked(View view) {
+        if (view.getId() == R.id.profile_btn_editName) {
+            EditText name = (EditText) findViewById(R.id.profile_editText_name);
+            enableInputField(name);
+        } else if (view.getId() == R.id.profile_btn_editAge) {
+            EditText name = (EditText) findViewById(R.id.profile_editText_age);
+            enableInputField(name);
+        }
+    }
+
+    private void enableInputField(EditText field) {
+        field.setFocusableInTouchMode(true);
+        field.setClickable(true);
+        field.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

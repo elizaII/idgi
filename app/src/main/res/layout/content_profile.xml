@@ -11,44 +11,85 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ProfileActivity"
     tools:showIn="@layout/app_bar_profile">
+    <ImageView
+        android:id="@+id/profile_imageView_profilePicture"
+        android:gravity="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_account_circle_black_24dp"/>
+<RelativeLayout
+    android:id="@+id/profile_relativeLayout_editName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/profile_imageView_profilePicture">
     <EditText
         android:id="@+id/profile_editText_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
         android:text="Mitt Namn"
-        android:layout_alignParentTop="true"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <ImageButton
+        android:id="@+id/profile_btn_editName"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/ic_mode_edit_black_24dp"
+        android:onClick="enableInputFieldButtonClicked"
+        android:layout_alignRight="@+id/profile_editText_name"
+        android:layout_alignEnd="@+id/profile_editText_name" />
+</RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/profile_relativeLayout_editAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_relativeLayout_editName">
     <EditText
         android:id="@+id/profile_editText_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:text="Min ålder"
-        android:layout_below="@+id/profile_editText_name"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <ImageButton
+        android:id="@+id/profile_btn_editAge"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/ic_mode_edit_black_24dp"
+        android:onClick="enableInputFieldButtonClicked"
+        android:layout_alignRight="@+id/profile_editText_age"
+        android:layout_alignEnd="@+id/profile_editText_age" />
+        </RelativeLayout>
 
     <TextView
-        android:id="@+id/profile_editText_gets"
+        android:id="@+id/profile_textView_nrOfGets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="609 gets"
         android:layout_marginTop="36dp"
-        android:layout_below="@+id/profile_editText_age"
+        android:layout_below="@+id/profile_relativeLayout_editAge"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
     <TextView
+        android:id="@+id/profile_textView_myHats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mina hattar"
-        android:id="@+id/textView2"
         android:layout_marginTop="27dp"
-        android:layout_below="@+id/profile_editText_gets"
+        android:layout_below="@+id/profile_textView_nrOfGets"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <RelativeLayout
+        android:id="@+id/profile_relativeLayout_ownedHats"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_below="@id/profile_textView_myHats">
+
+    </RelativeLayout>
 
 </RelativeLayout>
