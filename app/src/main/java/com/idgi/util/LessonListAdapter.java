@@ -8,38 +8,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.idgi.LessonListActivity;
+import com.idgi.LessonActivity;
 import com.idgi.R;
-import com.idgi.VideoActivity;
 
 import java.util.ArrayList;
 
 /**
- * Created by Emil on 29/04/2016.
+ * Created by Emil on 01/05/2016.
  */
-public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
+public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.ViewHolder> {
 
     private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public CourseListAdapter(Context context, ArrayList<String> data){
+    public LessonListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LessonListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.list_row, parent, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
-
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.subjectTextView.setText(data.get(position));
+    public void onBindViewHolder(LessonListAdapter.ViewHolder holder, int position) {
+        holder.lessonTextView.setText(data.get(position));
     }
 
     @Override
@@ -47,22 +45,20 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         return data.size();
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView subjectTextView;
+        public TextView lessonTextView;
 
         public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
-            subjectTextView =(TextView) v.findViewById(R.id.rowTextView);
+            lessonTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View v){
-            String s = subjectTextView.getText().toString();
+            String s = lessonTextView.getText().toString();
             System.out.println(s);
-            Intent intent = new Intent(v.getContext(), LessonListActivity.class);
-            intent.putExtra("courseName", s);
+            Intent intent = new Intent(v.getContext(), LessonActivity.class);
             v.getContext().startActivity(intent);
         }
 

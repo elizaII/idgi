@@ -24,7 +24,7 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private ArrayList<String> lessons = new ArrayList<>();
+    private ArrayList<String> courses = new ArrayList<>();
 
 
     @Override
@@ -34,10 +34,10 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
 
 
         manager = new LinearLayoutManager(this);
-        adapter = new CourseListAdapter(this, lessons);
+        adapter = new CourseListAdapter(this, courses);
 
         String s = "hej";
-        lessons.add(s);
+        courses.add(s);
 
         recycler = (RecyclerView) findViewById(R.id.course_list_recycler_view);
         recycler.setAdapter(adapter);
