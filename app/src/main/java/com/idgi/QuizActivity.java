@@ -18,6 +18,7 @@ import com.idgi.services.Database;
 import com.idgi.util.ButtonFactory;
 import com.idgi.widgets.AnswerButton;
 
+import java.util.List;
 import java.util.Set;
 
 public class QuizActivity extends AppCompatActivityWithDrawer {
@@ -130,7 +131,7 @@ public class QuizActivity extends AppCompatActivityWithDrawer {
 	}
 
 	private void createAnswerButtons(Question question) {
-		Set<Answer> answers = question.getAnswers();
+		List<Answer> answers = question.getAnswers();
 
 		answerButtons = new AnswerButton[answers.size()];
 

@@ -1,7 +1,9 @@
 package com.idgi.core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Question {
@@ -10,16 +12,16 @@ public class Question {
 	
 	private String text;
 	private String hint;
-	private Set<Answer> answers;
+	private List<Answer> answers;
 	
-	public Question(String text, String hint, Set<Answer> answers) {
+	public Question(String text, String hint, List<Answer> answers) {
 		this.text = text;
 		this.hint = hint;
 		this.answers = answers;
 	}
 	
 	public Question(String text, String hint) {
-		this(text, hint, new HashSet<Answer>());
+		this(text, hint, new ArrayList<Answer>());
 	}
 	
 	public void addAnswers(Answer... answers) {
@@ -34,7 +36,7 @@ public class Question {
 		return true;
 	}
 
-	public Set<Answer> getAnswers() {
+	public List<Answer> getAnswers() {
 		return answers;
 	}
 
@@ -43,7 +45,7 @@ public class Question {
 	}
 
 	public Question(String text) {
-		this(text, NO_HINTS_MESSAGE, new HashSet<Answer>());
+		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
 	}
 	
 	public String getText() {
