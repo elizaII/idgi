@@ -38,4 +38,8 @@
     <string name="quiz_result_finished_text">Finished!</string>
     <string name="quiz_result_retake_quiz">Retake Quiz</string>
     <string name="quiz_result_done">Done</string>
+
+    <!-- Content descriptions -->
+    <string name="quiz_result_question_list_correctness_image">Image that shows whether the answer was correct</string>
+    <string name="quiz_result_question_list_expand_image">Expand question</string>
 </resources>

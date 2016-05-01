@@ -1,21 +1,10 @@
 package com.idgi;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,15 +12,12 @@ import android.widget.TextView;
 
 import com.idgi.core.Quiz;
 import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.ExpandAnimation;
-import com.idgi.util.Navigation;
 import com.idgi.util.Storage;
+import com.idgi.util.recycleViews.QuestionAdapter;
 
 public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
-	private LinearLayout starContainer;
 	private Quiz quiz;
-	private RecyclerView recyclerView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +27,6 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		initializeDrawer();
 
 		this.quiz = Storage.getCurrentQuiz();
-		starContainer = (LinearLayout) findViewById(R.id.result_quiz_star_container);
 
 		initiateButtons();
 
@@ -86,6 +71,8 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 	}
 
 	private void showStars() {
+		LinearLayout starContainer = (LinearLayout) findViewById(R.id.result_quiz_star_container);
+
 		int emptyStar = R.drawable.ic_star_empty;
 		int filledStar = R.drawable.ic_star_filled;
 
@@ -113,12 +100,12 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 	}
 
 	private void populateQuestionList() {
-		recyclerView = (RecyclerView) findViewById(R.id.quiz_result_recycler_view_questions_roundup);
+		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.quiz_result_recycler_view_questions_roundup);
 
-		QuizResultAdapter adapter = new QuizResultAdapter(quiz.getQuestions());
-		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-		recyclerView.setHasFixedSize(false);
-		recyclerView.setLayoutManager(layoutManager);
+		QuestionAdapter adapter = new QuestionAdapter(this, quiz.getQuestions());
 		recyclerView.setAdapter(adapter);
+
+		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+		recyclerView.setLayoutManager(layoutManager);
 	}
 }

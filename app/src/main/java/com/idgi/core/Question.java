@@ -1,12 +1,14 @@
 package com.idgi.core;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Question {
+public class Question implements ParentListItem {
 
 	private static final String NO_HINTS_MESSAGE = "There are no hints for this question.";
 	
@@ -89,5 +91,15 @@ public class Question {
 		Answer answer = new Answer(text);
 
 		answers.add(answer);
+	}
+
+	@Override
+	public List<?> getChildItemList() {
+		return answers;
+	}
+
+	@Override
+	public boolean isInitiallyExpanded() {
+		return false;
 	}
 }
