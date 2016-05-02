@@ -8,10 +8,57 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/app_bar_browse"
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:context="com.idgi.BrowseActivity"
+        tools:showIn="@layout/app_bar_browse">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/app_bar"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ämnen"
+            android:id="@+id/browse_btn_subject"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:onClick="onSubjectButtonClick"
+            android:layout_above="@+id/browse_btn_school"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="66dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skolor"
+            android:id="@+id/browse_btn_school"
+            android:layout_weight="1"
+            android:textSize="25dp"
+            android:onClick="onSchoolButtonClick"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Hitta Kurser"
+            android:id="@+id/textView3"
+            android:editable="false"
+            android:textSize="50sp"
+            android:layout_below="@+id/toolbar"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
 
     <include
         layout="@layout/nav_drawer"/>

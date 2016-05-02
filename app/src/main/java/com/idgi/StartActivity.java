@@ -14,10 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Navigation;
 
-public class StartActivity extends AppCompatActivity
-		implements NavigationView.OnNavigationItemSelectedListener {
+public class StartActivity extends AppCompatActivityWithDrawer {
 
 	private Toolbar toolbar;
 
@@ -32,23 +32,8 @@ public class StartActivity extends AppCompatActivity
 		if (savedInstanceState != null)
 			return;
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		/*fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});*/
 
-		//Copied from ProfileActivity
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-		drawer.setDrawerListener(toggle);
-		toggle.syncState();
-
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
+		initializeDrawer();
     }
 
     public void showVideoActivity(View view) {
@@ -79,46 +64,5 @@ public class StartActivity extends AppCompatActivity
 		startActivity(new Intent(StartActivity.this, LessonActivity.class));
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.action_settings:
-				// User chose the "Settings" item, show the app settings UI...
-				return true;
 
-			case R.id.action_home:
-				return true;
-
-			default:
-				// If we got here, the user's action was not recognized.
-				// Invoke the superclass to handle it.
-				return super.onOptionsItemSelected(item);
-
-		}
-	}
-	@Override
-	public void onBackPressed() {
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		if (drawer.isDrawerOpen(GravityCompat.START)) {
-			drawer.closeDrawer(GravityCompat.START);
-		} else {
-			super.onBackPressed();
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onNavigationItemSelected(MenuItem item) {
-		Navigation.onMenuItemSelected(this, item);
-
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawer.closeDrawer(GravityCompat.START);
-		return true;
-	}
 }

@@ -16,9 +16,8 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/test_toolbar"
-        layout="@layout/app_bar"
-        android:layout_weight="1"></include>
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -29,56 +28,33 @@
         android:layout_weight="1" />
 
     <Button
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/menu_button"
         android:text="Hitta"
         android:id="@+id/BrowseButton"
-        android:textAllCaps="false"
-        android:onClick="onStartButtonClick"
-        android:textSize="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1" />
+        android:onClick="onStartButtonClick" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/menu_button"
         android:text="Logga in(Quiz)"
         android:id="@+id/LogInButton"
-        android:layout_weight="1"
-        android:textSize="25dp"
         android:onClick="onLogInButtonClick" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/menu_button"
         android:text="Skapa konto"
         android:id="@+id/CreateAccountButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:textSize="25dp"
         android:onClick="onCreateAccountButtonClick" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/menu_button"
         android:text="Konto"
         android:id="@+id/AccountButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:textSize="25dp"
         android:onClick="onAccountButtonClick" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/menu_button"
         android:text="Lesson"
         android:id="@+id/start_btn_lesson"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:textSize="25dp"
         android:onClick="onLessonButtonClick" />
 
     <FrameLayout
