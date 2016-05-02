@@ -12,6 +12,7 @@ import com.idgi.util.LessonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class LessonListActivity extends AppCompatActivity {
 
@@ -37,8 +38,12 @@ public class LessonListActivity extends AppCompatActivity {
         txt.setText(s);
 
         ArrayList<String> lessonNames = new ArrayList<>();
+        List<Lesson> lessons = database.getLessons();
 
-        lessonNames.add("Derivata");
+        for(Lesson lesson : lessons) {
+            lessonNames.add(lesson.getName());
+        }
+
         Collections.sort(lessonNames);
 
         manager = new LinearLayoutManager(this);
