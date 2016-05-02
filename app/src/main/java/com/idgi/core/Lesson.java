@@ -13,7 +13,23 @@ public class Lesson {
 		this.video = video;
 	}
 	
-	public void setQuiz() {
-		
+	public void setQuiz(Quiz quiz) {
+		this.quiz = quiz;
+	}
+
+	public Quiz getQuiz() {
+		return quiz;
+	}
+
+	public Video getVideo(){
+		return video;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 }
