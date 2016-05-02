@@ -14,11 +14,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.idgi.core.Course;
+import com.idgi.services.Database;
+import com.idgi.services.IDatabase;
 import com.idgi.util.CourseListAdapter;
 import com.idgi.util.Navigation;
 import com.idgi.util.SubjectListAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class CourseListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Toolbar toolbar;
@@ -26,7 +32,9 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private ArrayList<Course> courses = new ArrayList<>();
+    private IDatabase database = Database.getInstance();
+
+    private List<Course> courses = new ArrayList<>();
 
 
     @Override
@@ -40,11 +48,17 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
         TextView txt = (TextView)findViewById(R.id.course_list_subject);
         txt.setText(s);
 
-        manager = new LinearLayoutManager(this);
-        adapter = new CourseListAdapter(this, courses);
+        courses = database.getCourses();
+        ArrayList<String> courseNames = new ArrayList<>();
 
-        Course course = new Course("Matte 3c");
-        courses.add(course);
+        Collections.sort(courseNames);
+
+        for(Course course: courses){
+            courseNames.add(course.getName());
+        }
+
+        manager = new LinearLayoutManager(this);
+        adapter = new CourseListAdapter(this, courseNames);
 
         recycler = (RecyclerView) findViewById(R.id.course_list_recycler_view);
         recycler.setAdapter(adapter);

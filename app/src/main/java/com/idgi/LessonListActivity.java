@@ -11,6 +11,7 @@ import com.idgi.services.Database;
 import com.idgi.util.LessonListAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LessonListActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class LessonListActivity extends AppCompatActivity {
     private Database database = Database.getInstance();
 
     //should be list of Lessons, when working
-    private ArrayList<String> lessons = new ArrayList<>();
+    private ArrayList<Lesson> lessons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +36,13 @@ public class LessonListActivity extends AppCompatActivity {
         TextView txt = (TextView)findViewById(R.id.lesson_list_course);
         txt.setText(s);
 
-        String lesson = "Integraler 2";
-        lessons.add(lesson);
+        ArrayList<String> lessonNames = new ArrayList<>();
 
+        lessonNames.add("Derivata");
+        Collections.sort(lessonNames);
 
         manager = new LinearLayoutManager(this);
-        adapter = new LessonListAdapter(this, lessons);
+        adapter = new LessonListAdapter(this, lessonNames);
 
         recycler = (RecyclerView) findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(adapter);

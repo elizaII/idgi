@@ -22,10 +22,10 @@ import java.util.ArrayList;
  */
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
 
-    private ArrayList<Subject> data;
+    private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SubjectListAdapter(Context context, ArrayList<Subject> data){
+    public SubjectListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -42,7 +42,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.subjectTextView.setText(data.get(position).getValue());
+        holder.subjectTextView.setText(data.get(position));
     }
 
     @Override

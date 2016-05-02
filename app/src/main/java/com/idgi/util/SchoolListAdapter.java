@@ -19,10 +19,10 @@ import java.util.ArrayList;
  */
 public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
 
-    private ArrayList<School> data;
+    private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, ArrayList<School> data){
+    public SchoolListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -39,7 +39,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data.get(position).getValue());
+        holder.schoolTextView.setText(data.get(position));
     }
 
     @Override

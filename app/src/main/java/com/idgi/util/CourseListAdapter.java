@@ -20,10 +20,10 @@ import java.util.ArrayList;
  */
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
-    private ArrayList<Course> data;
+    private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public CourseListAdapter(Context context, ArrayList<Course> data){
+    public CourseListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -40,7 +40,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.courseTextView.setText(data.get(position).getName());
+        holder.courseTextView.setText(data.get(position));
     }
 
     @Override

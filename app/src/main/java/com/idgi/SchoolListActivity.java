@@ -18,6 +18,7 @@ import com.idgi.util.Navigation;
 import com.idgi.util.SchoolListAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SchoolListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -29,7 +30,7 @@ public class SchoolListActivity extends AppCompatActivity implements NavigationV
 
     private Database database = Database.getInstance();
 
-    private ArrayList<School> schools = new ArrayList<>();
+    private List<School> schools = new ArrayList<>();
 
 
     @Override
@@ -37,24 +38,18 @@ public class SchoolListActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_list);
 
-        School s1 = database.getSchool("1");
-        School s2 = database.getSchool("2");
-        School s3 = database.getSchool("3");
-        School s4 = database.getSchool("4");
-        School s5 = database.getSchool("5");
-        School s6 = database.getSchool("6");
+        schools = database.getSchools();
+        ArrayList<String> schoolNames = new ArrayList<>();
 
-        schools.add(s1);
-        schools.add(s2);
-        schools.add(s3);
-        schools.add(s4);
-        schools.add(s5);
-        schools.add(s6);
+        for(School school: schools){
+            schoolNames.add(school.getValue());
+        }
 
+        Collections.sort(schoolNames);
 
 
         manager = new LinearLayoutManager(this);
-        adapter = new SchoolListAdapter(this, schools);
+        adapter = new SchoolListAdapter(this, schoolNames);
 
         recycler = (RecyclerView) findViewById(R.id.school_list_recycler_view);
         recycler.setAdapter(adapter);

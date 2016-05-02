@@ -18,7 +18,10 @@ import com.idgi.services.Database;
 import com.idgi.util.Navigation;
 import com.idgi.util.SubjectListAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SubjectListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Toolbar toolbar;
@@ -28,7 +31,7 @@ public class SubjectListActivity extends AppCompatActivity implements Navigation
 
     private Database database = Database.getInstance();
 
-    private ArrayList<Subject> subjects = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,17 @@ public class SubjectListActivity extends AppCompatActivity implements Navigation
         TextView txt = (TextView)findViewById(R.id.subject_list_school);
         txt.setText(s);
 
-        Subject math = database.getSubject("1");
-        subjects.add(math);
+        subjects = database.getSubjects();
+        ArrayList<String> subjectNames = new ArrayList<>();
+        for(Subject subject: subjects){
+            subjectNames.add(subject.getValue());
+        }
+
+        Collections.sort(subjectNames);
+
 
         manager = new LinearLayoutManager(this);
-        adapter = new SubjectListAdapter(this, subjects);
+        adapter = new SubjectListAdapter(this, subjectNames);
 
         recycler = (RecyclerView) findViewById(R.id.subject_list_recycler_view);
         recycler.setAdapter(adapter);
