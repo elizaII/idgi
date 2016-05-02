@@ -7,4 +7,8 @@ public class Video {
 	public Video(String url) {
 		this.url = url;
 	}
+
+	public String getUrl(){
+        return url;
+    }
 }
