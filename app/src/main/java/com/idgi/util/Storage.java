@@ -1,5 +1,6 @@
 package com.idgi.util;
 
+import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.Video;
 
@@ -10,6 +11,7 @@ public class Storage {
 
 	private static Quiz currentQuiz;
 	private static Video currentVideo;
+    private static Lesson currentLesson;
 
 	public static Quiz getCurrentQuiz() {
 		return currentQuiz;
@@ -26,4 +28,12 @@ public class Storage {
 	public static void setCurrentVideo(Video video) {
 		currentVideo = video;
 	}
+
+	public static void setCurrentLesson(Lesson lesson) {
+        currentLesson = lesson;
+    }
+
+    public static Lesson getCurrentLesson() {
+        return currentLesson;
+    }
 }
