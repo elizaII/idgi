@@ -16,4 +16,14 @@
         android:layout_height="wrap_content"
         android:name="com.idgi.widgets.YoutubeFragment" />
 
+    <Button
+        android:id="@+id/button"
+        android:text="@string/go_to_quiz"
+        android:onClick="onToQuizClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content_lesson_youtube_fragment"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>
