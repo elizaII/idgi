@@ -7,6 +7,7 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.Video;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +99,17 @@ public final class Database implements IDatabase {
 	}
 
 
-	/*public List<Lesson> getLessons(){
-		//TODO mock-lessons
-	}*/
+	public List<Lesson> getLessons(){
+		Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
+		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
+        Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));
+        //Todo... Add more lessons.
+
+        List<Lesson> lessons = new ArrayList<>();
+        lessons.add(complex1);
+        lessons.add(complex2);
+        lessons.add(complex3);
+
+        return lessons;
+	}
 }
