@@ -1,12 +1,16 @@
 package com.idgi.services;
 
 import com.idgi.core.Answer;
+import com.idgi.core.Course;
+import com.idgi.core.Lesson;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public final class Database implements IDatabase {
@@ -45,7 +49,7 @@ public final class Database implements IDatabase {
 		return instance;
 	}
 
-	public School getSchool(String key){
+	public List<School> getSchools(){
 		School school1 = new School("1", "MEG");
 		School school2 = new School("2", "Hvitfeldska");
 		School school3 = new School("3", "Polhem");
@@ -53,7 +57,7 @@ public final class Database implements IDatabase {
 		School school5 = new School("5", "Samskolan");
 		School school6 = new School("6", "Drottning Blanka");
 
-		ArrayList<School> schools = new ArrayList<>();
+		List<School> schools = new ArrayList<>();
 
 		schools.add(school1);
 		schools.add(school2);
@@ -62,20 +66,39 @@ public final class Database implements IDatabase {
 		schools.add(school5);
 		schools.add(school6);
 
-		for(School school : schools){
-			if (key.equals(school.getKey())){
-				return school;
-			}
-		}
-		return new School("x", "no such school bruh");
+		return schools;
 	}
 
-	public Subject getSubject(String key){
+	public List<Subject> getSubjects(){
 		Subject math = new Subject("1", "Math");
 		Subject english = new Subject("2", "English");
 		Subject swedish = new Subject("3", "Swedish");
 		Subject physics = new Subject("4", "Physics");
 
-		return math;
+		List<Subject> subjects = new ArrayList<>();
+		subjects.add(math);
+		subjects.add(english);
+		subjects.add(swedish);
+		subjects.add(physics);
+
+		return subjects;
 	}
+
+	public List<Course> getCourses(){
+		Course math1 = new Course("Matte 1c");
+		Course math2 = new Course("Matte 2c");
+		Course math3 = new Course("Matte 3c");
+
+		List<Course> courses = new ArrayList<>();
+		courses.add(math1);
+		courses.add(math2);
+		courses.add(math3);
+
+		return courses;
+	}
+
+
+	/*public List<Lesson> getLessons(){
+		//TODO mock-lessons
+	}*/
 }
