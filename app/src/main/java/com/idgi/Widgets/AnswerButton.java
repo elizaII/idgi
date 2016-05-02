@@ -1,4 +1,4 @@
-package com.idgi.widgets;
+package com.idgi.Widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

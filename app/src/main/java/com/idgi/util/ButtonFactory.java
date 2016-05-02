@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.idgi.R;
-import com.idgi.widgets.AnswerButton;
+import com.idgi.Widgets.AnswerButton;
 import com.idgi.core.Answer;
 
 public class ButtonFactory {

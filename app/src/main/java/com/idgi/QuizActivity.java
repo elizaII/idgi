@@ -2,7 +2,6 @@ package com.idgi;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +15,9 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.services.Database;
 import com.idgi.util.ButtonFactory;
-import com.idgi.widgets.AnswerButton;
+import com.idgi.Widgets.AnswerButton;
 
 import java.util.List;
-import java.util.Set;
 
 public class QuizActivity extends AppCompatActivityWithDrawer {
 

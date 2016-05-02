@@ -1,4 +1,4 @@
-package com.idgi.widgets;
+package com.idgi.Widgets;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -6,7 +6,9 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.idgi.core.Video;
 import com.idgi.util.Config;
+import com.idgi.util.Storage;
 
 /**
  * Use the {@link YoutubeFragment#newInstance} factory method to
@@ -37,9 +39,13 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
         if(!wasRestored){
-            //Video video = Storage.getCurrentVideo();
-            //youTubePlayer.cueVideo(video.getUrl());
-            youTubePlayer.cueVideo("ZXilG7pH3is");
+            if(Storage.getCurrentVideo() != null) {
+                Video video = Storage.getCurrentVideo();
+                youTubePlayer.cueVideo(video.getUrl());
+            } else {
+                //Todo... better error-handling
+                youTubePlayer.cueVideo("ZXilG7pH3is");
+            }
         } else {
             youTubePlayer.play();
         }
