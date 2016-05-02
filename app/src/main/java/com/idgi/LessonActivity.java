@@ -13,26 +13,35 @@ import com.idgi.util.Storage;
 
 public class LessonActivity extends AppCompatActivityWithDrawer {
 
+    Lesson currentLesson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Kvadratrötter och potenser");
 
+        if(Storage.getCurrentLesson() != null) {
+            currentLesson = Storage.getCurrentLesson();
+            toolbar.setTitle(currentLesson.getName());
+        } else {
+            toolbar.setTitle("Kvadratrötter och potenser");
+        }
 
         initializeDrawer();
     }
 
     public void onToQuizClick(View view) {
         /*
-        //Retrieving current lesson and its quiz
-        Lesson currentLesson = Storage.getCurrentLesson();
+        //Retrieving the lesson's quiz
         Quiz quiz = currentLesson.getQuiz();
 
         //Setting it to the current quiz to be displayed in QuizActivity
         Storage.setCurrentQuiz(quiz);
         */
-        startActivity(new Intent(this, QuizActivity.class));
+
+        Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("quiz_key", "Quiz123"); //Todo... replace with getCurrentQuiz()
+        startActivity(intent);
     }
 }
