@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">IDGI</string>
-    <string name="title_activity_video">VideoActivity</string>
     <string name="home">Home</string>
     <string name="action_settings">Inställningar</string>
     <string name="player_error">Error initializing YouTube player.  %1$s</string>
@@ -12,7 +11,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">Logga in</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -26,13 +25,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_create_account">CreateAccountActivity</string>
-    <string name="title_activity_account">AccountActivity</string>
-    <string name="title_activity_profile">Min profil</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_browse">BrowseActivity</string>
+
 
     <!-- For Quiz & Quiz result Activities -->
     <string name="quiz_result_finished_text">Finished!</string>
@@ -56,4 +53,21 @@
     <string name="start_btn_log_in">Logga in</string>
     <string name="start_btn_create_account">Skapa konto</string>
     <string name="start_btn_account">Konto</string>
+
+    <!-- For toolbar text -->
+    <string name="title_activity_start">Välkommen till IDGI</string>
+    <string name="title_activity_browse">Hitta kurser</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_login">Logga in</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_profile">Min profil</string>
+    <string name="title_activity_quiz">Quiz</string>
+    <string name="title_activity_school_list">Skolor</string>
+    <string name="title_activity_subject_list">Ämnen</string>
+    <string name="title_activity_course_list">Kurser</string>
+    <string name="title_activity_lesson_list">Lektioner</string>
+    <string name="title_activity_lesson">Lektion</string>
+    <string name="title_activity_quiz_result">Resultat</string>
+
 </resources>
