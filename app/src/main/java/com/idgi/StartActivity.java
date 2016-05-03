@@ -26,7 +26,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-		toolbar = (Toolbar) findViewById(R.id.test_toolbar);
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		if (savedInstanceState != null)
