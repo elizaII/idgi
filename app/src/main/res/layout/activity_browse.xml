@@ -21,13 +21,9 @@
             layout="@layout/app_bar"/>
 
         <TextView
-            android:layout_width="334dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            style="@style/title_text"
             android:text="@string/browse_text_find"
-            android:id="@+id/textView3"
-            android:editable="false"
-            android:textSize="50sp" />
+            android:id="@+id/textView3" />
 
         <Button
             style="@style/menu_button"

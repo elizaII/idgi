@@ -54,7 +54,7 @@
     <string name="start_btn_create_account">Skapa konto</string>
     <string name="start_btn_account">Konto</string>
 
-    <!-- For toolbar text -->
+    <!-- For Toolbars -->
     <string name="title_activity_start">Välkommen till IDGI</string>
     <string name="title_activity_browse">Hitta kurser</string>
     <string name="title_activity_video">VideoActivity</string>
