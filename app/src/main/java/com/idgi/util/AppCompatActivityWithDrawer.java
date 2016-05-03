@@ -43,8 +43,10 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 			drawer.closeDrawer(GravityCompat.START);
 		} else {
 			super.onBackPressed();
+			overridePendingTransition(R.anim.pull_in_left,R.anim.push_out_right);
 		}
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,4 +62,6 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
+
+
 }

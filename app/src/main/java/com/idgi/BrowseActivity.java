@@ -28,9 +28,11 @@ public class BrowseActivity extends AppCompatActivityWithDrawer {
 
     public void onSchoolButtonClick(View view){
         startActivity(new Intent(BrowseActivity.this, SchoolListActivity.class));
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 
     public void onSubjectButtonClick(View view){
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
     }
 }
