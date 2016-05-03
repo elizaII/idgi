@@ -14,44 +14,70 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+
+
+        <activity android:name=".StartActivity"
+            android:label="@string/title_activity_start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".VideoActivity"
             android:label="@string/title_activity_video"
             android:parentActivityName=".StartActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".SchoolListActivity" />
-        <activity android:name=".SubjectListActivity" />
-        <activity android:name=".CourseListActivity" />
+
+        <activity android:name=".QuizActivity"
+            android:label="@string/title_activity_quiz"/>
+
+        <activity android:name=".SchoolListActivity"
+            android:label="@string/title_activity_school_list"/>
+
+        <activity android:name=".SubjectListActivity"
+            android:label="@string/title_activity_subject_list"/>
+
+        <activity android:name=".CourseListActivity"
+            android:label="@string/title_activity_course_list"/>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat.Light" />
+
         <activity
             android:name=".CreateAccountActivity"
             android:label="@string/title_activity_create_account"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account" />
+
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
-        <activity android:name=".LessonActivity" />
+
+        <activity
+            android:name=".LessonActivity"
+            android:label="@string/title_activity_lesson" />
+
         <activity
             android:name=".BrowseActivity"
             android:label="@string/title_activity_browse"
             android:theme="@style/AppTheme" />
-        <activity android:name=".QuizResultActivity"></activity>
-        <activity android:name=".LessonListActivity"></activity>
+
+        <activity
+            android:name=".QuizResultActivity"
+            android:label="@string/title_activity_quiz_result" />
+
+        <activity
+            android:name=".LessonListActivity"
+            android:label="@string/title_activity_lesson_list" />
     </application>
 
 </manifest>
