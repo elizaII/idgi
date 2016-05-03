@@ -16,12 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Namn"
+        android:hint="@string/createAccount_hint_name"
         android:ems="10"
         android:id="@+id/nameText"
         android:layout_marginTop="49dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:allowUndo="false" />
 
     <EditText
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
         android:id="@+id/eMailText"
         android:layout_below="@+id/nameText"
         android:layout_centerHorizontal="true"
-        android:text="E-post" />
+        android:hint="@string/createAccount_hint_email" />
 
     <EditText
         android:layout_width="match_parent"
@@ -41,15 +42,15 @@
         android:id="@+id/phoneText"
         android:layout_below="@+id/eMailText"
         android:layout_centerHorizontal="true"
-        android:text="Telefon" />
+        android:hint="@string/createAccount_hint_phone" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skapa konto"
-        android:id="@+id/ConfirmAccountButton"
+        android:text="@string/createAccount_btn_createAccount"
+        android:id="@+id/createAccountButton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="createAccount" />
+        />
 
 </RelativeLayout>
