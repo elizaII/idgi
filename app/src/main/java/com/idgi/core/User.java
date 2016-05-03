@@ -3,7 +3,7 @@ package com.idgi.core;
 public class User {
     private String name;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
 
     private Statistics statistics;
 
@@ -16,7 +16,7 @@ public class User {
         this.name = name;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     public void setEmail(String eMail) {
@@ -29,7 +29,7 @@ public class User {
     public String getName(){
         return this.name;
     }
-    public int getPhoneNumber(){
+    public String getPhoneNumber(){
         return this.phoneNumber;
     }
 

@@ -75,5 +75,11 @@
     <string name="createAccount_hint_email">E-post</string>
     <string name="createAccount_hint_phone">Telefon</string>
     <string name="createAccount_btn_createAccount">Skapa konto</string>
-
+    
+    <!-- Statistics -->
+    <string name="statistics_completed_courses">Avklarade kurser</string>
+    <string name="statistics_ongoing_courses">Pågående kurser</string>
+    <string name="statistics_completed_quiz">Genomförda quiz</string>
+    <string name="statistics_seen_videos">Sedda videor</string>
+    <string name="statistics_hats">Hattar</string>
 </resources>

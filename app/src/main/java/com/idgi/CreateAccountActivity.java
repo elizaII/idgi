@@ -27,30 +27,23 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         eMailText = (EditText) findViewById(R.id.eMailText);
         Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
         createAccountButton.setOnClickListener(this);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void createAccount() {
-        User user = new User();
-        user.setName(this.nameText.getText().toString());
-        user.setEMail(this.eMailText.getText().toString());
+        String name = this.nameText.getText().toString();
+        String email = this.eMailText.getText().toString();
+
+        User user = new User(name);
+        user.setEmail(email);
 
         String phone = phoneText.getText().toString();
-        if (phone.equals("")) {
-            user.setPhoneNumber(000);
+        if (phone.isEmpty()) {
+            user.setPhoneNumber("N/A");
         } else {
-            user.setPhoneNumber(Integer.parseInt(phone));
+            user.setPhoneNumber(phone);
         }
 
-        Log.d("CreateAccountActivity", user.getName() + " " + user.getEMail());
+        Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
 
         startActivity(new Intent(CreateAccountActivity.this, StartActivity.class));
     }
