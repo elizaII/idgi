@@ -1,9 +1,7 @@
 package com.idgi.util;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.idgi.BrowseActivity;
@@ -13,41 +11,48 @@ import com.idgi.ProfileActivity;
 import com.idgi.QuizActivity;
 import com.idgi.R;
 import com.idgi.StartActivity;
+import com.idgi.StatisticsActivity;
 
 import static android.support.v4.app.ActivityCompat.startActivity;
 
-/**
- * Created by tuyenngo on 16-04-29.
- */
 public class Navigation {
 
-    public static void onMenuItemSelected(Activity a,MenuItem item){
-        // Handle navigation view item clicks here.
+    public static void onMenuItemSelected(Activity activity, MenuItem item){
+
+        Class activityClass = null;
+
         int id = item.getItemId();
 
-        if (id == R.id.nav_start) {
-            a.startActivity(new Intent(a.getApplicationContext(), StartActivity.class));
-        } else if(id==R.id.nav_profile){
-            a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
-        } else if(id==R.id.nav_my_courses){
-            a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
-        } else if (id == R.id.nav_my_courses) {
-            a.startActivity(new Intent(a.getApplicationContext(), ProfileActivity.class));
-        } else if (id == R.id.nav_quiz) {
-            Intent intent = new Intent(a.getApplicationContext(), QuizActivity.class);
-            intent.putExtra("quiz_key", "Quiz123");
+        switch (id) {
+            case R.id.nav_start:
+                activityClass = StartActivity.class;
+                break;
+            case R.id.nav_profile:
+                activityClass = ProfileActivity.class;
+                break;
+            case R.id.nav_my_courses:
+                activityClass = ProfileActivity.class;
+                break;
+            case R.id.nav_quiz:
+                Intent intent = new Intent(activity.getApplicationContext(), QuizActivity.class);
+                intent.putExtra("quiz_key", "Quiz123");
 
-            a.startActivity(intent);
-        } else if (id == R.id.nav_browse) {
-            a.startActivity(new Intent(a.getApplicationContext(), BrowseActivity.class));
-
-        } else if (id == R.id.nav_log_in) {
-            a.startActivity(new Intent(a.getApplicationContext(), LoginActivity.class));
-
-        } else if (id == R.id.nav_create_profile) {
-            a.startActivity(new Intent(a.getApplicationContext(), CreateAccountActivity.class));
-
+                activity.startActivity(intent);
+                return;
+            case R.id.nav_browse:
+                activityClass = BrowseActivity.class;
+                break;
+            case R.id.nav_log_in:
+                //activityClass = LoginActivity.class;
+                // TODO change back
+                activityClass = StatisticsActivity.class;
+                break;
+            case R.id.nav_create_profile:
+                activityClass = CreateAccountActivity.class;
+                break;
         }
+
+        activity.startActivity(new Intent(activity.getApplicationContext(), activityClass));
     }
 
 

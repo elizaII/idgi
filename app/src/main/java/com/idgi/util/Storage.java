@@ -2,16 +2,17 @@ package com.idgi.util;
 
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
+import com.idgi.core.User;
 import com.idgi.core.Video;
 
-/**
- * Created by Jonathan Krän on 28/04/2016.
- */
 public class Storage {
 
 	private static Quiz currentQuiz;
 	private static Video currentVideo;
     private static Lesson currentLesson;
+
+	// TODO : Create actual implemenation of activeUser, probably through phone local storage?
+	private static User activeUser = new User("Test");
 
 	public static Quiz getCurrentQuiz() {
 		return currentQuiz;
@@ -36,4 +37,7 @@ public class Storage {
     public static Lesson getCurrentLesson() {
         return currentLesson;
     }
+	public static User getActiveUser() {
+		return activeUser;
+	}
 }

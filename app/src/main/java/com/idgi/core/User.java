@@ -1,18 +1,15 @@
 package com.idgi.core;
 
-/**
- * Created by Allex on 2016-04-27.
- */
 public class User {
     private String name;
-    private String eMail;
+    private String email;
     private int phoneNumber;
 
-    public User(String name){
-        this.name=name;
-    }
-    public User(){
+    private Statistics statistics;
 
+    public User(String name){
+        this.name = name;
+		this.statistics = new Statistics();
     }
 
     public void setName(String name) {
@@ -22,18 +19,22 @@ public class User {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String eMail) {
+        this.email = eMail;
     }
 
-    public String getEMail(){
-        return this.eMail;
+    public String getEmail(){
+        return this.email;
     }
     public String getName(){
         return this.name;
     }
     public int getPhoneNumber(){
         return this.phoneNumber;
+    }
+
+    public int getStat(Statistics.Property property) {
+        return statistics.get(property);
     }
 
 }

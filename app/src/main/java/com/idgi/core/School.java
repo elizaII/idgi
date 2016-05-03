@@ -1,8 +1,5 @@
 package com.idgi.core;
 
-/**
- * Created by Emil on 29/04/2016.
- */
 public class School {
     private String key;
     private String value;
