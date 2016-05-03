@@ -31,25 +31,25 @@
 
     <Button
         style="@style/menu_button"
-        android:text="Hitta"
+        android:text="@string/start_btn_find_course"
         android:id="@+id/BrowseButton"
         android:onClick="onStartButtonClick" />
 
     <Button
         style="@style/menu_button"
-        android:text="Logga in(Quiz)"
+        android:text="@string/start_btn_log_in"
         android:id="@+id/LogInButton"
         android:onClick="onLogInButtonClick" />
 
     <Button
         style="@style/menu_button"
-        android:text="Skapa konto"
+        android:text="@string/start_btn_create_account"
         android:id="@+id/CreateAccountButton"
         android:onClick="onCreateAccountButtonClick" />
 
     <Button
         style="@style/menu_button"
-        android:text="Konto"
+        android:text="@string/start_btn_account"
         android:id="@+id/AccountButton"
         android:onClick="onAccountButtonClick" />
 

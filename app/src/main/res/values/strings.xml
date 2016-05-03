@@ -45,4 +45,15 @@
 
     <!-- For LessonActivity -->
     <string name="go_to_quiz">Gå till quiz</string>
+
+    <!-- For BrowseActivity -->
+    <string name="browse_btn_subject">Sök via ämnen</string>
+    <string name="browse_btn_school">Sök via skolor</string>
+    <string name="browse_text_find">Hitta kurser</string>
+
+    <!-- For StartActivity -->
+    <string name="start_btn_find_course">Hitta kurser</string>
+    <string name="start_btn_log_in">Logga in</string>
+    <string name="start_btn_create_account">Skapa konto</string>
+    <string name="start_btn_account">Konto</string>
 </resources>

@@ -25,7 +25,7 @@
             android:layout_width="334dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Hitta Kurser"
+            android:text="@string/browse_text_find"
             android:id="@+id/textView3"
             android:editable="false"
             android:textSize="50sp"
@@ -34,13 +34,13 @@
 
         <Button
             style="@style/menu_button"
-            android:text="Ämnen"
+            android:text="@string/browse_btn_subject"
             android:id="@+id/browse_btn_subject"
             android:onClick="onSubjectButtonClick" />
 
         <Button
             style="@style/menu_button"
-            android:text="Skolor"
+            android:text="@string/browse_btn_school"
             android:id="@+id/browse_btn_school"
             android:onClick="onSchoolButtonClick" />
 
