@@ -30,6 +30,9 @@ public class Navigation {
             case R.id.nav_profile:
                 activityClass = ProfileActivity.class;
                 break;
+            case R.id.nav_statistics:
+                activityClass = StatisticsActivity.class;
+                break;
             case R.id.nav_my_courses:
                 activityClass = ProfileActivity.class;
                 break;
@@ -43,9 +46,7 @@ public class Navigation {
                 activityClass = BrowseActivity.class;
                 break;
             case R.id.nav_log_in:
-                //activityClass = LoginActivity.class;
-                // TODO change back
-                activityClass = StatisticsActivity.class;
+                activityClass = LoginActivity.class;
                 break;
             case R.id.nav_create_profile:
                 activityClass = CreateAccountActivity.class;
