@@ -8,13 +8,14 @@ import android.widget.TextView;
 
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
+import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.LessonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LessonListActivity extends AppCompatActivity {
+public class LessonListActivity extends AppCompatActivityWithDrawer {
 
 
     private RecyclerView recycler;
@@ -52,5 +53,7 @@ public class LessonListActivity extends AppCompatActivity {
         recycler = (RecyclerView) findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
+
+        initializeDrawer();
     }
 }
