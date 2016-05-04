@@ -7,9 +7,14 @@ public class Comment {
 	
 	private String text;
 	private Set<Comment> replies;
-	
-	public Comment(String text) {
+
+
+
+	private String author;
+
+	public Comment(String text, String author) {
 		this.text = text;
+		this.author = author;
 		replies = new TreeSet<Comment>();
 	}
 	
@@ -20,5 +25,10 @@ public class Comment {
 	public String getText() {
 		return this.text;
 	}
-	
+
+	public String getAuthor() {
+		return author;
+	}
+
+
 }

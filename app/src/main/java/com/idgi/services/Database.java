@@ -1,6 +1,7 @@
 package com.idgi.services;
 
 import com.idgi.core.Answer;
+import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
@@ -111,5 +112,39 @@ public final class Database implements IDatabase {
         lessons.add(complex3);
 
         return lessons;
+	}
+
+	public List<Comment> getComments(){
+		Comment comment1 = new Comment("Bra video.", "Darth Vader");
+		Comment comment2 = new Comment("Randig katt.", "Luke");
+		Comment comment3 = new Comment("May the 4th be with you.", "Yoda");
+		Comment comment4 = new Comment("And you.", "Yoda");
+		Comment comment5 = new Comment("And you.", "Yoda");
+		Comment comment6 = new Comment("And you.", "Yoda");
+		Comment comment7 = new Comment("And you.", "Yoda");
+		Comment comment8 = new Comment("And you.", "Yoda");
+		Comment comment9 = new Comment("And you.", "Yoda");
+		Comment comment10 = new Comment("And you.", "Yoda");
+		Comment comment11 = new Comment("And you.", "Yoda");
+		Comment comment12 = new Comment("And you.", "Yoda");
+		Comment comment13 = new Comment("Not you.", "Yoda");
+        //Todo... Add more Comments.
+
+        ArrayList<Comment> comments = new ArrayList<>();
+        comments.add(comment1);
+        comments.add(comment2);
+        comments.add(comment3);
+        comments.add(comment4);
+        comments.add(comment5);
+        comments.add(comment6);
+        comments.add(comment7);
+        comments.add(comment8);
+        comments.add(comment9);
+        comments.add(comment10);
+        comments.add(comment11);
+        comments.add(comment12);
+        comments.add(comment13);
+
+        return comments;
 	}
 }

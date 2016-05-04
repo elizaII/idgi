@@ -10,20 +10,42 @@
     tools:context=".LessonActivity"
     >
 
-    <fragment
-        android:id="@+id/content_lesson_youtube_fragment"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.idgi.Widgets.YoutubeFragment" />
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button">
 
-    <Button
-        android:id="@+id/button"
-        android:text="@string/go_to_quiz"
-        android:onClick="onToQuizClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/content_lesson_youtube_fragment"
-        android:layout_centerHorizontal="true" />
+        <fragment
+            android:id="@+id/content_lesson_youtube_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.idgi.Widgets.YoutubeFragment" />
 
+        <Button
+            android:id="@+id/button"
+            android:text="@string/go_to_quiz"
+            android:onClick="onToQuizClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_lesson_youtube_fragment"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_list_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="53dp" />
+
+
+    </LinearLayout>
 
 </RelativeLayout>
