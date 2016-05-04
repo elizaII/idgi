@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.idgi.LessonListActivity;
+import com.idgi.CourseActivity;
 import com.idgi.R;
-import com.idgi.VideoActivity;
-import com.idgi.core.Course;
 
 import java.util.ArrayList;
 
@@ -62,7 +60,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         public void onClick(View v){
             String s = courseTextView.getText().toString();
             System.out.println(s);
-            Intent intent = new Intent(v.getContext(), LessonListActivity.class);
+            Intent intent = new Intent(v.getContext(), CourseActivity.class);
             intent.putExtra("courseName", s);
             v.getContext().startActivity(intent);
         }
