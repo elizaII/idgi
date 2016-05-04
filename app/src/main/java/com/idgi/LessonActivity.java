@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.idgi.Widgets.CommentListAdapter;
 import com.idgi.core.Comment;
@@ -27,6 +28,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Comment> commentList = new ArrayList<>();
     private Database database = Database.getInstance();
+    private TextView commentField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,10 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
+
+        commentField = (TextView) findViewById(R.id.commentField);
+
+        initializeDrawer();
     }
 
     public void onToQuizClick(View view) {
@@ -70,6 +76,13 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
         Intent intent = new Intent(this, QuizActivity.class);
         intent.putExtra("quiz_key", "Quiz123"); //Todo... replace with getCurrentQuiz()
         startActivity(intent);
+    }
+
+    public void onCommentButtonClick(View view) {
+        database.addComment(new Comment(commentField.getText().toString(), "No name"));
+        commentField.setText("");
+        adapter.notifyDataSetChanged();
+
     }
 
 

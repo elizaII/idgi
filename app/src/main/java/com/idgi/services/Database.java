@@ -19,7 +19,6 @@ import java.util.List;
 public final class Database implements IDatabase {
 	private static Database instance = null;
 
-
 	// TODO Implement this properly
 	public Quiz getQuiz(String key) {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
@@ -147,11 +146,16 @@ public final class Database implements IDatabase {
 
         return comments;
 	}
+
 	//public List<User> getUsers() {
 
 	//}
 
 	public void setUser() {
+
+	}
+	public void addComment(Comment comment){
+		System.out.println(comment.getText());
 
 	}
 }
