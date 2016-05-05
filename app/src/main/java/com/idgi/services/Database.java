@@ -32,22 +32,22 @@ public final class Database implements IDatabase {
 	// TODO Implement this properly
 	public Quiz getQuiz(String key) {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
-		Answer option1 = new Answer("8");
-		Answer option2 = new Answer("10");
-		Answer option3 = new Answer("16");
-		Answer option4 = new Answer("9");
-		option2.setCorrect(true);
-		question.addAnswers(option1, option2, option3, option4);
+		Answer answer1 = new Answer("8");
+		Answer answer2 = new Answer("10");
+		Answer answer3 = new Answer("16");
+		Answer answer4 = new Answer("9");
+		answer2.setCorrect(true);
+		question.addAnswers(answer1, answer2, answer3, answer4);
 
 
 		Quiz quiz = new Quiz();
 		quiz.addQuestion(question);
 
-		Answer option5 = new Answer("Yes");
-		option5.setCorrect(true);
-		Answer option6 = new Answer("No");
+		Answer answer5 = new Answer("Yes");
+		answer5.setCorrect(true);
+		Answer answer6 = new Answer("No");
 		question = new Question("Is this the last question?");
-		question.addAnswers(option5, option6);
+		question.addAnswers(answer5, answer6);
 
 		quiz.addQuestion(question);
 
@@ -93,12 +93,8 @@ public final class Database implements IDatabase {
 		Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
 		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
         Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));
-        //Todo... Add more lessons.
 
-        List<Lesson> lessons = new ArrayList<>();
-        lessons.add(complex1);
-        lessons.add(complex2);
-        lessons.add(complex3);
+        List<Lesson> lessons = Arrays.asList(new Lesson[]{ complex1, complex2, complex3 });
 
         return lessons;
 	}
