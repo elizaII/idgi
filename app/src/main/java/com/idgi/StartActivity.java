@@ -1,11 +1,14 @@
 package com.idgi;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.idgi.core.User;
 import com.idgi.util.AppCompatActivityWithDrawer;
+import com.idgi.util.Storage;
 
 public class StartActivity extends AppCompatActivityWithDrawer {
 
@@ -40,8 +43,10 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 	}
 
 	public void onCreateAccountButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
-		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
+		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+		Drawable d = getResources().getDrawable(R.drawable.yoda);
+		Storage.setActiveUser(new User("Yoda", "1337.gmail.com", d));
 
 	}
 
