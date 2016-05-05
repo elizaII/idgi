@@ -77,8 +77,7 @@
             android:label="@string/title_activity_quiz_result" />
 
         <activity
-            android:name=".LessonListActivity"
-            android:label="@string/title_activity_lesson_list" />
+            android:name=".CourseActivity"/>
 
         <activity android:name=".StatisticsActivity">
         </activity>
