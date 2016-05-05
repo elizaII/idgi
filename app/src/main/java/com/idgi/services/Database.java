@@ -114,19 +114,20 @@ public final class Database implements IDatabase {
         return lessons;
 	}
     public List<Comment> getComments(){
-		Comment comment1 = new Comment("Bra video.", "Darth Vader");
-		Comment comment2 = new Comment("Randig katt.", "Luke");
-		Comment comment3 = new Comment("May the 4th be with you.", "Yoda");
-		Comment comment4 = new Comment("And you.", "Yoda");
-		Comment comment5 = new Comment("And you.", "Yoda");
-		Comment comment6 = new Comment("And you.", "Yoda");
-		Comment comment7 = new Comment("And you.", "Yoda");
-		Comment comment8 = new Comment("And you.", "Yoda");
-		Comment comment9 = new Comment("And you.", "Yoda");
-		Comment comment10 = new Comment("And you.", "Yoda");
-		Comment comment11 = new Comment("And you.", "Yoda");
-		Comment comment12 = new Comment("And you.", "Yoda");
-		Comment comment13 = new Comment("Not you.", "Yoda");
+		User Yoda = new User("Yoda");
+		Comment comment1 = new Comment("Bra video.", new User("Darth Vader"));
+		Comment comment2 = new Comment("Randig katt.", new User("Luke"));
+		Comment comment3 = new Comment("May the 4th be with you.",Yoda);
+		Comment comment4 = new Comment("And you.", Yoda);
+		Comment comment5 = new Comment("And you.", Yoda);
+		Comment comment6 = new Comment("And you.", Yoda);
+		Comment comment7 = new Comment("And you.", Yoda);
+		Comment comment8 = new Comment("And you.", Yoda);
+		Comment comment9 = new Comment("And you.", Yoda);
+		Comment comment10 = new Comment("And you.",Yoda);
+		Comment comment11 = new Comment("And you.",Yoda);
+		Comment comment12 = new Comment("And you.", Yoda);
+		Comment comment13 = new Comment("Not you.", Yoda);
         //Todo... Add more Comments.
 
         ArrayList<Comment> comments = new ArrayList<>();

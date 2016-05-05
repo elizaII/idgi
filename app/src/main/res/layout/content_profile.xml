@@ -12,7 +12,7 @@
     tools:context=".ProfileActivity"
     tools:showIn="@layout/app_bar_profile">
     <ImageView
-        android:id="@+id/profile_imageView_profilePicture"
+        android:id="@+id/comment_imageView_profilePicture"
         android:gravity="top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
     android:id="@+id/profile_relativeLayout_editName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/profile_imageView_profilePicture">
+    android:layout_below="@+id/comment_imageView_profilePicture">
     <EditText
         android:id="@+id/profile_editText_name"
         android:layout_width="match_parent"

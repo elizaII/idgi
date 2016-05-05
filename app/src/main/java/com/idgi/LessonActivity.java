@@ -79,7 +79,8 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
     }
 
     public void onCommentButtonClick(View view) {
-        database.addComment(new Comment(commentField.getText().toString(), "No name"));
+        database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
+        commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentField.setText("");
         adapter.notifyDataSetChanged();
 

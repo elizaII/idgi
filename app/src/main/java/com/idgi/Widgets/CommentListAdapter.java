@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.idgi.LessonActivity;
 import com.idgi.R;
 import com.idgi.SubjectListActivity;
 import com.idgi.core.Comment;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,11 @@ public class CommentListAdapter  extends RecyclerView.Adapter<CommentListAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.comment_text.setText(data.get(position).getText());
-        holder.comment_author.setText(data.get(position).getAuthor());
+        holder.comment_author.setText(data.get(position).getAuthor().getName());
+        if (data.get(position).getAuthor().getImage() != null) {
+            holder.comment_imageView_profilePicture.setImageDrawable(data.get(position).getAuthor().getImage());
+            holder.comment_imageView_profilePicture.setBackground(null);
+        }
     }
 
     @Override
@@ -52,14 +58,16 @@ public class CommentListAdapter  extends RecyclerView.Adapter<CommentListAdapter
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView comment_text;
-        public TextView comment_author;
+        private TextView comment_text;
+        private TextView comment_author;
+        private ImageView comment_imageView_profilePicture;
 
         public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
             comment_text =(TextView) v.findViewById(R.id.comment_text);
             comment_author =(TextView) v.findViewById(R.id.comment_author);
+            comment_imageView_profilePicture=(ImageView) v.findViewById(R.id.comment_imageView_profilePicture);
         }
 
         public void onClick(View v){
