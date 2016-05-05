@@ -22,8 +22,8 @@ public class BrowseActivity extends AppCompatActivityWithDrawer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
-        initializeDrawer();
 
+        initializeDrawer();
     }
 
     public void onSchoolButtonClick(View view){

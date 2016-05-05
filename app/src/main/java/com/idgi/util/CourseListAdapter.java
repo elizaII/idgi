@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.idgi.CourseActivity;
+import com.idgi.LessonListActivity;
 import com.idgi.R;
+import com.idgi.VideoActivity;
+import com.idgi.core.Course;
 
 import java.util.ArrayList;
 
-/**
- * Created by Emil on 29/04/2016.
- */
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
     private ArrayList<String> data;
@@ -30,9 +29,8 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.list_row, parent, false);
-        ViewHolder vh = new ViewHolder(v);
 
-        return vh;
+        return new ViewHolder(v);
 
     }
 
@@ -60,7 +58,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         public void onClick(View v){
             String s = courseTextView.getText().toString();
             System.out.println(s);
-            Intent intent = new Intent(v.getContext(), CourseActivity.class);
+            Intent intent = new Intent(v.getContext(), LessonListActivity.class);
             intent.putExtra("courseName", s);
             v.getContext().startActivity(intent);
         }

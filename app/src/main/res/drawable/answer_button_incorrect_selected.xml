@@ -4,4 +4,8 @@
     android:shape="rectangle">
 
     <solid android:color="@color/colorAnswerButtonIncorrect" />
+
+    <stroke
+        android:width="@dimen/answer_button_border_width"
+        android:color="@color/colorAnswerButtonBorder" />
 </shape>

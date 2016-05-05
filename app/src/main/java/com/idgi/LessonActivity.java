@@ -32,7 +32,12 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
+
+        initializeDrawer();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
 
         if(Storage.getCurrentLesson() != null) {
             currentLesson = Storage.getCurrentLesson();
@@ -51,8 +56,6 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
-
-        initializeDrawer();
     }
 
     public void onToQuizClick(View view) {

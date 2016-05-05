@@ -17,21 +17,10 @@ public class ButtonFactory {
 	public static AnswerButton createAnswerButton(final Context context, final Answer answer) {
 		final AnswerButton button = new AnswerButton(new ContextThemeWrapper(context, R.style.quiz_answer_button), null, R.style.quiz_answer_button, answer);
 		button.setText(answer.getText());
-
 		button.setLayoutParams(getAnswerButtonLayout());
 
 		if (Build.VERSION.SDK_INT > 21)
 			button.setElevation(10);
-
-
-		button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				boolean selected = !answer.isSelected();
-
-				answer.setSelected(selected);
-				v.setSelected(selected);
-			}
-		});
 
 		return button;
 	}
@@ -44,7 +33,7 @@ public class ButtonFactory {
 					1.0f
 			);
 
-			buttonLayoutParams.setMargins(45, 45, 45, 45);
+			buttonLayoutParams.setMargins(20, 20, 20, 20);
 		}
 
 		return buttonLayoutParams;

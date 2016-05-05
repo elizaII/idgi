@@ -15,8 +15,10 @@ public class StartActivity extends AppCompatActivityWithDrawer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+
 		initializeDrawer();
+
+		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 
     public void showVideoActivity(View view) {
