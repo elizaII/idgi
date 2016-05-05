@@ -9,14 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.idgi.Widgets.CommentListAdapter;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Storage;
+import com.idgi.util.recycleViews.ReplyAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class LessonActivity extends AppCompatActivityWithDrawer {
@@ -26,7 +29,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
     private RecyclerView.LayoutManager manager;
-    private ArrayList<Comment> commentList = new ArrayList<>();
+    private List<Comment> commentList;
     private Database database = Database.getInstance();
     private TextView commentField;
 
@@ -48,20 +51,27 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
             toolbar.setTitle("Kvadratrötter och potenser");
         }
 
-        commentList= (ArrayList<Comment>) database.getComments();
+        commentList = database.getComments();
 
         ArrayList<String> commentText = new ArrayList<>();
 
         manager = new LinearLayoutManager(this);
-        adapter = new CommentListAdapter(this, commentList);
+       // adapter = new CommentListAdapter(this, commentList);
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
-        recycler.setAdapter(adapter);
+        //recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
         commentField = (TextView) findViewById(R.id.commentField);
 
         initializeDrawer();
+
+
+
+        adapter = new ReplyAdapter(this, commentList);
+        recycler.setAdapter(adapter);
+
+
     }
 
     public void onToQuizClick(View view) {
@@ -88,3 +98,4 @@ public class LessonActivity extends AppCompatActivityWithDrawer {
 
 
 }
+

@@ -1,19 +1,26 @@
 package com.idgi.core;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Comment {
+public class Comment implements ParentListItem{
 	
 	private String text;
-	private Set<Comment> replies;
+
+
+
+	private List<Comment> replies;
 	private User author;
 
 
 	public Comment(String text, User author) {
 		this.text = text;
 		this.author = author;
-		replies = new TreeSet<Comment>();
+		replies = new ArrayList<Comment>();
 	}
 	
 	public void addReply(Comment comment) {
@@ -28,5 +35,17 @@ public class Comment {
 		return author;
 	}
 
+	public List<Comment> getReplies() {
+		return replies;
+	}
 
+	@Override
+	public List<?> getChildItemList() {
+		return replies;
+	}
+
+	@Override
+	public boolean isInitiallyExpanded() {
+		return false;
+	}
 }

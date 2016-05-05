@@ -130,7 +130,7 @@ public final class Database implements IDatabase {
 		Comment comment13 = new Comment("Not you.", Yoda);
         //Todo... Add more Comments.
 
-        ArrayList<Comment> comments = new ArrayList<>();
+        List<Comment> comments = new ArrayList<>();
         comments.add(comment1);
         comments.add(comment2);
         comments.add(comment3);
@@ -144,7 +144,8 @@ public final class Database implements IDatabase {
         comments.add(comment11);
         comments.add(comment12);
         comments.add(comment13);
-
+		comment13.addReply(new Comment("dååååligt", Yoda));
+		comment1.addReply(new Comment("braaaa", Yoda));
         return comments;
 	}
 
