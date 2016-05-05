@@ -40,9 +40,13 @@ public class CourseActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
+        Bundle bundle = getIntent().getExtras();
+        String title = bundle.getString("courseName");
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(title);
 
         viewPager = (ViewPager) findViewById(R.id.course_pager);
 
@@ -55,10 +59,6 @@ public class CourseActivity extends AppCompatActivityWithDrawer {
 
         tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
-
-/*        Bundle bundle = getIntent().getExtras();
-       String s = bundle.getString("courseName"); */
 
         initializeDrawer();
     }
