@@ -19,6 +19,10 @@ public class StartActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_activity_start);
+
 		initializeDrawer();
 
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
