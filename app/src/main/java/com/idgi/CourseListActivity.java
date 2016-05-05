@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.idgi.core.Course;
 import com.idgi.services.Database;
 import com.idgi.services.IDatabase;
+import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.CourseListAdapter;
 import com.idgi.util.Navigation;
 import com.idgi.util.SubjectListAdapter;
@@ -26,7 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class CourseListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CourseListActivity extends AppCompatActivityWithDrawer{
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
@@ -42,11 +43,14 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
+        initializeDrawer();
+
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("subjectName");
 
-        TextView txt = (TextView)findViewById(R.id.course_list_subject);
-        txt.setText(s);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(s);
 
         courses = database.getCourses();
         ArrayList<String> courseNames = new ArrayList<>();
@@ -64,42 +68,5 @@ public class CourseListActivity extends AppCompatActivity implements NavigationV
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
-        toolbar = (Toolbar) findViewById(R.id.test_toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-    }
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        Navigation.onMenuItemSelected(this, item);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
