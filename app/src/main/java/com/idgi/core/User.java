@@ -51,6 +51,7 @@ public class User {
     public int getStat(Statistics.Property property) {
         return statistics.get(property);
     }
+
     public Drawable getImage() {
         return image;
     }

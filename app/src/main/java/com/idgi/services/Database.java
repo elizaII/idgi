@@ -84,7 +84,7 @@ public final class Database implements IDatabase {
 		Course math1 = new Course("Matte 1c");
 		Course math2 = new Course("Matte 2c");
 		Course math3 = new Course("Matte 3c");
-
+		
 		return Arrays.asList(math1, math2, math3);
 	}
 
