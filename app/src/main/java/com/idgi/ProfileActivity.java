@@ -100,6 +100,11 @@ public class ProfileActivity extends AppCompatActivity
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
     }
+    private void disableInputField(EditText field) {
+        field.setFocusableInTouchMode(false);
+        field.setClickable(false);
+        field.clearFocus();
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

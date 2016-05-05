@@ -7,6 +7,7 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.User;
 import com.idgi.core.Video;
 
 import java.util.ArrayList;
@@ -112,4 +113,13 @@ public final class Database implements IDatabase {
 
         return lessons;
 	}
+
+	//public List<User> getUsers() {
+
+	//}
+
+	public void setUser() {
+
+	}
+
 }

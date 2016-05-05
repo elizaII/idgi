@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.core.User;
+import com.idgi.util.AppCompatActivityWithDrawer;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText nameText, phoneText, eMailText;
@@ -21,21 +22,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //initializeDrawer();
 
         nameText = (EditText) findViewById(R.id.nameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
         eMailText = (EditText) findViewById(R.id.eMailText);
         Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
         createAccountButton.setOnClickListener(this);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     public void createAccount() {
