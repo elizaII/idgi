@@ -44,8 +44,9 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("schoolName");
 
-        TextView txt = (TextView)findViewById(R.id.subject_list_school);
-        txt.setText(s);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(s);
 
         subjects = database.getSubjects();
         ArrayList<String> subjectNames = new ArrayList<>();
@@ -63,8 +64,6 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
-        toolbar = (Toolbar) findViewById(R.id.test_toolbar);
-        setSupportActionBar(toolbar);
 
     }
 }
