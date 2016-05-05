@@ -6,8 +6,12 @@ public class Statistics {
 
 	public enum Property {
 		COMPLETED_COURSES, ONGOING_COURSES, COMPLETED_QUIZZES, SEEN_VIDEOS,
-		COMMENTS, HATS
+		COMMENTS, HATS, POINTS
 	}
+
+	private int totalPoints;
+
+	private HashMap<Integer, Integer> quizPoints = new HashMap<>();
 
 	private HashMap<Property, Integer> map = new HashMap<>();
 
@@ -23,16 +27,38 @@ public class Statistics {
 		map.put(Property.COMMENTS, 0);
 		map.put(Property.HATS, 0);
 
+		totalPoints = 0;
 	}
 
-	private int completedCourses;
-	private int currentCourses;
-	private int completedQuizAmount;
-	private int seenVideos;
-	private int commentAmount;
-	private int hatAmount;
-
 	public int get(Property property) {
-		return map.get(property);
+		switch (property) {
+			case POINTS:
+				return totalPoints;
+			default:
+			return map.get(property);
+		}
+	}
+
+	//Updates the score for a quiz. If totalPoints are a new best score, updates user's total totalPoints.
+	public void updateQuizPoints(int quizID, int newScore) {
+		Integer oldScore = quizPoints.get(quizID);
+
+		if (oldScore == null) {
+			quizPoints.put(quizID, 0);
+			oldScore = 0;
+		}
+
+		if (oldScore < newScore) {
+			int diff = newScore - oldScore;
+			quizPoints.put(quizID, newScore);
+			addPoints(diff);
+		}
+	}
+
+	private void addPoints(int amount) {
+		if (amount < 0)
+			throw new IllegalArgumentException("Can not remove points.");
+
+		totalPoints += amount;
 	}
 }

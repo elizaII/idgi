@@ -1,6 +1,9 @@
 package com.idgi.core;
 
+import com.idgi.services.Database;
+
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class Quiz {
@@ -8,11 +11,19 @@ public class Quiz {
 	private int currentIndex = 0;
 	
 	List<Question> questions;
+
+	private int id;
 	
 	public Quiz() {
 		questions = new ArrayList<>();
+		this.id = Database.getInstance().getNewQuizId();
 	}
-	
+
+
+	public int getID() {
+		return this.id;
+	}
+
 	public void addQuestion(Question question) {
 		questions.add(question);
 	}
@@ -66,5 +77,44 @@ public class Quiz {
 				++n;
 
 		return n;
+	}
+
+	/**
+	 * Calculates points earned from the quiz
+	 * @throws IllegalStateException if called before quiz is finished (@see isFinished())
+	 * @return amount of points earned from the quiz
+	 */
+	public int getPointsEarned() {
+		if (!this.isFinished())
+			throw new IllegalStateException("Can not prompt for points before quiz is finished.");
+
+		int total = 0;
+		for(Question question : questions) {
+			int amount = 0;
+			int correctAnswerAmount = question.getCorrectAnswerAmount();
+
+			for (Answer answer : question.getAnswers()) {
+				if (answer.isSelected())
+					if (answer.isCorrect()) {
+						++amount;
+					}
+					else {
+						--amount;
+					}
+			}
+
+			int points = calculatePointsEarned(amount, correctAnswerAmount);
+			total += points;
+		}
+
+		return total;
+	}
+
+	/**
+	 * Returns amount of points to be awarded for a question.
+	 * @param deltaAnswers correctAnswers - incorrectAnswers
+	 */
+	private int calculatePointsEarned(int deltaAnswers, int correctAnswerAmount) {
+		return Math.max(0, (int) ((float) deltaAnswers / correctAnswerAmount * 100));
 	}
 }

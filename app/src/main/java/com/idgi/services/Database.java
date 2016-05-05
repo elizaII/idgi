@@ -10,14 +10,24 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 
 public final class Database implements IDatabase {
 	private static Database instance = null;
+
+	private static int currentQuizId = 0;
+
+	//Used to make sure we don't give out duplicate points for a quiz
+	public int getNewQuizId() {
+		return currentQuizId++;
+	}
 
 	// TODO Implement this properly
 	public Quiz getQuiz(String key) {
@@ -52,23 +62,13 @@ public final class Database implements IDatabase {
 	}
 
 	public List<School> getSchools(){
-		School school1 = new School("1", "MEG");
-		School school2 = new School("2", "Hvitfeldska");
-		School school3 = new School("3", "Polhem");
-		School school4 = new School("4", "Ingrid Segerstedt");
-		School school5 = new School("5", "Samskolan");
-		School school6 = new School("6", "Drottning Blanka");
+		School[] schools = {
+				new School("1", "MEG"), new School("2", "Hvitfeldska"),
+				new School("3", "Polhem"), new School("4", "Ingrid Segerstedt"),
+				new School("5", "Samskolan"), new School("6", "Drottning Blanka")
+		};
 
-		List<School> schools = new ArrayList<>();
-
-		schools.add(school1);
-		schools.add(school2);
-		schools.add(school3);
-		schools.add(school4);
-		schools.add(school5);
-		schools.add(school6);
-
-		return schools;
+		return Arrays.asList(schools);
 	}
 
 	public List<Subject> getSubjects(){
@@ -77,13 +77,7 @@ public final class Database implements IDatabase {
 		Subject swedish = new Subject("3", "Swedish");
 		Subject physics = new Subject("4", "Physics");
 
-		List<Subject> subjects = new ArrayList<>();
-		subjects.add(math);
-		subjects.add(english);
-		subjects.add(swedish);
-		subjects.add(physics);
-
-		return subjects;
+		return Arrays.asList(math, english, swedish, physics);
 	}
 
 	public List<Course> getCourses(){
@@ -91,12 +85,7 @@ public final class Database implements IDatabase {
 		Course math2 = new Course("Matte 2c");
 		Course math3 = new Course("Matte 3c");
 
-		List<Course> courses = new ArrayList<>();
-		courses.add(math1);
-		courses.add(math2);
-		courses.add(math3);
-
-		return courses;
+		return Arrays.asList(math1, math2, math3);
 	}
 
 
@@ -114,38 +103,20 @@ public final class Database implements IDatabase {
         return lessons;
 	}
     public List<Comment> getComments(){
-		User Yoda = new User("Yoda");
-		Comment comment1 = new Comment("Bra video.", new User("Darth Vader"));
-		Comment comment2 = new Comment("Randig katt.", new User("Luke"));
-		Comment comment3 = new Comment("May the 4th be with you.",Yoda);
-		Comment comment4 = new Comment("And you.", Yoda);
-		Comment comment5 = new Comment("And you.", Yoda);
-		Comment comment6 = new Comment("And you.", Yoda);
-		Comment comment7 = new Comment("And you.", Yoda);
-		Comment comment8 = new Comment("And you.", Yoda);
-		Comment comment9 = new Comment("And you.", Yoda);
-		Comment comment10 = new Comment("And you.",Yoda);
-		Comment comment11 = new Comment("And you.",Yoda);
-		Comment comment12 = new Comment("And you.", Yoda);
-		Comment comment13 = new Comment("Not you.", Yoda);
-        //Todo... Add more Comments.
+		String[] words = {"I", "am", "hello", "rad", "totally", "dude", "fantastic"};
 
-        List<Comment> comments = new ArrayList<>();
-        comments.add(comment1);
-        comments.add(comment2);
-        comments.add(comment3);
-        comments.add(comment4);
-        comments.add(comment5);
-        comments.add(comment6);
-        comments.add(comment7);
-        comments.add(comment8);
-        comments.add(comment9);
-        comments.add(comment10);
-        comments.add(comment11);
-        comments.add(comment12);
-        comments.add(comment13);
-		comment13.addReply(new Comment("dååååligt", Yoda));
-		comment1.addReply(new Comment("braaaa", Yoda));
+		Random rand = new Random();
+
+		List<Comment> comments = new ArrayList<>();
+
+		for (int i = 0; i < 10; ++i) {
+			String text = "";
+			int k = rand.nextInt(5);
+			while(k-- >= 0) {
+				text += " " + words[rand.nextInt(words.length - 1)];
+			}
+			comments.add(new Comment(text + ".", Storage.getActiveUser()));
+		}
         return comments;
 	}
 

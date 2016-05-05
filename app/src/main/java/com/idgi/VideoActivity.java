@@ -34,6 +34,8 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
 		youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
+
+
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,9 +47,36 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 	}
 
 	@Override
-	public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored) {
+	public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
 		if (!wasRestored) {
 			player.cueVideo("1-ZZ7HlNQgk"); // Plays https://www.youtube.com/watch?v=1-ZZ7HlNQgk
+			player.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
+				@Override
+				public void onPlaying() {
+
+				}
+
+				@Override
+				public void onPaused() {
+					if (player.getCurrentTimeMillis() == player.getDurationMillis())
+						Toast.makeText(VideoActivity.this, "Works!", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onStopped() {
+
+				}
+
+				@Override
+				public void onBuffering(boolean b) {
+
+				}
+
+				@Override
+				public void onSeekTo(int i) {
+
+				}
+			});
 		}
 	}
 

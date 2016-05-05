@@ -27,24 +27,6 @@ public class QuestionTest {
 		assertTrue(question1.isCorrectlyAnswered());
 	}
 	
-	public void testGetMistakes() {
-		resetQuestion();
-		
-		Answer option10 = new Answer("10");
-		option10.setCorrect(true);
-		Answer option12 = new Answer("12");
-		Answer option2 = new Answer("2");
-		
-		question1.addAnswers(option10, option12, option2);
-		
-		option12.setSelected(true);
-		option2.setSelected(true);
-		
-		//Set<Answer> mistakes = question1.getMistakes();
-		
-		//assertTrue(mistakes.contains(option12) && mistakes.contains(option2));
-	}
-	
 	public void resetQuestion() {
 		question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
 	}

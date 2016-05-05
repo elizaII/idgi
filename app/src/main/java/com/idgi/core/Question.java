@@ -46,6 +46,16 @@ public class Question implements ParentListItem {
 		return answers.size();
 	}
 
+	public int getCorrectAnswerAmount() {
+		int amount = 0;
+		for (Answer answer : answers) {
+			if (answer.isCorrect())
+				++amount;
+		}
+
+		return amount;
+	}
+
 	public Question(String text) {
 		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
 	}

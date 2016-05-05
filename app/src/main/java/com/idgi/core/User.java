@@ -54,4 +54,12 @@ public class User {
     public Drawable getImage() {
         return image;
     }
+
+    public void givePointsForQuiz(int quizID, int points) {
+        statistics.updateQuizPoints(quizID, points);
+    }
+
+    public int getPoints() {
+        return statistics.get(Statistics.Property.POINTS);
+    }
 }
