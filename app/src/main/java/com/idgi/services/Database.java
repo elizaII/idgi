@@ -8,6 +8,7 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.User;
 import com.idgi.core.Video;
 
 import java.util.ArrayList;
@@ -113,8 +114,7 @@ public final class Database implements IDatabase {
 
         return lessons;
 	}
-
-	public List<Comment> getComments(){
+    public List<Comment> getComments(){
 		Comment comment1 = new Comment("Bra video.", "Darth Vader");
 		Comment comment2 = new Comment("Randig katt.", "Luke");
 		Comment comment3 = new Comment("May the 4th be with you.", "Yoda");
@@ -146,5 +146,12 @@ public final class Database implements IDatabase {
         comments.add(comment13);
 
         return comments;
+	}
+	//public List<User> getUsers() {
+
+	//}
+
+	public void setUser() {
+
 	}
 }

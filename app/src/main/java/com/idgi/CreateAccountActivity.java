@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.core.User;
+import com.idgi.util.AppCompatActivityWithDrawer;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText nameText, phoneText, eMailText;
@@ -21,6 +22,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //initializeDrawer();
 
         nameText = (EditText) findViewById(R.id.nameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
