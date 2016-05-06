@@ -55,7 +55,7 @@ public class User {
     public Drawable getImage() {
         return image;
     }
-    
+
     public int getPointsForVideo(Video video) {
         return statistics.getVideoPoints(video);
     }
