@@ -1,26 +1,18 @@
 package com.idgi.Widgets;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.idgi.LessonActivity;
 import com.idgi.R;
-import com.idgi.SubjectListActivity;
 import com.idgi.core.Comment;
-import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 
-/**
- * Created by Allex on 2016-05-04.
- */
 public class CommentListAdapter  extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
     private ArrayList<Comment> data;
     private LayoutInflater inflater;
@@ -33,10 +25,9 @@ public class CommentListAdapter  extends RecyclerView.Adapter<CommentListAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.list_row_comment, parent, false);
-        ViewHolder vh = new ViewHolder(v);
+        View view = inflater.inflate(R.layout.list_row_comment, parent, false);
 
-        return vh;
+        return new ViewHolder(view);
 
     }
 

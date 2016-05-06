@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CourseLessonListFragment">
+    tools:context=".fragments.CourseLessonListFragment">
 
 
     <android.support.v7.widget.RecyclerView
@@ -10,9 +10,6 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="53dp" />
 
     <TextView
@@ -20,8 +17,6 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/lesson_list_course"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp" /> <!-- Font size should be in dp -->
+        android:textSize="24sp" />
 
 </FrameLayout>

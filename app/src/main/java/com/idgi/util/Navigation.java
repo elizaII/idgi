@@ -4,16 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.idgi.BrowseActivity;
-import com.idgi.CreateAccountActivity;
-import com.idgi.LoginActivity;
-import com.idgi.ProfileActivity;
-import com.idgi.QuizActivity;
+import com.idgi.activities.BrowseActivity;
+import com.idgi.activities.CreateAccountActivity;
+import com.idgi.activities.LoginActivity;
+import com.idgi.activities.ProfileActivity;
+import com.idgi.activities.QuizActivity;
 import com.idgi.R;
-import com.idgi.StartActivity;
-import com.idgi.StatisticsActivity;
-
-import static android.support.v4.app.ActivityCompat.startActivity;
+import com.idgi.activities.StartActivity;
+import com.idgi.activities.StatisticsActivity;
 
 public class Navigation {
 

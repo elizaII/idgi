@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:showIn="@layout/app_bar_course_list"
-    tools:context=".CourseListActivity">
+    tools:context=".activities.CourseListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/course_list_recycler_view"

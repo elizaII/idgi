@@ -83,4 +83,8 @@
     <string name="statistics_seen_videos">Sedda videor</string>
     <string name="statistics_hats">Hattar</string>
     <string name="statistics_points">Poäng</string>
+
+    <!-- Lesson -->
+    <string name="content_lesson_leave_comment">Lämna en kommentar...</string>
+    <string name="content_lesson_post_comment">Lämna kommentar</string>
 </resources>
