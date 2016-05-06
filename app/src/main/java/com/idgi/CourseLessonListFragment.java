@@ -15,6 +15,7 @@ import com.idgi.util.LessonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class CourseLessonListFragment extends Fragment {
@@ -25,7 +26,7 @@ public class CourseLessonListFragment extends Fragment {
 
     private Database database = Database.getInstance();
 
-    private ArrayList<Lesson> lessons = new ArrayList<>();
+    private List<Lesson> lessons;
 
     public CourseLessonListFragment() {
         // Required empty public constructor
@@ -43,7 +44,7 @@ public class CourseLessonListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
 
         ArrayList<String> lessonNames = new ArrayList<>();
-        lessons = (ArrayList<Lesson>)database.getLessons();
+        lessons = database.getLessons();
 
         for(Lesson lesson : lessons) {
             lessonNames.add(lesson.getName());

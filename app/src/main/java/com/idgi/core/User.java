@@ -60,6 +60,10 @@ public class User {
         statistics.updateQuizPoints(quizID, points);
     }
 
+    public void givePointsForViewingVideo(Video video, int points) {
+        statistics.addVideoPoints(video, points);
+    }
+
     public int getPoints() {
         return statistics.get(Statistics.Property.POINTS);
     }

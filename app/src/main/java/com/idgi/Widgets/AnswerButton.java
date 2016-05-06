@@ -1,25 +1,14 @@
 package com.idgi.Widgets;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.graphics.drawable.shapes.RectShape;
-import android.graphics.drawable.shapes.Shape;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
 import com.idgi.R;
 import com.idgi.core.Answer;
-import com.idgi.core.Statistics;
-import com.idgi.util.TransitionFactory;
 
 public class AnswerButton extends Button {
 	private static final int DEFAULT_LOOK = R.drawable.answer_button_normal;
@@ -75,12 +64,12 @@ public class AnswerButton extends Button {
 
 		updateTextColor();
 
-		TransitionDrawable background = TransitionFactory.createDrawableCrossFade(
-				oldBackground, newBackground, fadeTime);
+		Drawable drawables[] = {oldBackground, newBackground};
+		TransitionDrawable transitionBackground = new TransitionDrawable(drawables);
 
-		this.setBackground(background);
+		this.setBackground(transitionBackground);
 
-		background.startTransition(500);
+		transitionBackground.startTransition(fadeTime);
 	}
 
 	private void updateTextColor() {

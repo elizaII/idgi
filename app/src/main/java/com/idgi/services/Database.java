@@ -84,19 +84,21 @@ public final class Database implements IDatabase {
 		Course math1 = new Course("Matte 1c");
 		Course math2 = new Course("Matte 2c");
 		Course math3 = new Course("Matte 3c");
-		
+
 		return Arrays.asList(math1, math2, math3);
 	}
 
 
 	public List<Lesson> getLessons(){
-		Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
+		/*Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
 		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
-        Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));
+        Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));*/
 
-        List<Lesson> lessons = Arrays.asList(new Lesson[]{ complex1, complex2, complex3 });
+		Lesson complex1 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
+		Lesson complex2 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
+		Lesson complex3 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
 
-        return lessons;
+		return Arrays.asList(complex1, complex2, complex3);
 	}
     public List<Comment> getComments(){
 		String[] words = {"I", "am", "hello", "rad", "totally", "dude", "fantastic"};
@@ -109,7 +111,7 @@ public final class Database implements IDatabase {
 			String text = "";
 			int k = rand.nextInt(5);
 			while(k-- >= 0) {
-				text += " " + words[rand.nextInt(words.length - 1)];
+				text += " " + words[rand.nextInt(words.length)];
 			}
 			comments.add(new Comment(text + ".", Storage.getActiveUser()));
 		}

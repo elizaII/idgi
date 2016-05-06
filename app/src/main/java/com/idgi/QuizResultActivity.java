@@ -15,6 +15,8 @@ import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Storage;
 import com.idgi.util.recycleViews.QuestionAdapter;
 
+import java.util.Locale;
+
 public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
 	private Quiz quiz;
@@ -33,6 +35,8 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		displayScore();
 
 		populateQuestionList();
+
+		Storage.getActiveUser().givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 	}
 
 	private void initiateButtons() {
@@ -63,7 +67,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		if (txtScore != null) {
 			int score = quiz.getCorrectAnswerAmount();
 			int max = quiz.length();
-			String scoreText = String.format("%d/%d", score, max);
+			String scoreText = String.format(Locale.ENGLISH, "%d/%d", score, max);
 			txtScore.setText(scoreText);
 		}
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class Statistics {
 
+	private static final int MAX_POINTS_FOR_VIDEO = 600;
+
 	public enum Property {
 		COMPLETED_COURSES, ONGOING_COURSES, COMPLETED_QUIZZES, SEEN_VIDEOS,
 		COMMENTS, HATS, POINTS
@@ -12,6 +14,7 @@ public class Statistics {
 	private int totalPoints;
 
 	private HashMap<Integer, Integer> quizPoints = new HashMap<>();
+	private HashMap<String, Integer> videoPoints = new HashMap<>();
 
 	private HashMap<Property, Integer> map = new HashMap<>();
 
@@ -60,5 +63,35 @@ public class Statistics {
 			throw new IllegalArgumentException("Can not remove points.");
 
 		totalPoints += amount;
+	}
+
+	public void addVideoPoints(Video video, int newPoints) {
+		if (newPoints < 0)
+			throw new IllegalArgumentException("Adding a negative amount of points is prohibited.");
+
+		Integer currentPoints = getPointsEarnedForVideo(video);
+
+		if (currentPoints == null) {
+			addViewedVideo(video);
+			currentPoints = 0;
+		}
+		int points = Math.min(MAX_POINTS_FOR_VIDEO, currentPoints + newPoints);
+
+		setPointsForViewedVideo(video, points);
+	}
+
+	private void addViewedVideo(Video video) {
+		videoPoints.put(video.getUrl(), 0);
+	}
+
+	private Integer getPointsEarnedForVideo(Video video) {
+		return videoPoints.get(video.getUrl());
+	}
+
+	private void setPointsForViewedVideo(Video video, int points) {
+		int pointsBefore = getPointsEarnedForVideo(video);
+		videoPoints.put(video.getUrl(), points);
+
+		addPoints(points - pointsBefore);
 	}
 }
