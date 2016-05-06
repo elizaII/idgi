@@ -30,14 +30,14 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_list);
 
-        initializeDrawer();
-
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("schoolName");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(s);
+
+        initializeDrawer();
 
         subjects = database.getSubjects();
         ArrayList<String> subjectNames = new ArrayList<>();

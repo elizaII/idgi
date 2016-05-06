@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CourseListActivity extends AppCompatActivityWithDrawer{
+public class CourseListActivity extends AppCompatActivityWithDrawer {
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
@@ -32,14 +32,14 @@ public class CourseListActivity extends AppCompatActivityWithDrawer{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        initializeDrawer();
-
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("subjectName");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(s);
+
+        initializeDrawer();
 
         courses = database.getCourses();
         ArrayList<String> courseNames = new ArrayList<>();

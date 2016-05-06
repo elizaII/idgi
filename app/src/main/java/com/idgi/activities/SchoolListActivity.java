@@ -30,6 +30,8 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_list);
 
+        initializeDrawer();
+
         schools = database.getSchools();
         ArrayList<String> schoolNames = new ArrayList<>();
 
@@ -37,7 +39,6 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
             schoolNames.add(school.getValue());
 
         Collections.sort(schoolNames);
-
 
         manager = new LinearLayoutManager(this);
         adapter = new SchoolListAdapter(this, schoolNames);
