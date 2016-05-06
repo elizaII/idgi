@@ -1,10 +1,10 @@
 package com.idgi.core;
 
+import com.idgi.util.Config;
+
 import java.util.HashMap;
 
 public class Statistics {
-
-	private static final int MAX_POINTS_FOR_VIDEO = 600;
 
 	public enum Property {
 		COMPLETED_COURSES, ONGOING_COURSES, COMPLETED_QUIZZES, SEEN_VIDEOS,
@@ -75,9 +75,14 @@ public class Statistics {
 			addViewedVideo(video);
 			currentPoints = 0;
 		}
-		int points = Math.min(MAX_POINTS_FOR_VIDEO, currentPoints + newPoints);
+		int points = Math.min(Config.MAX_POINTS_FOR_VIDEO, currentPoints + newPoints);
 
 		setPointsForViewedVideo(video, points);
+	}
+
+	public int getVideoPoints(Video video) {
+		Integer points = videoPoints.get(video.getUrl());
+		return points != null ? points : 0;
 	}
 
 	private void addViewedVideo(Video video) {

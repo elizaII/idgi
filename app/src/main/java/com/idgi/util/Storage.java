@@ -12,7 +12,8 @@ import com.idgi.core.Video;
 public class Storage {
 
 	private static Quiz currentQuiz;
-	private static Video currentVideo;
+	// TODO create actual implemenation
+	private static Video currentVideo = new Video("ffLLmV4mZwU");
     private static Lesson currentLesson;
 
 	// TODO : Create actual implemenation of activeUser, probably through phone local storage?

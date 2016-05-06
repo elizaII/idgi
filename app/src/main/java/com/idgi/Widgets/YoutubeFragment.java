@@ -3,28 +3,13 @@ package com.idgi.Widgets;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.animation.BounceInterpolator;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
-import com.idgi.R;
-import com.idgi.core.Video;
 import com.idgi.util.Config;
 import com.idgi.util.Storage;
-
-import java.util.Locale;
-import java.util.Timer;
-import java.util.concurrent.RunnableFuture;
 
 /**
  * Use the {@link YoutubeFragment#newInstance} factory method to
@@ -32,19 +17,24 @@ import java.util.concurrent.RunnableFuture;
  */
 public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePlayer.OnInitializedListener{
 
+    private FragmentListener listener;
+
     //MUST be multiple of 2000
     private static final int TIME_TO_GET_POINTS = 5 * 1000;
-    private static final int POINTS_PER_TICK = 350;
 
     private Handler handler = new Handler();
-
-    private Video video;
 
     private long milliSecondsSpentWatching = 0;
 
     private boolean videoPaused = true;
 
     public YoutubeFragment() {
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        listener = (FragmentListener) context;
     }
 
     /**
@@ -72,8 +62,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
         if(!wasRestored){
             if(Storage.getCurrentVideo() != null) {
-                video = Storage.getCurrentVideo();
-                youTubePlayer.cueVideo(video.getUrl());
+                youTubePlayer.cueVideo(Storage.getCurrentVideo().getUrl());
             } else {
                 //Todo... better error-handling
                 youTubePlayer.cueVideo("ZXilG7pH3is");
@@ -161,33 +150,23 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
         }
     };
 
-    // TODO
-    private void showPointAnimation(int points) {
-       /* TextView view = new TextView(getContext());
-        view.setText(String.format(Locale.ENGLISH, "+%d", points));
-
-
-       RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-
-        //RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) root.getLayoutParams();
-
-        layoutParams.addRule(RelativeLayout.BELOW, getView().findViewById(R.id.youtube_view).getId());
-
-        root.addView(view, layoutParams);
-
-        ViewAnimator.animate(view).bounceIn().interpolator(new BounceInterpolator()).start();*/
-    }
-
     private void awardPoints(int points) {
         Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
-        Storage.getActiveUser().givePointsForViewingVideo(video, points);
-        showPointAnimation(points);
+        Storage.getActiveUser().givePointsForViewingVideo(Storage.getCurrentVideo(), points);
+        updatePointProgressBar();
     }
 
     private void updateTimeSpentWatching() {
         milliSecondsSpentWatching += 2000;
         if (milliSecondsSpentWatching % TIME_TO_GET_POINTS == 0)
-            awardPoints(POINTS_PER_TICK);
+            awardPoints(Config.POINTS_PER_TICK);
+    }
+
+    public interface FragmentListener {
+        void updatePoints(int value);
+    }
+
+    private void updatePointProgressBar() {
+        listener.updatePoints(Storage.getActiveUser().getPointsForVideo(Storage.getCurrentVideo()));
     }
 }

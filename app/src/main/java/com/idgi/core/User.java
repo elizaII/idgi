@@ -55,6 +55,10 @@ public class User {
     public Drawable getImage() {
         return image;
     }
+    
+    public int getPointsForVideo(Video video) {
+        return statistics.getVideoPoints(video);
+    }
 
     public void givePointsForQuiz(int quizID, int points) {
         statistics.updateQuizPoints(quizID, points);

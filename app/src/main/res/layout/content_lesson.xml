@@ -30,6 +30,12 @@
                 android:layout_height="wrap_content"
                 android:name="com.idgi.Widgets.YoutubeFragment" />
 
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/content_lesson_point_progress"
+                style="?android:attr/progressBarStyleHorizontal"/>
+
             <Button
                 android:id="@+id/button"
                 android:text="@string/go_to_quiz"
