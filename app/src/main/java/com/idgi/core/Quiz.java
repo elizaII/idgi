@@ -46,7 +46,10 @@ public class Quiz {
 	}
 	
 	public Question getCurrentQuestion() {
-		return questions.get(currentIndex);
+		if (!isFinished())
+			return questions.get(currentIndex);
+
+		return null;
 	}
 	
 	/**

@@ -1,8 +1,11 @@
 package com.idgi.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.util.Config;
 import com.idgi.util.Storage;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
@@ -20,6 +24,8 @@ import com.idgi.Widgets.AnswerButton;
 
 import java.util.List;
 
+import butterknife.OnClick;
+
 public class QuizActivity extends AppCompatActivity {
 
 	private Quiz quiz;
@@ -28,7 +34,7 @@ public class QuizActivity extends AppCompatActivity {
 	private Button btnNext;
 	private AnswerButton[] answerButtons;
 
-	private boolean showingCorrectAnswers = false;
+	private boolean isInTransition = false;
 
 	private static final int BUTTONS_PER_ROW = 2;
 
@@ -50,21 +56,12 @@ public class QuizActivity extends AppCompatActivity {
 		btnNext = (Button) findViewById(R.id.quiz_btn_next_question);
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				changeToNextQuestion();
+				if (!isInTransition())
+					finishQuestion();
+				else
+					gotoNextQuestion();
 			}
 		});
-	}
-
-	private void loadQuiz() {
-		Bundle extras = getIntent().getExtras();
-
-		if (extras != null) {
-			String quizKey = extras.getString("quiz_key");
-			if (quizKey != null)
-				quiz = Database.getInstance().getQuiz(quizKey);
-			else
-				throw new NullPointerException("A Quiz must be passed as an extra with key 'quiz_key' from the previous activity.");
-		}
 	}
 
 	private void initializeQuestionView() {
@@ -82,53 +79,61 @@ public class QuizActivity extends AppCompatActivity {
 		});
 	}
 
-	private void changeToNextQuestion() {
+
+	private void finishQuestion() {
 		showCorrectAnswers();
+		setInTransition(true);
 
+		final Question finishedQuestion = quiz.getCurrentQuestion();
 
-		CountDownTimer timer = new CountDownTimer(3000, 500) {
-			@Override
-			public void onTick(long millisUntilFinished) {
+		Handler handler = new Handler();
+
+		handler.postDelayed(new Runnable() {
+			public void run() {
+				if (finishedQuestion.equals(quiz.getCurrentQuestion()))
+					gotoNextQuestion();
 			}
+		}, Config.TIME_TO_DISPLAY_QUIZ_ANSWERS);
+	}
 
-			@Override
-			public void onFinish() {
-				quiz.nextQuestion();
+	private void gotoNextQuestion() {
+		quiz.nextQuestion();
 
-				if (quiz.isFinished())
-					switchToQuizResultActivity();
-				else {
-					showQuestion(quiz.getCurrentQuestion());
-				}
-			}
-		};
+		if (quiz.isFinished())
+			switchToQuizResultActivity();
+		else
+			showQuestion(quiz.getCurrentQuestion());
 
-		timer.start();
+		setInTransition(false);
 	}
 
 	public void switchToQuizResultActivity() {
 		Storage.setCurrentQuiz(quiz);
 		startActivity(new Intent(QuizActivity.this, QuizResultActivity.class));
+		finish();
 	}
 
 	private void showCorrectAnswers() {
 		for (AnswerButton answerButton : answerButtons)
 			answerButton.setDisplayMode(AnswerButton.DisplayMode.SHOW_ANSWER);
-
-		showingCorrectAnswers = !showingCorrectAnswers;
 	}
 
 	private void showQuestion(Question question) {
 		txtQuestion.setText(question.getText());
-		buttonContainer.removeAllViews();
-		showingCorrectAnswers = false;
 
 		createAnswerButtons(question);
+
+		updateNextButton();
+	}
+
+	private void updateNextButton() {
 		if (quiz.isLastQuestion())
 			btnNext.setText(R.string.quiz_finish);
 	}
 
 	private void createAnswerButtons(Question question) {
+		buttonContainer.removeAllViews();
+
 		List<Answer> answers = question.getAnswers();
 
 		answerButtons = new AnswerButton[answers.size()];
@@ -139,6 +144,7 @@ public class QuizActivity extends AppCompatActivity {
 
 		for (Answer answer : answers) {
 			AnswerButton answerButton = ButtonFactory.createAnswerButton(this, answer);
+			answerButton.setOnClickListener(answerButtonClickListener);
 
 			answerButtons[i++] = answerButton;
 			buttonRow.addView(answerButton);
@@ -166,4 +172,54 @@ public class QuizActivity extends AppCompatActivity {
 
 		return row;
 	}
+
+	private void loadQuiz() {
+		Bundle extras = getIntent().getExtras();
+
+		if (extras != null) {
+			String quizKey = extras.getString("quiz_key");
+			if (quizKey != null)
+				quiz = Database.getInstance().getQuiz(quizKey);
+			else
+				throw new NullPointerException("A Quiz must be passed as an extra with key 'quiz_key' from the previous activity.");
+		}
+	}
+
+	private void setInTransition(boolean value) {
+		this.isInTransition = value;
+	}
+
+	private boolean isInTransition() {
+		return this.isInTransition;
+	}
+
+	@Override
+	public void onBackPressed() {
+		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+				.setTitle(getString(R.string.quiz_leaving_prompt_title))
+				.setMessage(getString(R.string.quiz_leaving_prompt))
+				.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				}).setNegativeButton(getString(R.string.no), null)
+				.show();
+	}
+
+	private final View.OnClickListener answerButtonClickListener = new View.OnClickListener() {
+		public void onClick(View view) {
+			if (isInTransition()) {
+				gotoNextQuestion();
+			}
+			else {
+				AnswerButton button = (AnswerButton) view;
+
+				Answer answer = button.getAnswer();
+				boolean selected = !answer.isSelected();
+
+				answer.setSelected(selected);
+				button.updateDrawable(AnswerButton.SELECTION_FADE_TIME);
+			}
+		}
+	};
 }

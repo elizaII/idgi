@@ -3,6 +3,7 @@ package com.idgi.Widgets;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class AnswerButton extends Button {
 	//TODO change back to answer_button_incorrect_selected
 	private static final int INCORRECT_LOOK_SELECTED = R.drawable.answer_button_normal_selected;
 
-	private static final int FADE_TIME_SELECT = 400;
+	public static final int SELECTION_FADE_TIME = 400;
 	private static final int FADE_TIME_SHOW_ANSWER = 1000;
 
 	public enum DisplayMode {
@@ -31,36 +32,20 @@ public class AnswerButton extends Button {
 	}
 
 	private DisplayMode displayMode = DisplayMode.NORMAL;
-
-	private final static OnClickListener clickListener = new OnClickListener() {
-		public void onClick(View view) {
-			AnswerButton button = (AnswerButton) view;
-
-			Answer answer = button.getAnswer();
-			boolean selected = !answer.isSelected();
-
-			answer.setSelected(selected);
-			button.updateDrawable(FADE_TIME_SELECT);
-
-		}
-	};
-
 	private Answer answer;
 
 	public AnswerButton(Context context, AttributeSet attributeSet, int defStyleAttr, Answer answer) {
 		super(context, attributeSet, defStyleAttr);
 		this.answer = answer;
-
-		this.setOnClickListener(clickListener);
 	}
 
 	public Answer getAnswer() {
 		return this.answer;
 	}
 
-	private void updateDrawable(int fadeTime) {
+	public void updateDrawable(int fadeTime) {
 		Drawable oldBackground = this.getBackground();
-		Drawable newBackground = getResources().getDrawable(getDrawable());
+		Drawable newBackground = ContextCompat.getDrawable(getContext(), getDrawable());
 
 		updateTextColor();
 

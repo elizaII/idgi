@@ -51,6 +51,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 					intent.putExtra("quiz_key", "Quiz123");
 
 					startActivity(intent);
+					finish();
 				}
 			});
 
@@ -58,6 +59,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 			btnDone.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					startActivity(new Intent(QuizResultActivity.this, StartActivity.class));
+					finish();
 				}
 			});
 	}
