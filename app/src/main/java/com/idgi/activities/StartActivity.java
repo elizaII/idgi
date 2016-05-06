@@ -13,25 +13,18 @@ import com.idgi.util.Storage;
 
 public class StartActivity extends AppCompatActivityWithDrawer {
 
-	private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-		initializeDrawer();
-
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_start);
 
-		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-    }
+		initializeDrawer();
 
-    public void showVideoActivity(View view) {
-		//Toast.makeText(getBaseContext(), "Click registered.", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(StartActivity.this, VideoActivity.class));
+		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 
 	public void onStartButtonClick(View view) {
