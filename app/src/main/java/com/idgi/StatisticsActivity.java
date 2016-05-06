@@ -14,6 +14,8 @@ import com.idgi.core.User;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Storage;
 
+import java.util.Locale;
+
 public class StatisticsActivity extends AppCompatActivityWithDrawer {
 	private TextView txtCompletedCourses, txtOngoingCourses, txtCompletedQuizAmount, txtSeenVideosAmount, txtHatAmount, txtPoints;
 
@@ -29,23 +31,7 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 		User user = Storage.getActiveUser();
 		loadStatistics(user);
 
-		final RelativeLayout layout = (RelativeLayout) findViewById(R.id.statistics_view_layout);
-		layout.setAlpha(0f);
-
-		Handler handler = new Handler();
-
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				layout.setAlpha(1f);
-			}
-		}, 100);
-
-		for (int i = 0; i < layout.getChildCount(); ++i) {
-			View view = layout.getChildAt(i);
-			handler.postDelayed(viewSlideIn(view), 50 * i);
-		}
-
+		animateActivityEntrance();
 	}
 
 	private Runnable viewSlideIn(final View view) {
@@ -66,11 +52,23 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 	}
 
 	private void loadStatistics(User user) {
-		txtCompletedCourses.setText(Integer.toString(user.getStat(Statistics.Property.COMPLETED_COURSES)));
-		txtOngoingCourses.setText(Integer.toString(user.getStat(Statistics.Property.ONGOING_COURSES)));
-		txtCompletedQuizAmount.setText(Integer.toString(user.getStat(Statistics.Property.COMPLETED_QUIZZES)));
-		txtSeenVideosAmount.setText(Integer.toString(user.getStat(Statistics.Property.SEEN_VIDEOS)));
-		txtPoints.setText(Integer.toString(user.getStat(Statistics.Property.POINTS)));
-		txtHatAmount.setText(Integer.toString(user.getStat(Statistics.Property.HATS)));
+		txtCompletedCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_COURSES)));
+		txtOngoingCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.ONGOING_COURSES)));
+		txtCompletedQuizAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_QUIZZES)));
+		txtSeenVideosAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.SEEN_VIDEOS)));
+		txtPoints.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.POINTS)));
+		txtHatAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.HATS)));
+	}
+
+	private void animateActivityEntrance() {
+		final RelativeLayout layout = (RelativeLayout) findViewById(R.id.statistics_view_layout);
+
+		Handler handler = new Handler();
+
+		for (int i = 0; i < layout.getChildCount(); ++i) {
+			View view = layout.getChildAt(i);
+			view.setAlpha(0f);
+			handler.postDelayed(viewSlideIn(view), 50 * i);
+		}
 	}
 }
