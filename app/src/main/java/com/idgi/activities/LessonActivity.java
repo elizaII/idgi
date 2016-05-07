@@ -100,10 +100,13 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentField.setText("");
-        adapter.notifyDataSetChanged();
-
+        adapter = new ReplyAdapter(this, commentList);
+        recycler.setAdapter(adapter);
     }
 
+    public void onReplyButtonClick(View view) {
+        System.out.println(view.getId());
+    }
 
     @Override
     public void updatePoints(int value) {

@@ -13,15 +13,17 @@ import com.idgi.core.Comment;
 import com.idgi.recycleViews.viewHolders.CommentHolder;
 import com.idgi.recycleViews.viewHolders.ReplyHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, ReplyHolder> {
-
+    private ArrayList<Comment> data;
         private LayoutInflater mInflator;
 
     public ReplyAdapter(Context context, @NonNull List<? extends ParentListItem> parentListItem) {
             super(parentListItem);
             mInflator = LayoutInflater.from(context);
+        this.data= (ArrayList<Comment>)parentListItem;
         }
 
         // onCreate ...
@@ -33,20 +35,21 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, Reply
 
         @Override
         public ReplyHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
-            View replyView = mInflator.inflate(R.layout.list_row_comment, childViewGroup, false);
+            View replyView = mInflator.inflate(R.layout.list_row_reply, childViewGroup, false);
             return new ReplyHolder(replyView);
         }
 
         // onBind ...
         @Override
         public void onBindParentViewHolder(CommentHolder commentHolder, int position, ParentListItem parentListItem) {
-            Comment comment = (Comment) parentListItem;
-            commentHolder.bind(comment);
+            commentHolder.bind(data.get(position));
+
         }
 
         @Override
         public void onBindChildViewHolder(ReplyHolder replyHolder, int position, Object childListItem) {
-            Comment comment = (Comment) childListItem;
-            replyHolder.bind(comment);
+                Comment comment = (Comment)childListItem;
+                replyHolder.bind(comment);
         }
+
     }
