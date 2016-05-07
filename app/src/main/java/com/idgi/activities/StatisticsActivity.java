@@ -35,14 +35,6 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 		animateActivityEntrance();
 	}
 
-	private Runnable viewSlideIn(final View view) {
-		return new Runnable() {
-			public void run() {
-				ViewAnimator.animate(view).slideLeft().duration(800).start();
-			}
-		};
-	}
-
 	private void findViews() {
 		txtCompletedCourses = (TextView) findViewById(R.id.statistics_txt_completed_courses);
 		txtOngoingCourses = (TextView) findViewById(R.id.statistics_txt_ongoing_courses);
@@ -71,5 +63,13 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 			view.setAlpha(0f);
 			handler.postDelayed(viewSlideIn(view), 50 * i);
 		}
+	}
+
+	private Runnable viewSlideIn(final View view) {
+		return new Runnable() {
+			public void run() {
+				ViewAnimator.animate(view).slideLeft().duration(800).start();
+			}
+		};
 	}
 }
