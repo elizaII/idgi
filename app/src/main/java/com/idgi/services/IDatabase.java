@@ -1,5 +1,6 @@
 package com.idgi.services;
 
+import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
@@ -12,8 +13,9 @@ public interface IDatabase {
 
 	Quiz getQuiz(String key);
 	List<School> getSchools();
-	List<Subject> getSubjects();
-	//List<Lesson> getLessons();
-	List<Course> getCourses();
+	List<Subject> getSubjects(School school);
+	List<Lesson> getLessons(Course course);
+	List<Course> getCourses(Subject subject);
+	List<Comment> getComments(Lesson lesson);
 
 }

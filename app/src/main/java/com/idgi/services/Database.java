@@ -71,7 +71,7 @@ public final class Database implements IDatabase {
 		return Arrays.asList(schools);
 	}
 
-	public List<Subject> getSubjects(){
+	public List<Subject> getSubjects(School school){
 		Subject math = new Subject("1", "Math");
 		Subject english = new Subject("2", "English");
 		Subject swedish = new Subject("3", "Swedish");
@@ -80,7 +80,7 @@ public final class Database implements IDatabase {
 		return Arrays.asList(math, english, swedish, physics);
 	}
 
-	public List<Course> getCourses(){
+	public List<Course> getCourses(Subject subject){
 		Course math1 = new Course("Matte 1c");
 		Course math2 = new Course("Matte 2c");
 		Course math3 = new Course("Matte 3c");
@@ -89,7 +89,7 @@ public final class Database implements IDatabase {
 	}
 
 
-	public List<Lesson> getLessons(){
+	public List<Lesson> getLessons(Course course){
 		/*Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
 		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
         Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));*/
@@ -100,7 +100,7 @@ public final class Database implements IDatabase {
 
 		return Arrays.asList(complex1, complex2, complex3);
 	}
-    public List<Comment> getComments(){
+    public List<Comment> getComments(Lesson lesson){
 		String[] words = {"I", "am", "hello", "rad", "totally", "dude", "fantastic"};
 
 		Random rand = new Random();

@@ -45,7 +45,7 @@ public class CourseLessonListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
 
         ArrayList<String> lessonNames = new ArrayList<>();
-        lessons = database.getLessons();
+        lessons = database.getLessons(null);
 
         for(Lesson lesson : lessons) {
             lessonNames.add(lesson.getName());

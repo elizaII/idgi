@@ -59,7 +59,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             toolbar.setTitle("Kvadratrötter och potenser");
         }
 
-        commentList = database.getComments();
+        commentList = database.getComments(null);
 
         ArrayList<String> commentText = new ArrayList<>();
 
