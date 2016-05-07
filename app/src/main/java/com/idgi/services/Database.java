@@ -1,5 +1,7 @@
 package com.idgi.services;
 
+import android.util.Log;
+
 import com.idgi.core.Answer;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;

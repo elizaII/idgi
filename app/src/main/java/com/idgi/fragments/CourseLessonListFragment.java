@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class CourseLessonListFragment extends Fragment {
         recyclerManager = new LinearLayoutManager(this.getContext());
         recyclerAdapter = new LessonListAdapter(this.getContext(), lessonNames);
 
-        recycler = (RecyclerView) this.getActivity().findViewById(R.id.lesson_list_recycler_view);
+        recycler = (RecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(recyclerAdapter);
         recycler.setLayoutManager(recyclerManager);
 
