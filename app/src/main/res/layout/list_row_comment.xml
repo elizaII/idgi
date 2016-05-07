@@ -63,4 +63,51 @@
         android:layout_alignWithParentIfMissing="false"
         android:gravity="center|center_horizontal" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Svar:"
+        android:id="@+id/replies"
+        android:layout_alignTop="@+id/comment_author"
+        android:layout_toRightOf="@+id/reply_textField"
+        android:layout_toEndOf="@+id/reply_textField"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/replies_count"
+        android:layout_alignTop="@+id/replies"
+        android:layout_toRightOf="@+id/replies"
+        android:layout_toEndOf="@+id/replies" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Svara"
+        android:id="@+id/reply_button"
+        android:layout_alignBaseline="@+id/reply_textField"
+        android:layout_alignBottom="@+id/reply_textField"
+        android:layout_alignRight="@+id/comment_text"
+        android:layout_alignEnd="@+id/comment_text"
+        android:onClick="onReplyButtonClick" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reply_textField"
+        android:layout_below="@+id/replies"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/reply_button"
+        android:layout_toStartOf="@+id/reply_button"
+        android:editable="true"
+        android:enabled="true"
+        android:focusable="true"
+        android:hint="Skriv ett svar till kommentar." />
+
 </RelativeLayout>
