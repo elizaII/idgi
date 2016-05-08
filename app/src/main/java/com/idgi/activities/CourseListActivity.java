@@ -8,9 +8,11 @@ import android.support.v7.widget.Toolbar;
 import com.idgi.R;
 import com.idgi.core.Course;
 import com.idgi.services.Database;
+import com.idgi.services.FireDatabase;
 import com.idgi.services.IDatabase;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.recycleViews.adapters.CourseListAdapter;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +24,6 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private IDatabase database = Database.getInstance();
-
     private List<Course> courses = new ArrayList<>();
 
 
@@ -32,23 +32,21 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        Bundle bundle = getIntent().getExtras();
-        String s = bundle.getString("subjectName");
+        String subjectName = Storage.getCurrentSubject().getName();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(s);
+        getSupportActionBar().setTitle(subjectName);
 
         initializeDrawer();
 
-        courses = database.getCourses(null);
+        courses = Storage.getCurrentSchool().getSubject(subjectName).getCourses();
+
         ArrayList<String> courseNames = new ArrayList<>();
+        for(Course course: courses)
+            courseNames.add(course.getName());
 
         Collections.sort(courseNames);
-
-        for(Course course: courses){
-            courseNames.add(course.getName());
-        }
 
         manager = new LinearLayoutManager(this);
         adapter = new CourseListAdapter(this, courseNames);

@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.firebase.client.Firebase;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.services.Database;
+import com.idgi.services.FireDatabase;
+import com.idgi.services.IDatabase;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.recycleViews.adapters.SchoolListAdapter;
 
@@ -20,10 +23,6 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private Database database = Database.getInstance();
-
-    private List<School> schools = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +31,10 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
 
         initializeDrawer();
 
-        schools = database.getSchools();
         ArrayList<String> schoolNames = new ArrayList<>();
 
-        for(School school: schools)
-            schoolNames.add(school.getValue());
+        for(School school: FireDatabase.getInstance().getSchools())
+            schoolNames.add(school.getName());
 
         Collections.sort(schoolNames);
 

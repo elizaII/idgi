@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.idgi.activities.CourseListActivity;
 import com.idgi.R;
+import com.idgi.core.Subject;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 
@@ -53,12 +55,13 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             subjectTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View v){
-            String s = subjectTextView.getText().toString();
-            System.out.println(s);
-            Intent intent = new Intent(v.getContext(), CourseListActivity.class);
-            intent.putExtra("subjectName", s);
-            v.getContext().startActivity(intent);
+        public void onClick(View view){
+            String subjectName = subjectTextView.getText().toString();
+            Subject subject = Storage.getCurrentSchool().getSubject(subjectName);
+            Storage.setCurrentSubject(subject);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, CourseListActivity.class));
         }
 
     }

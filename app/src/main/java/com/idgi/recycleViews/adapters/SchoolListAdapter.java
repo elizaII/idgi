@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.SubjectListActivity;
+import com.idgi.core.School;
+import com.idgi.services.FireDatabase;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 
@@ -53,12 +56,14 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
             schoolTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View v){
-            String s = schoolTextView.getText().toString();
-            System.out.println(s);
-            Intent intent = new Intent(v.getContext(), SubjectListActivity.class);
-            intent.putExtra("schoolName", s);
-            v.getContext().startActivity(intent);
+        public void onClick(View view){
+            String schoolName = schoolTextView.getText().toString();
+            School school = FireDatabase.getInstance().getSchool((schoolName));
+
+            Storage.setCurrentSchool(school);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, SubjectListActivity.class));
         }
 
     }

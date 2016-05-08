@@ -44,7 +44,7 @@ public class QuizActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_quiz);
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
-		loadQuiz();
+		quiz = Storage.getCurrentQuiz();
 
 		initializeNextButton();
 		initializeQuestionView();
@@ -108,7 +108,6 @@ public class QuizActivity extends AppCompatActivity {
 	}
 
 	public void switchToQuizResultActivity() {
-		Storage.setCurrentQuiz(quiz);
 		startActivity(new Intent(QuizActivity.this, QuizResultActivity.class));
 		finish();
 	}
@@ -171,18 +170,6 @@ public class QuizActivity extends AppCompatActivity {
 		row.setOrientation(LinearLayout.HORIZONTAL);
 
 		return row;
-	}
-
-	private void loadQuiz() {
-		Bundle extras = getIntent().getExtras();
-
-		if (extras != null) {
-			String quizKey = extras.getString("quiz_key");
-			if (quizKey != null)
-				quiz = Database.getInstance().getQuiz(quizKey);
-			else
-				throw new NullPointerException("A Quiz must be passed as an extra with key 'quiz_key' from the previous activity.");
-		}
 	}
 
 	private void setInTransition(boolean value) {

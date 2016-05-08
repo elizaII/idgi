@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
+import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.Database;
+import com.idgi.services.FireDatabase;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.recycleViews.adapters.SubjectListAdapter;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,8 +24,6 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private Database database = Database.getInstance();
-
     private List<Subject> subjects = new ArrayList<>();
 
     @Override
@@ -30,31 +31,31 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_list);
 
-        Bundle bundle = getIntent().getExtras();
-        String s = bundle.getString("schoolName");
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(s);
-
         initializeDrawer();
-
-        subjects = database.getSubjects(null);
-        ArrayList<String> subjectNames = new ArrayList<>();
-        for(Subject subject: subjects){
-            subjectNames.add(subject.getValue());
-        }
-
-        Collections.sort(subjectNames);
 
 
         manager = new LinearLayoutManager(this);
-        adapter = new SubjectListAdapter(this, subjectNames);
+        adapter = new SubjectListAdapter(this, getSubjectNames());
 
         recycler = (RecyclerView) findViewById(R.id.subject_list_recycler_view);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
+    }
 
+    private ArrayList<String> getSubjectNames() {
+        School school = Storage.getCurrentSchool();
+        getSupportActionBar().setTitle(school.getName());
 
+        subjects = school.getSubjects();
+
+        ArrayList<String> subjectNames = new ArrayList<>();
+        for(Subject subject: subjects)
+            subjectNames.add(subject.getName());
+
+        Collections.sort(subjectNames);
+
+        return subjectNames;
     }
 }

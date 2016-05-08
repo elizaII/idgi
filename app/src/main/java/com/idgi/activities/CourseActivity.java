@@ -17,6 +17,7 @@ import com.idgi.R;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
 import com.idgi.util.AppCompatActivityWithDrawer;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +42,12 @@ public class CourseActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        Bundle bundle = getIntent().getExtras();
-        String title = bundle.getString("courseName");
+        String courseName = Storage.getCurrentCourse().getName();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(courseName);
 
         viewPager = (ViewPager) findViewById(R.id.course_pager);
 

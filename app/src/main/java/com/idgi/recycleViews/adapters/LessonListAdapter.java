@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.idgi.activities.LessonActivity;
 import com.idgi.R;
+import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
 import com.idgi.util.Storage;
@@ -48,30 +49,22 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private Database db = Database.getInstance();
-        private List<Lesson> lessons = db.getLessons(null);
-
         public TextView lessonTextView;
 
-        public ViewHolder(View v){
-            super(v);
-            v.setOnClickListener(this);
-            lessonTextView =(TextView) v.findViewById(R.id.rowTextView);
+        public ViewHolder(View view){
+            super(view);
+            view.setOnClickListener(this);
+            lessonTextView =(TextView) view.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View v){
-            String s = lessonTextView.getText().toString();
+        public void onClick(View view){
+            String lessonName = lessonTextView.getText().toString();
 
-            for(Lesson lesson : lessons){
-                if(s.equals(lesson.getName())){
-                    Storage.setCurrentLesson(lesson);
-                    Storage.setCurrentVideo(lesson.getVideo());
-                    Log.d("CURRENT_LESSON", "onClick: " + lesson.getName());
-                }
-            }
+            Course course = Storage.getCurrentCourse();
+            Storage.setCurrentLesson(course.getLesson(lessonName));
 
-            Intent intent = new Intent(v.getContext(), LessonActivity.class);
-            v.getContext().startActivity(intent);
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, LessonActivity.class));
         }
 
     }

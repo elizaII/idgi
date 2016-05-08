@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.idgi.activities.CourseActivity;
 import com.idgi.R;
+import com.idgi.core.Course;
+import com.idgi.util.Storage;
 
 import java.util.ArrayList;
 
@@ -53,12 +55,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
             courseTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View v){
-            String s = courseTextView.getText().toString();
-            System.out.println(s);
-            Intent intent = new Intent(v.getContext(), CourseActivity.class);
-            intent.putExtra("courseName", s);
-            v.getContext().startActivity(intent);
+        public void onClick(View view){
+            String courseName = courseTextView.getText().toString();
+            Course course = Storage.getCurrentSubject().getCourse(courseName);
+            Storage.setCurrentCourse(course);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, CourseActivity.class));
         }
 
     }

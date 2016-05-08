@@ -29,11 +29,8 @@ import com.idgi.recycleViews.adapters.ReplyAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class LessonActivity extends AppCompatActivityWithDrawer implements YoutubeFragment.FragmentListener {
 
-
-    Lesson currentLesson;
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
     private RecyclerView.LayoutManager manager;
@@ -47,24 +44,20 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
-        initializeDrawer();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        Lesson lesson = Storage.getCurrentLesson();
+        if(lesson != null)
+            toolbar.setTitle(lesson.getName());
+        else
+            toolbar.setTitle(getString(R.string.content_lesson_no_lesson_found_title));
 
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
         pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
         pointProgressBar.setProgress(Storage.getActiveUser().getPointsForVideo(Storage.getCurrentVideo()));
 
-
-        if(Storage.getCurrentLesson() != null) {
-            currentLesson = Storage.getCurrentLesson();
-            toolbar.setTitle(currentLesson.getName());
-        } else {
-            toolbar.setTitle("Kvadratrötter och potenser");
-        }
-
         commentList = database.getComments(null);
+        ArrayList<String> commentText = new ArrayList<>();
 
         manager = new LinearLayoutManager(this);
 
@@ -72,29 +65,13 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         recycler.setLayoutManager(manager);
 
         commentField = (TextView) findViewById(R.id.commentField);
-
-        initializeDrawer();
-
         adapter = new ReplyAdapter(this, commentList);
         recycler.setAdapter(adapter);
-
-
-
     }
 
 
     public void onToQuizClick(View view) {
-        /*
-        //Retrieving the lesson's quiz
-        Quiz quiz = currentLesson.getQuiz();
-
-        //Setting it to the current quiz to be displayed in QuizActivity
-        Storage.setCurrentQuiz(quiz);
-        */
-
-        Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("quiz_key", "Quiz123"); //Todo... replace with getCurrentQuiz()
-        startActivity(intent);
+        startActivity(new Intent(this, QuizActivity.class));
     }
 
     public void onCommentButtonClick(View view) {

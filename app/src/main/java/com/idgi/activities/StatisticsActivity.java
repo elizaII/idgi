@@ -72,4 +72,10 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 			}
 		};
 	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		finish();
+	}
 }
