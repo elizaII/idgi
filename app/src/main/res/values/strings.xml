@@ -92,4 +92,5 @@
     <!-- Lesson -->
     <string name="content_lesson_leave_comment">Skriv en kommentar</string>
     <string name="content_lesson_post_comment">Lämna kommentar</string>
+    <string name="content_lesson_no_lesson_found_title">N/A</string>
 </resources>
