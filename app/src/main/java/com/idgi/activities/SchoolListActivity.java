@@ -3,19 +3,14 @@ package com.idgi.activities;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import com.firebase.client.Firebase;
 import com.idgi.R;
 import com.idgi.core.School;
-import com.idgi.services.Database;
 import com.idgi.services.FireDatabase;
-import com.idgi.services.IDatabase;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.recycleViews.adapters.SchoolListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class SchoolListActivity extends AppCompatActivityWithDrawer {
 
