@@ -1,13 +1,13 @@
 package com.idgi.core;
 
+import com.idgi.util.Nameable;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class School {
+public class School implements Nameable {
     private String name;
 
 	private List<Subject> subjects;
