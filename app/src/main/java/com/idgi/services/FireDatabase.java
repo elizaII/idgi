@@ -12,6 +12,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,27 +42,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public School getSchool(String schoolName) {
-	/*	ref.child("schools").child(schoolName).addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				School school = snapshot.getValue(School.class);
-				Log.d("HERES A SCHOOL FOR YA", school.toString());
-
-				for (Subject subject : school.getSubjects())
-					Log.d("SUBJECT:", subject.getName());
-			}
-
-			@Override
-			public void onCancelled(FirebaseError firebaseError) {
-
-			}
-		});*/
-		for (School school : schools) {
-			if (school.getName().equals(schoolName))
-				return school;
-		}
-
-		return null;
+		return Util.findByName(schoolName, schools);
 	}
 
 	public List<Subject> getSubjects(School school) {
