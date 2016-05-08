@@ -39,11 +39,11 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/round"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_marginLeft="31dp"
-        android:layout_marginStart="31dp" />
+        android:layout_alignRight="@+id/reply_author"
+        android:layout_alignEnd="@+id/reply_author" />
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -55,18 +55,17 @@
         android:layout_alignWithParentIfMissing="false"
         android:gravity="center|center_horizontal"
         android:layout_below="@+id/reply_imageView_profilePicture"
-        android:layout_toRightOf="@+id/imageView2"
         android:layout_marginLeft="30dp" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="fill_parent"
-        android:id="@+id/imageView2"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView2"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/re"
         android:background="@color/colorAccent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="visible"/>
+        android:minLines="5"
+        android:minWidth="30dp" />
 
 </RelativeLayout>

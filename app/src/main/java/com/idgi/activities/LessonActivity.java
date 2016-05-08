@@ -1,7 +1,6 @@
 package com.idgi.activities;
 
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.fragments.YoutubeFragment;
-import android.widget.Button;
 
 import com.idgi.Widgets.CommentLayout;
+
+import com.idgi.Widgets.CommentReplyDialog;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
@@ -105,31 +105,33 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentField.setText("");
-        adapter = new ReplyAdapter(this, commentList);
-        recycler.setAdapter(adapter);
+        updateComments();
     }
 
     public void onReplyButtonClick(View view) {
         final CommentLayout layout = (CommentLayout) view.getParent();
-        // custom dialog
+       /* // custom comment_reply_dialog
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog);
+        dialog.setContentView(R.layout.comment_reply_dialog);
         dialog.setTitle("Svara på kommentar");
 
-        // set the custom dialog components - text, image and button
+        // set the custom comment_reply_dialog components - text, image and button
         final TextView text = (TextView) dialog.findViewById(R.id.reply_textField);
-        //text.setText("Android custom dialog example!");
+        //text.setText("Android custom comment_reply_dialog example!");
 
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layout.getComment().addReply(new Comment(text.getText().toString(), Storage.getActiveUser()));
+                adapter = new ReplyAdapter(context, commentList);
                 recycler.setAdapter(adapter);
                 dialog.dismiss();
             }
         });
 
+        dialog.show();*/
+        CommentReplyDialog dialog=new CommentReplyDialog(this, layout.getComment());
         dialog.show();
     }
 
@@ -144,5 +146,11 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             pointProgressBar.setProgress(value);
         }
     }
+    public void updateComments(){
+        adapter = new ReplyAdapter(this, commentList);
+        recycler.setAdapter(adapter);
+
+    }
+
 }
 
