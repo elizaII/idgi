@@ -34,22 +34,14 @@ public final class Database implements IDatabase {
 	// TODO Implement this properly
 	public Quiz getQuiz(String key) {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
-		Answer answer1 = new Answer("8");
-		Answer answer2 = new Answer("10");
-		Answer answer3 = new Answer("16");
-		Answer answer4 = new Answer("9");
-		answer2.setCorrect(true);
-		question.addAnswers(answer1, answer2, answer3, answer4);
+		question.addAnswers(Answer.incorrect("8"), Answer.correct("10"), Answer.incorrect("16"), Answer.incorrect("9"));
 
 
 		Quiz quiz = new Quiz();
 		quiz.addQuestion(question);
 
-		Answer answer5 = new Answer("Yes");
-		answer5.setCorrect(true);
-		Answer answer6 = new Answer("No");
 		question = new Question("Is this the last question?");
-		question.addAnswers(answer5, answer6);
+		question.addAnswers(Answer.correct("Yes"), Answer.incorrect("No"));
 
 		quiz.addQuestion(question);
 
@@ -65,21 +57,22 @@ public final class Database implements IDatabase {
 
 	public List<School> getSchools(){
 		School[] schools = {
-				new School("1", "MEG"), new School("2", "Hvitfeldska"),
-				new School("3", "Polhem"), new School("4", "Ingrid Segerstedt"),
-				new School("5", "Samskolan"), new School("6", "Drottning Blanka")
+				new School("MEG"), new School("Hvitfeldska"),
+				new School("Polhem"), new School("Ingrid Segerstedt"),
+				new School("Samskolan"), new School("Drottning Blanka")
 		};
 
 		return Arrays.asList(schools);
 	}
 
 	public List<Subject> getSubjects(School school){
-		Subject math = new Subject("1", "Math");
-		Subject english = new Subject("2", "English");
-		Subject swedish = new Subject("3", "Swedish");
-		Subject physics = new Subject("4", "Physics");
+		String[] subjectNames = {"Math", "English", "Swedish", "Physics"};
+		List<Subject> subjects = new ArrayList<>();
 
-		return Arrays.asList(math, english, swedish, physics);
+		for (String name : subjectNames)
+		subjects.add(new Subject(name));
+
+		return subjects;
 	}
 
 	public List<Course> getCourses(Subject subject){
@@ -96,9 +89,11 @@ public final class Database implements IDatabase {
 		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
         Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));*/
 
-		Lesson complex1 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
-		Lesson complex2 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
-		Lesson complex3 = new Lesson("Test1", new Video("ffLLmV4mZwU"));
+		Video video = Video.from("ffLLmV4mZwU");
+
+		Lesson complex1 = Lesson.create("Lektion 1").withVideo(video).withQuiz(getQuiz(""));
+		Lesson complex2 = Lesson.create("Lektion 2").withVideo(video).withQuiz(getQuiz(""));
+		Lesson complex3 = Lesson.create("Lektion 3").withVideo(video).withQuiz(getQuiz(""));
 
 		return Arrays.asList(complex1, complex2, complex3);
 	}

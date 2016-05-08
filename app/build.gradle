@@ -42,4 +42,6 @@ dependencies {
     //Animation stuff
     compile 'com.github.florent37:viewanimator:1.0.3@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+
+    compile 'com.firebase:firebase-client-android:2.5.2'
 }
