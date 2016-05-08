@@ -66,13 +66,9 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
         commentList = database.getComments(null);
 
-        ArrayList<String> commentText = new ArrayList<>();
-
         manager = new LinearLayoutManager(this);
-       // adapter = new CommentListAdapter(this, commentList);
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
-        //recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
         commentField = (TextView) findViewById(R.id.commentField);
@@ -110,27 +106,6 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
     public void onReplyButtonClick(View view) {
         final CommentLayout layout = (CommentLayout) view.getParent();
-       /* // custom comment_reply_dialog
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.comment_reply_dialog);
-        dialog.setTitle("Svara på kommentar");
-
-        // set the custom comment_reply_dialog components - text, image and button
-        final TextView text = (TextView) dialog.findViewById(R.id.reply_textField);
-        //text.setText("Android custom comment_reply_dialog example!");
-
-        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layout.getComment().addReply(new Comment(text.getText().toString(), Storage.getActiveUser()));
-                adapter = new ReplyAdapter(context, commentList);
-                recycler.setAdapter(adapter);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();*/
         CommentReplyDialog dialog=new CommentReplyDialog(this, layout.getComment());
         dialog.show();
     }

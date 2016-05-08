@@ -17,7 +17,6 @@ public class CommentHolder extends ParentViewHolder {
     private TextView comment_author;
     private TextView see_replies_text;
     private ImageView comment_imageView_profilePicture;
-    private Comment comment;
     private CommentLayout view;
 
         public CommentHolder(View itemView) {
@@ -38,7 +37,6 @@ public class CommentHolder extends ParentViewHolder {
                 comment_imageView_profilePicture.setImageDrawable(comment.getAuthor().getImage());
                 comment_imageView_profilePicture.setBackground(null);
             }
-            this.comment=comment;
         }
 
 }
