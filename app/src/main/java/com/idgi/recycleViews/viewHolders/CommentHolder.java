@@ -15,8 +15,7 @@ public class CommentHolder extends ParentViewHolder {
 
     private TextView comment_text;
     private TextView comment_author;
-    private TextView replies_count;
-    private TextView reply_textField;
+    private TextView see_replies_text;
     private ImageView comment_imageView_profilePicture;
     private Comment comment;
     private CommentLayout view;
@@ -24,9 +23,8 @@ public class CommentHolder extends ParentViewHolder {
         public CommentHolder(View itemView) {
             super(itemView);
             comment_text = (TextView)itemView.findViewById(R.id.comment_text);
-            //replies_count = (TextView)itemView.findViewById(R.id.replies_count);
+            see_replies_text = (TextView)itemView.findViewById(R.id.see_replies_text);
             comment_author =(TextView) itemView.findViewById(R.id.comment_author);
-            reply_textField =(TextView) itemView.findViewById(R.id.reply_textField);
             comment_imageView_profilePicture=(ImageView) itemView.findViewById(R.id.comment_imageView_profilePicture);
             this.view = (CommentLayout)itemView;
         }
@@ -35,7 +33,7 @@ public class CommentHolder extends ParentViewHolder {
                 view.setComment(comment);
             comment_text.setText(comment.getText());
             comment_author.setText(comment.getAuthor().getName());
-//            replies_count.setText(Integer.toString(comment.getNbrOfReplies()));
+            see_replies_text.setText("Se svar: " + comment.getNbrOfReplies() + "st");
             if (comment.getAuthor().getImage() != null) {
                 comment_imageView_profilePicture.setImageDrawable(comment.getAuthor().getImage());
                 comment_imageView_profilePicture.setBackground(null);
