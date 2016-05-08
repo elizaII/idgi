@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
-    tools:context=".activities.CourseListActivity">
-
-    <android.support.v4.view.ViewPager
+    tools:context=".activities.CourseActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/course_pager"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:context=".activities.CourseActivity">
+        android:layout_gravity="fill_vertical"
 
-    <include layout="@layout/app_bar_course"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    <include layout="@layout/nav_drawer"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                layout="@layout/app_bar"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
 
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/course_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.design.widget.TabLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/course_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </android.support.v4.widget.DrawerLayout>
