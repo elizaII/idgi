@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.idgi.LessonActivity;
+import com.idgi.activities.LessonActivity;
 import com.idgi.R;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
