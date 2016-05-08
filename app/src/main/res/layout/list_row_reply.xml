@@ -5,12 +5,11 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:longClickable="true"
-    android:background="@drawable/list_border">
+    android:background="@drawable/text_view_border">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="kdöskr j LKWERhdf N sbjfdjksgfew  bwe bvjhsdfjs vwerv hjf s "
         android:textSize="20sp"
         android:id="@+id/reply_text"
         android:layout_alignParentTop="true"
@@ -33,7 +32,8 @@
         android:rotation="180"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/circle_crop"
-        android:layout_alignStart="@+id/circle_crop" />
+        android:layout_alignStart="@+id/circle_crop"
+        android:layout_marginTop="4dp" />
     <ImageView
         android:id="@+id/circle_crop"
         android:layout_width="80dp"
@@ -43,7 +43,8 @@
         android:layout_marginEnd="33dp"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/reply_author"
-        android:layout_alignEnd="@+id/reply_author" />
+        android:layout_alignEnd="@+id/reply_author"
+        android:layout_marginTop="4dp" />
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -63,8 +64,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView2"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/re"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:minLines="5"
         android:minWidth="30dp" />
 

@@ -48,8 +48,10 @@ public class CommentReplyDialog extends Dialog implements
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.send_reply_button:
-                    comment.addReply(new Comment(reply_field.getText().toString(), Storage.getActiveUser()));
-                    c.updateComments();
+                    if (reply_field.getText().toString().length() !=0) {
+                        comment.addReply(new Comment(reply_field.getText().toString(), Storage.getActiveUser()));
+                        c.updateComments();
+                    }
                     break;
                 default:
                     break;

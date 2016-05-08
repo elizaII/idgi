@@ -40,11 +40,12 @@
                 android:id="@+id/button"
                 android:text="@string/go_to_quiz"
                 android:onClick="onToQuizClick"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/content_lesson_youtube_fragment"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -63,7 +64,11 @@
                     android:clickable="true"
                     android:contextClickable="true"
                     android:hint="@string/content_lesson_leave_comment"
-                    android:background="@color/colorAccent" />
+                    android:background="@drawable/text_view_border"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp" />
 
                 <Button
                     android:layout_width="wrap_content"

@@ -44,7 +44,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
 		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 		Drawable d = getResources().getDrawable(R.drawable.yoda);
-		Storage.setActiveUser(new User("Yoda", "1337.gmail.com", d));
+		Storage.setActiveUser(new User("Yoda", "1337@gmail.com", d));
 
 	}
 

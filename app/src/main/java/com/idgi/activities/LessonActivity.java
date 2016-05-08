@@ -98,10 +98,12 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     }
 
     public void onCommentButtonClick(View view) {
-        database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
-        commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
-        commentField.setText("");
-        updateComments();
+        if(commentField.getText().toString().length() != 0) {
+            database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
+            commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
+            commentField.setText("");
+            updateComments();
+        }
     }
 
     public void onReplyButtonClick(View view) {
