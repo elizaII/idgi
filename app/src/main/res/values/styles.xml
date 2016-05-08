@@ -32,6 +32,7 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+
     <style name="menu_button" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/menu_button_background</item>
         <item name="android:layout_width">match_parent</item>

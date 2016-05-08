@@ -14,15 +14,12 @@ public class Comment implements ParentListItem{
 
 	private Comment replyTo;
 	private List<Comment> replies;
-	private List<Comment> comment;
 	private User author;
 
 	public Comment(String text, User author) {
 		this.text = text;
 		this.author = author;
 		replies = new ArrayList<Comment>();
-		comment = new ArrayList<Comment>();
-		comment.add(this);
 	}
 
 	public Comment(Comment replyTo,String text, User author) {
@@ -34,8 +31,7 @@ public class Comment implements ParentListItem{
 
 
 	public void addReply(Comment reply) {
-		replies.add(reply);
-		comment.add(this);
+		replies.add(0,reply);
 	}
 	
 	public String getText() {

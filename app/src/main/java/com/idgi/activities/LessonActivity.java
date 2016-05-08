@@ -1,6 +1,7 @@
 package com.idgi.activities;
 
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.fragments.YoutubeFragment;
+import android.widget.Button;
+
+import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
@@ -20,6 +24,7 @@ import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Config;
 import com.idgi.util.Storage;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,13 +79,13 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
         initializeDrawer();
 
-
-
         adapter = new ReplyAdapter(this, commentList);
         recycler.setAdapter(adapter);
 
 
+
     }
+
 
     public void onToQuizClick(View view) {
         /*
@@ -105,7 +110,27 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     }
 
     public void onReplyButtonClick(View view) {
-        System.out.println(view.getId());
+        final CommentLayout layout = (CommentLayout) view.getParent();
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog);
+        dialog.setTitle("Svara på kommentar");
+
+        // set the custom dialog components - text, image and button
+        final TextView text = (TextView) dialog.findViewById(R.id.reply_textField);
+        //text.setText("Android custom dialog example!");
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout.getComment().addReply(new Comment(text.getText().toString(), Storage.getActiveUser()));
+                recycler.setAdapter(adapter);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override

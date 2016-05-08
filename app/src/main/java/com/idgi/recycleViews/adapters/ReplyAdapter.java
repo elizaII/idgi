@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.idgi.R;
+import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.recycleViews.viewHolders.CommentHolder;
 import com.idgi.recycleViews.viewHolders.ReplyHolder;
@@ -19,11 +20,13 @@ import java.util.List;
 public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, ReplyHolder> {
     private ArrayList<Comment> data;
         private LayoutInflater mInflator;
+    private Context context;
 
     public ReplyAdapter(Context context, @NonNull List<? extends ParentListItem> parentListItem) {
             super(parentListItem);
             mInflator = LayoutInflater.from(context);
         this.data= (ArrayList<Comment>)parentListItem;
+        this.context = context;
         }
 
         // onCreate ...
@@ -35,6 +38,7 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, Reply
 
         @Override
         public ReplyHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
+
             View replyView = mInflator.inflate(R.layout.list_row_reply, childViewGroup, false);
             return new ReplyHolder(replyView);
         }
@@ -42,7 +46,8 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, Reply
         // onBind ...
         @Override
         public void onBindParentViewHolder(CommentHolder commentHolder, int position, ParentListItem parentListItem) {
-            commentHolder.bind(data.get(position));
+            //commentHolder.bind(data.get(position));
+            commentHolder.bind((Comment)parentListItem);
 
         }
 
