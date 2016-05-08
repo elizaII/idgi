@@ -47,13 +47,24 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
         return super.onOptionsItemSelected(item);
     }
 
+
     public void enableInputFieldButtonClicked(View view) {
-        if (view.getId() == R.id.profile_btn_editName) {
+        if (view.getId() == R.id.profile_btn_editName ) {
             EditText name = (EditText) findViewById(R.id.profile_editText_name);
-            enableInputField(name);
+            if (name.getTag() == "enabled") {
+                disableInputField(name);
+            }
+            else {
+                enableInputField(name);
+            }
         } else if (view.getId() == R.id.profile_btn_editAge) {
-            EditText name = (EditText) findViewById(R.id.profile_editText_age);
-            enableInputField(name);
+            EditText age = (EditText) findViewById(R.id.profile_editText_age);
+            if (age.getTag() == "enabled") {
+                disableInputField(age);
+            }
+            else {
+                enableInputField(age);
+            }
         }
     }
 
@@ -63,10 +74,12 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
         field.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
+        field.setTag("enabled");
     }
     private void disableInputField(EditText field) {
         field.setFocusableInTouchMode(false);
         field.setClickable(false);
         field.clearFocus();
+        field.setTag("disabled");
     }
 }
