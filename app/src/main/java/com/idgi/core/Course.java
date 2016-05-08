@@ -1,34 +1,40 @@
 package com.idgi.core;
 
+import com.idgi.util.Nameable;
+import com.idgi.util.Util;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Course {
-
-	private final String id;
+public class Course implements Nameable {
 	private String name;
 	private List<Lesson> lessons;
-	
+
+	private Course() {}
+
 	public Course(String name) {
-		this.id = "N/A";
 		this.name = name;
 		lessons = new ArrayList<>();
 	}
-	
-	/**
-	 * If the lesson is not already included in the course, adds the lesson.
-	 */
+
 	public void addLesson(Lesson lesson) {
-		if (!lessons.contains(lesson))
 			lessons.add(lesson);
+	}
+
+	public Lesson getLesson(String courseName) {
+		return Util.findByName(courseName, lessons);
 	}
 	
 	public String getName() {
 		return this.name;
 	}
-	
-	public String getID() {
-		return this.id;
+
+	public List<Lesson> getLessons() {
+		if (lessons == null)
+			lessons = Collections.emptyList();
+
+		return lessons;
 	}
 	
 }

@@ -1,16 +1,38 @@
 package com.idgi.core;
 
-public class Lesson {
+import com.idgi.util.Nameable;
+
+public class Lesson implements Nameable {
 
 	private String name;
 	private String id;
 	private Video video;
 	private Discussion discussion;
 	private Quiz quiz;
+
+	private Lesson() {}
 	
 	public Lesson(String name, Video video) {
 		this.name = name;
 		this.video = video;
+	}
+
+	private Lesson(String name) {
+		this.name = name;
+	}
+
+	public static Lesson create(String name) {
+		return new Lesson(name);
+	}
+
+	public Lesson withVideo(Video video) {
+		this.video = video;
+		return this;
+	}
+
+	public Lesson withQuiz(Quiz quiz) {
+		this.quiz = quiz;
+		return this;
 	}
 	
 	public void setQuiz(Quiz quiz) {

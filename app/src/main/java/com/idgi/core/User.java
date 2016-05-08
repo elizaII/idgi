@@ -9,7 +9,7 @@ public class User {
 
     private Statistics statistics;
 
-
+    private User() {}
 
     private Drawable image;
 

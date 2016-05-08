@@ -1,11 +1,13 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idgi.services.Database;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Quiz {
 
 	private int currentIndex = 0;
@@ -13,7 +15,7 @@ public class Quiz {
 	List<Question> questions;
 
 	private int id;
-	
+
 	public Quiz() {
 		questions = new ArrayList<>();
 		this.id = Database.getInstance().getNewQuizId();
@@ -44,7 +46,7 @@ public class Quiz {
 	public boolean hasQuestion(Question question) {
 		return questions.contains(question);
 	}
-	
+
 	public Question getCurrentQuestion() {
 		if (!isFinished())
 			return questions.get(currentIndex);
@@ -89,7 +91,7 @@ public class Quiz {
 	 */
 	public int getPointsEarned() {
 		if (!this.isFinished())
-			throw new IllegalStateException("Can not prompt for points before quiz is finished.");
+			return 0;
 
 		int total = 0;
 		for(Question question : questions) {

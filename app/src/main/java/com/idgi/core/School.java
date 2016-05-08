@@ -1,19 +1,41 @@
 package com.idgi.core;
 
+import com.idgi.util.Util;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class School {
-    private String key;
-    private String value;
+    private String name;
 
-    public School(String key, String value){
-        this.key = key;
-        this.value = value;
+	private List<Subject> subjects;
+
+    private School() {
     }
 
-    public String getKey(){
-        return key;
+    public School(String name){
+        this.name = name;
+		this.subjects = new ArrayList<>();
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
+
+	public List<Subject> getSubjects() {
+		if (subjects == null)
+			subjects = Collections.emptyList();
+		
+		return subjects;
+	}
+
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
+	}
+
+	public Subject getSubject(String subjectName) {
+		return Util.findByName(subjectName, subjects);
+	}
 }

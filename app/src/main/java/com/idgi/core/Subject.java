@@ -1,22 +1,40 @@
 package com.idgi.core;
 
-/**
- * Created by Emil on 29/04/2016.
- */
-public class Subject {
-    private String key;
-    private String value;
+import com.idgi.util.Nameable;
+import com.idgi.util.Util;
 
-    public Subject(String key, String value){
-        this.key = key;
-        this.value = value;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Subject implements Nameable {
+    private String name;
+
+    private List<Course> courses;
+
+    private Subject() {}
+
+    public Subject(String name){
+        this.name = name;
+        courses = new ArrayList<>();
     }
 
-    public String getKey(){
-        return key;
+    public String getName() {
+        return name;
     }
 
-    public String getValue() {
-        return value;
+    public List<Course> getCourses() {
+        if (courses == null)
+            courses = Collections.emptyList();
+
+        return courses;
+    }
+
+    public Course getCourse(String courseName) {
+        return Util.findByName(courseName, courses);
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
     }
 }

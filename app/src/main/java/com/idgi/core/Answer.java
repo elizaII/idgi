@@ -1,13 +1,30 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"selectedAndIncorrect", "deselectedAndCorrect"})
 public class Answer {
 
 	private String text;
 	private boolean isSelected = false;
 	private boolean isCorrect = false;
-	
+
+	//For deserializing
+	private Answer() {}
+
 	public Answer(String text) {
 		this.text = text;
+	}
+
+	public static Answer correct(String text) {
+		Answer answer = new Answer(text);
+		answer.setCorrect(true);
+		return answer;
+	}
+
+	public static Answer incorrect(String text) {
+		return new Answer(text);
 	}
 	
 	public String getText() {
@@ -36,9 +53,15 @@ public class Answer {
 		
 		return this.text.equals(that.text) && this.isSelected() == that.isSelected();
 	}
-	
+
+	@JsonIgnore
 	public boolean isSelectedAndIncorrect() {
 		return this.isSelected && !this.isCorrect;
+	}
+
+	@JsonIgnore
+	public boolean isDeselectedAndCorrect() {
+		return !this.isSelected && this.isCorrect;
 	}
 
 	public boolean isCorrect() {
@@ -51,9 +74,5 @@ public class Answer {
 		result = prime * result + (this.isSelected ? 1231 : 1237);
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		return result;
-	}
-
-	public boolean isDeselectedAndCorrect() {
-		return !this.isSelected && this.isCorrect;
 	}
 }

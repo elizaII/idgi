@@ -1,0 +1,906 @@
+[33mcommit aee288572028e778e78490a793f637af19be0245[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 20:57:47 2016 +0200
+
+    Make backing out of quiz/quiz result feel better, and let user skip answer-animation
+    
+    You can skip the answer animation by tapping an answer or the "next" button once the answer-animation is playing.
+
+[33mcommit 39b7aa875990d3f96a3e8084ebd64d0ad814633c[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 20:52:32 2016 +0200
+
+    Move CommentListAdapter to the adapters folder
+
+[33mcommit 644eb098ecf540bab603d840e17db2a4869a4712[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 20:51:58 2016 +0200
+
+    Refactor code, remove unnecessary lines
+
+[33mcommit a226b75f18ab72b8aba901068003a28ce1451b39[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 20:50:08 2016 +0200
+
+    Refactor more activities to extend AppCompatActivityWithDrawer
+
+[33mcommit 65d9d24d3cfd2edb9d47590db9637a15fb0b3096[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 18:28:21 2016 +0200
+
+    Organize java classes into different packages
+
+[33mcommit 25b9fac90b5e077edff50af26d0a266492394907[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 16:09:44 2016 +0200
+
+    Add methods for point retrieval
+
+[33mcommit 0af5aa58ee170998ba7717b05ad2ce2c3a620798[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 16:06:09 2016 +0200
+
+    Make statistics slide-in animation smoother
+
+[33mcommit 7a1fb4f816bac4ebc97046cd554e2d58ca624be9[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 15:24:53 2016 +0200
+
+    Add a progress bar for points underneath the video for a lesson
+
+[33mcommit ec44ee02854ba8b83707296e743d3db9c75c5fa8[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 15:23:05 2016 +0200
+
+    Move some constants to Config
+
+[33mcommit 23e51f85120585c7a7c111c885b1ee38c1c86cdb[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 12:33:53 2016 +0200
+
+    Add point system
+    
+    Points are rewarded for watching videos, and for completing a quiz.
+
+[33mcommit 0f2b29779fbd46f5cba7ec858c6c060a5b92b938[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu May 5 16:00:25 2016 +0200
+
+    Add point system and associated test
+
+[33mcommit a4a00a94778e4e593bfa9a6fafeabb4964b07449[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 12:29:33 2016 +0200
+
+    Remove TransitionFactory since it is redundant
+    
+    There was only very little code in it, and thus not worth keeping.
+
+[33mcommit 2b61d82b4634dcfbfc23aaf1ba2ad88a82d7cbd3[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu May 5 16:28:54 2016 +0200
+
+    Refactor code in Database.java
+
+[33mcommit 1ff217422a17049cb6f6d33dd04f2cf85d30b895[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu May 5 16:00:25 2016 +0200
+
+    Add point system and associated test
+
+[33mcommit 8d0d78fea58ff8ff6d016c8e106fa6c5c0754acb[m
+Merge: 8faa319 dbdbf57
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri May 6 14:18:02 2016 +0200
+
+    Merge branch 'master' of github.com:elizaII/idgi
+
+[33mcommit 8faa3198eaa9efe24a11b224a3c5d8201c6332ff[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 22:01:26 2016 +0200
+
+    Add changes in module
+
+[33mcommit dbdbf57a7ba6e94764cf52afc025d3593df5acba[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 22:01:26 2016 +0200
+
+    Change the app's name back to IDGI instead of a welcome msg
+
+[33mcommit e666da323da397a226a4b1bb78591f690f5d0356[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 21:50:00 2016 +0200
+
+    Change course's toolbar's title accordingly
+
+[33mcommit 0ec129285eda67f78ffc7a08e6a75c38d7a420ab[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 21:46:39 2016 +0200
+
+    Refactor and change course_list's toolbar's title accordingly
+
+[33mcommit 99aea1caee5edbba870ae8c02b7ca77ad3de4b3a[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 21:19:04 2016 +0200
+
+    Change toolbar's title accordingly to the previous click
+
+[33mcommit 7fe879b0f72d194486f8f0b4a570f44109d8b4f3[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu May 5 20:20:23 2016 +0200
+
+    Refactor SubjectListActivity so it uses App...WithDrawer
+
+[33mcommit 0588821788317d9d2e447149c9de1643aa1d1373[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu May 5 17:09:03 2016 +0200
+
+    replies can now be seen for comments
+
+[33mcommit 35b0269960be0559b4596f1f6c0932361f1ab7b8[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu May 5 15:56:08 2016 +0200
+
+    Getting profile image for comments is now working.
+
+[33mcommit 536b5f03b9c0dd5e8be27e494a6a3650396c2eff[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu May 5 15:55:15 2016 +0200
+
+    Skapa konto button now creates a User with profile image.
+
+[33mcommit 573019b008225235990a01002ef9980df2ea1e0a[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu May 5 14:20:10 2016 +0200
+
+    fixing the width of the profile picture in comments.
+
+[33mcommit db68618efce6dec3f8489421d679a4f778ebd15b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu May 5 13:58:32 2016 +0200
+
+    adding profile picture to comments.
+
+[33mcommit e502df3bee3258ed92b3d7d394d2a20edf947fb5[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Wed May 4 17:02:23 2016 +0200
+
+    adding ability to write comments
+
+[33mcommit 9320e670e508814e9d60f0c36208d819cc03c3d1[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Thu May 5 12:56:46 2016 +0200
+
+    Fix deleted changes from recent push
+
+[33mcommit 4b33b9368782610b6482f9ae8f11db73f3ed66ac[m
+Merge: 57f2496 2a80c55
+Author: Tove <ektove@student.chalmers.se>
+Date:   Thu May 5 12:34:01 2016 +0200
+
+    Fix merge conflict and add CreateAccount. Again.
+
+[33mcommit 2a80c55a870787d715c872483ddf9c7d54afb0f8[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Thu May 5 11:50:57 2016 +0200
+
+    CreateAccount is improved
+
+[33mcommit 57f249627fa1664938460d7229707718ec76002d[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu May 5 10:01:45 2016 +0200
+
+    Add missed files
+
+[33mcommit 3f811c5c19861d0158902d243c8fb9d1425b0225[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu May 5 10:01:05 2016 +0200
+
+    Solve weird errors caused by earlier push
+
+[33mcommit 1ccb552836228b01f214097d14f22d914b949157[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed May 4 19:33:37 2016 +0200
+
+    Adding tabs to toolbar in Course.
+
+[33mcommit 7b9f39cd382ca5fa509db61fc84fbb6006928be0[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed May 4 19:33:16 2016 +0200
+
+    Adding fragments for tabbed Course.
+
+[33mcommit 07f3fab5f340f4858a980787dd9816e01b1741bf[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed May 4 19:32:51 2016 +0200
+
+    Changing names from LessonList to Course.
+
+[33mcommit 8b27be730e2d92f597874dc772a7ae4cb7768a5b[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Wed May 4 16:37:11 2016 +0200
+
+    Make small changes to strings
+
+[33mcommit 586b74d7fccd40536c8789e0f5c1617c9900029b[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Wed May 4 16:25:18 2016 +0200
+
+    Improve code in Navigation
+
+[33mcommit 15e865f2f9f2ba82a666bfafefa6a581925ccd3a[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue May 3 17:23:59 2016 +0200
+
+    Create the Statistics Activity
+
+[33mcommit 9b9c4543e49c717618d9701489913ba1e129cb10[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue May 3 17:12:31 2016 +0200
+
+    Perform some code cleanups and make minor changes
+
+[33mcommit a941ec8b14f39fc87c158cb84ef44850265721ce[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Wed May 4 15:59:12 2016 +0200
+
+    deleting unnecessary file
+
+[33mcommit e44b1d23ed84c4ca785c6296ca76d831d6c8126a[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Wed May 4 15:52:56 2016 +0200
+
+    adding comments section to LessonActivity.
+
+[33mcommit abd761f8ed4e02c3fa5c15d5852528d4d58e72c2[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Wed May 4 15:10:49 2016 +0200
+
+    Add toolbar and drawer to LessonListActivity
+
+[33mcommit 1b1aea04d0cdd12fa9ed24608efacab97ef1a659[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Tue May 3 23:07:58 2016 +0200
+
+    Form input and validation in CreateAccountActivity is fixed
+
+[33mcommit 4893f43a1d5996ed1ac5cdaec3d07b78ba423a1f[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 14:58:41 2016 +0200
+
+    adding transitions between StartActivity and other activities.
+
+[33mcommit 2024d637387b54bbc2dbdc95ee68b7f19547f473[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 12:21:47 2016 +0200
+
+    more refactoring from browseActivity to styles.xml
+
+[33mcommit 6c2359223f75ed375a49243f8b9d1c3cf88b7c4b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 12:05:50 2016 +0200
+
+    changing the text in toolbar depending on what activity is showing.
+
+[33mcommit e6458ba57b8038bd26834a4f536a34cfbc710c31[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 12:01:11 2016 +0200
+
+    adding labels to all of the activities.
+
+[33mcommit f943f3c776e295ede86ce69c980b6e7e43ef9e4f[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 11:23:41 2016 +0200
+
+    deleting unnecessary files.
+
+[33mcommit 3dd30908f5d29cc2e01ef87d4fceb720eac10c7b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 11:01:51 2016 +0200
+
+    deleting unnecessary files.
+
+[33mcommit 4350fd532feb60e5b733af6d4630f391c815ad6b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 11:00:32 2016 +0200
+
+    deleting unnecessary files.
+
+[33mcommit 7e9c0b39d7360981aceabd23472ee55d9601c87c[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 10:54:10 2016 +0200
+
+    refactoring strings from activity_browse and activity_start to string.xml
+
+[33mcommit 91389285b836d7aa6962511e08326515618a2df5[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Tue May 3 10:41:34 2016 +0200
+
+    button animation on pressing is brought back.
+
+[33mcommit 324cd445bbfdfe50d484ed28ca90c21405c2352d[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 23:06:43 2016 +0200
+
+    Retrieve and play the video that belongs to the lesson, and refactor widgets -> Widgets
+
+[33mcommit 0a274d179056373c1a9a59733e88cab99f06a1cd[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 22:59:44 2016 +0200
+
+    Set current lesson when selecting a lesson in the list
+
+[33mcommit 088333faede77d23ab475f6505ff7905f1291b95[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 22:30:39 2016 +0200
+
+    Put lessons into LessonList
+
+[33mcommit 7b2af5a7e1f95f4f934dfb0fc428c3e9789cd9ef[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 22:23:50 2016 +0200
+
+    Add lessons to database
+
+[33mcommit 01ba4577c0ef381089937834ef4147d8ef453eb1[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Mon May 2 22:17:04 2016 +0200
+
+    makes the buttons in StartActivity and BrowseActivity use the style from styles.xml
+
+[33mcommit 3ce46b13aa8ed93d9cb0470fb14cf25936684244[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Mon May 2 21:57:08 2016 +0200
+
+    moving specification to styles.xml. also implements the new way to initialize navigation drawer and toolbar in startActivity and BrowseActivity.
+
+[33mcommit 6ae8a5a4790ca59d02212b9c31cd1eed25397329[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Mon May 2 21:42:11 2016 +0200
+
+    Lists are now sorted in alphabetical order.
+
+[33mcommit 11233a702d5e51a6e1990e3a2968044f37defdcf[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Mon May 2 21:41:26 2016 +0200
+
+    Fixing so that database returns lists of objects.
+
+[33mcommit 15f35d5c1bb96b18abe77493368bd67bc914de69[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 21:33:36 2016 +0200
+
+    Add "to quiz"-button for Lesson
+
+[33mcommit 80d058771fdf55264b4e6b2dfe5c97dc86edc5eb[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 21:27:48 2016 +0200
+
+    Add setters and getters for Lesson in Storage
+
+[33mcommit 2591d58ddd5a84a2ce1ac82a3a3c3473e61ef82c[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 20:40:22 2016 +0200
+
+    Refactor LessonActivity's superclass to AppCompatActivityWithDrawer
+
+[33mcommit 8699d04ac3157b38792688bae9e7a7fbf934e7b9[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 20:28:07 2016 +0200
+
+    Add getter for Video
+
+[33mcommit d54ab7896aefa8461a03b1ee2b67189542e410ee[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon May 2 20:25:59 2016 +0200
+
+    Add getters and setters for Lesson
+
+[33mcommit 1b8f95264e6c5c3cf962a2bf8cc472aa4b0c570b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Mon May 2 13:50:17 2016 +0200
+
+    adding meeting 7
+
+[33mcommit 9f317ce167b557c54ea2e46d496bddac131c5603[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Sun May 1 23:09:38 2016 +0200
+
+    Images and buttons are added to profile
+
+[33mcommit f1edfa99b64fa104aeb347011372e4f898ba8a41[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Sun May 1 18:20:32 2016 +0200
+
+    Add required things for answer expanding to work
+
+[33mcommit c3a462827fc4aed93544abb42899aa81efde00d9[m
+Merge: 9add6f2 d99920f
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Sun May 1 14:26:52 2016 +0200
+
+    Merge branch 'master' of https://github.com/elizaII/idgi
+
+[33mcommit 9add6f2fcbb03fd63a67a52f489485531db14d9a[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Sun May 1 14:21:08 2016 +0200
+
+    Making lists have lists of thei respective objects, not strings.
+
+[33mcommit 013d261fdbd6551672d4577c30abeb06f5e03a42[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Sun May 1 14:07:14 2016 +0200
+
+    Adding forgotten LessonListActivity before LessonActivity.
+
+[33mcommit d99920f652cd348e6b4f7b133caaad167e44baaf[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Sun May 1 14:04:08 2016 +0200
+
+    Changes answer collection to be of type List instead of Set.
+
+[33mcommit fd4a4f5130720c35f4935c8e5255ca1c2cc93095[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Sun May 1 14:03:38 2016 +0200
+
+    Adds a divider to the expandable answers in Quiz Result view
+
+[33mcommit 131a4c1e31875389bcf2f406955ca7f0ee7c8af9[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Sun May 1 14:03:09 2016 +0200
+
+    Implements expandable answers  in Quiz Result view.
+
+[33mcommit 5555207a4bc9c00ed0c856e303577c75aaefffab[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:46:01 2016 +0200
+
+    Modifying QuestionTest to accommodate the changes made in core.
+
+[33mcommit 6ca6a965994bf4b0be56ff0f5da17af459a63db7[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:44:20 2016 +0200
+
+    Refactoring package "Widgets" to "widgets".
+
+[33mcommit 48561dc37fe59709a7c8e980875123b091afe1cb[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:39:37 2016 +0200
+
+    Refactoring package "Widgets" to "widgets".
+
+[33mcommit f1ab2fd8b093b6a1920fed4c351479c89ddf0c03[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:36:31 2016 +0200
+
+    Adding our own video-fragment into Lesson.
+
+[33mcommit 0c2ff0727682797f4f44c41c6d7fc26238c7585f[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:35:36 2016 +0200
+
+    Making a fragment that extends YouTubeFragment with a listener.
+
+[33mcommit 17bcd62c77f0342b52ac93401055fe2c24905a70[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 01:33:09 2016 +0200
+
+    Adding button to LessonActivity for easier access.
+
+[33mcommit 6783826f1cdf612a2b69fa95fd35944efddc4a12[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Sun May 1 00:47:39 2016 +0200
+
+    Refixing navigation for Lesson.
+
+[33mcommit 8489fa0ed3e449905f319efcca267be7e571f2b2[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri Apr 29 19:15:28 2016 +0200
+
+    Adds Toolbar & Drawer.
+
+[33mcommit 126667d2db11aa7f2361b4079a5bdd715332af4c[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri Apr 29 19:13:24 2016 +0200
+
+    Adds AppCompatActivityWithDrawer, a class that applies Toolbar & Drawer to an activity (by extending it).
+
+[33mcommit d51ee5f69c39e6979b8b5c14b5d1eefb1564c147[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri Apr 29 17:32:49 2016 +0200
+
+    Adds a post-quiz screen as well as touch-ups to the quiz view.
+
+[33mcommit 1442c401e52cfacf5d45c5847afdcfafeee32728[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 15:19:08 2016 +0200
+
+    add nav drawer and action bar to list activities.
+
+[33mcommit 13ad4564dfcece7ffb3b52c4d5348c46628b031a[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 14:24:33 2016 +0200
+
+    small fix to AndroidManifest
+
+[33mcommit a3487c963da13ae947e788a3f91488586544bc60[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 14:23:04 2016 +0200
+
+    Fixing missing activities in manifest.
+
+[33mcommit f8f98af265f97d7da6a93bc7434b5d5adce3d148[m
+Merge: 891c429 84a0a2b
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 14:16:33 2016 +0200
+
+    Merge branch 'ListNavigation'
+
+[33mcommit 84a0a2b4dfbd8fc34bc4665db923b0be13c85719[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 14:06:51 2016 +0200
+
+    Navigation from CourseList to Video possible.
+
+[33mcommit 891c4298f7279120eb281db9e9a6f1e150283639[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 14:03:47 2016 +0200
+
+    small fixes to the navigation drawer
+
+[33mcommit 10d7266c2b0f432f970016d92abf516fa8b436dd[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 13:47:30 2016 +0200
+
+    Making navigation to lists of subjects related to a school possible.
+
+[33mcommit 52b78d9542bcc9111a0dbcdc9b0e371250ce5011[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 13:46:44 2016 +0200
+
+    Changing names of list-related classes.
+
+[33mcommit 5f7186d95ee11a182e519617fe9b443923997326[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 13:42:36 2016 +0200
+
+    Navigation drawer now works in multiple activities.
+
+[33mcommit 32ee9c657356e5a6e5a03455abf9654b80663102[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 13:17:05 2016 +0200
+
+    Adding model-classes for the lists, and list for subjects.
+
+[33mcommit 4c93855a48ec8a6ec525166eeea47ce732718131[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 13:16:25 2016 +0200
+
+    Running SchoolList through database.
+
+[33mcommit d7ef2cb1c2c1f82ff16b6d6d11895ecdbc9bed1b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 12:44:39 2016 +0200
+
+    Fix content in navigation drawer
+
+[33mcommit b22400ae9bfa7b72fd3f26f31793c8a900399cf4[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Fri Apr 29 12:41:42 2016 +0200
+
+    Adding onClick for RecyclerView's items.
+
+[33mcommit a84733222a34a1274310d78220a48e3de2aa4e05[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 12:39:07 2016 +0200
+
+    add navigation drawer to StartActivity
+
+[33mcommit 5919b3b5922b78e2a3796f71c025f5c27f0b651b[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 12:38:45 2016 +0200
+
+    add navigation drawer to StartActivity
+
+[33mcommit eaf16fa12b9e77e7f8c416ef40807b848f303415[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Fri Apr 29 11:57:24 2016 +0200
+
+    Add BrowseActivity
+
+[33mcommit d5061b9fbe8b02a4db6d8b06bf8d818347803ce1[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Fri Apr 29 11:46:48 2016 +0200
+
+    Extracting navigation-methods into a class and delegating.
+
+[33mcommit 0903c4c985252124b3be8bc0a74028940e4ee5a4[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Fri Apr 29 11:39:16 2016 +0200
+
+    Passing video to Storage.
+
+[33mcommit c46c0fef9b6e1d6db8c4d392f9c2597e7b8d2313[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu Apr 28 22:11:55 2016 +0200
+
+    Changing field variables to protected to use butter knife.
+
+[33mcommit 9a6ab70229ff236a60ccbd4e70932b960ec7800e[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu Apr 28 22:11:16 2016 +0200
+
+    Updating Gradle so Instant-run is enabled.
+
+[33mcommit b995f7cc9c41fc1b7e629992c9e85c6aa69de422[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu Apr 28 21:29:35 2016 +0200
+
+    Binding views and menues to the LessonActivity-class.
+
+[33mcommit 8c9d6ece3390f5f0ff6184ef04bf8b1dd13ba798[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Thu Apr 28 20:01:44 2016 +0200
+
+    Add LessonActivity with the same menu drawer as profile.
+
+[33mcommit e798cff17f2e569612f1c4dd63caee40c36f5e81[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Fri Apr 29 11:33:23 2016 +0200
+
+    Adds the Storage class.
+
+[33mcommit ff18ba1cd24d8353a170dd62776edca585c94aff[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu Apr 28 21:46:33 2016 +0200
+
+    Small improvements to quiz view
+
+[33mcommit e8d9a9db7ca1226b4185f8663628c513b21b75ee[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Thu Apr 28 18:13:17 2016 +0200
+
+    Renames Option to Answer.
+    Enables blinking functionality after answering each question; lets user see correct answer and which selected answers were incorrect.
+
+[33mcommit ef8fdd061e47050d10a64af5c8a90b6966b22859[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Thu Apr 28 13:54:26 2016 +0200
+
+    Meeting 6 is added
+
+[33mcommit d275d4155d867a1562aeab5811b433bf74c8e5ce[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu Apr 28 11:35:37 2016 +0200
+
+    Fixed merge conflict and connected ProfileActivity to the right button on StartScreen
+
+[33mcommit d89b54053424f6a3522198596aeaa72e9bed28d2[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Thu Apr 28 11:22:10 2016 +0200
+
+    Styles and strings are included
+
+[33mcommit 2601fae473c3e8a9948380b3c025e918400b7c48[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Thu Apr 28 10:44:15 2016 +0200
+
+    Adding data to SchoolList.
+
+[33mcommit 4228a2b90db751e4dd4a790f15c78874206a39c2[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu Apr 28 10:35:27 2016 +0200
+
+    Connected buttons on the start screen to the right activity
+
+[33mcommit 52a49c78eb91bf99823b42c4a1e4c42181ba02bd[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Wed Apr 27 21:40:45 2016 +0200
+
+    small fixes
+
+[33mcommit 560a734096058e799fc8843e5ff85d9b9467307a[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Wed Apr 27 13:32:38 2016 +0200
+
+    Start screen, create account views created
+
+[33mcommit 21a019f67c1bd30673bf84e293b378cc06e2d92f[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed Apr 27 21:32:15 2016 +0200
+
+    Fixing missing(?) import-statement.
+
+[33mcommit 44749872df4d142490e96c4e70f8ad37091ce84c[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Wed Apr 27 20:09:37 2016 +0200
+
+    Further improves the quiz activity
+
+[33mcommit 8633d6a1de0421c5f18105d40cb5b6cadc7149da[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed Apr 27 16:55:13 2016 +0200
+
+    Adding SchoolListActivity to AndroidManifest.
+
+[33mcommit 17bfdccdc655a42af77d7471a36eae51110a7b16[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed Apr 27 16:41:18 2016 +0200
+
+    Creating RecyclerView and SchoolListActivity.
+
+[33mcommit a19df6379d0f1d34057a752990459f1ebe7767ff[m
+Author: Emil Logren <emil.logren@gmail.com>
+Date:   Wed Apr 27 16:39:47 2016 +0200
+
+    Adding RecyclerView dependencies.
+
+[33mcommit 58dbdb08cc7487ebfe11d614ea63760ea22d7155[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Wed Apr 27 13:26:29 2016 +0200
+
+    QuizActivity is more properly layouted
+
+[33mcommit 6a18e38ab25d525a4031c8a625d592e43a40907c[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 26 15:40:22 2016 +0200
+
+    more buttons
+
+[33mcommit d7a24ef8ddd8ef3427102ca36f643e3c797919af[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 26 15:39:26 2016 +0200
+
+    Buttins!
+
+[33mcommit 9e83ce34ee21be5e5e228c193337cd43088cbeb6[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 26 15:15:56 2016 +0200
+
+    Removed broken classes
+
+[33mcommit 0a853202f8cceff6d9db644f77e06e67eff99555[m
+Merge: b4019f8 33489d2
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 26 15:11:45 2016 +0200
+
+    Merge branch 'master' of github.com:elizaII/idgi
+
+[33mcommit b4019f859460f2c69a82cb4a8838917a6c38d0e1[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Mon Apr 25 14:25:36 2016 +0200
+
+    adds youtube activity
+
+[33mcommit 33489d2e0f12a4bf2cfac194306179161e56bd1c[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Apr 25 12:37:29 2016 +0200
+
+    Meeting 4 and 5 are added.
+
+[33mcommit 867ca4ea75006e6a8b2db34428bb45dbac1c0d9b[m
+Author: Tove <ektove@student.chalmers.se>
+Date:   Mon Apr 25 11:41:22 2016 +0200
+
+    /idea.modules.xml will no longer be updated
+
+[33mcommit bd229d613af215dfa3cbc0e4e964638466b39dfc[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Mon Apr 25 11:33:05 2016 +0200
+
+    Add isDeselectedAndCorrect() in Option andcalls it in isCorrectlyAnswered() in Question
+
+[33mcommit 0c8340f2a7d171903e2439b201483493f1c1fa77[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 19 19:16:47 2016 +0200
+
+    gitignore stuff
+
+[33mcommit 9d5a0222d12d238d283d4df37452f998bdb160ef[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 19 19:15:28 2016 +0200
+
+    gitignore fixed
+
+[33mcommit b934b8b598eda2d0a36037ff192da6a6b71c0c22[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 19 19:14:47 2016 +0200
+
+    Forgot .gitignore
+
+[33mcommit e8e4ad860db0c5f97afdc693d9daf3d9f171dc1a[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 19 19:12:28 2016 +0200
+
+    Adds the project files
+
+[33mcommit d7a42fda9be13859c45dd1f26fb103ed3abf1c06[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Apr 19 19:09:31 2016 +0200
+
+    Deletes previous project files
+
+[33mcommit 8556e2a355888d16fd170ee7a1fdabb4a08fbd33[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Mon Apr 18 15:08:55 2016 +0200
+
+    Added group meeting 3
+
+[33mcommit c55d5b3cd72a688b86d338c388cf333ab58e9d7d[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Mon Apr 11 20:04:17 2016 +0200
+
+    Adds the Android Studio project.
+
+[33mcommit be34b5c176df4a2d3b0cf72698540961169ecbc0[m
+Merge: 207983f 2fab179
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Mon Apr 11 16:49:13 2016 +0200
+
+    Merge branch 'master' of github.com:elizaII/idgi
+
+[33mcommit 207983f5a6354f00193f5af5a2338f6d24635942[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Mon Apr 11 16:48:56 2016 +0200
+
+    Removes the deprecated Eclipse files
+
+[33mcommit 2fab179bc625a46486c2d9b67b449d06b0d4c0d0[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Mon Apr 11 12:16:33 2016 +0200
+
+    meeting 2
+
+[33mcommit 5a076929f3216f8bf39c519437a8a30f652f6b4f[m
+Author: AllexNordgren <allexnordgren@outlook.com>
+Date:   Thu Mar 24 10:40:43 2016 +0100
+
+    Meeting 1 is added
+
+[33mcommit 9421278dbbca2e68140e62919440ee2ad89167a5[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Mar 22 17:29:48 2016 +0100
+
+    Removes unnecessary Maven files
+
+[33mcommit 767ee4434d3b067068cda8554d3e52dc90774029[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Mar 22 17:11:59 2016 +0100
+
+    Creates the project
+
+[33mcommit 771a788f6b5909d15e5c458c9110926693971c13[m
+Author: Jonathan Kran <giuinktseo@gmail.com>
+Date:   Tue Mar 22 17:00:15 2016 +0100
+
+    Fixes gitignore
+
+[33mcommit 064f933e1220552f7d2e28ba8b80299a560ffa2b[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Mar 21 21:55:39 2016 +0100
+
+    Setting up project
+
+[33mcommit 63ca58b466dd2206288bba807b9f5a0ba309bbab[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Mar 21 21:55:05 2016 +0100
+
+    Edits gitignore
+
+[33mcommit 2cd42c034a08fc141bcc7617b0103535c169b1f8[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Mar 21 21:25:57 2016 +0100
+
+    Adds gitignore
+
+[33mcommit 1da52bb2fc4e094b62618f3c851faa684e9a33a4[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Mar 21 21:17:49 2016 +0100
+
+    Changing encodint to UTF-8 ehehe
+
+[33mcommit 5ebca74bb7809c4a02a941a2661095b7d3f21b23[m
+Author: Tuyen Ngo <tuyen@student.chalmers.se>
+Date:   Mon Mar 21 21:16:34 2016 +0100
+
+    Adding README

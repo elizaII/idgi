@@ -1,13 +1,17 @@
 package com.idgi.core;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Question implements ParentListItem {
 
 	private static final String NO_HINTS_MESSAGE = "There are no hints for this question.";
@@ -15,7 +19,9 @@ public class Question implements ParentListItem {
 	private String text;
 	private String hint;
 	private List<Answer> answers;
-	
+
+	private Question() {}
+
 	public Question(String text, String hint, List<Answer> answers) {
 		this.text = text;
 		this.hint = hint;
@@ -39,6 +45,9 @@ public class Question implements ParentListItem {
 	}
 
 	public List<Answer> getAnswers() {
+		if (answers == null)
+			answers = Collections.emptyList();
+
 		return answers;
 	}
 
@@ -90,23 +99,11 @@ public class Question implements ParentListItem {
 		return true;
 	}
 
-	public void addNewCorrectAnswer(String text) {
-		Answer answer = new Answer(text);
-		answer.setCorrect(true);
-
-		answers.add(answer);
-	}
-
-	public void addNewAnswer(String text) {
-		Answer answer = new Answer(text);
-
-		answers.add(answer);
-	}
-
-	@Override
+	@JsonIgnore
 	public List<?> getChildItemList() {
 		return answers;
 	}
+
 
 	@Override
 	public boolean isInitiallyExpanded() {
