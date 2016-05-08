@@ -52,6 +52,8 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         else
             toolbar.setTitle(getString(R.string.content_lesson_no_lesson_found_title));
 
+        initializeDrawer();
+
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
         pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
         pointProgressBar.setProgress(Storage.getActiveUser().getPointsForVideo(Storage.getCurrentVideo()));
