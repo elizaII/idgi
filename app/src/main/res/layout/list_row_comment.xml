@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.idgi.Widgets.CommentLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -63,4 +64,39 @@
         android:layout_alignWithParentIfMissing="false"
         android:gravity="center|center_horizontal" />
 
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Svara"
+        android:id="@+id/reply_button"
+        android:layout_alignRight="@+id/comment_text"
+        android:layout_alignEnd="@+id/comment_text"
+        android:onClick="onReplyButtonClick"
+        android:layout_below="@+id/comment_author"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:paddingEnd="0dp"
+        android:paddingStart="0dp"
+        android:enabled="true"
+        android:clickable="false"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/see_replies_text"
+        android:layout_alignBottom="@+id/reply_button"
+        android:layout_toRightOf="@+id/comment_imageView_profilePicture"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:layout_toLeftOf="@+id/reply_button"
+        android:layout_toStartOf="@+id/reply_button"
+        android:singleLine="true" />
+
+</com.idgi.Widgets.CommentLayout>

@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.fragments.YoutubeFragment;
+
+import com.idgi.Widgets.CommentLayout;
+
+import com.idgi.Widgets.CommentReplyDialog;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.services.Database;
@@ -20,6 +24,7 @@ import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Config;
 import com.idgi.util.Storage;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,28 +64,24 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             toolbar.setTitle("Kvadratrötter och potenser");
         }
 
-        commentList = database.getComments();
-
-        ArrayList<String> commentText = new ArrayList<>();
+        commentList = database.getComments(null);
 
         manager = new LinearLayoutManager(this);
-       // adapter = new CommentListAdapter(this, commentList);
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
-        //recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
 
         commentField = (TextView) findViewById(R.id.commentField);
 
         initializeDrawer();
 
-
-
         adapter = new ReplyAdapter(this, commentList);
         recycler.setAdapter(adapter);
 
 
+
     }
+
 
     public void onToQuizClick(View view) {
         /*
@@ -100,10 +101,14 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
         commentField.setText("");
-        adapter.notifyDataSetChanged();
-
+        updateComments();
     }
 
+    public void onReplyButtonClick(View view) {
+        final CommentLayout layout = (CommentLayout) view.getParent();
+        CommentReplyDialog dialog=new CommentReplyDialog(this, layout.getComment());
+        dialog.show();
+    }
 
     @Override
     public void updatePoints(int value) {
@@ -116,5 +121,11 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             pointProgressBar.setProgress(value);
         }
     }
+    public void updateComments(){
+        adapter = new ReplyAdapter(this, commentList);
+        recycler.setAdapter(adapter);
+
+    }
+
 }
 

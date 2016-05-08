@@ -49,7 +49,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Database db = Database.getInstance();
-        private List<Lesson> lessons = db.getLessons();
+        private List<Lesson> lessons = db.getLessons(null);
 
         public TextView lessonTextView;
 

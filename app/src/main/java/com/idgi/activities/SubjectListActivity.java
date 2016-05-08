@@ -39,7 +39,7 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
 
         initializeDrawer();
 
-        subjects = database.getSubjects();
+        subjects = database.getSubjects(null);
         ArrayList<String> subjectNames = new ArrayList<>();
         for(Subject subject: subjects){
             subjectNames.add(subject.getValue());

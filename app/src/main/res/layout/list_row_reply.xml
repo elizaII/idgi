@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:longClickable="true"
+    android:background="@drawable/list_border">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kdöskr j LKWERhdf N sbjfdjksgfew  bwe bvjhsdfjs vwerv hjf s "
+        android:textSize="20sp"
+        android:id="@+id/reply_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/reply_author"
+        android:layout_alignBottom="@+id/reply_author" />
+
+    <ImageView
+        android:id="@+id/reply_imageView_profilePicture"
+        android:gravity="top"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_account_circle_black_24dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerInside"
+        android:maxHeight="80dp"
+        android:padding="100dp"
+        android:cropToPadding="true"
+        android:rotation="180"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/circle_crop"
+        android:layout_alignStart="@+id/circle_crop" />
+    <ImageView
+        android:id="@+id/circle_crop"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/round"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/reply_author"
+        android:layout_alignEnd="@+id/reply_author" />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/reply_author"
+        android:textSize="25sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignWithParentIfMissing="false"
+        android:gravity="center|center_horizontal"
+        android:layout_below="@+id/reply_imageView_profilePicture"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView2"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/re"
+        android:background="@color/colorAccent"
+        android:minLines="5"
+        android:minWidth="30dp" />
+
+</RelativeLayout>

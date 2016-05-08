@@ -41,7 +41,7 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
 
         initializeDrawer();
 
-        courses = database.getCourses();
+        courses = database.getCourses(null);
         ArrayList<String> courseNames = new ArrayList<>();
 
         Collections.sort(courseNames);
