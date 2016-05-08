@@ -31,8 +31,6 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
 		Firebase.setAndroidContext(this);
-
-		FireDatabase.getInstance().createSchools();
 	}
 
 	@Override
