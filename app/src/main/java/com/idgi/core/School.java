@@ -17,7 +17,7 @@ public class School implements Nameable {
 
     public School(String name){
         this.name = name;
-		this.subjects = new ArrayList<>();
+		this.subjects = new ArrayList<Subject>();
     }
 
     public String getName() {

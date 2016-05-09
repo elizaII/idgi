@@ -61,7 +61,6 @@ public final class Database implements IDatabase {
 				new School("Polhem"), new School("Ingrid Segerstedt"),
 				new School("Samskolan"), new School("Drottning Blanka")
 		};
-
 		return Arrays.asList(schools);
 	}
 

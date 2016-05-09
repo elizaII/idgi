@@ -15,6 +15,7 @@ import com.idgi.core.Subject;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FireDatabase implements IDatabase {
@@ -28,16 +29,17 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void addSchool(School school) {
-
+		System.out.println(school.getName());
 		Firebase schoolRef = ref.child("schools").child(school.getName());
 		schoolRef.setValue(school);
+		schools.add(school);
 	}
 
 	public List<School> getSchools() {
 		if (schools == null) {
 			fetchSchools();
 		}
-
+		System.out.println("hämtar skolor" + schools.size());
 		return schools;
 	}
 
@@ -49,20 +51,35 @@ public class FireDatabase implements IDatabase {
 		return getSubjects(school.getName());
 	}
 
-	public List<Course> getCourses(String subjectName) {
-		return null;
+	public List<Course> getCourses(String schoolName, String subjectName) {
+		List<Course> courseList;
+		//System.out.println(getSchool(schoolName).getSubject(subjectName));
+		System.out.println(schoolName);
+		System.out.println(subjectName);
+		System.out.println(getSchool(schoolName).getSubjects().size());
+		System.out.println(getSchool(schoolName).getSubjects().get(0).getName());
+		//System.out.println(getSchool(schoolName).getSubject(subjectName).getName());
+		if (getSchool(schoolName).getSubjects().size()>0){
+			return getSchool(schoolName).getSubject(subjectName).getCourses();
+		}
+		else {
+			courseList = Collections.emptyList();
+			return courseList;
+		}
 	}
+
 
 	public List<Subject> getSubjects(String schoolName) {
 		return getSchool(schoolName).getSubjects();
 	}
+
 
 	public List<Lesson> getLessons(Course course) {
 		return null;
 	}
 
 	public List<Course> getCourses(Subject subject) {
-		return null;
+		return subject.getCourses();
 	}
 
 	public List<Comment> getComments(Lesson lesson) {
@@ -80,16 +97,16 @@ public class FireDatabase implements IDatabase {
 		Database mock = Database.getInstance();
 
 		for (School school : mock.getSchools()) {
-			for (Subject subject : mock.getSubjects(null)) {
-				if (subject.getName().equals("Math"))
-					for (Course course : mock.getCourses(null)) {
-						for (Lesson lesson : mock.getLessons(null))
-							course.addLesson(lesson);
-						subject.addCourse(course);
-					}
+			//for (Subject subject : mock.getSubjects(null)) {
+			//	if (subject.getName().equals("Math"))
+			//		for (Course course : mock.getCourses(null)) {
+			//			for (Lesson lesson : mock.getLessons(null))
+			//				course.addLesson(lesson);
+			//			subject.addCourse(course);
+			//		}
 
-				school.addSubject(subject);
-			}
+			//	school.addSubject(subject);
+			//}
 
 			addSchool(school);
 		}

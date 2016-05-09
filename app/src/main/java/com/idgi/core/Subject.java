@@ -16,7 +16,7 @@ public class Subject implements Nameable {
 
     public Subject(String name){
         this.name = name;
-        courses = new ArrayList<>();
+        this.courses = new ArrayList<Course>();
     }
 
     public String getName() {
@@ -24,9 +24,9 @@ public class Subject implements Nameable {
     }
 
     public List<Course> getCourses() {
-        if (courses == null)
+        if (courses == null) {
             courses = Collections.emptyList();
-
+        }
         return courses;
     }
 
@@ -35,6 +35,10 @@ public class Subject implements Nameable {
     }
 
     public void addCourse(Course course) {
+        System.out.println(course.getName());
+        if (courses.equals(Collections.emptyList())){
+            courses = new ArrayList<Course>();
+        }
         courses.add(course);
     }
 }

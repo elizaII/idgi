@@ -68,7 +68,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 	}
 
 	public void onLessonButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, LessonActivity.class));
+		startActivity(new Intent(StartActivity.this, CreateLessonActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
