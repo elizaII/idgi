@@ -6,6 +6,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.User;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface IDatabase {
 	List<Lesson> getLessons(Course course);
 	List<Course> getCourses(Subject subject);
 	List<Comment> getComments(Lesson lesson);
+	List<User> getUsers(User user);
 
 }
