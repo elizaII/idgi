@@ -8,8 +8,7 @@ import android.view.View;
 
 import com.firebase.client.Firebase;
 import com.idgi.R;
-import com.idgi.core.School;
-import com.idgi.core.Subject;
+import com.idgi.core.Account;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
 import com.idgi.util.AppCompatActivityWithDrawer;
@@ -58,7 +57,10 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
 		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 		Drawable d = getResources().getDrawable(R.drawable.yoda);
-		Storage.setActiveUser(new User("Yoda", "1337@gmail.com", d));
+		User user = new User("Yoda");
+		user.setEmail("test@gmail.com");
+		user.setImage(d);
+		Storage.setActiveUser(user);
 
 	}
 
