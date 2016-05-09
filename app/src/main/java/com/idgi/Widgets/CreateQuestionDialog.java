@@ -35,6 +35,7 @@ public class CreateQuestionDialog extends Dialog implements
     private FireDatabase database;
     private Button create_quiz_button;
     private EditText quiz_question_editText;
+    private EditText quiz_hint_editText;
     private EditText quiz_answer_editText1;
     private EditText quiz_answer_editText2;
     private EditText quiz_answer_editText3;
@@ -60,6 +61,7 @@ public class CreateQuestionDialog extends Dialog implements
         setContentView(R.layout.create_question_dialog);
 
         quiz_question_editText = (EditText) findViewById(R.id.quiz_question_editText);
+        quiz_hint_editText = (EditText) findViewById(R.id.quiz_hint_editText);
         quiz_answer_editText1 = (EditText) findViewById(R.id.quiz_answer_editText1);
         quiz_answer_editText2 = (EditText) findViewById(R.id.quiz_answer_editText2);
         quiz_answer_editText3 = (EditText) findViewById(R.id.quiz_answer_editText3);
@@ -90,6 +92,9 @@ public class CreateQuestionDialog extends Dialog implements
                 answer3.setCorrect(quiz_set_correct_switch3.isChecked());
                 answer4.setCorrect(quiz_set_correct_switch4.isChecked());
 
+                if(quiz_hint_editText.getText().toString().length()>0) {
+                    question.setHint(quiz_hint_editText.getText().toString());
+                }
                 question.addAnswers(answer1, answer2, answer3, answer4);
 
                 c.updateQuestionList(question);
