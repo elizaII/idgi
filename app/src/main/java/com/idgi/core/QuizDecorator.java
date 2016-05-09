@@ -64,9 +64,9 @@ public abstract class QuizDecorator implements IQuiz {
         return this.decoratedQuiz.getCorrectAnswerAmount();
     }
 
-    /* Implement in subclasses?
+    //Implement in subclasses?
     @Override
     public int getPointsEarned() {
-        return 0;
-    }*/
+        return this.decoratedQuiz.getPointsEarned();
+    }
 }

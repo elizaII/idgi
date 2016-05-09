@@ -16,10 +16,10 @@ public class TimedQuiz extends QuizDecorator {
     @Override
     public int getPointsEarned() {
         int maximalScore = this.getCorrectAnswerAmount()*100;
-        int total = decoratedQuiz.getPointsEarned();
+        int total = super.getPointsEarned();
 
         if(maximalScore == total){
-            total += calculateTimeBonus(this.remainingTime);
+            total += calculateTimeBonus();
         }
         //Todo... better calculation because the questions are now not uniquely identified
         return total;
@@ -37,10 +37,8 @@ public class TimedQuiz extends QuizDecorator {
         this.remainingTime = remainingTime;
     }
 
-    private int calculateTimeBonus(final int remainingTime){
-        int difference = getTime() - remainingTime;
-
-        return (int) difference/10;
+    private int calculateTimeBonus(){
+        return (int) remainingTime/10;
     }
 
 }
