@@ -18,18 +18,20 @@
         android:layout_below="@+id/add_course_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Skapa lektion"
-        android:id="@+id/button4"
+        android:id="@+id/create_lesson_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:onClick="onCreateLessonButtonClick" />
+        android:onClick="onCreateLessonButtonClick"
+        android:enabled="false" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,7 +41,8 @@
         android:layout_above="@+id/youtube_url_editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,7 +52,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="URL till youtube-klipp" />
+        android:hint="URL till youtube-klipp"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -71,7 +75,8 @@
         android:layout_below="@+id/add_school_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -83,5 +88,6 @@
         android:layout_toRightOf="@+id/lesson_name_editText"
         android:layout_toEndOf="@+id/lesson_name_editText"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:enabled="false" />
 </RelativeLayout>

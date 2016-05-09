@@ -81,13 +81,13 @@ public class CreateDialog extends Dialog implements
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.send_reply_button && string.equals("skola")) {
-                database.addSchool(new School(reply_field.getText().toString()));
+                c.setSchool(new School(reply_field.getText().toString()));
             }
             if (v.getId() == R.id.send_reply_button && string.equals("ämne")) {
-                database.getSchool(school).addSubject(new Subject(reply_field.getText().toString()));
+                c.setSubject(new Subject(reply_field.getText().toString()));
             }
             if (v.getId() == R.id.send_reply_button && string.equals("kurs")) {
-                Storage.getCurrentSubject().addCourse(new Course(reply_field.getText().toString()));
+                c.setCourse(new Course(reply_field.getText().toString()));
             }
             selectItem(reply_field.getText().toString(), string);
             dismiss();

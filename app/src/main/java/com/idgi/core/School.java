@@ -32,6 +32,9 @@ public class School implements Nameable {
 	}
 
 	public void addSubject(Subject subject) {
+		if(subjects.equals(Collections.emptyList())){
+			subjects = new ArrayList<Subject>();
+		}
 		subjects.add(subject);
 	}
 

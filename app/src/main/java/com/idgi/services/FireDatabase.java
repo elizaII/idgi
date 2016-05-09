@@ -29,7 +29,6 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void addSchool(School school) {
-		System.out.println(school.getName());
 		Firebase schoolRef = ref.child("schools").child(school.getName());
 		schoolRef.setValue(school);
 		schools.add(school);
@@ -134,4 +133,6 @@ public class FireDatabase implements IDatabase {
 	public void initialize() {
 		fetchSchools();
 	}
+
+
 }
