@@ -1,9 +1,12 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idgi.util.Config;
 
 import java.util.HashMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Statistics {
 
 	public enum Property {
@@ -16,29 +19,26 @@ public class Statistics {
 	private HashMap<Integer, Integer> quizPoints = new HashMap<>();
 	private HashMap<String, Integer> videoPoints = new HashMap<>();
 
-	private HashMap<Property, Integer> map = new HashMap<>();
+	private HashMap<Property, Integer> propertyMap = new HashMap<>();
 
 	public Statistics() {
 		initialize();
 	}
 
 	private void initialize() {
-		map.put(Property.COMPLETED_COURSES, 0);
-		map.put(Property.ONGOING_COURSES, 0);
-		map.put(Property.COMPLETED_QUIZZES, 0);
-		map.put(Property.SEEN_VIDEOS, 0);
-		map.put(Property.COMMENTS, 0);
-		map.put(Property.HATS, 0);
+		for (Property property : Property.values())
+			propertyMap.put(property, 0);
 
 		totalPoints = 0;
 	}
 
+	@JsonIgnore
 	public int get(Property property) {
 		switch (property) {
 			case POINTS:
 				return totalPoints;
 			default:
-			return map.get(property);
+			return propertyMap.get(property);
 		}
 	}
 
@@ -80,6 +80,7 @@ public class Statistics {
 		setPointsForViewedVideo(video, points);
 	}
 
+	@JsonIgnore
 	public int getVideoPoints(Video video) {
 		Integer points = videoPoints.get(video.getUrl());
 		return points != null ? points : 0;
@@ -89,10 +90,12 @@ public class Statistics {
 		videoPoints.put(video.getUrl(), 0);
 	}
 
+	@JsonIgnore
 	private Integer getPointsEarnedForVideo(Video video) {
 		return videoPoints.get(video.getUrl());
 	}
 
+	@JsonIgnore
 	private void setPointsForViewedVideo(Video video, int points) {
 		int pointsBefore = getPointsEarnedForVideo(video);
 		videoPoints.put(video.getUrl(), points);
