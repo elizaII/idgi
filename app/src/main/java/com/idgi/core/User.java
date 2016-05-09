@@ -5,34 +5,30 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     private String name;
     private String email;
+
     private String phoneNumber;
     private String age;
+    private Drawable image;
 
     private Statistics statistics;
 
     private User() {}
 
-    private Drawable image;
-
-    public User(String name){
-        this.name = name;
+	public User(String name){
+		this.name = name;
 		this.statistics = new Statistics();
-    }
-
-    public User(String name, String email, Drawable image){
-        this.name = name;
-        this.email = email;
-        this.image = image;
-        this.statistics = new Statistics();
-    }
+	}
 
     public void setName(String name) {
         this.name = name;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -58,6 +54,8 @@ public class User {
     public String getPhoneNumber(){
         return this.phoneNumber;
     }
+
+	@JsonIgnore
     public int getStat(Statistics.Property property) {
         return statistics.get(property);
     }
@@ -66,6 +64,7 @@ public class User {
         return image;
     }
 
+    @JsonIgnore
     public int getPointsForVideo(Video video) {
         return statistics.getVideoPoints(video);
     }
@@ -78,6 +77,7 @@ public class User {
         statistics.addVideoPoints(video, points);
     }
 
+    @JsonIgnore
     public int getPoints() {
         return statistics.get(Statistics.Property.POINTS);
     }
