@@ -12,8 +12,10 @@ import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
 
-public class Storage {
+import java.util.Collections;
+import java.util.List;
 
+public class Storage {
 	private static School currentSchool;
 	private static Quiz currentQuiz;
 

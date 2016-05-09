@@ -84,10 +84,6 @@ public final class Database implements IDatabase {
 
 
 	public List<Lesson> getLessons(Course course){
-		/*Lesson complex1 = new Lesson("Introduktion", new Video("Gyhg-bWssOk"));
-		Lesson complex2 = new Lesson("Räkneregler", new Video("LUQrdbOK508"));
-        Lesson complex3 = new Lesson("Komplexa talplanet", new Video("nl87kdkJTYc"));*/
-
 		Video video = Video.from("ffLLmV4mZwU");
 
 		Lesson complex1 = Lesson.create("Lektion 1").withVideo(video).withQuiz(getQuiz(""));

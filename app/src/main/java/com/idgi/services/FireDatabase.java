@@ -1,17 +1,18 @@
 package com.idgi.services;
 
-import android.util.Log;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.User;
+import com.idgi.util.Storage;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
@@ -23,22 +24,44 @@ public class FireDatabase implements IDatabase {
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
 
 	private List<School> schools;
+	private List<User> users;
 
 	public Quiz getQuiz(String key) {
 		return null;
 	}
 
-	public void addSchool(School school) {
-		Firebase schoolRef = ref.child("schools").child(school.getName());
-		schoolRef.setValue(school);
-		schools.add(school);
+	public void pushSchool(School school) {
+		Firebase schoolRef = ref.child("schools");
+		schoolRef.push().setValue(school);
 	}
 
 	public List<School> getSchools() {
-		if (schools == null) {
-			fetchSchools();
-		}
+		if (schools == null)
+			schools = Collections.emptyList();
+
 		return schools;
+	}
+
+	public List<User> getUsers() {
+		if (users == null)
+			users = Collections.emptyList();
+
+		return users;
+	}
+
+	public void pushAccount(Account account) {
+		Firebase accountPush = ref.child("accounts").push();
+
+		accountPush.setValue(account);
+
+		pushAccountInfo(account, accountPush.getKey());
+	}
+
+	private void pushAccountInfo(Account account, String key) {
+		Firebase accountRef = ref.child("accountInfo").child(key);
+
+		accountRef.child("accountName").setValue(account.getName());
+		accountRef.child("email").setValue(account.getUser().getEmail());
 	}
 
 	public School getSchool(String schoolName) {
@@ -100,16 +123,16 @@ public class FireDatabase implements IDatabase {
 				school.addSubject(subject);
 			}
 
-			addSchool(school);
+			pushSchool(school);
 		}
 	}
 
-	private void fetchSchools() {
-		schools = new ArrayList<>();
+	public void retrieveSchools() {
+		schools = Collections.emptyList();
 
-		Firebase reff = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
+		Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
 
-		reff.addListenerForSingleValueEvent(new ValueEventListener() {
+		schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
 			public void onDataChange(DataSnapshot snapshot) {
 
 				for (DataSnapshot child : snapshot.getChildren()) {
@@ -123,8 +146,27 @@ public class FireDatabase implements IDatabase {
 		});
 	}
 
+	public void retrieveUsers() {
+		users = Collections.emptyList();
+
+		Firebase userRef = ref.child("users");
+
+		userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+			public void onDataChange(DataSnapshot snapshot) {
+
+				for (DataSnapshot child : snapshot.getChildren()) {
+					User user = child.getValue(User.class);
+					users.add(user);
+				}
+			}
+
+			public void onCancelled(FirebaseError firebaseError) {
+			}
+		});
+	}
+
 	public void initialize() {
-		fetchSchools();
+		retrieveSchools();
 	}
 
 
