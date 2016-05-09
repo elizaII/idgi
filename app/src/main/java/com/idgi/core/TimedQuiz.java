@@ -6,6 +6,7 @@ public class TimedQuiz implements IQuiz {
 
     private Quiz quiz;
     private int time;
+    private int remainingTime;
 
     public TimedQuiz(int time){
         quiz = new Quiz();
@@ -69,8 +70,14 @@ public class TimedQuiz implements IQuiz {
 
     @Override
     public int getPointsEarned() {
-        //Todo...
-        return 0;
+        int maximalScore = this.getCorrectAnswerAmount()*100;
+        int total = this.quiz.getPointsEarned();
+
+        if(maximalScore == total){
+            total += calculateTimeBonus(this.remainingTime);
+        }
+        //Todo... better calculation because the questions are now not uniquely identified
+        return total;
     }
 
     public void setTime(int time){
@@ -80,4 +87,15 @@ public class TimedQuiz implements IQuiz {
     public int getTime(){
         return this.time;
     }
+
+    public void setRemainingTime(int remainingTime){
+        this.remainingTime = remainingTime;
+    }
+
+    private int calculateTimeBonus(final int remainingTime){
+        int difference = getTime() - remainingTime;
+
+        return (int) difference/10;
+    }
+
 }
