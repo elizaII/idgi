@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.R;
+import com.idgi.core.Account;
 import com.idgi.core.User;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,7 +23,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //initializeDrawer();
 
         nameText = (EditText) findViewById(R.id.nameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
@@ -35,8 +35,16 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String name = this.nameText.getText().toString();
         String email = this.eMailText.getText().toString();
 
+        // TODO implement actual account name
+        String accountName = "test";
+
+        // TODO implement actual password
+        String password = "hej123";
+
+        Account account = new Account(accountName, password);
         User user = new User(name);
         user.setEmail(email);
+        account.setUser(user);
 
         String phone = phoneText.getText().toString();
         if (phone.isEmpty()) {
