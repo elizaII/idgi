@@ -14,6 +14,8 @@ import com.idgi.Widgets.CreateDialog;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
+import com.idgi.core.Question;
+import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Video;
 import com.idgi.services.FireDatabase;
@@ -32,6 +34,7 @@ public class CreateLessonActivity extends AppCompatActivity {
     private ArrayList<String> schoolNames;
     private ArrayList<String> subjectNames;
     private ArrayList<String> courseNames;
+    private ArrayList<Question> questionList;
     private Button add_school_button;
     private Button add_subject_button;
     private Button add_course_button;
@@ -46,6 +49,7 @@ public class CreateLessonActivity extends AppCompatActivity {
     private School school;
     private com.idgi.core.Subject subject;
     private Course course;
+    private Quiz quiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class CreateLessonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_lesson);
 
 
-
+        questionList=new ArrayList<Question>();
 
 
 
@@ -67,18 +71,19 @@ public class CreateLessonActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        if (extras != null && extras.getString("quiz").equals("quiz")) {
+        if (extras != null) {
             add_school_button.setText(Storage.getCurrentSchool().getName());
             add_subject_button.setText(Storage.getCurrentSubject().getName());
             add_course_button.setText(Storage.getCurrentCourse().getName());
-            add_quiz_button.setText("Quiz is added.");
+
 
             add_subject_button.setEnabled(true);
             add_course_button.setEnabled(true);
             lesson_name_editText.setEnabled(true);
             youtube_url_editText.setEnabled(true);
             create_lesson_button.setEnabled(true);
-            add_quiz_button.setEnabled(true);
+            add_quiz_button.setEnabled(extras.getBoolean("quiz"));
+            System.out.println(extras.getBoolean("quiz"));
 
             hasQuiz=true;
         }
@@ -96,20 +101,22 @@ public class CreateLessonActivity extends AppCompatActivity {
 
 
         if(!add_school_button.getText().toString().equals("Lägg till skola")){
-            System.out.println("Letar ämnen");
         subjectNames = new ArrayList<String>();
-        for (com.idgi.core.Subject subject : database.getSubjects(add_school_button.getText().toString())){
-            subjectNames.add(subject.getName());
-        }
+            if(!newSchool) {
+                for (com.idgi.core.Subject subject : database.getSubjects(add_school_button.getText().toString())) {
+                    subjectNames.add(subject.getName());
+                }
+            }
         }
 
 
         if(!add_subject_button.getText().toString().equals("Lägg till ämne")){
-            System.out.println("Letar kurser");
         courseNames = new ArrayList<String>();
-        for (Course course : database.getCourses(add_school_button.getText().toString(), add_subject_button.getText().toString())){
-            courseNames.add(course.getName());
-        }
+            if(!newSubject) {
+                for (Course course : database.getCourses(add_school_button.getText().toString(), add_subject_button.getText().toString())) {
+                    courseNames.add(course.getName());
+                }
+            }
         }
 
 
@@ -127,7 +134,6 @@ public class CreateLessonActivity extends AppCompatActivity {
                 break;
             case R.id.add_course_button:
                 CreateDialog dialog2=new CreateDialog(this, "kurs", add_school_button.getText().toString(), add_subject_button.getText().toString(), courseNames);
-                System.out.println("Kursknapppppppppp");
                 dialog2.show();
                 break;
             default:
@@ -137,50 +143,70 @@ public class CreateLessonActivity extends AppCompatActivity {
     }
 
     public void selectItem(String text, String string) {
-        if (string.equals("skola")) {
-            Storage.setCurrentSchool(database.getSchool(text));
-            add_school_button.setText(text);
-            add_subject_button.setEnabled(true);
-            initiateLists();
-        }
-        if (string.equals("ämne")) {
-            Storage.setCurrentSubject(Storage.getCurrentSchool().getSubject(text));
-            add_subject_button.setText(text);
-            add_course_button.setEnabled(true);
-            initiateLists();
-        }
-        if (string.equals("kurs")) {
-            Storage.setCurrentCourse(Storage.getCurrentSubject().getCourse(text));
-            add_course_button.setText(text);
-            add_quiz_button.setEnabled(true);
-            lesson_name_editText.setEnabled(true);
-            youtube_url_editText.setEnabled(true);
-            create_lesson_button.setEnabled(true);
-            initiateLists();
+
+        if (text.length()>0) {
+            if (string.equals("skola")) {
+                setSchool(new School(text));
+                add_school_button.setText(text);
+                add_subject_button.setEnabled(true);
+                newSchool=false;
+                initiateLists();
+
+            }
+            if (string.equals("ämne")) {
+                setSubject(new com.idgi.core.Subject(text));
+                add_subject_button.setText(text);
+                add_course_button.setEnabled(true);
+                newSubject=false;
+                initiateLists();
+
+            }
+            if (string.equals("kurs")) {
+                setCourse(new Course(text));
+                add_course_button.setText(text);
+                add_quiz_button.setEnabled(true);
+                lesson_name_editText.setEnabled(true);
+                youtube_url_editText.setEnabled(true);
+                create_lesson_button.setEnabled(true);
+                newCourse=false;
+                initiateLists();
+
+            }
         }
     }
 
     public void onAddQuizButtonClick(View view) {
-        Intent intent = new Intent(CreateLessonActivity.this, CreateQuizActivity.class);
-        startActivity(intent);
+        CreateQuizDialog dialog=new CreateQuizDialog(this, questionList);
+        dialog.show();
 
+    }
+
+    public void setQuiz() {
+        if (questionList.size() > 0) {
+            Quiz quiz = new Quiz();
+            quiz.addQuestions(questionList);
+            Storage.setCurrentQuiz(quiz);
+            add_quiz_button.setText("Quiz is added.");
+            this.quiz=quiz;
+            hasQuiz = true;
+        }
     }
 
     public void onCreateLessonButtonClick(View view){
 
         Lesson lesson = new Lesson(lesson_name_editText.getText().toString(), new Video(youtube_url_editText.getText().toString()));
         if (hasQuiz){
-            lesson.setQuiz(Storage.getCurrentQuiz());
+            lesson.setQuiz(quiz);
         }
         course.addLesson(lesson);
         if(newCourse){
-            subject.addCourse(this.course);
+            subject.addCourse(course);
         }
         if(newSubject){
-            school.addSubject(this.subject);
+            school.addSubject(subject);
         }
         if(newSchool){
-            database.addSchool(this.school);
+            database.addSchool(school);
         }
         Storage.setCurrentLesson(lesson);
 
@@ -188,17 +214,18 @@ public class CreateLessonActivity extends AppCompatActivity {
     }
 
     public void setSchool(School school) {
-        this.school = school;
+        this.school=school;
         this.newSchool=true;
     }
 
     public void setSubject(com.idgi.core.Subject subject) {
-        this.subject = subject;
+        this.subject=subject;
         this.newSubject = true;
     }
 
     public void setCourse(Course course) {
-        this.course = course;
+        this.course=course;
         this.newCourse=true;
     }
+
 }

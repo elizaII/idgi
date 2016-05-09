@@ -30,7 +30,6 @@ public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder
     public CreateAdapter(CreateDialog dialog, ArrayList<String> data, String string){
         this.data = data;
         inflater = LayoutInflater.from(dialog.getContext());
-        System.out.println("data size " + data.size());
         this.dialog=dialog;
         this.string=string;
         }

@@ -2,6 +2,7 @@ package com.idgi.Widgets;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 
 import com.idgi.R;
-import com.idgi.activities.CreateQuizActivity;
+import com.idgi.activities.CreateLessonActivity;
+import com.idgi.activities.CreateQuizDialog;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
@@ -29,7 +31,7 @@ import java.util.List;
 public class CreateQuestionDialog extends Dialog implements
         View.OnClickListener {
 
-    private CreateQuizActivity c;
+    private CreateQuizDialog c;
     private FireDatabase database;
     private Button create_quiz_button;
     private EditText quiz_question_editText;
@@ -44,8 +46,8 @@ public class CreateQuestionDialog extends Dialog implements
 
     //private EditText
 
-    public CreateQuestionDialog(CreateQuizActivity a) {
-        super(a);
+    public CreateQuestionDialog(CreateQuizDialog a, Context context) {
+        super(context);
         // TODO Auto-generated constructor stub
         this.c = a;
     }

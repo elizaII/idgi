@@ -31,8 +31,8 @@ public class Storage {
 		return currentCourse;
 	}
 
-	public static void setCurrentCourse(Course currentCourse) {
-		Storage.currentCourse = currentCourse;
+	public static void setCurrentCourse(Course course) {
+		currentCourse = course;
 	}
 
 	private static Course currentCourse;
