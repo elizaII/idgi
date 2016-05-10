@@ -1,7 +1,6 @@
 package com.idgi.Widgets;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,28 +12,20 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
-import com.idgi.activities.LessonActivity;
-import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.recycleViews.adapters.CreateAdapter;
-import com.idgi.services.FireDatabase;
-import com.idgi.util.Storage;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by Allex on 2016-05-08.
- */
 public class CreateDialog extends Dialog implements
             View.OnClickListener {
 
-    private CreateLessonActivity c;
-    private Button create_new_button;
-    private EditText create_new_editText;
-    private String string;
+    private CreateLessonActivity activity;
+    private Button btnCreateNew;
+    private EditText txtCreateNew;
+    private CreateAdapter.Type type;
     private TextView title;
     private CreateAdapter adapter;
     private RecyclerView recyclerView;
@@ -42,12 +33,12 @@ public class CreateDialog extends Dialog implements
     private ArrayList<String> data;
 
 
-        public CreateDialog(CreateLessonActivity a, String string, ArrayList<String> data) {
-            super(a);
-            // TODO Auto-generated constructor stub
-            this.c = a;
-            this.string=string;
-            this.data=data;
+        public CreateDialog(CreateLessonActivity activity, CreateAdapter.Type type, ArrayList<String> data) {
+            super(activity);
+
+            this.activity = activity;
+            this.type = type;
+            this.data = data;
         }
 
         @Override
@@ -55,39 +46,47 @@ public class CreateDialog extends Dialog implements
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.selection_dialog);
-            create_new_button = (Button) findViewById(R.id.create_new_button);
-            create_new_editText = (EditText) findViewById(R.id.create_new_editText);
-            title = (TextView) findViewById(R.id.title);
-            title.setText("välj " + string);
-            create_new_editText.setHint("skriv namn för att skapa " + string);
-            create_new_button.setOnClickListener(this);
 
-            manager = new LinearLayoutManager(c);
+            btnCreateNew = (Button) findViewById(R.id.create_new_button);
+            txtCreateNew = (EditText) findViewById(R.id.create_new_editText);
+            title = (TextView) findViewById(R.id.title);
+            title.setText("välj " + type);
+            txtCreateNew.setHint("skriv namn för att skapa " + type);
+            btnCreateNew.setOnClickListener(this);
+
+            manager = new LinearLayoutManager(activity);
             recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
             recyclerView.setLayoutManager(manager);
 
-            adapter = new CreateAdapter(this, this.data, string);
+            adapter = new CreateAdapter(this, this.data, type);
             recyclerView.setAdapter(adapter);
 
         }
 
         @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.send_reply_button && string.equals("skola")) {
-                c.setSchool(new School(create_new_editText.getText().toString()));
+        public void onClick(View view) {
+            if (view.getId() == R.id.send_reply_button) {
+                String name = txtCreateNew.getText().toString();
+                switch(type) {
+                    case SCHOOL:
+                        activity.setSchool(new School(name));
+                        break;
+                    case SUBJECT:
+                        activity.setSubject(new Subject(name));
+                        break;
+                    case COURSE:
+                        activity.setCourse(new Course(name));
+                    default:
+                        break;
+                }
             }
-            if (v.getId() == R.id.send_reply_button && string.equals("ämne")) {
-                c.setSubject(new Subject(create_new_editText.getText().toString()));
-            }
-            if (v.getId() == R.id.send_reply_button && string.equals("kurs")) {
-                c.setCourse(new Course(create_new_editText.getText().toString()));
-            }
-            selectItem(create_new_editText.getText().toString(), string);
+
+            selectItem(txtCreateNew.getText().toString(), type);
             dismiss();
         }
 
-    public void selectItem(String text, String string) {
-        c.selectItem(text, string);
+    public void selectItem(String text, CreateAdapter.Type type) {
+        activity.selectItem(text, type);
         dismiss();
     }
 }

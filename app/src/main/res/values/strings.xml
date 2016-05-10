@@ -6,6 +6,11 @@
     <string name="seek_to">Jump To</string>
     <string name="seek_to_hint">Seconds</string>
 
+    <!-- General -->
+    <string name="school">skola</string>
+    <string name="subject">ämne</string>
+    <string name="course">kurs</string>
+
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
 

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.idgi.R;
 import com.idgi.core.Account;
 import com.idgi.core.User;
+import com.idgi.services.FireDatabase;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText nameText, phoneText, eMailText;
@@ -56,6 +57,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         user.saveEmailToLocalStorage(this);
 
         Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
+
+        FireDatabase.getInstance().pushAccount(account);
 
         startActivity(new Intent(CreateAccountActivity.this, StartActivity.class));
 
