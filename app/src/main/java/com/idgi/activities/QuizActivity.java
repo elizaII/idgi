@@ -36,6 +36,9 @@ public class QuizActivity extends AppCompatActivity {
 
 	private boolean isInTransition = false;
 
+	//To stop weird transitions after we've already exited the activity
+	private boolean leftActivity = false;
+
 	private static final int BUTTONS_PER_ROW = 2;
 
 	@Override
@@ -45,6 +48,10 @@ public class QuizActivity extends AppCompatActivity {
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
 		quiz = Storage.getCurrentQuiz();
+		if (quiz == null)
+			finish();
+
+		Storage.getCurrentQuiz().reset();
 
 		initializeNextButton();
 		initializeQuestionView();
@@ -90,7 +97,7 @@ public class QuizActivity extends AppCompatActivity {
 
 		handler.postDelayed(new Runnable() {
 			public void run() {
-				if (finishedQuestion.equals(quiz.getCurrentQuestion()))
+				if (finishedQuestion.equals(quiz.getCurrentQuestion()) && !leftActivity)
 					gotoNextQuestion();
 			}
 		}, Config.TIME_TO_DISPLAY_QUIZ_ANSWERS);
@@ -108,6 +115,7 @@ public class QuizActivity extends AppCompatActivity {
 	}
 
 	public void switchToQuizResultActivity() {
+		leftActivity = true;
 		startActivity(new Intent(QuizActivity.this, QuizResultActivity.class));
 		finish();
 	}

@@ -89,6 +89,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         final CommentLayout layout = (CommentLayout) view.getParent();
         CommentReplyDialog dialog=new CommentReplyDialog(this, layout.getComment());
         dialog.show();
+
     }
 
     @Override

@@ -87,7 +87,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
         @Override
         public void onPaused() {
-            Toast.makeText(getContext(), "Pausing.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Pausing.", Toast.LENGTH_SHORT).show();
             videoPaused = true;
         }
 

@@ -1,20 +1,22 @@
 package com.idgi.services;
 
-import android.util.Log;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.User;
+import com.idgi.util.Storage;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FireDatabase implements IDatabase {
@@ -22,23 +24,46 @@ public class FireDatabase implements IDatabase {
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
 
 	private List<School> schools;
+	private List<User> users;
 
 	public Quiz getQuiz(String key) {
 		return null;
 	}
 
-	public void addSchool(School school) {
-
-		Firebase schoolRef = ref.child("schools").child(school.getName());
-		schoolRef.setValue(school);
+	/* Push (add) a school to Firebase */
+	public void pushSchool(School school) {
+		Firebase schoolRef = ref.child("schools");
+		schoolRef.push().setValue(school);
 	}
 
 	public List<School> getSchools() {
-		if (schools == null) {
-			fetchSchools();
-		}
+		if (schools == null)
+			schools = Collections.emptyList();
 
 		return schools;
+	}
+
+	public List<User> getUsers() {
+		if (users == null)
+			users = Collections.emptyList();
+
+		return users;
+	}
+
+	/* Push (add) an account to Firebase */
+	public void pushAccount(Account account) {
+		Firebase accountPush = ref.child("accounts").push();
+
+		accountPush.setValue(account);
+
+		pushAccountInfo(account, accountPush.getKey());
+	}
+
+	private void pushAccountInfo(Account account, String key) {
+		Firebase accountRef = ref.child("accountInfo").child(key);
+
+		accountRef.child("accountName").setValue(account.getName());
+		accountRef.child("email").setValue(account.getUser().getEmail());
 	}
 
 	public School getSchool(String schoolName) {
@@ -49,20 +74,30 @@ public class FireDatabase implements IDatabase {
 		return getSubjects(school.getName());
 	}
 
-	public List<Course> getCourses(String subjectName) {
-		return null;
+	public List<Course> getCourses(String schoolName, String subjectName) {
+
+		List<Course> courseList;
+		if (getSchool(schoolName).getSubjects().size()>0){
+			return getSchool(schoolName).getSubject(subjectName).getCourses();
+		}
+		else {
+			courseList = new ArrayList<>();
+			return courseList;
+		}
 	}
+
 
 	public List<Subject> getSubjects(String schoolName) {
 		return getSchool(schoolName).getSubjects();
 	}
+
 
 	public List<Lesson> getLessons(Course course) {
 		return null;
 	}
 
 	public List<Course> getCourses(Subject subject) {
-		return null;
+		return subject.getCourses();
 	}
 
 	public List<Comment> getComments(Lesson lesson) {
@@ -91,16 +126,16 @@ public class FireDatabase implements IDatabase {
 				school.addSubject(subject);
 			}
 
-			addSchool(school);
+			pushSchool(school);
 		}
 	}
 
-	private void fetchSchools() {
+	public void retrieveSchools() {
 		schools = new ArrayList<>();
 
-		Firebase reff = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
+		Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
 
-		reff.addListenerForSingleValueEvent(new ValueEventListener() {
+		schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
 			public void onDataChange(DataSnapshot snapshot) {
 
 				for (DataSnapshot child : snapshot.getChildren()) {
@@ -114,7 +149,28 @@ public class FireDatabase implements IDatabase {
 		});
 	}
 
-	public void initialize() {
-		fetchSchools();
+	public void retrieveUsers() {
+		users = new ArrayList<>();
+
+		Firebase userRef = ref.child("users");
+
+		userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+			public void onDataChange(DataSnapshot snapshot) {
+
+				for (DataSnapshot child : snapshot.getChildren()) {
+					User user = child.getValue(User.class);
+					users.add(user);
+				}
+			}
+
+			public void onCancelled(FirebaseError firebaseError) {
+			}
+		});
 	}
+
+	public void initialize() {
+		retrieveSchools();
+	}
+
+
 }

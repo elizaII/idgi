@@ -27,9 +27,13 @@ public class Question implements ParentListItem {
 		this.hint = hint;
 		this.answers = answers;
 	}
-	
+
 	public Question(String text, String hint) {
 		this(text, hint, new ArrayList<Answer>());
+	}
+
+	public Question(String text) {
+		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
 	}
 	
 	public void addAnswers(Answer... answers) {
@@ -65,8 +69,9 @@ public class Question implements ParentListItem {
 		return amount;
 	}
 
-	public Question(String text) {
-		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
+	public void reset() {
+		for (Answer answer : answers)
+			answer.setSelected(false);
 	}
 	
 	public String getText() {
@@ -75,6 +80,10 @@ public class Question implements ParentListItem {
 	
 	public String getHint() {
 		return this.hint;
+	}
+
+	public void setHint(String hint){
+		this.hint=hint;
 	}
 	
 	public boolean hasAnswer(Answer answer) {

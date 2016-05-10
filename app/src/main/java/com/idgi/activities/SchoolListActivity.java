@@ -3,6 +3,8 @@ package com.idgi.activities;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.firebase.client.Firebase;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
@@ -27,7 +29,6 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
         initializeDrawer();
 
         ArrayList<String> schoolNames = new ArrayList<>();
-
         for(School school: FireDatabase.getInstance().getSchools())
             schoolNames.add(school.getName());
 

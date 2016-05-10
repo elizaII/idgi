@@ -47,10 +47,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		if (btnRetake != null)
 			btnRetake.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(QuizResultActivity.this, QuizActivity.class);
-					intent.putExtra("quiz_key", "Quiz123");
-
-					startActivity(intent);
+					startActivity(new Intent(QuizResultActivity.this, QuizActivity.class));
 					finish();
 				}
 			});

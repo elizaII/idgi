@@ -13,11 +13,11 @@ import java.util.List;
 public interface IDatabase {
 
 	Quiz getQuiz(String key);
-	List<School> getSchools();
+	void retrieveSchools();
 	List<Subject> getSubjects(School school);
 	List<Lesson> getLessons(Course course);
 	List<Course> getCourses(Subject subject);
 	List<Comment> getComments(Lesson lesson);
-	List<User> getUsers(User user);
+	void retrieveUsers();
 
 }

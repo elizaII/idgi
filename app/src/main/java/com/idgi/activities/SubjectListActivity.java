@@ -29,6 +29,13 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // TODO Solve this in a better way instead of just going back to the previous activity.
+        if (Storage.getCurrentSchool() == null) {
+            System.out.println(":::::::NOTE:::::: Can not enter SubjectListActivity because Storage.getCurrentSchool() returns null");
+            finish();
+        }
+
         setContentView(R.layout.activity_subject_list);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
