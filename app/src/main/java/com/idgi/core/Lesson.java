@@ -17,7 +17,7 @@ public class Lesson implements Nameable {
 		this.video = video;
 	}
 
-	private Lesson(String name) {
+	public Lesson(String name) {
 		this.name = name;
 	}
 
@@ -31,7 +31,7 @@ public class Lesson implements Nameable {
 	}
 
 	public Lesson withQuiz(Quiz quiz) {
-		this.quiz = quiz;
+		setQuiz(quiz);
 		return this;
 	}
 	

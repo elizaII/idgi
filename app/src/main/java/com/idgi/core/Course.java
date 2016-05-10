@@ -23,7 +23,7 @@ public class Course implements Nameable {
 	}
 
 	public Lesson getLesson(String courseName) {
-		return Util.findByName(courseName, lessons);
+		return Util.findByName(lessons, courseName);
 	}
 	
 	public String getName() {

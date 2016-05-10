@@ -32,8 +32,9 @@ public class FireDatabase implements IDatabase {
 
 	/* Push (add) a school to Firebase */
 	public void pushSchool(School school) {
-		Firebase schoolRef = ref.child("schools");
-		schoolRef.push().setValue(school);
+		Firebase push = ref.child("schools").push();
+		school.setKey(push.getKey());
+		push.setValue(school);
 	}
 
 	public List<School> getSchools() {
@@ -52,11 +53,12 @@ public class FireDatabase implements IDatabase {
 
 	/* Push (add) an account to Firebase */
 	public void pushAccount(Account account) {
-		Firebase accountPush = ref.child("accounts").push();
+		Firebase push = ref.child("accounts").push();
 
-		accountPush.setValue(account);
+		account.setKey(push.getKey());
+		push.setValue(account);
 
-		pushAccountInfo(account, accountPush.getKey());
+		pushAccountInfo(account, push.getKey());
 	}
 
 	private void pushAccountInfo(Account account, String key) {
@@ -67,7 +69,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public School getSchool(String schoolName) {
-		return Util.findByName(schoolName, schools);
+		return Util.findByName(schools, schoolName);
 	}
 
 	public List<Subject> getSubjects(School school) {
@@ -128,6 +130,15 @@ public class FireDatabase implements IDatabase {
 
 			pushSchool(school);
 		}
+	}
+
+	/**
+	 * Adds a lesson to a school
+	 */
+	public void pushLessonToSchool(Lesson lesson, String schoolKey, String subjectName, String courseName) {
+		String path = String.format("schools/%s/subjects/%s/courses/%s/lessons/", schoolKey, subjectName, courseName);
+
+		ref.child(path).setValue(lesson);
 	}
 
 	public void retrieveSchools() {

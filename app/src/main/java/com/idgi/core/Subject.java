@@ -16,7 +16,7 @@ public class Subject implements Nameable {
 
     public Subject(String name){
         this.name = name;
-        this.courses = new ArrayList<Course>();
+        this.courses = new ArrayList<>();
     }
 
     public String getName() {
@@ -25,20 +25,22 @@ public class Subject implements Nameable {
 
     public List<Course> getCourses() {
         if (courses == null) {
-            courses = Collections.emptyList();
+            courses = new ArrayList<>();
         }
         return courses;
     }
 
     public Course getCourse(String courseName) {
-        return Util.findByName(courseName, courses);
+        return Util.findByName(courses, courseName);
     }
 
     public void addCourse(Course course) {
         System.out.println(course.getName());
-        if (courses.equals(Collections.emptyList())){
-            courses = new ArrayList<Course>();
-        }
-        courses.add(course);
+
+        getCourses().add(course);
+    }
+
+    public boolean hasCourse(Course course) {
+        return Util.listContains(courses, course);
     }
 }

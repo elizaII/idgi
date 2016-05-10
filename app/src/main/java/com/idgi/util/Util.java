@@ -4,12 +4,20 @@ import java.util.List;
 
 public class Util {
 
-	public static <T extends Nameable> T findByName(String name, List<T> list) {
+	public static <T extends Nameable> T findByName(List<T> list, String name) {
 		for (T element : list)
 			if (namePredicate.accepts(element, name))
 				return element;
 
 		return null;
+	}
+
+	public static <T extends Nameable> boolean listContains(List<T> list, T nameable) {
+		for (T element : list)
+			if (nameable.equals(element))
+				return true;
+
+		return false;
 	}
 
 	private static final Predicate<Nameable> namePredicate = new Predicate<Nameable>() {

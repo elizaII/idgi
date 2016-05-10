@@ -9,6 +9,8 @@ public class Account {
 	private String name;
 	private String password;
 
+	private String key;
+
 	private Account() {}
 
 	public Account(String name, String password) {
@@ -38,5 +40,13 @@ public class Account {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 }
