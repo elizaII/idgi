@@ -67,9 +67,7 @@ public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder
     public void onClick(View view){
         String text = textView.getText().toString();
         dialog.selectItem(text, string);
-       // reply_field.setText(string);
 
     }
-
 }
 }

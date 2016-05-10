@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.firebase.client.Firebase;
 import com.idgi.R;
 import com.idgi.Widgets.CreateDialog;
-import com.idgi.core.Comment;
+import com.idgi.Widgets.CreateQuizDialog;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
@@ -22,9 +20,6 @@ import com.idgi.services.FireDatabase;
 import com.idgi.util.Storage;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.security.auth.Subject;
 
 public class CreateLessonActivity extends AppCompatActivity {
 
@@ -56,10 +51,7 @@ public class CreateLessonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
 
-
         questionList=new ArrayList<Question>();
-
-
 
         lesson_name_editText = (EditText) findViewById(R.id.lesson_name_editText);
         youtube_url_editText = (EditText) findViewById(R.id.youtube_url_editText);
@@ -69,24 +61,6 @@ public class CreateLessonActivity extends AppCompatActivity {
         add_quiz_button = (Button) findViewById(R.id.add_quiz_button);
         create_lesson_button = (Button) findViewById(R.id.create_lesson_button);
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            add_school_button.setText(Storage.getCurrentSchool().getName());
-            add_subject_button.setText(Storage.getCurrentSubject().getName());
-            add_course_button.setText(Storage.getCurrentCourse().getName());
-
-
-            add_subject_button.setEnabled(true);
-            add_course_button.setEnabled(true);
-            lesson_name_editText.setEnabled(true);
-            youtube_url_editText.setEnabled(true);
-            create_lesson_button.setEnabled(true);
-            add_quiz_button.setEnabled(extras.getBoolean("quiz"));
-            System.out.println(extras.getBoolean("quiz"));
-
-            hasQuiz=true;
-        }
 
         initiateLists();
     }
@@ -119,21 +93,20 @@ public class CreateLessonActivity extends AppCompatActivity {
             }
         }
 
-
         }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_school_button:
-                CreateDialog dialog=new CreateDialog(this, "skola", "skola", "skola,", schoolNames);
+                CreateDialog dialog=new CreateDialog(this, "skola", schoolNames);
                 dialog.show();
                 break;
             case R.id.add_subject_button:
-                CreateDialog dialog1=new CreateDialog(this, "ämne", add_school_button.getText().toString(), "ämne", subjectNames);
+                CreateDialog dialog1=new CreateDialog(this, "ämne", subjectNames);
                 dialog1.show();
                 break;
             case R.id.add_course_button:
-                CreateDialog dialog2=new CreateDialog(this, "kurs", add_school_button.getText().toString(), add_subject_button.getText().toString(), courseNames);
+                CreateDialog dialog2=new CreateDialog(this, "kurs", courseNames);
                 dialog2.show();
                 break;
             default:

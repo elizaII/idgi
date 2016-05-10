@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Svara på kommentar:"
+        android:text="Välj"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -31,10 +31,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reply_field"
+        android:id="@+id/create_new_editText"
         android:layout_gravity="center_horizontal"
         android:textColor="#000"
-        android:hint="Skriv ett svar på kommentar."
+        android:hint="Skriv namn för att skapa ny"
         android:layout_weight="1.60"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
@@ -45,12 +45,12 @@
 
 
     <Button
-        android:id="@+id/send_reply_button"
+        android:id="@+id/create_new_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:clickable="true"
-        android:text="svara"
+        android:text="Skapa ny"
         android:textColor="#000"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"

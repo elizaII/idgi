@@ -1,4 +1,4 @@
-package com.idgi.activities;
+package com.idgi.Widgets;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.CreateQuestionDialog;
+import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.recycleViews.adapters.CreateAdapter;
@@ -31,7 +32,6 @@ public class CreateQuizDialog extends Dialog implements View.OnClickListener {
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
     private CreateQuestionAdapter adapter;
-    private FireDatabase database;
     private Button add_question_button;
     private Button question_done_button;
 
@@ -39,7 +39,6 @@ public class CreateQuizDialog extends Dialog implements View.OnClickListener {
 
     public CreateQuizDialog(CreateLessonActivity a, List<Question> questionList) {
         super(a);
-        // TODO Auto-generated constructor stub
         this.c = a;
         this.questionList=questionList;
     }
@@ -48,7 +47,6 @@ public class CreateQuizDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        database = FireDatabase.getInstance();
         setContentView(R.layout.create_quiz_dialog);
 
         add_question_button = (Button) findViewById(R.id.add_question_button);

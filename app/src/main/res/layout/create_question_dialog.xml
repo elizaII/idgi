@@ -61,7 +61,9 @@
         android:text="Korrekt svar:"
         android:id="@+id/quiz_set_correct_switch1"
         android:layout_gravity="right"
-        android:checked="false" />
+        android:checked="false"
+        android:textOff="Nej"
+        android:textOn="Ja"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -75,13 +77,16 @@
         android:text="Korrekt svar:"
         android:id="@+id/quiz_set_correct_switch2"
         android:layout_gravity="right"
-        android:checked="false" />
+        android:checked="false"
+        android:textOff="Nej"
+        android:textOn="Ja"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText3"
-        android:hint="Svarsalternativ 3" />
+        android:hint="Svarsalternativ 3"
+        />
 
     <Switch
         android:layout_width="wrap_content"
@@ -89,7 +94,9 @@
         android:text="Korrekt svar:"
         android:id="@+id/quiz_set_correct_switch3"
         android:layout_gravity="right"
-        android:checked="false" />
+        android:checked="false"
+        android:textOff="Nej"
+        android:textOn="Ja"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -103,7 +110,9 @@
         android:text="Korrekt Svar:"
         android:id="@+id/quiz_set_correct_switch4"
         android:layout_gravity="right"
-        android:checked="false" />
+        android:checked="false"
+        android:textOff="Nej"
+        android:textOn="Ja"/>
 
     <Button
         android:id="@+id/create_quiz_button"

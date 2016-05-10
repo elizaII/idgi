@@ -1,29 +1,18 @@
 package com.idgi.Widgets;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
 
 import com.idgi.R;
-import com.idgi.activities.CreateLessonActivity;
-import com.idgi.activities.CreateQuizDialog;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 import com.idgi.services.FireDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Allex on 2016-05-09.
@@ -32,7 +21,6 @@ public class CreateQuestionDialog extends Dialog implements
         View.OnClickListener {
 
     private CreateQuizDialog c;
-    private FireDatabase database;
     private Button create_quiz_button;
     private EditText quiz_question_editText;
     private EditText quiz_hint_editText;
@@ -45,11 +33,9 @@ public class CreateQuestionDialog extends Dialog implements
     private Switch quiz_set_correct_switch3;
     private Switch quiz_set_correct_switch4;
 
-    //private EditText
 
     public CreateQuestionDialog(CreateQuizDialog a, Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         this.c = a;
     }
 
@@ -57,7 +43,6 @@ public class CreateQuestionDialog extends Dialog implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        database= FireDatabase.getInstance();
         setContentView(R.layout.create_question_dialog);
 
         quiz_question_editText = (EditText) findViewById(R.id.quiz_question_editText);
@@ -73,15 +58,13 @@ public class CreateQuestionDialog extends Dialog implements
         create_quiz_button = (Button) findViewById(R.id.create_quiz_button);
         create_quiz_button.setOnClickListener(this);
 
-
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.create_quiz_button:
-                    Question question = new Question(quiz_question_editText.getText().toString());
+                Question question = new Question(quiz_question_editText.getText().toString());
                 Answer answer1 = new Answer(quiz_answer_editText1.getText().toString());
                 Answer answer2 = new Answer(quiz_answer_editText2.getText().toString());
                 Answer answer3 = new Answer(quiz_answer_editText3.getText().toString());

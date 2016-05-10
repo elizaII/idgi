@@ -38,7 +38,6 @@ public class FireDatabase implements IDatabase {
 		if (schools == null) {
 			fetchSchools();
 		}
-		System.out.println("hämtar skolor" + schools.size());
 		return schools;
 	}
 
@@ -52,12 +51,6 @@ public class FireDatabase implements IDatabase {
 
 	public List<Course> getCourses(String schoolName, String subjectName) {
 		List<Course> courseList;
-		//System.out.println(getSchool(schoolName).getSubject(subjectName));
-		System.out.println(schoolName);
-		System.out.println(subjectName);
-		System.out.println(getSchool(schoolName).getSubjects().size());
-		System.out.println(getSchool(schoolName).getSubjects().get(0).getName());
-		//System.out.println(getSchool(schoolName).getSubject(subjectName).getName());
 		if (getSchool(schoolName).getSubjects().size()>0){
 			return getSchool(schoolName).getSubject(subjectName).getCourses();
 		}
@@ -96,16 +89,16 @@ public class FireDatabase implements IDatabase {
 		Database mock = Database.getInstance();
 
 		for (School school : mock.getSchools()) {
-			//for (Subject subject : mock.getSubjects(null)) {
-			//	if (subject.getName().equals("Math"))
-			//		for (Course course : mock.getCourses(null)) {
-			//			for (Lesson lesson : mock.getLessons(null))
-			//				course.addLesson(lesson);
-			//			subject.addCourse(course);
-			//		}
+			for (Subject subject : mock.getSubjects(null)) {
+				if (subject.getName().equals("Math"))
+					for (Course course : mock.getCourses(null)) {
+						for (Lesson lesson : mock.getLessons(null))
+							course.addLesson(lesson);
+						subject.addCourse(course);
+					}
 
-			//	school.addSubject(subject);
-			//}
+				school.addSubject(subject);
+			}
 
 			addSchool(school);
 		}

@@ -31,43 +31,36 @@ import java.util.List;
 public class CreateDialog extends Dialog implements
             View.OnClickListener {
 
-        private CreateLessonActivity c;
-        private Button reply;
-        private EditText reply_field;
-        private String string;
-    private String school;
-    private String subject;
-        private TextView title;
+    private CreateLessonActivity c;
+    private Button create_new_button;
+    private EditText create_new_editText;
+    private String string;
+    private TextView title;
     private CreateAdapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager manager;
     private ArrayList<String> data;
 
-    private FireDatabase database;
 
-        public CreateDialog(CreateLessonActivity a, String string, String school, String subject, ArrayList<String> data) {
+        public CreateDialog(CreateLessonActivity a, String string, ArrayList<String> data) {
             super(a);
             // TODO Auto-generated constructor stub
             this.c = a;
             this.string=string;
             this.data=data;
-            this.school=school;
-            this.subject=subject;
         }
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            database=FireDatabase.getInstance();
             setContentView(R.layout.selection_dialog);
-            reply = (Button) findViewById(R.id.send_reply_button);
-            reply_field = (EditText) findViewById(R.id.reply_field);
+            create_new_button = (Button) findViewById(R.id.create_new_button);
+            create_new_editText = (EditText) findViewById(R.id.create_new_editText);
             title = (TextView) findViewById(R.id.title);
-            title.setText("skapa ny " + string);
-            reply_field.setHint("skriv in namn på " + string);
-            reply.setOnClickListener(this);
-
+            title.setText("välj " + string);
+            create_new_editText.setHint("skriv namn för att skapa " + string);
+            create_new_button.setOnClickListener(this);
 
             manager = new LinearLayoutManager(c);
             recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
@@ -81,22 +74,21 @@ public class CreateDialog extends Dialog implements
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.send_reply_button && string.equals("skola")) {
-                c.setSchool(new School(reply_field.getText().toString()));
+                c.setSchool(new School(create_new_editText.getText().toString()));
             }
             if (v.getId() == R.id.send_reply_button && string.equals("ämne")) {
-                c.setSubject(new Subject(reply_field.getText().toString()));
+                c.setSubject(new Subject(create_new_editText.getText().toString()));
             }
             if (v.getId() == R.id.send_reply_button && string.equals("kurs")) {
-                c.setCourse(new Course(reply_field.getText().toString()));
+                c.setCourse(new Course(create_new_editText.getText().toString()));
             }
-            selectItem(reply_field.getText().toString(), string);
+            selectItem(create_new_editText.getText().toString(), string);
             dismiss();
         }
 
     public void selectItem(String text, String string) {
         c.selectItem(text, string);
         dismiss();
-
     }
 }
 

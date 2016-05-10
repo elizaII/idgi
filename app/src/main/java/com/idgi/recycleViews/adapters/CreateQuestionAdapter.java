@@ -55,7 +55,6 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
         }
 
         public void onClick(View view) {
-            // reply_field.setText(string);
 
         }
     }
