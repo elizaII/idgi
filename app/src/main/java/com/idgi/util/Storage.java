@@ -15,6 +15,7 @@ import com.idgi.core.Video;
 public class Storage {
 
 	private static School currentSchool;
+	private static Quiz currentQuiz;
 
 	public static Subject getCurrentSubject() {
 		return currentSubject;
@@ -30,8 +31,8 @@ public class Storage {
 		return currentCourse;
 	}
 
-	public static void setCurrentCourse(Course currentCourse) {
-		Storage.currentCourse = currentCourse;
+	public static void setCurrentCourse(Course course) {
+		currentCourse = course;
 	}
 
 	private static Course currentCourse;
@@ -45,7 +46,7 @@ public class Storage {
 	private static User activeUser = new User("Test");
 
 	public static Quiz getCurrentQuiz() {
-		return currentLesson.getQuiz();
+		return currentQuiz;
 	}
 
 	public static Video getCurrentVideo() {
@@ -54,6 +55,7 @@ public class Storage {
 
 	public static void setCurrentLesson(Lesson lesson) {
         currentLesson = lesson;
+		setCurrentQuiz(lesson.getQuiz());
     }
 
     public static Lesson getCurrentLesson() {
@@ -69,5 +71,9 @@ public class Storage {
 
 	public static void setCurrentSchool(School school) {
 		currentSchool = school;
+	}
+
+	public static void setCurrentQuiz(Quiz quiz) {
+		currentQuiz = quiz;
 	}
 }

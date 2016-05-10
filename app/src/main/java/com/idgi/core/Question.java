@@ -76,6 +76,10 @@ public class Question implements ParentListItem {
 	public String getHint() {
 		return this.hint;
 	}
+
+	public void setHint(String hint){
+		this.hint=hint;
+	}
 	
 	public boolean hasAnswer(Answer answer) {
 		return answers.contains(answer);

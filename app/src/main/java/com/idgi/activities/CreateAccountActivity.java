@@ -1,6 +1,8 @@
 package com.idgi.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,9 +45,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             user.setPhoneNumber(phone);
         }
 
+        user.saveEmailToLocalStorage(this);
+
         Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
 
         startActivity(new Intent(CreateAccountActivity.this, StartActivity.class));
+
     }
     private boolean formIsValid() {
         if (nameText.getText().toString().equals("")) {

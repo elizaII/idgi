@@ -1,6 +1,7 @@
 package com.idgi.activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,16 +19,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.Firebase;
 import com.idgi.R;
+import com.idgi.core.User;
 import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.util.Navigation;
 
 public class ProfileActivity extends AppCompatActivityWithDrawer {
 
+    User user;
+    EditText name;
+    EditText age;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        String userEmail = User.getLoggedInUserEmail(this);
+       // user = Firebase(dfkdkgkgk: userEmail);
+
+        name = (EditText) findViewById(R.id.profile_editText_name);
+        age = (EditText) findViewById(R.id.profile_editText_age);
 
         initializeDrawer();
     }
@@ -50,7 +63,6 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
 
     public void enableInputFieldButtonClicked(View view) {
         if (view.getId() == R.id.profile_btn_editName ) {
-            EditText name = (EditText) findViewById(R.id.profile_editText_name);
             if (name.getTag() == "enabled") {
                 disableInputField(name);
             }
@@ -58,7 +70,6 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
                 enableInputField(name);
             }
         } else if (view.getId() == R.id.profile_btn_editAge) {
-            EditText age = (EditText) findViewById(R.id.profile_editText_age);
             if (age.getTag() == "enabled") {
                 disableInputField(age);
             }
@@ -81,5 +92,10 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
         field.setClickable(false);
         field.clearFocus();
         field.setTag("disabled");
+    }
+
+    private void saveInfo(View view) {
+        user.setName(name.getText().toString());
+        user.setAge(age.getText().toString());
     }
 }

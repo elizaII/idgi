@@ -8,7 +8,7 @@ import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Quiz {
+public class Quiz implements IQuiz{
 
 	private int currentIndex = 0;
 	

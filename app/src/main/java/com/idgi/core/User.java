@@ -1,11 +1,15 @@
 package com.idgi.core;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
 public class User {
     private String name;
     private String email;
     private String phoneNumber;
+    private String age;
 
     private Statistics statistics;
 
@@ -38,12 +42,18 @@ public class User {
     public void setImage(Drawable image) {
         this.image = image;
     }
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getEmail(){
         return this.email;
     }
     public String getName(){
         return this.name;
+    }
+    public String getAge() {
+        return this.age;
     }
     public String getPhoneNumber(){
         return this.phoneNumber;
@@ -70,5 +80,17 @@ public class User {
 
     public int getPoints() {
         return statistics.get(Statistics.Property.POINTS);
+    }
+
+    public void saveEmailToLocalStorage(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.apply();
+    }
+
+    public static String getLoggedInUserEmail(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        return sharedPref.getString("email", null);
     }
 }

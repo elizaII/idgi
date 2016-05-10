@@ -15,6 +15,7 @@ import com.idgi.core.Subject;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FireDatabase implements IDatabase {
@@ -28,16 +29,15 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void addSchool(School school) {
-
 		Firebase schoolRef = ref.child("schools").child(school.getName());
 		schoolRef.setValue(school);
+		schools.add(school);
 	}
 
 	public List<School> getSchools() {
 		if (schools == null) {
 			fetchSchools();
 		}
-
 		return schools;
 	}
 
@@ -49,20 +49,29 @@ public class FireDatabase implements IDatabase {
 		return getSubjects(school.getName());
 	}
 
-	public List<Course> getCourses(String subjectName) {
-		return null;
+	public List<Course> getCourses(String schoolName, String subjectName) {
+		List<Course> courseList;
+		if (getSchool(schoolName).getSubjects().size()>0){
+			return getSchool(schoolName).getSubject(subjectName).getCourses();
+		}
+		else {
+			courseList = Collections.emptyList();
+			return courseList;
+		}
 	}
+
 
 	public List<Subject> getSubjects(String schoolName) {
 		return getSchool(schoolName).getSubjects();
 	}
+
 
 	public List<Lesson> getLessons(Course course) {
 		return null;
 	}
 
 	public List<Course> getCourses(Subject subject) {
-		return null;
+		return subject.getCourses();
 	}
 
 	public List<Comment> getComments(Lesson lesson) {
@@ -117,4 +126,6 @@ public class FireDatabase implements IDatabase {
 	public void initialize() {
 		fetchSchools();
 	}
+
+
 }
