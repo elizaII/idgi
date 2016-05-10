@@ -30,6 +30,7 @@ public class FireDatabase implements IDatabase {
 		return null;
 	}
 
+	/* Push (add) a school to Firebase */
 	public void pushSchool(School school) {
 		Firebase schoolRef = ref.child("schools");
 		schoolRef.push().setValue(school);
@@ -49,6 +50,7 @@ public class FireDatabase implements IDatabase {
 		return users;
 	}
 
+	/* Push (add) an account to Firebase */
 	public void pushAccount(Account account) {
 		Firebase accountPush = ref.child("accounts").push();
 

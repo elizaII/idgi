@@ -122,4 +122,13 @@ public class Quiz implements IQuiz{
 	private int calculatePointsEarned(int deltaAnswers, int correctAnswerAmount) {
 		return Math.max(0, (int) ((float) deltaAnswers / correctAnswerAmount * 100));
 	}
+
+	/* Resets the current question to the first question and deselects all answers */
+	public void reset() {
+		currentIndex = 0;
+
+		for (Question question : questions) {
+			question.reset();
+		}
+	}
 }

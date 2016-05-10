@@ -47,12 +47,14 @@ public class Storage {
 
 	private static User activeUser = new User("Test");
 
+	/* Returns the current lesson's quiz.
+	 * If there is no current lesson, returns null. */
 	public static Quiz getCurrentQuiz() {
-		return currentQuiz;
+		return currentLesson != null ? currentLesson.getQuiz() : null;
 	}
 
 	public static Video getCurrentVideo() {
-		return currentLesson.getVideo();
+		return currentLesson != null ? currentLesson.getVideo() : null;
 	}
 
 	public static void setCurrentLesson(Lesson lesson) {

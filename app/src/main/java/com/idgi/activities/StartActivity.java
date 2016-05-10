@@ -28,15 +28,11 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		initializeDrawer();
 
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-
-		Firebase.setAndroidContext(this);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		FireDatabase.getInstance().initialize();
 	}
 
 	public void onStartButtonClick(View view) {
