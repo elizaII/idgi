@@ -119,6 +119,11 @@ public final class Database implements IDatabase {
 	}
 	public void addComment(Comment comment){
 		System.out.println(comment.getText());
-
 	}
+
+	//Does nothing
+	public void retrieveSchools() {}
+
+	//Does nothing
+	public void retrieveUsers() {}
 }

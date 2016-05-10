@@ -179,7 +179,7 @@ public class CreateLessonActivity extends AppCompatActivity {
             school.addSubject(subject);
         }
         if(newSchool){
-            database.addSchool(school);
+            database.pushSchool(school);
         }
         Storage.setCurrentLesson(lesson);
 

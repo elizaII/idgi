@@ -75,12 +75,13 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public List<Course> getCourses(String schoolName, String subjectName) {
+
 		List<Course> courseList;
 		if (getSchool(schoolName).getSubjects().size()>0){
 			return getSchool(schoolName).getSubject(subjectName).getCourses();
 		}
 		else {
-			courseList = Collections.emptyList();
+			courseList = new ArrayList<>();
 			return courseList;
 		}
 	}
@@ -130,7 +131,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void retrieveSchools() {
-		schools = Collections.emptyList();
+		schools = new ArrayList<>();
 
 		Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
 
@@ -149,7 +150,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void retrieveUsers() {
-		users = Collections.emptyList();
+		users = new ArrayList<>();
 
 		Firebase userRef = ref.child("users");
 

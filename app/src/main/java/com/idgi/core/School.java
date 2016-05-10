@@ -26,16 +26,13 @@ public class School implements Nameable {
 
 	public List<Subject> getSubjects() {
 		if (subjects == null)
-			subjects = Collections.emptyList();
+			subjects = new ArrayList<>();
 		
 		return subjects;
 	}
 
 	public void addSubject(Subject subject) {
-		if(subjects.equals(Collections.emptyList())){
-			subjects = new ArrayList<Subject>();
-		}
-		subjects.add(subject);
+		getSubjects().add(subject);
 	}
 
 	public Subject getSubject(String subjectName) {
