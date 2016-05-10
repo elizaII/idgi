@@ -41,6 +41,6 @@ public class Subject implements Nameable {
     }
 
     public boolean hasCourse(Course course) {
-        return Util.listContains(courses, course);
+        return courses.contains(course);
     }
 }

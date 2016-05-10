@@ -12,14 +12,6 @@ public class Util {
 		return null;
 	}
 
-	public static <T extends Nameable> boolean listContains(List<T> list, T nameable) {
-		for (T element : list)
-			if (nameable.equals(element))
-				return true;
-
-		return false;
-	}
-
 	private static final Predicate<Nameable> namePredicate = new Predicate<Nameable>() {
 
 		public boolean accepts(Nameable namedObject, Object... extras) {

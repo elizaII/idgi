@@ -190,7 +190,7 @@ public class CreateLessonActivity extends AppCompatActivity {
     }
 
     private boolean isNewSchool(School school) {
-        return Util.listContains(database.getSchools(), school);
+        return database.getSchools().contains(school);
     }
 
     public void setSchool(School school) {

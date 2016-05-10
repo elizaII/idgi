@@ -45,7 +45,7 @@ public class School implements Nameable {
 	}
 
 	public boolean hasSubject(Subject subject) {
-		return Util.listContains(subjects, subject);
+		return subjects.contains(subject);
 	}
 
 	public Subject getSubject(String subjectName) {

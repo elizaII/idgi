@@ -1,5 +1,6 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idgi.services.Database;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quiz implements IQuiz{
 
+	@JsonIgnore
 	private int currentIndex = 0;
 	
 	List<Question> questions;
@@ -47,6 +49,7 @@ public class Quiz implements IQuiz{
 		return questions.contains(question);
 	}
 
+	@JsonIgnore
 	public Question getCurrentQuestion() {
 		if (!isFinished())
 			return questions.get(currentIndex);
