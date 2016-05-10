@@ -4,5 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CourseInfoFragment">
 
+    <include layout="@layout/list_view_empty"
+             android:id="@+id/lesson_list_empty_view"/>
 
 </FrameLayout>

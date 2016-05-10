@@ -13,9 +13,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+<<<<<<< c0fc1f17b5e8f6939f3730598b77bbdb811da12c
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.StartActivity"
+=======
+        android:theme="@style/AppTheme"
+        android:name=".Application">
+
+
+        <activity android:name=".activities.StartActivity"
+>>>>>>> Modify CourseActivity to display alternative view if list is empty
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +65,13 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.LessonActivity"
+<<<<<<< c0fc1f17b5e8f6939f3730598b77bbdb811da12c
             android:label="@string/title_activity_lesson" />
+=======
+            android:label="@string/title_activity_lesson"
+            android:windowSoftInputMode="stateHidden"/>
+
+>>>>>>> Modify CourseActivity to display alternative view if list is empty
         <activity
             android:name=".activities.BrowseActivity"
             android:label="@string/title_activity_browse"

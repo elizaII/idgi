@@ -93,4 +93,10 @@
     <string name="content_lesson_leave_comment">Skriv en kommentar</string>
     <string name="content_lesson_post_comment">Lämna kommentar</string>
     <string name="content_lesson_no_lesson_found_title">N/A</string>
+
+    <!-- Empty list stuff -->
+    <string name="course_no_lessons">There are no lessons here yet.</string>
+    <string name="course_no_quizzes">There are no quizzes here yet.</string>
+    <string name="course_no_info">There is no info here yet.</string>
+
 </resources>
