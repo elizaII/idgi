@@ -44,15 +44,11 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         Lesson lesson = Storage.getCurrentLesson();
-        if(lesson != null)
-            toolbar.setTitle(lesson.getName());
-        else
-            toolbar.setTitle(getString(R.string.content_lesson_no_lesson_found_title));
 
-        initializeDrawer();
+        String title = lesson == null ? getString(R.string.content_lesson_no_lesson_found_title) : lesson.getName();
+
+        initializeWithTitle(title);
 
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
         pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);

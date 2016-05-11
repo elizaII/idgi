@@ -1,7 +1,6 @@
 package com.idgi.recycleViews.viewHolders;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
@@ -10,22 +9,29 @@ import com.idgi.core.Question;
 
 public class QuestionViewHolder extends ParentViewHolder {
 
-	private ImageView imgCorrectness;
+	private View background;
 	private TextView txtQuestion;
 
 	public QuestionViewHolder(View itemView) {
 		super(itemView);
 
-		txtQuestion = (TextView) itemView.findViewById(R.id.quiz_result_list_item_question_text);
-		imgCorrectness = (ImageView) itemView.findViewById(R.id.quiz_result_list_item_correctness_icon);
+		txtQuestion = (TextView) itemView.findViewById(R.id.quiz_result_question_text);
+		background = itemView.findViewById(R.id.quiz_result_listitem_background);
 	}
 
 	public void bind(Question question) {
+		boolean isCorrect = question.isCorrectlyAnswered();
+
 		txtQuestion.setText(question.getText());
-		imgCorrectness.setImageResource(getCorrectnessImage(question.isCorrectlyAnswered()));
+		txtQuestion.setTextColor(getTextColor(isCorrect));
+		background.setBackgroundResource(getBackground(isCorrect));
 	}
 
-	private int getCorrectnessImage(boolean correct) {
-		return correct ? R.drawable.ic_done : R.drawable.ic_red_cross;
+	private int getTextColor(boolean correct) {
+		return correct ? R.color.quizResultQuestionCorrectText : R.color.quizResultQuestionIncorrectText;
+	}
+
+	private int getBackground(boolean correct) {
+		return correct ? R.drawable.quiz_result_question_background_correct : R.drawable.quiz_result_question_background_incorrect;
 	}
 }

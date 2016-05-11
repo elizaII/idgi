@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Alternative colors
     <color name="colorPrimary">#B2DFDB</color>
     <color name="colorPrimaryDark">#4DB6AC</color>
     <color name="colorAccent">#FFD54F</color>
+    -->
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryDark">#0097A7</color>
+    <color name="colorAccent">#FFC107</color>
+
     <color name="colorButton">#DBDCDC</color>
     <color name="colorTextPrimary">#000000</color>
     <color name="colorTextSecondary">#FFFFFF</color>
@@ -24,5 +30,7 @@
         #4DB6AC teal
         #FFD740 amber
     -->
+    <color name="quizResultQuestionCorrectText">#1B5E20</color>
+    <color name="quizResultQuestionIncorrectText">#DD2C00</color>
 
 </resources>

@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.idgi.R;
@@ -69,37 +67,6 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 			int max = quiz.length();
 			String scoreText = String.format(Locale.ENGLISH, "%d/%d", score, max);
 			txtScore.setText(scoreText);
-		}
-
-		showStars();
-	}
-
-	private void showStars() {
-		LinearLayout starContainer = (LinearLayout) findViewById(R.id.result_quiz_star_container);
-
-		int emptyStar = R.drawable.ic_star_empty;
-		int filledStar = R.drawable.ic_star_filled;
-
-		int amount = quiz.length();
-		int correctAnswers = quiz.getCorrectAnswerAmount();
-		int incorrectAnswers = amount - correctAnswers;
-
-		for (int i = 0; i < amount; ++i) {
-			ImageView imageView = new ImageView(this);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT
-					);
-
-			params.setMargins(10, 0, 0, 0);
-			imageView.setLayoutParams(params);
-
-			if (i < incorrectAnswers)
-				imageView.setImageResource(emptyStar);
-			else
-				imageView.setImageResource(filledStar);
-
-			starContainer.addView(imageView);
 		}
 	}
 

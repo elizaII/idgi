@@ -72,6 +72,7 @@
     <string name="title_activity_create_account">Skapa konto</string>
     <string name="title_activity_account">AccountActivity</string>
     <string name="title_activity_profile">Min profil</string>
+    <string name="title_activity_statistics">Statistik</string>
     <string name="title_activity_quiz">Quiz</string>
     <string name="title_activity_school_list">Skolor</string>
     <string name="title_activity_subject_list">Ämnen</string>
@@ -90,6 +91,7 @@
     <string name="statistics_completed_courses">Avklarade kurser</string>
     <string name="statistics_ongoing_courses">Pågående kurser</string>
     <string name="statistics_completed_quiz">Genomförda quiz</string>
+    <string name="statistics_comment_amount">Kommenterar</string>
     <string name="statistics_seen_videos">Sedda videor</string>
     <string name="statistics_hats">Hattar</string>
     <string name="statistics_points">Poäng</string>

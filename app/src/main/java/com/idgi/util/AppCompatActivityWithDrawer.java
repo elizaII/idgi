@@ -23,7 +23,9 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 	}
 
 	protected void initializeDrawer() {
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		if (toolbar == null)
+			toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 		setSupportActionBar(toolbar);
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -35,6 +37,12 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		if (navigationView != null)
 			navigationView.setNavigationItemSelectedListener(this);
+	}
+
+	protected void initializeWithTitle(String title) {
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setTitle(title);
+		initializeDrawer();
 	}
 
 	@Override
