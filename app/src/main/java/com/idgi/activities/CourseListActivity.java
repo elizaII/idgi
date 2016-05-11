@@ -57,4 +57,5 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
         recycler.setLayoutManager(manager);
 
     }
+
 }

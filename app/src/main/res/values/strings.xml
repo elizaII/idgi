@@ -61,6 +61,8 @@
     <!-- For Lists -->
     <string name="add_to_my_courses">Lägg till i mina kurser</string>
     <string name="added_to_my_courses">Ta bort från mina kurser</string>
+    <string name="log_in_message">logga in för denna funktion</string>
+
 
     <!-- For StartActivity -->
     <string name="start_btn_find_course">Hitta kurser</string>

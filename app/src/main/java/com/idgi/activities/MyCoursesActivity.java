@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
 import com.idgi.core.Course;
+import com.idgi.recycleViews.adapters.CourseListAdapter;
 import com.idgi.recycleViews.adapters.MyCoursesAdapter;
 import com.idgi.util.Storage;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class MyCoursesActivity extends AppCompatActivity {
 
-    private MyCoursesAdapter adapter;
+    private CourseListAdapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager manager;
     private ArrayList<Course> data;
@@ -31,13 +32,8 @@ public class MyCoursesActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_courses_list_recycler_view);
         recyclerView.setLayoutManager(manager);
 
-        adapter = new MyCoursesAdapter(this, this.data);
+        adapter = new CourseListAdapter(this, this.data);
         recyclerView.setAdapter(adapter);
-
-       // initiateList();
-
     }
-    private void initiateList() {
 
-    }
 }

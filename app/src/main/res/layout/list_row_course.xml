@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:text="Sample"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/my_courses_button"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/my_courses_button"
+        android:layout_toStartOf="@+id/my_courses_button" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
