@@ -3,6 +3,7 @@ package com.idgi.core;
 import com.idgi.util.Nameable;
 import com.idgi.util.Util;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Subject implements Nameable {
     private String name;
 
-    private List<Course> courses;
+    private ArrayList<Course> courses;
 
     private Subject() {}
 
@@ -23,7 +24,7 @@ public class Subject implements Nameable {
         return name;
     }
 
-    public List<Course> getCourses() {
+    public ArrayList<Course> getCourses() {
         if (courses == null) {
             courses = new ArrayList<>();
         }

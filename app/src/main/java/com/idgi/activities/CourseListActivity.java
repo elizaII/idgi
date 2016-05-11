@@ -14,6 +14,7 @@ import com.idgi.util.AppCompatActivityWithDrawer;
 import com.idgi.recycleViews.adapters.CourseListAdapter;
 import com.idgi.util.Storage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private List<Course> courses = new ArrayList<>();
+    private ArrayList<Course> courses = new ArrayList<>();
 
 
     @Override
@@ -49,7 +50,7 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
         Collections.sort(courseNames);
 
         manager = new LinearLayoutManager(this);
-        adapter = new CourseListAdapter(this, courseNames);
+        adapter = new CourseListAdapter(this, courses);
 
         recycler = (RecyclerView) findViewById(R.id.course_list_recycler_view);
         recycler.setAdapter(adapter);

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import com.idgi.activities.BrowseActivity;
 import com.idgi.activities.CreateAccountActivity;
 import com.idgi.activities.LoginActivity;
+import com.idgi.activities.MyCoursesActivity;
 import com.idgi.activities.ProfileActivity;
 import com.idgi.activities.QuizActivity;
 import com.idgi.R;
@@ -32,7 +33,7 @@ public class Navigation {
                 activityClass = StatisticsActivity.class;
                 break;
             case R.id.nav_my_courses:
-                activityClass = ProfileActivity.class;
+                activityClass = MyCoursesActivity.class;
                 break;
             case R.id.nav_quiz:
                 Intent intent = new Intent(activity.getApplicationContext(), QuizActivity.class);

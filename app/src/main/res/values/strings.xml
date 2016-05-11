@@ -58,6 +58,10 @@
     <string name="browse_btn_school">Sök via skolor</string>
     <string name="browse_text_find">Hitta kurser</string>
 
+    <!-- For Lists -->
+    <string name="add_to_my_courses">Lägg till i mina kurser</string>
+    <string name="added_to_my_courses">Ta bort från mina kurser</string>
+
     <!-- For StartActivity -->
     <string name="start_btn_find_course">Hitta kurser</string>
     <string name="start_btn_log_in">Logga in</string>

@@ -45,7 +45,11 @@ public class Storage {
 		Storage.activeUser = activeUser;
 	}
 
-	private static User activeUser = new User("Test");
+	private static User activeUser;
+
+	public static boolean hasActiveUser(){
+		return activeUser!=null;
+	}
 
 	/* Returns the current lesson's quiz.
 	 * If there is no current lesson, returns null. */
