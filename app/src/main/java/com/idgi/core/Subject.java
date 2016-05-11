@@ -35,12 +35,24 @@ public class Subject implements Nameable {
     }
 
     public void addCourse(Course course) {
-        System.out.println(course.getName());
-
-        getCourses().add(course);
+        if (!hasCourse(course))
+            getCourses().add(course);
     }
 
     public boolean hasCourse(Course course) {
         return courses.contains(course);
+    }
+
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if (object.getClass() != Subject.class) return false;
+
+        Subject that = (Subject) object;
+        return this.name.equals(that.name) && this.courses.equals(that.courses);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

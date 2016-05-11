@@ -41,7 +41,8 @@ public class School implements Nameable {
 	}
 
 	public void addSubject(Subject subject) {
-		getSubjects().add(subject);
+		if (!hasSubject(subject))
+			getSubjects().add(subject);
 	}
 
 	public boolean hasSubject(Subject subject) {
@@ -54,7 +55,7 @@ public class School implements Nameable {
 
 	public boolean equals(Object object) {
 		if (object == null) return false;
-		if (object.getClass() != this.getClass()) return false;
+		if (object.getClass() != School.class) return false;
 
 		School that = (School) object;
 		if (this.getKey() != null)

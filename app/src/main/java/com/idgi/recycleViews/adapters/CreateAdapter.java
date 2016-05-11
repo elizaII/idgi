@@ -8,28 +8,11 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.CreateDialog;
+import com.idgi.util.Type;
 
 import java.util.ArrayList;
 
 public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder> {
-
-    public enum Type {
-        SCHOOL, SUBJECT, COURSE;
-
-        /* Returns a readable version of the type: School, Subject or Course */
-        public String toString() {
-            switch (this) {
-                case SCHOOL:
-                    return "skola";
-                case SUBJECT:
-                    return "ämne";
-                case COURSE:
-                    return "kurs";
-            }
-
-            return null;
-        }
-    }
 
     private ArrayList<String> data;
     private LayoutInflater inflater;

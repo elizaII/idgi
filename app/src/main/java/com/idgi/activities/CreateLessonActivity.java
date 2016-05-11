@@ -17,9 +17,9 @@ import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.Video;
-import com.idgi.recycleViews.adapters.CreateAdapter;
 import com.idgi.services.FireDatabase;
 import com.idgi.util.Storage;
+import com.idgi.util.Type;
 import com.idgi.util.Util;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class CreateLessonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
 
-        questionList=new ArrayList<>();
+        questionList = new ArrayList<>();
 
         txtLessonName = (EditText) findViewById(R.id.lesson_name_editText);
         txtYouTubeUrl = (EditText) findViewById(R.id.youtube_url_editText);
@@ -52,51 +52,23 @@ public class CreateLessonActivity extends AppCompatActivity {
         btnAddQuiz = (Button) findViewById(R.id.add_quiz_button);
         btnCreateLesson = (Button) findViewById(R.id.create_lesson_button);
 
-
-        refreshLists();
-    }
-
-    public void refreshLists() {
         schoolNames = new ArrayList<>();
-        for (School school : database.getSchools()){
+        for (School school : database.getSchools())
             schoolNames.add(school.getName());
-            System.out.println(school.getName());
-        }
-
-
-        if(!btnAddSchool.getText().toString().equals("Lägg till skola")){
-        subjectNames = new ArrayList<>();
-            if(school != null) {
-                for (com.idgi.core.Subject subject : database.getSubjects(btnAddSchool.getText().toString())) {
-                    subjectNames.add(subject.getName());
-                }
-            }
-        }
-
-
-        if(!btnAddSubject.getText().toString().equals("Lägg till ämne")){
-        courseNames = new ArrayList<>();
-            if(subject != null) {
-                for (Course course : database.getCourses(btnAddSchool.getText().toString(), btnAddSubject.getText().toString())) {
-                    courseNames.add(course.getName());
-                }
-            }
-        }
-
-        }
+    }
 
     public void onClick(View v) {
         CreateDialog dialog = null;
 
         switch (v.getId()) {
             case R.id.add_school_button:
-                dialog = new CreateDialog(this, CreateAdapter.Type.SCHOOL, schoolNames);
+                dialog = new CreateDialog(this, Type.SCHOOL, schoolNames);
                 break;
             case R.id.add_subject_button:
-                dialog = new CreateDialog(this, CreateAdapter.Type.SUBJECT, subjectNames);
+                dialog = new CreateDialog(this, Type.SUBJECT, subjectNames);
                 break;
             case R.id.add_course_button:
-                dialog = new CreateDialog(this, CreateAdapter.Type.COURSE, courseNames);
+                dialog = new CreateDialog(this, Type.COURSE, courseNames);
                 break;
             default:
                 break;
@@ -112,25 +84,25 @@ public class CreateLessonActivity extends AppCompatActivity {
         btnText.setText(text);
     }
 
-    public void selectItem(String text, CreateAdapter.Type type) {
+    public void selectItem(String name, Type type) {
 
-        if (text.length() > 0) {
+        if (name.length() > 0) {
             Button btnEnable = null;
             Button btnText = null;
 
             switch (type) {
                 case SCHOOL:
-                    setSchool(new School(text));
+                    updateSelectedSchool(name);
                     btnText = btnAddSchool;
                     btnEnable = btnAddSubject;
                     break;
                 case SUBJECT:
-                    setSubject(new Subject(text));
+                    updateSelectedSubject(name);
                     btnText = btnAddSubject;
                     btnEnable = btnAddCourse;
                     break;
                 case COURSE:
-                    setCourse(new Course(text));
+                    updateSelectedCourse(name);
                     btnText = btnAddCourse;
                     btnEnable = btnAddQuiz;
                     enableViews(txtLessonName, txtYouTubeUrl, btnCreateLesson);
@@ -138,10 +110,45 @@ public class CreateLessonActivity extends AppCompatActivity {
             }
 
             if (btnEnable != null && btnText != null)
-                setEnabledAndText(btnEnable, btnText, text);
-
-            refreshLists();
+                setEnabledAndText(btnEnable, btnText, name);
         }
+    }
+
+    private void updateSelectedSchool(String schoolName) {
+        School existingSchool = Util.findByName(database.getSchools(), schoolName);
+        School school = existingSchool == null ? new School(schoolName) : existingSchool;
+        setSchool(school);
+    }
+
+    private void updateSelectedSubject(String subjectName) {
+        if (school != null) {
+            Subject existingSubject = Util.findByName(school.getSubjects(), subjectName);
+            Subject subject = existingSubject == null ? new Subject(subjectName) : existingSubject;
+            setSubject(subject);
+        }
+    }
+
+    private void updateSelectedCourse(String courseName) {
+        if (subject != null) {
+            Course existingCourse = Util.findByName(subject.getCourses(), courseName);
+            Course course = existingCourse == null ? new Course(courseName) : existingCourse;
+            setCourse(course);
+        }
+    }
+
+    private void refreshSubjects() {
+        subjectNames = new ArrayList<>();
+
+        for (Subject subject : school.getSubjects()) {
+            subjectNames.add(subject.getName());
+        }
+    }
+
+    private void refreshCourses() {
+        courseNames = new ArrayList<>();
+
+        for (Course course : subject.getCourses())
+            courseNames.add(course.getName());
     }
 
     private void enableViews(View... views) {
@@ -166,27 +173,28 @@ public class CreateLessonActivity extends AppCompatActivity {
 
     public void onCreateLessonButtonClick(View view){
 
+        String videoUrl = txtYouTubeUrl.getText().toString();
         String lessonName = txtLessonName.getText().toString();
-        Video video = Video.from(txtYouTubeUrl.getText().toString());
 
+        Video video = Video.from(videoUrl);
         Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(quiz);
         course.addLesson(lesson);
 
-        if (!school.hasSubject(subject))
-            school.addSubject(subject);
+        pushLesson(lesson);
+        Storage.setCurrentLesson(lesson);
 
-        if (!subject.hasCourse(course))
-            subject.addCourse(course);
+        gotoLessonActivity();
+    }
 
+    private void gotoLessonActivity() {
+        startActivity(new Intent(CreateLessonActivity.this, LessonActivity.class));
+    }
+
+    private void pushLesson(Lesson lesson) {
         if (!isNewSchool(school))
             database.pushLessonToSchool(lesson, school.getKey(), subject.getName(), course.getName());
         else
             database.pushSchool(school);
-
-
-        Storage.setCurrentLesson(lesson);
-
-        startActivity(new Intent(CreateLessonActivity.this, LessonActivity.class));
     }
 
     private boolean isNewSchool(School school) {
@@ -195,14 +203,63 @@ public class CreateLessonActivity extends AppCompatActivity {
 
     public void setSchool(School school) {
         this.school = school;
+
+        clearChildData(Type.SCHOOL);
+
+        refreshSubjects();
     }
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+
+        if (school != null)
+            school.addSubject(subject);
+
+        clearChildData(Type.SUBJECT);
+
+        refreshSubjects();
+        refreshCourses();
     }
 
     public void setCourse(Course course) {
         this.course = course;
+
+        if (subject != null)
+            subject.addCourse(course);
+
+        clearChildData(Type.COURSE);
+        refreshCourses();
+    }
+
+    private void clearChildData(Type type) {
+        //No break is intentional, we want cascading behavior
+        switch(type) {
+            case SCHOOL:
+                clearSubject();
+            case SUBJECT:
+                clearCourse();
+            case COURSE:
+                clearQuiz();
+        }
+    }
+
+    private void clearQuiz() {
+        questionList.clear();
+        quiz = null;
+        btnAddQuiz.setText("Lägg till quiz");
+    }
+
+    private void clearCourse() {
+        course = null;
+        btnAddCourse.setText("Lägg till kurs");
+    }
+
+    private void clearSubject() {
+        if (subject != null) {
+            subject = null;
+            courseNames.clear();
+            btnAddSubject.setText("Lägg till ämne");
+        }
     }
 
 }

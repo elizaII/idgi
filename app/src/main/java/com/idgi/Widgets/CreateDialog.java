@@ -12,28 +12,23 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
-import com.idgi.core.Course;
-import com.idgi.core.School;
-import com.idgi.core.Subject;
 import com.idgi.recycleViews.adapters.CreateAdapter;
+import com.idgi.util.Type;
 
 import java.util.ArrayList;
 
-public class CreateDialog extends Dialog implements
-            View.OnClickListener {
+public class CreateDialog extends Dialog {
 
     private CreateLessonActivity activity;
     private Button btnCreateNew;
     private EditText txtCreateNew;
-    private CreateAdapter.Type type;
+    private Type type;
     private TextView title;
     private CreateAdapter adapter;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager manager;
     private ArrayList<String> data;
 
 
-        public CreateDialog(CreateLessonActivity activity, CreateAdapter.Type type, ArrayList<String> data) {
+        public CreateDialog(CreateLessonActivity activity, Type type, ArrayList<String> data) {
             super(activity);
 
             this.activity = activity;
@@ -52,40 +47,27 @@ public class CreateDialog extends Dialog implements
             title = (TextView) findViewById(R.id.title);
             title.setText("välj " + type);
             txtCreateNew.setHint("skriv namn för att skapa " + type);
-            btnCreateNew.setOnClickListener(this);
+            btnCreateNew.setOnClickListener(onCreateClick);
 
-            manager = new LinearLayoutManager(activity);
-            recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
-            recyclerView.setLayoutManager(manager);
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
+            recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
             adapter = new CreateAdapter(this, this.data, type);
             recyclerView.setAdapter(adapter);
 
         }
 
-        @Override
+    /* Triggers when you click an element in the list, like a School or Subject. */
+    private final View.OnClickListener onCreateClick = new View.OnClickListener() {
         public void onClick(View view) {
-            if (view.getId() == R.id.send_reply_button) {
-                String name = txtCreateNew.getText().toString();
-                switch(type) {
-                    case SCHOOL:
-                        activity.setSchool(new School(name));
-                        break;
-                    case SUBJECT:
-                        activity.setSubject(new Subject(name));
-                        break;
-                    case COURSE:
-                        activity.setCourse(new Course(name));
-                    default:
-                        break;
-                }
-            }
+            String name = txtCreateNew.getText().toString();
 
-            selectItem(txtCreateNew.getText().toString(), type);
+            selectItem(name, type);
             dismiss();
         }
+    };
 
-    public void selectItem(String text, CreateAdapter.Type type) {
+    public void selectItem(String text, Type type) {
         activity.selectItem(text, type);
         dismiss();
     }
