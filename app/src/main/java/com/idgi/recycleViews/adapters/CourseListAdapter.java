@@ -51,6 +51,11 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
             holder.my_courses_button.setText(R.string.log_in_message);
             holder.my_courses_button.setEnabled(false);
         }
+/*        if(data.get(position).getDescription().length()>0){
+            holder.courseDescriptionTextView.setText(data.get(position).getDescription());
+        }else{*/
+            holder.courseDescriptionTextView.setText(R.string.no_description);
+  //      }
     }
 
 
@@ -65,12 +70,17 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         public Button my_courses_button;
         protected boolean isAddedToMyCourses = false;
         private CourseListAdapter adapter;
+        public TextView courseInformationTextView;
+        public TextView courseDescriptionTextView;
+
 
         public ViewHolder(View v, CourseListAdapter adapter){
             super(v);
             v.setOnClickListener(this);
             this.adapter=adapter;
             courseTextView =(TextView) v.findViewById(R.id.rowTextView);
+            courseDescriptionTextView =(TextView) v.findViewById(R.id.courseDescriptionTextView);
+            courseInformationTextView =(TextView) v.findViewById(R.id.courseInformationTextView);
             my_courses_button = (Button) v.findViewById(R.id.my_courses_button);
             my_courses_button.setOnClickListener(this);
             courseTextView.setOnClickListener(this);

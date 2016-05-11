@@ -111,5 +111,6 @@
     <string name="course_no_lessons">There are no lessons here yet.</string>
     <string name="course_no_quizzes">There are no quizzes here yet.</string>
     <string name="course_no_info">There is no info here yet.</string>
+    <string name="no_description">Det finns ingen beskrivning för det här objektet.</string>
 
 </resources>

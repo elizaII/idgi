@@ -1,5 +1,6 @@
 package com.idgi.core;
 
+import com.idgi.R;
 import com.idgi.util.Nameable;
 import com.idgi.util.Util;
 
@@ -10,12 +11,18 @@ import java.util.List;
 public class Course implements Nameable {
 	private String name;
 	private List<Lesson> lessons;
+	private String description;
+	private String parentSubject;
+	private String parentSchool;
 
 	private Course() {}
 
 	public Course(String name) {
 		this.name = name;
 		lessons = new ArrayList<>();
+		this.description= "";
+		this.parentSchool="no school";
+		this.parentSubject="no subject";
 	}
 
 	public void addLesson(Lesson lesson) {
@@ -36,5 +43,30 @@ public class Course implements Nameable {
 
 		return lessons;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getParentSubject() {
+		return parentSubject;
+	}
+
+	public void setParentSubject(String parentSubject) {
+		this.parentSubject = parentSubject;
+	}
+
+	public String getParentSchool() {
+		return parentSchool;
+	}
+
+	public void setParentSchool(String parentSchool) {
+		this.parentSchool = parentSchool;
+	}
+
+
 }
