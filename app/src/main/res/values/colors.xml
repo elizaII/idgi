@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8BC34A</color>
-    <color name="colorPrimaryDark">#689f38</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#B2DFDB</color>
+    <color name="colorPrimaryDark">#4DB6AC</color>
+    <color name="colorAccent">#FFD54F</color>
     <color name="colorButton">#DBDCDC</color>
+    <color name="colorTextPrimary">#000000</color>
+    <color name="colorTextSecondary">#FFFFFF</color>
+    <color name="colorTextComplementary">#FFD740</color>
 
     <!-- AnswerButton colors -->
     <color name="colorAnswerButton">#FCE4EC </color>
@@ -15,7 +18,11 @@
     <color name="colorAnswerButtonBorder">#E91E63</color>
 
     <!-- Quiz activity colors -->
-    <color name="colorQuizQuestionBackground">#E91E63</color>
+    <color name="colorQuizQuestionBackground">#4DB6AC</color>
     <color name="colorQuizQuestionText">#FFFFFF</color>
+    <!-- hexcodes
+        #4DB6AC teal
+        #FFD740 amber
+    -->
 
 </resources>
