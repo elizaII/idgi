@@ -7,6 +7,7 @@ import com.firebase.client.ValueEventListener;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
@@ -26,7 +27,7 @@ public class FireDatabase implements IDatabase {
 	private List<School> schools;
 	private List<User> users;
 
-	public Quiz getQuiz(String key) {
+	public IQuiz getQuiz(String key) {
 		return null;
 	}
 

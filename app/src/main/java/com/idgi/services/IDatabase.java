@@ -2,6 +2,7 @@ package com.idgi.services;
 
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public interface IDatabase {
 
-	Quiz getQuiz(String key);
+	IQuiz getQuiz(String key);
 	void retrieveSchools();
 	List<Subject> getSubjects(School school);
 	List<Lesson> getLessons(Course course);

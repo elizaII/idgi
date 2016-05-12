@@ -30,7 +30,7 @@ public class Lesson implements Nameable {
 		return this;
 	}
 
-	public Lesson withQuiz(Quiz quiz) {
+	public Lesson withQuiz(IQuiz quiz) {
 		setQuiz(quiz);
 		return this;
 	}

@@ -3,11 +3,13 @@ package com.idgi.services;
 import com.idgi.core.Answer;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
+import com.idgi.core.TimedQuiz;
 import com.idgi.core.Video;
 import com.idgi.session.SessionData;
 
@@ -21,12 +23,12 @@ public final class MockData implements IDatabase {
 	private static MockData instance = null;
 
 	// TODO Implement this properly
-	public Quiz getQuiz(String key) {
+	public IQuiz getQuiz(String key) {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
 		question.addAnswers(Answer.incorrect("8"), Answer.correct("10"), Answer.incorrect("16"), Answer.incorrect("9"));
 
 
-		Quiz quiz = new Quiz();
+		IQuiz quiz = new TimedQuiz(new Quiz(), 5000);
 		quiz.addQuestion(question);
 
 		question = new Question("Is this the last question?");
