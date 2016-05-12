@@ -12,6 +12,9 @@ public class Quiz implements IQuiz{
 
 	@JsonIgnore
 	private int currentIndex = 0;
+
+	//For JSon deserialization
+	private String type = "quiz";
 	
 	List<Question> questions;
 
@@ -132,5 +135,15 @@ public class Quiz implements IQuiz{
 		for (Question question : questions) {
 			question.reset();
 		}
+	}
+
+	//Do not use; this is for JSon deserialization
+	public String getType() {
+		return type;
+	}
+
+	//Do not use; This is for JSon deserialization
+	public void setType(String type) {
+		this.type = type;
 	}
 }

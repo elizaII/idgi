@@ -69,4 +69,9 @@ public abstract class QuizDecorator implements IQuiz {
     public int getPointsEarned() {
         return this.decoratedQuiz.getPointsEarned();
     }
+
+    @Override
+    public void reset() {
+        decoratedQuiz.reset();
+    }
 }

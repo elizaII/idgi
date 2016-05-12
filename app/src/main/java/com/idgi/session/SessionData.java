@@ -1,6 +1,7 @@
 package com.idgi.session;
 
 import com.idgi.core.Course;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
@@ -43,7 +44,7 @@ public class SessionData {
 
 	/* Returns the current lesson's quiz.
 	 * If there is no current lesson, returns null. */
-	public static Quiz getCurrentQuiz() {
+	public static IQuiz getCurrentQuiz() {
 		return currentLesson != null ? currentLesson.getQuiz() : null;
 	}
 

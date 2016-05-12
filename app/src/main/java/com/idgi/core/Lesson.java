@@ -8,7 +8,7 @@ public class Lesson implements Nameable {
 	private String id;
 	private Video video;
 	private Discussion discussion;
-	private Quiz quiz;
+	private IQuiz quiz;
 
 	private Lesson() {}
 	
@@ -35,11 +35,11 @@ public class Lesson implements Nameable {
 		return this;
 	}
 	
-	public void setQuiz(Quiz quiz) {
+	public void setQuiz(IQuiz quiz) {
 		this.quiz = quiz;
 	}
 
-	public Quiz getQuiz() {
+	public IQuiz getQuiz() {
 		return quiz;
 	}
 
@@ -53,5 +53,13 @@ public class Lesson implements Nameable {
 
 	public String getName() {
 		return name;
+	}
+
+	public Discussion getDiscussion() {
+		return this.discussion;
+	}
+
+	/* Is likely to not have functionality. Here to please Firebase */
+	public void setDiscussion(Discussion discussion) {
 	}
 }

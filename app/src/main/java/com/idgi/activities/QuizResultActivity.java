@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Quiz;
 import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.core.User;
 import com.idgi.session.SessionData;
 import com.idgi.activities.recycleViews.adapters.QuestionAdapter;
 
@@ -18,7 +20,7 @@ import java.util.Locale;
 
 public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
-	private Quiz quiz;
+	private IQuiz quiz;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,12 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
 		populateQuestionList();
 
-		SessionData.getLoggedInUser().givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
+		awardPoints();
+	}
+
+	private void awardPoints() {
+		if (SessionData.hasLoggedInUser())
+			SessionData.getLoggedInUser().givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 	}
 
 	private void initiateButtons() {

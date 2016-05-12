@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.core.IQuiz;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
 
-	private Quiz quiz;
+	private IQuiz quiz;
 	private TextView txtQuestion;
 	private LinearLayout buttonContainer;
 	private Button btnNext;

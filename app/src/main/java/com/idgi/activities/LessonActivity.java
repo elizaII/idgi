@@ -37,6 +37,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     private MockData database = MockData.getInstance();
     private TextView commentField;
     private ProgressBar pointProgressBar;
+    private Lesson lesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +50,24 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
         initializeWithTitle(title);
 
-        if (SessionData.hasLoggedInUser()) {
-            pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
-            pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
-            pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
-        }
+        if (SessionData.hasLoggedInUser())
+            initializePointsBar();
+    }
 
-        commentList = database.getComments(null);
-        ArrayList<String> commentText = new ArrayList<>();
-
-        manager = new LinearLayoutManager(this);
+    private void initializeCommentView() {
+        commentList = lesson.getDiscussion().getComments();
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
-        recycler.setLayoutManager(manager);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        commentField = (TextView) findViewById(R.id.commentField);
         adapter = new ReplyAdapter(this, commentList);
         recycler.setAdapter(adapter);
+    }
+
+    private void initializePointsBar() {
+        pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
+        pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
+        pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
     }
 
 

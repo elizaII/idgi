@@ -1,7 +1,18 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.List;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Quiz.class, name = "quiz"),
+        @JsonSubTypes.Type(value = TimedQuiz.class, name = "timedQuiz")
+})
 public interface IQuiz {
 
     String getID();
@@ -13,6 +24,8 @@ public interface IQuiz {
     void addQuestions(List<Question> questions);
 
     void nextQuestion();
+
+    void reset();
 
     Question getCurrentQuestion();
 

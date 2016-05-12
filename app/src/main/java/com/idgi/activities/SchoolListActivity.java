@@ -40,6 +40,4 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
     }
-
-
 }

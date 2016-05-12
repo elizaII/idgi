@@ -24,4 +24,8 @@ public class Discussion {
 	public boolean isDisabled() {
 		return disabled;
 	}
+
+	public List<Comment> getComments() {
+		return this.comments;
+	}
 }

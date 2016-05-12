@@ -8,6 +8,8 @@ public class TimedQuiz extends QuizDecorator {
     private int time;
     private int remainingTime;
 
+    private String type = "timedQuiz";
+
     public TimedQuiz(IQuiz decoratedQuiz, int time){
         super(decoratedQuiz);
         time = this.time;
