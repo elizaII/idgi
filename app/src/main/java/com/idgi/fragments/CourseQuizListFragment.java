@@ -38,7 +38,7 @@ public class CourseQuizListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_course_quiz_list, container, false);
 
         ArrayList<String> quizIds = new ArrayList<>();
 
