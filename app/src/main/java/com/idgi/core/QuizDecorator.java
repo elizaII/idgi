@@ -5,6 +5,7 @@ import java.util.List;
 public abstract class QuizDecorator implements IQuiz {
     protected IQuiz decoratedQuiz;
 
+    public QuizDecorator(){}
     public QuizDecorator(IQuiz decoratedQuiz) {
         this.decoratedQuiz = decoratedQuiz;
     }

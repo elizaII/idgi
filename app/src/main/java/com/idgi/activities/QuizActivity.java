@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.IQuiz;
+import com.idgi.core.TimedQuiz;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
@@ -30,6 +33,7 @@ public class QuizActivity extends AppCompatActivity {
 	private LinearLayout buttonContainer;
 	private Button btnNext;
 	private AnswerButton[] answerButtons;
+    private ProgressBar timeProgressBar;
 
 	private boolean isInTransition = false;
 
@@ -37,6 +41,8 @@ public class QuizActivity extends AppCompatActivity {
 	private boolean leftActivity = false;
 
 	private static final int BUTTONS_PER_ROW = 2;
+
+    private final String ACTIVITY_TAG ="QUIZ_ACTIVITY";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +53,26 @@ public class QuizActivity extends AppCompatActivity {
 		quiz = SessionData.getCurrentQuiz();
 		if (quiz != null) {
 			quiz.reset();
-
 			initializeNextButton();
 			initializeQuestionView();
-
+			if(quiz instanceof TimedQuiz){
+				Log.d(ACTIVITY_TAG, "Is timed quiz");
+				initializeTimeBar((TimedQuiz) quiz);
+			} else {
+				Log.d(ACTIVITY_TAG, "Is not timed quiz");
+			}
 			createAnswerButtons(quiz.getCurrentQuestion());
 		} else {
 			finish();
 		}
 	}
+
+	private void initializeTimeBar(TimedQuiz timedQuiz) {
+        timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
+        Log.d(ACTIVITY_TAG, "Timed quiz's time: " + timedQuiz.getTime());
+        timeProgressBar.setMax(timedQuiz.getTime());
+        timeProgressBar.setProgress(1000);
+    }
 
 	private void initializeNextButton() {
 		btnNext = (Button) findViewById(R.id.quiz_btn_next_question);

@@ -1,16 +1,29 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TimedQuiz extends QuizDecorator {
 
-    private Quiz quiz;
     private int time;
     private int remainingTime;
 
     private String type = "timedQuiz";
 
-    public TimedQuiz(IQuiz decoratedQuiz, int time){
+    //Dummy constructor for Json because it can't provide arguments
+    private TimedQuiz(){
+        super();
+    }
+
+    /**
+     * Creates a quiz with a timer
+     * @param decoratedQuiz The normal quiz that doesn't have a set time
+     * @param time The time for the quiz in milliseconds
+     */
+    public TimedQuiz(Quiz decoratedQuiz, int time){
         super(decoratedQuiz);
         time = this.time;
     }

@@ -27,11 +27,14 @@ public final class MockData implements IDatabase {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
 		question.addAnswers(Answer.incorrect("8"), Answer.correct("10"), Answer.incorrect("16"), Answer.incorrect("9"));
 
-
-		IQuiz quiz = new TimedQuiz(new Quiz(), 5000);
+		TimedQuiz quiz = new TimedQuiz(new Quiz(), 5000);
+		//Since Json can't recognise parameters we have to manually set
+		//the time after creating the TimedQuiz too
+		//Todo... better solution for Json's unrecognising of properties
+		quiz.setTime(5000);
 		quiz.addQuestion(question);
 
-		question = new Question("Is this the last question?");
+		question = new Question("Is this the last one?");
 		question.addAnswers(Answer.correct("Yes"), Answer.incorrect("No"));
 
 		quiz.addQuestion(question);
