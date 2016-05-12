@@ -1,6 +1,5 @@
 package com.idgi.Widgets;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +10,8 @@ import android.widget.EditText;
 import com.idgi.activities.LessonActivity;
 import com.idgi.R;
 import com.idgi.core.Comment;
-import com.idgi.core.Lesson;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
-/**
- * Created by Allex on 2016-05-08.
- */
 public class CommentReplyDialog extends Dialog implements
             android.view.View.OnClickListener {
 
@@ -29,7 +24,7 @@ public class CommentReplyDialog extends Dialog implements
         public CommentReplyDialog(LessonActivity a, Comment comment) {
             super(a);
             // TODO Auto-generated constructor stub
-            this.c = (LessonActivity)a;
+            this.c = a;
             this.comment = comment;
         }
 
@@ -49,7 +44,7 @@ public class CommentReplyDialog extends Dialog implements
             switch (v.getId()) {
                 case R.id.send_reply_button:
                     if (reply_field.getText().toString().length() !=0) {
-                        comment.addReply(new Comment(reply_field.getText().toString(), Storage.getActiveUser()));
+                        comment.addReply(new Comment(reply_field.getText().toString(), SessionData.getLoggedInUser()));
                         c.updateComments();
                     }
                     break;

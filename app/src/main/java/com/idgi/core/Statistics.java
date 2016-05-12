@@ -16,7 +16,7 @@ public class Statistics {
 
 	private int totalPoints;
 
-	private HashMap<Integer, Integer> quizPoints = new HashMap<>();
+	private HashMap<String, Integer> quizPoints = new HashMap<>();
 	private HashMap<String, Integer> videoPoints = new HashMap<>();
 
 	private HashMap<Property, Integer> propertyMap = new HashMap<>();
@@ -43,7 +43,7 @@ public class Statistics {
 	}
 
 	//Updates the score for a quiz. If totalPoints are a new best score, updates user's total totalPoints.
-	public void updateQuizPoints(int quizID, int newScore) {
+	public void updateQuizPoints(String quizID, int newScore) {
 		Integer oldScore = quizPoints.get(quizID);
 
 		if (oldScore == null) {

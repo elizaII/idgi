@@ -5,20 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
 import com.idgi.core.Lesson;
-import com.idgi.services.Database;
-import com.idgi.recycleViews.adapters.LessonListAdapter;
-import com.idgi.util.Storage;
+import com.idgi.services.MockData;
+import com.idgi.activities.recycleViews.adapters.LessonListAdapter;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +28,7 @@ public class CourseLessonListFragment extends Fragment {
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerManager;
 
-    private Database database = Database.getInstance();
+    private MockData database = MockData.getInstance();
 
     private List<Lesson> lessons;
 
@@ -51,7 +48,7 @@ public class CourseLessonListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
 
         ArrayList<String> lessonNames = new ArrayList<>();
-        lessons = Storage.getCurrentCourse().getLessons();
+        lessons = SessionData.getCurrentCourse().getLessons();
 
         for(Lesson lesson : lessons)
             lessonNames.add(lesson.getName());

@@ -1,7 +1,6 @@
 package com.idgi.core;
 
 import com.idgi.util.Nameable;
-import com.idgi.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class School implements Nameable {
 	}
 
 	public Subject getSubject(String subjectName) {
-		return Util.findByName(subjects, subjectName);
+		return ModelUtility.findByName(subjects, subjectName);
 	}
 
 	public boolean equals(Object object) {

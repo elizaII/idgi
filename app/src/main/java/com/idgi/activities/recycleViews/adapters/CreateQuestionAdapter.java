@@ -1,5 +1,6 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,24 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.Widgets.CreateDialog;
-import com.idgi.util.Type;
 
 import java.util.ArrayList;
 
-public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder> {
+public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAdapter.ViewHolder> {
 
     private ArrayList<String> data;
     private LayoutInflater inflater;
-    private CreateDialog dialog;
-    private Type type;
 
-    public CreateAdapter(CreateDialog dialog, ArrayList<String> data, Type type){
+    public CreateQuestionAdapter(Context context, ArrayList<String> data) {
         this.data = data;
-        inflater = LayoutInflater.from(dialog.getContext());
-        this.dialog = dialog;
-        this.type = type;
-        }
+        inflater = LayoutInflater.from(context);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,33 +27,33 @@ public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder
 
         return new ViewHolder(view);
 
-        }
+    }
 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(data.get(position));
-        }
+    }
 
     @Override
     public int getItemCount() {
         return data.size();
-        }
+    }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView textView;
 
-        public ViewHolder(View v){
+        public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            textView =(TextView) v.findViewById(R.id.rowTextView);
+            textView = (TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View view){
-            String text = textView.getText().toString();
-            dialog.selectItem(text, type);
+        public void onClick(View view) {
+
         }
     }
 }
+

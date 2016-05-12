@@ -1,9 +1,7 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,20 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
-import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.idgi.R;
-import com.idgi.activities.CourseActivity;
-import com.idgi.core.Answer;
-import com.idgi.core.Course;
 import com.idgi.core.Question;
-import com.idgi.recycleViews.viewHolders.AnswerViewHolder;
-import com.idgi.recycleViews.viewHolders.QuestionViewHolder;
-import com.idgi.util.Storage;
+import com.idgi.activities.recycleViews.viewHolders.QuestionViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionViewHolder> {

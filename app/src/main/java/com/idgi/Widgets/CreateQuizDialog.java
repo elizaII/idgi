@@ -1,28 +1,18 @@
 package com.idgi.Widgets;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.Widgets.CreateQuestionDialog;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
-import com.idgi.core.Quiz;
-import com.idgi.recycleViews.adapters.CreateAdapter;
-import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
-import com.idgi.services.FireDatabase;
-import com.idgi.util.Storage;
+import com.idgi.activities.recycleViews.adapters.CreateQuestionAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

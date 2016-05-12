@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.idgi.R;
-import com.idgi.util.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
 
 public class BrowseActivity extends AppCompatActivityWithDrawer {
     @Override

@@ -1,4 +1,4 @@
-package com.idgi.recycleViews;
+package com.idgi.activities.recycleViews;
 
 
 import android.content.Context;

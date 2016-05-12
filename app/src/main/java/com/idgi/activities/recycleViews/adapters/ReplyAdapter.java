@@ -1,4 +1,4 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.idgi.R;
-import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
-import com.idgi.recycleViews.viewHolders.CommentHolder;
-import com.idgi.recycleViews.viewHolders.ReplyHolder;
+import com.idgi.activities.recycleViews.viewHolders.CommentHolder;
+import com.idgi.activities.recycleViews.viewHolders.ReplyHolder;
 
 import java.util.ArrayList;
 import java.util.List;

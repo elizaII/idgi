@@ -8,11 +8,9 @@ import android.support.v7.widget.Toolbar;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
-import com.idgi.services.Database;
-import com.idgi.services.FireDatabase;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.recycleViews.adapters.SubjectListAdapter;
-import com.idgi.util.Storage;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.recycleViews.adapters.SubjectListAdapter;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +29,7 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
         super.onCreate(savedInstanceState);
 
         // TODO Solve this in a better way instead of just going back to the previous activity.
-        if (Storage.getCurrentSchool() == null) {
+        if (SessionData.getCurrentSchool() == null) {
             System.out.println(":::::::NOTE:::::: Can not enter SubjectListActivity because Storage.getCurrentSchool() returns null");
             finish();
         }
@@ -52,7 +50,7 @@ public class SubjectListActivity extends AppCompatActivityWithDrawer{
     }
 
     private ArrayList<String> getSubjectNames() {
-        School school = Storage.getCurrentSchool();
+        School school = SessionData.getCurrentSchool();
         getSupportActionBar().setTitle(school.getName());
 
         subjects = school.getSubjects();

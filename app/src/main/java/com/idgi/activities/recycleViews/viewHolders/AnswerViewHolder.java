@@ -1,11 +1,10 @@
-package com.idgi.recycleViews.viewHolders;
+package com.idgi.activities.recycleViews.viewHolders;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.idgi.R;
-import com.idgi.core.Answer;
 
 public class AnswerViewHolder extends ChildViewHolder {
 

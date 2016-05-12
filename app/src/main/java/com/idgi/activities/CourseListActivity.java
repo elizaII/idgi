@@ -7,17 +7,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
 import com.idgi.core.Course;
-import com.idgi.services.Database;
-import com.idgi.services.FireDatabase;
-import com.idgi.services.IDatabase;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.recycleViews.adapters.CourseListAdapter;
-import com.idgi.util.Storage;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.recycleViews.adapters.CourseListAdapter;
+import com.idgi.session.SessionData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class CourseListActivity extends AppCompatActivityWithDrawer {
     private Toolbar toolbar;
@@ -33,7 +28,7 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        String subjectName = Storage.getCurrentSubject().getName();
+        String subjectName = SessionData.getCurrentSubject().getName();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,7 +36,7 @@ public class CourseListActivity extends AppCompatActivityWithDrawer {
 
         initializeDrawer();
 
-        courses = Storage.getCurrentSchool().getSubject(subjectName).getCourses();
+        courses = SessionData.getCurrentSchool().getSubject(subjectName).getCourses();
 
         ArrayList<String> courseNames = new ArrayList<>();
         for(Course course: courses)

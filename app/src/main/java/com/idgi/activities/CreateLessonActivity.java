@@ -18,9 +18,9 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.Video;
 import com.idgi.services.FireDatabase;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 import com.idgi.util.Type;
-import com.idgi.util.Util;
+import com.idgi.core.ModelUtility;
 
 import java.util.ArrayList;
 
@@ -115,14 +115,14 @@ public class CreateLessonActivity extends AppCompatActivity {
     }
 
     private void updateSelectedSchool(String schoolName) {
-        School existingSchool = Util.findByName(database.getSchools(), schoolName);
+        School existingSchool = ModelUtility.findByName(database.getSchools(), schoolName);
         School school = existingSchool == null ? new School(schoolName) : existingSchool;
         setSchool(school);
     }
 
     private void updateSelectedSubject(String subjectName) {
         if (school != null) {
-            Subject existingSubject = Util.findByName(school.getSubjects(), subjectName);
+            Subject existingSubject = ModelUtility.findByName(school.getSubjects(), subjectName);
             Subject subject = existingSubject == null ? new Subject(subjectName) : existingSubject;
             setSubject(subject);
         }
@@ -130,7 +130,7 @@ public class CreateLessonActivity extends AppCompatActivity {
 
     private void updateSelectedCourse(String courseName) {
         if (subject != null) {
-            Course existingCourse = Util.findByName(subject.getCourses(), courseName);
+            Course existingCourse = ModelUtility.findByName(subject.getCourses(), courseName);
             Course course = existingCourse == null ? new Course(courseName) : existingCourse;
             setCourse(course);
         }
@@ -165,7 +165,6 @@ public class CreateLessonActivity extends AppCompatActivity {
         if (questionList.size() > 0) {
             Quiz quiz = new Quiz();
             quiz.addQuestions(questionList);
-            Storage.setCurrentQuiz(quiz);
             btnAddQuiz.setText("Quiz is added.");
             this.quiz = quiz;
         }
@@ -181,7 +180,7 @@ public class CreateLessonActivity extends AppCompatActivity {
         course.addLesson(lesson);
 
         pushLesson(lesson);
-        Storage.setCurrentLesson(lesson);
+        SessionData.setCurrentLesson(lesson);
 
         gotoLessonActivity();
     }

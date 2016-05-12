@@ -1,6 +1,5 @@
 package com.idgi.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +10,9 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
 import com.idgi.core.Course;
-import com.idgi.recycleViews.adapters.CourseListAdapter;
-import com.idgi.recycleViews.adapters.MyCoursesAdapter;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.Storage;
+import com.idgi.activities.recycleViews.adapters.CourseListAdapter;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 
@@ -32,11 +30,11 @@ public class MyCoursesActivity extends AppCompatActivityWithDrawer {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_activity_my_course);
+        toolbar.setTitle(R.string.title_activity_my_course);
 
         initializeDrawer();
         this.data = new ArrayList<>();
-        data = Storage.getActiveUser().getMyCourses();
+        data = SessionData.getLoggedInUser().getMyCourses();
 
 
 

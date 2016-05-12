@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.firebase.client.Firebase;
 import com.idgi.R;
-import com.idgi.core.Account;
 import com.idgi.core.User;
-import com.idgi.services.FireDatabase;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.Storage;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
 
 public class StartActivity extends AppCompatActivityWithDrawer {
 
@@ -23,7 +20,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_activity_start);
+        toolbar.setTitle(R.string.title_activity_start);
 
 		initializeDrawer();
 
@@ -56,7 +53,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		User user = new User("Yoda");
 		user.setEmail("test@gmail.com");
 		user.setImage(d);
-		Storage.setActiveUser(user);
+		SessionData.setLoggedInUser(user);
 
 	}
 

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Quiz;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.Storage;
-import com.idgi.recycleViews.adapters.QuestionAdapter;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
+import com.idgi.activities.recycleViews.adapters.QuestionAdapter;
 
 import java.util.Locale;
 
@@ -27,7 +27,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
 		initializeDrawer();
 
-		this.quiz = Storage.getCurrentQuiz();
+		this.quiz = SessionData.getCurrentQuiz();
 
 		initiateButtons();
 
@@ -35,7 +35,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 
 		populateQuestionList();
 
-		Storage.getActiveUser().givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
+		SessionData.getLoggedInUser().givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 	}
 
 	private void initiateButtons() {

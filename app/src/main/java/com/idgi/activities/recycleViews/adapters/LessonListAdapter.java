@@ -1,9 +1,8 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,9 @@ import android.widget.TextView;
 import com.idgi.activities.LessonActivity;
 import com.idgi.R;
 import com.idgi.core.Course;
-import com.idgi.core.Lesson;
-import com.idgi.services.Database;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.ViewHolder> {
 
@@ -60,8 +56,8 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
         public void onClick(View view){
             String lessonName = lessonTextView.getText().toString();
 
-            Course course = Storage.getCurrentCourse();
-            Storage.setCurrentLesson(course.getLesson(lessonName));
+            Course course = SessionData.getCurrentCourse();
+            SessionData.setCurrentLesson(course.getLesson(lessonName));
 
             Context context = view.getContext();
             context.startActivity(new Intent(context, LessonActivity.class));

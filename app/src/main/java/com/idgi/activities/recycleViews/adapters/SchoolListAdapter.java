@@ -1,4 +1,4 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import com.idgi.R;
 import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
             String schoolName = schoolTextView.getText().toString();
             School school = FireDatabase.getInstance().getSchool((schoolName));
 
-            Storage.setCurrentSchool(school);
+            SessionData.setCurrentSchool(school);
 
             Context context = view.getContext();
             context.startActivity(new Intent(context, SubjectListActivity.class));

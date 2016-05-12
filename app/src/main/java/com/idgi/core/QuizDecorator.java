@@ -10,7 +10,7 @@ public abstract class QuizDecorator implements IQuiz {
     }
 
     @Override
-    public int getID() {
+    public String getID() {
         return this.decoratedQuiz.getID();
     }
 

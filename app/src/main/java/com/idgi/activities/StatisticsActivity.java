@@ -6,8 +6,8 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Statistics;
 import com.idgi.core.User;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.Storage;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
@@ -25,7 +25,7 @@ public class StatisticsActivity extends AppCompatActivityWithDrawer {
 
 		findViews();
 
-		User user = Storage.getActiveUser();
+		User user = SessionData.getLoggedInUser();
 		loadStatistics(user);
 	}
 

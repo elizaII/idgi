@@ -1,7 +1,5 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
-import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,45 +7,43 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.core.Course;
+import com.idgi.Widgets.CreateDialog;
+import com.idgi.util.Type;
 
 import java.util.ArrayList;
 
-/**
- * Created by Allex on 2016-05-11.
- */
-public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.ViewHolder>{
+public class CreateAdapter extends RecyclerView.Adapter<CreateAdapter.ViewHolder> {
 
-
-    private ArrayList<Course> data;
+    private ArrayList<String> data;
     private LayoutInflater inflater;
+    private CreateDialog dialog;
+    private Type type;
 
-
-
-    public MyCoursesAdapter(Context context, ArrayList<Course> data){
+    public CreateAdapter(CreateDialog dialog, ArrayList<String> data, Type type){
         this.data = data;
-        inflater = LayoutInflater.from(context);
-
-    }
+        inflater = LayoutInflater.from(dialog.getContext());
+        this.dialog = dialog;
+        this.type = type;
+        }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_row_course, parent, false);
+        View view = inflater.inflate(R.layout.list_row, parent, false);
 
         return new ViewHolder(view);
 
-    }
+        }
 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position).getName());
-    }
+        holder.textView.setText(data.get(position));
+        }
 
     @Override
     public int getItemCount() {
         return data.size();
-    }
+        }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -61,7 +57,8 @@ public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.View
         }
 
         public void onClick(View view){
-         //   String text = textView.getText().toString();
+            String text = textView.getText().toString();
+            dialog.selectItem(text, type);
         }
     }
 }

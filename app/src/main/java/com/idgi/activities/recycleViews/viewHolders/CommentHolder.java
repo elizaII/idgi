@@ -1,15 +1,13 @@
-package com.idgi.recycleViews.viewHolders;
+package com.idgi.activities.recycleViews.viewHolders;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.idgi.R;
 import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
-import com.idgi.util.Storage;
 
 public class CommentHolder extends ParentViewHolder {
 

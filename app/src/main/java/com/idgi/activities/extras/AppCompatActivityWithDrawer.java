@@ -1,4 +1,4 @@
-package com.idgi.util;
+package com.idgi.activities.extras;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
+import com.idgi.util.Navigation;
 
 public class AppCompatActivityWithDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

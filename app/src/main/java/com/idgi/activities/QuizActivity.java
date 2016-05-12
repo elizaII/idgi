@@ -2,7 +2,6 @@ package com.idgi.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -14,17 +13,14 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.util.Config;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
-import com.idgi.services.Database;
-import com.idgi.util.ButtonFactory;
+import com.idgi.activities.extras.ButtonFactory;
 import com.idgi.Widgets.AnswerButton;
 
 import java.util.List;
-
-import butterknife.OnClick;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -47,11 +43,11 @@ public class QuizActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_quiz);
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
-		quiz = Storage.getCurrentQuiz();
+		quiz = SessionData.getCurrentQuiz();
 		if (quiz == null)
 			finish();
 
-		Storage.getCurrentQuiz().reset();
+		SessionData.getCurrentQuiz().reset();
 
 		initializeNextButton();
 		initializeQuestionView();

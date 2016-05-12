@@ -2,11 +2,10 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.idgi.services.Database;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
+import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quiz implements IQuiz{
@@ -16,15 +15,15 @@ public class Quiz implements IQuiz{
 	
 	List<Question> questions;
 
-	private int id;
+	private String id;
 
 	public Quiz() {
 		questions = new ArrayList<>();
-		this.id = Database.getInstance().getNewQuizId();
+		this.id = UUID.randomUUID().toString();
 	}
 
 
-	public int getID() {
+	public String getID() {
 		return this.id;
 	}
 

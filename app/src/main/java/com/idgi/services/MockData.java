@@ -1,7 +1,5 @@
 package com.idgi.services;
 
-import android.util.Log;
-
 import com.idgi.core.Answer;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
@@ -10,26 +8,17 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
-import com.idgi.core.User;
 import com.idgi.core.Video;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 
-public final class Database implements IDatabase {
-	private static Database instance = null;
-
-	private static int currentQuizId = 0;
-
-	//Used to make sure we don't give out duplicate points for a quiz
-	public int getNewQuizId() {
-		return currentQuizId++;
-	}
+public final class MockData implements IDatabase {
+	private static MockData instance = null;
 
 	// TODO Implement this properly
 	public Quiz getQuiz(String key) {
@@ -48,9 +37,9 @@ public final class Database implements IDatabase {
 		return quiz;
 	}
 
-	public static Database getInstance() {
+	public static MockData getInstance() {
 		if (instance == null)
-			instance = new Database();
+			instance = new MockData();
 
 		return instance;
 	}
@@ -105,7 +94,7 @@ public final class Database implements IDatabase {
 			while(k-- >= 0) {
 				text += " " + words[rand.nextInt(words.length)];
 			}
-			comments.add(new Comment(text + ".", Storage.getActiveUser()));
+			comments.add(new Comment(text + ".", SessionData.getLoggedInUser()));
 		}
         return comments;
 	}

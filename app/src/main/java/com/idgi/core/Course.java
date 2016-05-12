@@ -1,8 +1,6 @@
 package com.idgi.core;
 
-import com.idgi.R;
 import com.idgi.util.Nameable;
-import com.idgi.util.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +28,7 @@ public class Course implements Nameable {
 	}
 
 	public Lesson getLesson(String courseName) {
-		return Util.findByName(lessons, courseName);
+		return ModelUtility.findByName(lessons, courseName);
 	}
 	
 	public String getName() {

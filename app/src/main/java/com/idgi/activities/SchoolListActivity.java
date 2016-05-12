@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.firebase.client.Firebase;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.recycleViews.adapters.SchoolListAdapter;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.recycleViews.adapters.SchoolListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,4 +40,6 @@ public class SchoolListActivity extends AppCompatActivityWithDrawer {
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(manager);
     }
+
+
 }

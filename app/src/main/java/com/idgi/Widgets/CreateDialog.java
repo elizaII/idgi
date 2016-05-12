@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
-import com.idgi.recycleViews.adapters.CreateAdapter;
+import com.idgi.activities.recycleViews.adapters.CreateAdapter;
 import com.idgi.util.Type;
 
 import java.util.ArrayList;

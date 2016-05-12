@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IQuiz {
 
-    int getID();
+    String getID();
 
     int length();
 

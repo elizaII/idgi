@@ -95,7 +95,7 @@ public class User {
         return statistics.getVideoPoints(video);
     }
 
-    public void givePointsForQuiz(int quizID, int points) {
+    public void givePointsForQuiz(String quizID, int points) {
         statistics.updateQuizPoints(quizID, points);
     }
 

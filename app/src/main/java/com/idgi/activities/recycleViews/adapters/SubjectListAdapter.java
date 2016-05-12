@@ -1,4 +1,4 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.idgi.activities.CourseListActivity;
 import com.idgi.R;
 import com.idgi.core.Subject;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 
@@ -57,8 +57,8 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
         public void onClick(View view){
             String subjectName = subjectTextView.getText().toString();
-            Subject subject = Storage.getCurrentSchool().getSubject(subjectName);
-            Storage.setCurrentSubject(subject);
+            Subject subject = SessionData.getCurrentSchool().getSubject(subjectName);
+            SessionData.setCurrentSubject(subject);
 
             Context context = view.getContext();
             context.startActivity(new Intent(context, CourseListActivity.class));

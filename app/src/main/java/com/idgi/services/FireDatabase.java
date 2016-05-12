@@ -12,8 +12,7 @@ import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
-import com.idgi.util.Storage;
-import com.idgi.util.Util;
+import com.idgi.core.ModelUtility;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +68,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public School getSchool(String schoolName) {
-		return Util.findByName(schools, schoolName);
+		return ModelUtility.findByName(schools, schoolName);
 	}
 
 	public List<Subject> getSubjects(School school) {
@@ -114,7 +113,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void createSchools() {
-		Database mock = Database.getInstance();
+		MockData mock = MockData.getInstance();
 
 		for (School school : mock.getSchools()) {
 			for (Subject subject : mock.getSubjects(null)) {

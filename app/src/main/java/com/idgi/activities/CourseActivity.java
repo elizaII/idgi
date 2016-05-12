@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,14 +16,11 @@ import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
 import com.idgi.R;
-import com.idgi.core.Lesson;
-import com.idgi.services.Database;
-import com.idgi.util.AppCompatActivityWithDrawer;
-import com.idgi.util.Storage;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CourseActivity extends AppCompatActivityWithDrawer {
 
@@ -61,7 +57,7 @@ public class CourseActivity extends AppCompatActivityWithDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        String courseName = Storage.getCurrentCourse().getName();
+        String courseName = SessionData.getCurrentCourse().getName();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

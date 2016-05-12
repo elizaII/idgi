@@ -9,7 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.idgi.util.Config;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 /**
  * Use the {@link YoutubeFragment#newInstance} factory method to
@@ -61,8 +61,8 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
         youTubePlayer.setPlaybackEventListener(playbackListener);
 
         if(!wasRestored){
-            if(Storage.getCurrentVideo() != null) {
-                youTubePlayer.cueVideo(Storage.getCurrentVideo().getUrl());
+            if(SessionData.getCurrentVideo() != null) {
+                youTubePlayer.cueVideo(SessionData.getCurrentVideo().getUrl());
             } else {
                 //Todo... better error-handling
                 youTubePlayer.cueVideo("ZXilG7pH3is");
@@ -152,7 +152,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
     private void awardPoints(int points) {
         Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
-        Storage.getActiveUser().givePointsForViewingVideo(Storage.getCurrentVideo(), points);
+        SessionData.getLoggedInUser().givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
         updatePointProgressBar();
     }
 
@@ -167,6 +167,6 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     }
 
     private void updatePointProgressBar() {
-        listener.updatePoints(Storage.getActiveUser().getPointsForVideo(Storage.getCurrentVideo()));
+        listener.updatePoints(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
     }
 }

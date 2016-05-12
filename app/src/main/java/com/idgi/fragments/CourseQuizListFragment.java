@@ -8,14 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
-import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
-import com.idgi.recycleViews.adapters.LessonListAdapter;
-import com.idgi.util.Storage;
+import com.idgi.activities.recycleViews.adapters.LessonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +43,7 @@ public class CourseQuizListFragment extends Fragment {
         List<Quiz> quizzes = Arrays.asList(new Quiz(), new Quiz());
 
         for(Quiz quiz : quizzes)
-            quizIds.add(Integer.toString(quiz.getID()));
+            quizIds.add(quiz.getID());
 
         Collections.sort(quizIds);
 

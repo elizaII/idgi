@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
@@ -19,11 +18,11 @@ import com.idgi.Widgets.CommentLayout;
 import com.idgi.Widgets.CommentReplyDialog;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
-import com.idgi.services.Database;
-import com.idgi.util.AppCompatActivityWithDrawer;
+import com.idgi.services.MockData;
+import com.idgi.activities.extras.AppCompatActivityWithDrawer;
 import com.idgi.util.Config;
-import com.idgi.util.Storage;
-import com.idgi.recycleViews.adapters.ReplyAdapter;
+import com.idgi.session.SessionData;
+import com.idgi.activities.recycleViews.adapters.ReplyAdapter;
 
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     private RecyclerView recycler;
     private RecyclerView.LayoutManager manager;
     private List<Comment> commentList;
-    private Database database = Database.getInstance();
+    private MockData database = MockData.getInstance();
     private TextView commentField;
     private ProgressBar pointProgressBar;
 
@@ -44,15 +43,17 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
-        Lesson lesson = Storage.getCurrentLesson();
+        Lesson lesson = SessionData.getCurrentLesson();
 
         String title = lesson == null ? getString(R.string.content_lesson_no_lesson_found_title) : lesson.getName();
 
         initializeWithTitle(title);
 
-        pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
-        pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
-        pointProgressBar.setProgress(Storage.getActiveUser().getPointsForVideo(Storage.getCurrentVideo()));
+        if (SessionData.hasLoggedInUser()) {
+            pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
+            pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
+            pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
+        }
 
         commentList = database.getComments(null);
         ArrayList<String> commentText = new ArrayList<>();
@@ -74,8 +75,8 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
     public void onCommentButtonClick(View view) {
         if(commentField.getText().toString().length() != 0) {
-            database.addComment(new Comment(commentField.getText().toString(), Storage.getActiveUser()));
-            commentList.add(0, new Comment(commentField.getText().toString(), Storage.getActiveUser()));
+            database.addComment(new Comment(commentField.getText().toString(), SessionData.getLoggedInUser()));
+            commentList.add(0, new Comment(commentField.getText().toString(), SessionData.getLoggedInUser()));
             commentField.setText("");
             updateComments();
         }

@@ -1,9 +1,7 @@
-package com.idgi.recycleViews.adapters;
+package com.idgi.activities.recycleViews.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +11,10 @@ import android.widget.TextView;
 
 import com.idgi.activities.CourseActivity;
 import com.idgi.R;
-import com.idgi.activities.MyCoursesActivity;
 import com.idgi.core.Course;
-import com.idgi.util.Storage;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
@@ -41,8 +37,8 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.courseTextView.setText(data.get(position).getName());
-        if (Storage.hasActiveUser()) {
-            if (Storage.getActiveUser().getMyCourses().contains(data.get(position))){
+        if (SessionData.hasLoggedInUser()) {
+            if (SessionData.getLoggedInUser().getMyCourses().contains(data.get(position))){
                 holder.isAddedToMyCourses=true;
                 holder.my_courses_button.setText(R.string.added_to_my_courses);
             }
@@ -88,22 +84,22 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
         public void onClick(View view){
             String courseName = courseTextView.getText().toString();
-            Course course = Storage.getCurrentSubject().getCourse(courseName);
+            Course course = SessionData.getCurrentSubject().getCourse(courseName);
             switch (view.getId()) {
                 case R.id.rowTextView:
-                    Storage.setCurrentCourse(course);
+                    SessionData.setCurrentCourse(course);
                     Context context = view.getContext();
                     context.startActivity(new Intent(context, CourseActivity.class));
                     break;
                 case R.id.my_courses_button:
-                    if (Storage.hasActiveUser()) {
+                    if (SessionData.hasLoggedInUser()) {
                         if (isAddedToMyCourses) {
-                            Storage.getActiveUser().removeFromMyCourses(course);
+                            SessionData.getLoggedInUser().removeFromMyCourses(course);
                             my_courses_button.setText(R.string.add_to_my_courses);
                             isAddedToMyCourses = false;
                             adapter.notifyDataSetChanged();
                         } else {
-                            Storage.getActiveUser().addToMyCourses(course);
+                            SessionData.getLoggedInUser().addToMyCourses(course);
                             my_courses_button.setText(R.string.added_to_my_courses);
                             isAddedToMyCourses = true;
                         }

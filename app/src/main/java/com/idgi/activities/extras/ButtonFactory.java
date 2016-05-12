@@ -1,4 +1,4 @@
-package com.idgi.util;
+package com.idgi.activities.extras;
 
 import android.content.Context;
 import android.os.Build;
