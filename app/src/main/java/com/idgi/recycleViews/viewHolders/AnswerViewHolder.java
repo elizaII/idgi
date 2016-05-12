@@ -9,11 +9,12 @@ import com.idgi.core.Answer;
 
 public class AnswerViewHolder extends ChildViewHolder {
 
-	public TextView txtAnswer;
+	public TextView answerTextView, feedbackTextView;
 
 	public AnswerViewHolder(View itemView) {
 		super(itemView);
 
-		txtAnswer = (TextView) itemView.findViewById(R.id.quiz_result_listitem_answer_text);
+		answerTextView = (TextView) itemView.findViewById(R.id.quiz_result_listitem_answer_text);
+		feedbackTextView = (TextView) itemView.findViewById(R.id.quiz_result_listitem_answer_selected_text);
 	}
 }

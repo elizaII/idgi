@@ -7,23 +7,33 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:animateLayoutChanges="true"
-    android:orientation="horizontal">
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="It takes several."
-        android:id="@+id/quiz_result_listitem_answer_text"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginLeft="@dimen/spacing_normal"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="It takes several."
-        android:id="@+id/quiz_result_listitem_answer_selected_text"
-        android:layout_toRightOf="@+id/quiz_result_listitem_answer_text"
-        android:layout_toEndOf="@+id/quiz_result_listitem_answer_text"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/quiz_result_listitem_answer_text"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/quiz_result_listitem_answer_selected_text"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_weight="1"
+            android:gravity="end|center"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 </LinearLayout>
