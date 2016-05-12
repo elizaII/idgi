@@ -139,4 +139,9 @@
     <string name="create_lesson_invalid_link_title">Ogiltig länk</string>
     <string name="create_lesson_invalid_link_message">Din länk funkar inte. Var vänlig klistra in med en fungerande youtube-länk.</string>
 
+    <!-- Searchable-->
+    <string name="idgi">IDGI.</string>
+    <string name="search_hint">Sök på Skolor, ämnen, kurser och lektioner.</string>
+
+
 </resources>
