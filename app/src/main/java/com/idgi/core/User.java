@@ -19,6 +19,8 @@ public class User {
 
     private String phoneNumber;
     private String age;
+
+    @JsonIgnore
     private Drawable image;
 
     private Statistics statistics;
@@ -45,9 +47,12 @@ public class User {
     public void setEmail(String eMail) {
         this.email = eMail;
     }
+
+    @JsonIgnore
     public void setImage(Drawable image) {
         this.image = image;
     }
+
     public void setAge(String age) {
         this.age = age;
     }
@@ -86,6 +91,7 @@ public class User {
         return statistics.get(property);
     }
 
+    @JsonIgnore
     public Drawable getImage() {
         return image;
     }
