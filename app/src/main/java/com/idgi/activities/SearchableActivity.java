@@ -4,11 +4,14 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.Query;
 import com.idgi.R;
 import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.recycleViews.adapters.SearchableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.School;
@@ -22,6 +25,9 @@ import java.util.List;
 public class SearchableActivity extends AppCompatActivityWithDrawer {
 
     private List<Nameable> searchResults;
+    private RecyclerView recycler;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,15 @@ public class SearchableActivity extends AppCompatActivityWithDrawer {
             query.toLowerCase();
             searchResults = searchDatabase(query);
         }
+
+        ArrayList<String> data = new ArrayList<>();
+
+        for(Nameable nameable : searchResults){
+            data.add(nameable.getName());
+        }
+
+        manager = new LinearLayoutManager(this);
+        adapter = new SearchableAdapter(this, data);
     }
 
     private List<Nameable> searchDatabase(String query){
