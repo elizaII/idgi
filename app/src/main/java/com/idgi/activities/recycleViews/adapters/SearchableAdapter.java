@@ -13,6 +13,7 @@ import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
+import com.idgi.util.Nameable;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,10 @@ import java.util.ArrayList;
  */
 public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private ArrayList<Nameable> data;
     private LayoutInflater inflater;
 
-    public SearchableAdapter(Context context, ArrayList<String> data){
+    public SearchableAdapter(Context context, ArrayList<Nameable> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -40,7 +41,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.searchTextView.setText(data.get(position));
+        holder.searchTextView.setText(data.get(position).getName());
     }
 
     @Override

@@ -19,12 +19,14 @@ import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
 import com.idgi.util.Nameable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchableActivity extends AppCompatActivityWithDrawer {
 
-    private List<Nameable> searchResults;
+    private ArrayList<Nameable> searchResults;
+
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
@@ -41,18 +43,13 @@ public class SearchableActivity extends AppCompatActivityWithDrawer {
             searchResults = searchDatabase(query);
         }
 
-        ArrayList<String> data = new ArrayList<>();
-
-        for(Nameable nameable : searchResults){
-            data.add(nameable.getName());
-        }
 
         manager = new LinearLayoutManager(this);
-        adapter = new SearchableAdapter(this, data);
+        adapter = new SearchableAdapter(this, searchResults);
     }
 
-    private List<Nameable> searchDatabase(String query){
-        List<Nameable> results = new ArrayList<>();
+    private ArrayList<Nameable> searchDatabase(String query){
+        ArrayList<Nameable> results = new ArrayList<>();
 
         FireDatabase ref = FireDatabase.getInstance();
         List<School> schools = ref.getSchools();
