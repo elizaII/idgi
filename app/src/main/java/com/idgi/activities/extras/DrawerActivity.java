@@ -61,7 +61,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 
@@ -76,7 +76,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 
-		if (id == R.id.action_settings) {
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_search) {
 			return true;
 		}
 

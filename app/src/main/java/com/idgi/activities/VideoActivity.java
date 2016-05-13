@@ -111,7 +111,7 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_search) {
 			return true;
 		}
 
@@ -129,7 +129,7 @@ public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 	@Override

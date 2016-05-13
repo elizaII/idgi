@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import com.firebase.client.Firebase;
 import com.firebase.client.Query;
 import com.idgi.R;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.activities.recycleViews.adapters.SearchableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
@@ -23,7 +23,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchableActivity extends AppCompatActivityWithDrawer {
+public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
 

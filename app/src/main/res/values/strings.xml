@@ -142,6 +142,7 @@
     <!-- Searchable-->
     <string name="idgi">IDGI.</string>
     <string name="search_hint">Sök på Skolor, ämnen, kurser och lektioner.</string>
+    <string name="action_search" />
 
 
 </resources>
