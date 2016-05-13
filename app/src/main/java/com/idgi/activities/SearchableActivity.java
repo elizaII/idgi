@@ -40,7 +40,7 @@ public class SearchableActivity extends AppCompatActivityWithDrawer {
         if(intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
             query.toLowerCase();
-            searchResults = searchDatabase(query);
+            searchDatabase(query);
         }
 
 
@@ -48,11 +48,12 @@ public class SearchableActivity extends AppCompatActivityWithDrawer {
         adapter = new SearchableAdapter(this, searchResults);
     }
 
-    private ArrayList<Nameable> searchDatabase(String query){
+    private void searchDatabase(String query){
         ArrayList<Nameable> results = new ArrayList<>();
 
         FireDatabase ref = FireDatabase.getInstance();
         List<School> schools = ref.getSchools();
+
         for(School school: schools){
             if(school.getName().toLowerCase().equals(query)){
                 results.add(school);
@@ -73,7 +74,7 @@ public class SearchableActivity extends AppCompatActivityWithDrawer {
                 }
             }
         }
-        return results;
+        this.searchResults = results;
     }
 }
 
