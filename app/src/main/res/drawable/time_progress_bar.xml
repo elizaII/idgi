@@ -20,13 +20,7 @@
 
     <item android:id="@android:id/background">
         <shape>
-            <gradient
-                android:startColor="#ffff0000"
-                android:centerColor="#ff5a5d5a"
-                android:centerY="0.75"
-                android:endColor="#ff747674"
-                android:angle="270"
-                />
+            <solid android:color="@color/colorAccent" />
         </shape>
     </item>
 
@@ -34,11 +28,10 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="#80ffd300"
-                    android:centerColor="#80ffb600"
+                    android:startColor="#80a92ed2"
+                    android:centerColor="#8045075b"
                     android:centerY="0.75"
-                    android:endColor="#a0ffcb00"
-                    android:angle="270"
+                    android:endColor="#a03b025e"
                     />
             </shape>
         </clip>
@@ -47,13 +40,7 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <gradient
-                    android:startColor="#ffffd300"
-                    android:centerColor="#ffffb600"
-                    android:centerY="0.75"
-                    android:endColor="#ffffcb00"
-                    android:angle="270"
-                    />
+                <solid android:color="@color/colorPrimary" />
             </shape>
         </clip>
     </item>

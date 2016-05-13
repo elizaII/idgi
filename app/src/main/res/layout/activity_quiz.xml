@@ -17,7 +17,16 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="20sp"
         android:textColor="@color/colorQuizQuestionText"
+        android:layout_below="@+id/content_quiz_time_progress"
         android:gravity="center_vertical|center_horizontal"/>
+
+    <ProgressBar
+        style="@style/timeProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="50"
+        android:id="@+id/content_quiz_time_progress"
+        android:layout_alignParentTop="true" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -38,14 +47,5 @@
         android:id="@+id/quiz_btn_next_question"
         android:elevation="6dp"
         android:layout_alignParentBottom="true"/>
-
-    <ProgressBar
-        style="@style/timeProgressBar"
-        android:layout_width="900dp"
-        android:layout_height="350dp"
-        android:rotation="270"
-        android:id="@+id/content_quiz_time_progress"
-        android:layout_above="@+id/quiz_btn_next_question"
-        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
