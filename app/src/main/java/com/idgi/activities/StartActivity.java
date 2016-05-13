@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.idgi.R;
 import com.idgi.core.User;
@@ -13,6 +14,11 @@ import com.idgi.session.SessionData;
 
 public class StartActivity extends AppCompatActivityWithDrawer {
 
+		private Button start_btn_browse;
+		private Button start_btn_log_in;
+		private Button start_btn_create_account;
+		private Button start_btn_account;
+		private Button start_btn_create_lesson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,20 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		initializeDrawer();
 
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+
+		start_btn_browse = (Button) findViewById(R.id.start_btn_browse);
+		start_btn_log_in = (Button) findViewById(R.id.start_btn_log_in);
+		start_btn_create_account = (Button) findViewById(R.id.start_btn_create_account);
+		start_btn_account = (Button) findViewById(R.id.start_btn_account);
+		start_btn_create_lesson = (Button) findViewById(R.id.start_btn_create_lesson);
+		if (!Storage.hasActiveUser()){
+			notLoggedIn();
+		}
+	}
+
+	private void notLoggedIn() {
+		start_btn_account.setEnabled(false);
+		start_btn_create_lesson.setEnabled(false);
 	}
 
 	@Override

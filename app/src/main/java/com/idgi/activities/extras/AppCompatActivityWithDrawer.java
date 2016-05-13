@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.idgi.R;
 import com.idgi.util.Navigation;
@@ -17,8 +18,8 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 
 	private DrawerLayout drawer;
 	private Toolbar toolbar;
-
 	@Override
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}

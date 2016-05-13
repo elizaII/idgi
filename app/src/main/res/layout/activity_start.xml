@@ -41,31 +41,31 @@
     <Button
         style="@style/menu_button"
         android:text="@string/start_btn_find_course"
-        android:id="@+id/BrowseButton"
+        android:id="@+id/start_btn_browse"
         android:onClick="onStartButtonClick" />
 
     <Button
         style="@style/menu_button"
         android:text="@string/start_btn_log_in"
-        android:id="@+id/LogInButton"
+        android:id="@+id/start_btn_log_in"
         android:onClick="onLogInButtonClick" />
 
     <Button
         style="@style/menu_button"
         android:text="@string/start_btn_create_account"
-        android:id="@+id/CreateAccountButton"
+        android:id="@+id/start_btn_create_account"
         android:onClick="onCreateAccountButtonClick" />
 
     <Button
         style="@style/menu_button"
         android:text="@string/start_btn_account"
-        android:id="@+id/AccountButton"
+        android:id="@+id/start_btn_account"
         android:onClick="onAccountButtonClick" />
 
     <Button
         style="@style/menu_button"
         android:text="Lesson"
-        android:id="@+id/start_btn_lesson"
+        android:id="@+id/start_btn_create_lesson"
         android:onClick="onLessonButtonClick" />
 
     <FrameLayout

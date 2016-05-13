@@ -10,6 +10,7 @@
     <color name="colorAccent">#FFC107</color>
 
     <color name="colorButton">#DBDCDC</color>
+    <color name="colorButtonDisabled">#ECECEC</color>
     <color name="colorTextPrimary">#000000</color>
     <color name="colorTextSecondary">#FFFFFF</color>
     <color name="colorTextComplementary">#FFD740</color>
