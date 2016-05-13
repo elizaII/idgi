@@ -3,15 +3,19 @@ package com.idgi.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.idgi.R;
 import com.idgi.core.IQuiz;
@@ -34,6 +38,7 @@ public class QuizActivity extends AppCompatActivity {
 	private Button btnNext;
 	private AnswerButton[] answerButtons;
     private ProgressBar timeProgressBar;
+    private RelativeLayout relativeLayout;
 
 	private boolean isInTransition = false;
 
@@ -48,6 +53,8 @@ public class QuizActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
+        relativeLayout = (RelativeLayout) findViewById(R.id.quiz_relative_layout);
+
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
 		quiz = SessionData.getCurrentQuiz();
@@ -69,9 +76,41 @@ public class QuizActivity extends AppCompatActivity {
 
 	private void initializeTimeBar(TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
-        Log.d(ACTIVITY_TAG, "Timed quiz's time: " + timedQuiz.getTime());
-        timeProgressBar.setMax(timedQuiz.getTime());
-        timeProgressBar.setProgress(1000);
+
+        relativeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(ACTIVITY_TAG, "Width: " + relativeLayout.getWidth() + ", height: " + relativeLayout.getHeight());
+                if(relativeLayout.getWidth() != 0 && relativeLayout.getHeight() != 0){
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) timeProgressBar.getLayoutParams();
+//                    params.width = relativeLayout.getHeight();
+
+                    Log.d(ACTIVITY_TAG, "Progress bar's height: " + params.height);
+                    Log.d(ACTIVITY_TAG, "Progress bar's width: " + params.width);
+//                    params.height = relativeLayout.getWidth();
+                }
+            }
+        });
+//        timeProgressBar.setMinimumWidth(params.getHeight());
+//        timeProgressBar.setMinimumHeight(params.getWidth());
+
+        final int MAX_TIME = timedQuiz.getTime();
+        Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
+        timeProgressBar.setMax(MAX_TIME);
+
+        CountDownTimer timer = new CountDownTimer(MAX_TIME, 1) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeProgressBar.setProgress(MAX_TIME - (int)millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d(ACTIVITY_TAG, "You failed!");
+            }
+        };
+
+        timer.start();
     }
 
 	private void initializeNextButton() {

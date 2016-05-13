@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quiz_relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.QuizActivity">
@@ -39,11 +40,12 @@
         android:layout_alignParentBottom="true"/>
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        style="@style/timeProgressBar"
+        android:layout_width="900dp"
+        android:layout_height="350dp"
+        android:rotation="270"
         android:id="@+id/content_quiz_time_progress"
         android:layout_above="@+id/quiz_btn_next_question"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
