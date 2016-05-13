@@ -11,6 +11,7 @@ import android.widget.ToggleButton;
 import com.idgi.R;
 import com.idgi.core.User;
 import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.session.SessionData;
 
 
 public class ProfileActivity extends AppCompatActivityWithDrawer {
@@ -25,16 +26,15 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
         setContentView(R.layout.activity_profile);
 
         String userEmail = User.getLoggedInUserEmail(this);
-       // user = Firebase(dfkdkgkgk: userEmail);
 
         name = (EditText) findViewById(R.id.profile_editText_name);
         age = (EditText) findViewById(R.id.profile_editText_age);
-    //    user = Storage.getActiveUser();
-
-     //   name.setText(user.getName());
-       // age.setText(user.getAge());
-       // age.setText(user.getEmail());
-
+        user = SessionData.getLoggedInUser();
+       if (user != null) {
+           name.setText(user.getName());
+           age.setText(user.getAge());
+           age.setText(user.getEmail());
+       }
         initializeDrawer();
     }
 /*
@@ -55,23 +55,25 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
     */
 
     private void enableInputField(EditText field) {
- //       field.setFocusableInTouchMode(true);
-  //      field.setClickable(true);
+        field.setFocusableInTouchMode(true);
+        field.setClickable(true);
         field.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
-  //      field.setTag("enabled");
+        field.setTag("enabled");
     }
     private void disableInputField(EditText field) {
- //       field.setFocusableInTouchMode(false);
-   //     field.setClickable(false);
+        field.setFocusableInTouchMode(false);
+        field.setClickable(false);
         field.clearFocus();
-     //   field.setTag("disabled");
+        field.setTag("disabled");
     }
 
     private void saveInfo() {
-      //  user.setName(name.getText().toString());
-       // user.setAge(age.getText().toString());
+        if (user != null) {
+            user.setName(name.getText().toString());
+            user.setAge(age.getText().toString());
+        }
     }
     public void toggleEditState(View view) {
         boolean checked = ((ToggleButton)view).isChecked();
