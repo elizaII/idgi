@@ -13,6 +13,7 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.ModelUtility;
+import com.idgi.util.Config;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,8 +113,9 @@ public class FireDatabase implements IDatabase {
 		return instance;
 	}
 
-	public void createSchools() {
+	public List<School> createSchools() {
 		MockData mock = MockData.getInstance();
+		List<School> schools = new ArrayList<>();
 
 		for (School school : mock.getSchools()) {
 			for (Subject subject : mock.getSubjects(null)) {
@@ -127,8 +129,16 @@ public class FireDatabase implements IDatabase {
 				school.addSubject(subject);
 			}
 
-			pushSchool(school);
+			schools.add(school);
 		}
+
+		return schools;
+	}
+
+	public void pushMockDataToFirebase() {
+		List<School> mockSchools = createSchools();
+		for (School school : mockSchools)
+			pushSchool(school);
 	}
 
 	/**
@@ -141,22 +151,26 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void retrieveSchools() {
-		schools = new ArrayList<>();
+		if (Config.firebaseMode == Config.FirebaseMode.ACTIVE) {
+			schools = new ArrayList<>();
 
-		Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
+			Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
 
-		schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
-			public void onDataChange(DataSnapshot snapshot) {
+			schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
+				public void onDataChange(DataSnapshot snapshot) {
 
-				for (DataSnapshot child : snapshot.getChildren()) {
-					School school = child.getValue(School.class);
-					schools.add(school);
+					for (DataSnapshot child : snapshot.getChildren()) {
+						School school = child.getValue(School.class);
+						schools.add(school);
+					}
 				}
-			}
 
-			public void onCancelled(FirebaseError firebaseError) {
-			}
-		});
+				public void onCancelled(FirebaseError firebaseError) {
+				}
+			});
+		} else {
+			schools = createSchools();
+		}
 	}
 
 	public void retrieveUsers() {
