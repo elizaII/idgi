@@ -178,8 +178,7 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
         if(isYoutubeLink(txtYouTubeUrl.getText().toString())){
 
-            //Todo... trim youtubelink
-            String videoUrl = txtYouTubeUrl.getText().toString();
+            String videoUrl = trimYoutubeLink(txtYouTubeUrl.getText().toString());
             String lessonName = txtLessonName.getText().toString();
 
             Video video = Video.from(videoUrl);
@@ -284,5 +283,52 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
     private boolean isYoutubeLink(String url){
         return url.contains("youtube.com") || url.contains("youtu.be");
+    }
+
+
+    /**
+     * Trims a youtube link to get the unique ID of a video
+     * @param url The youtube link that will be trimmed
+     * @return The unique identifier for a youtube video
+     */
+    private String trimYoutubeLink(String url){
+        if(url.contains("youtube.com")){
+
+            //A youtube link usually looks like this
+            //https://www.youtube.com/watch?v=aE2drlA8vf8
+            //where the unique identifier is after the equal sign
+            String[] urlFragments = url.split("=");
+
+            //There are times when it can have this appearance
+            //https://www.youtube.com/watch?v=aE2drlA8vf8&feature=youtu.be&t=2m
+            //so we need to trim the now "aE2drlA8vf8&feature=youtu.be&t=2m"
+            //and retrieve the first part
+            if(urlFragments[1].contains("&")){
+                String[] tokens = urlFragments[1].split("&");
+                return tokens[0];
+            }
+
+            return urlFragments[1];
+
+        } else if(url.contains("youtu.be")){
+
+            //Similarly for the shortened link
+            //https://youtu.be/aE2drlA8vf8
+            String[] urlFragments = url.split(".be/");
+
+            //And if it contains more information
+            //https://youtu.be/aE2drlA8vf8?t=2m
+            if(urlFragments[1].contains("?")){
+                String [] tokens = urlFragments[1].split("\\?");
+                return tokens[0];
+            }
+
+            return urlFragments[1];
+        }
+
+        //Returns an empty string, but it shouldn't
+        //because the method isYoutubeLink checks
+        //if it's a valid link in beforehand
+        return "";
     }
 }
