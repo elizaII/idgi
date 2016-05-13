@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:id="@+id/comment_text"
+        android:id="@+id/lesson_listitem_comment_text"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -23,24 +23,19 @@
         android:layout_alignBottom="@+id/comment_author" />
 
     <ImageView
-        android:id="@+id/comment_imageView_profilePicture"
+        android:id="@+id/lesson_listitem_comment_image_profile_picture"
         android:gravity="top"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/ic_account_circle_black_24dp"
-        android:adjustViewBounds="false"
-        android:scaleType="centerInside"
+        android:contentDescription="@string/profile_picture"
         android:maxHeight="80dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignLeft="@+id/comment_text"
-        android:layout_alignStart="@+id/comment_text"
-        android:padding="100dp"
-        android:cropToPadding="true"
-        android:rotation="180"
+        android:layout_marginLeft="@dimen/spacing_xLarge"
+        android:layout_marginStart="@dimen/spacing_xLarge"
+        android:layout_alignLeft="@+id/lesson_listitem_comment_text"
+        android:layout_alignStart="@+id/lesson_listitem_comment_text"
         android:layout_marginTop="4dp"
         />
     <ImageView
@@ -48,9 +43,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/round"
+        android:contentDescription="@string/profile_description_profile_image_circle"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/comment_imageView_profilePicture"
-        android:layout_alignStart="@+id/comment_imageView_profilePicture"
+        android:layout_alignLeft="@+id/lesson_listitem_comment_image_profile_picture"
+        android:layout_alignStart="@+id/lesson_listitem_comment_image_profile_picture"
         android:layout_marginTop="4dp"/>
 
     <TextView
@@ -59,7 +55,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/comment_author"
         android:textSize="25sp"
-        android:layout_below="@+id/comment_imageView_profilePicture"
+        android:layout_below="@+id/lesson_listitem_comment_image_profile_picture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
@@ -71,15 +67,15 @@
         android:layout_height="40dp"
         android:text="@string/content_lesson_reply"
         android:id="@+id/lesson_listitem_comment_btn_reply"
-        android:layout_alignRight="@+id/comment_text"
-        android:layout_alignEnd="@+id/comment_text"
+        android:layout_alignRight="@+id/lesson_listitem_comment_text"
+        android:layout_alignEnd="@+id/lesson_listitem_comment_text"
         android:onClick="onReplyButtonClick"
         android:layout_below="@+id/comment_author"
         android:enabled="true"
         android:clickable="false"
         android:background="@color/colorButton" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,29 +83,31 @@
         android:layout_toStartOf="@+id/lesson_listitem_comment_btn_reply"
         android:layout_below="@id/comment_author"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/lesson_listitem_comment_reply_text"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="4"
+            android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@color/colorPrimary"
 
             android:gravity="center"
             android:singleLine="true" />
         <TextView
             android:id="@+id/lesson_listitem_comment_reply_amount_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="svar"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_toRightOf="@id/lesson_listitem_comment_reply_text"
+            android:layout_toEndOf="@id/lesson_listitem_comment_reply_text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:singleLine="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </com.idgi.Widgets.CommentLayout>

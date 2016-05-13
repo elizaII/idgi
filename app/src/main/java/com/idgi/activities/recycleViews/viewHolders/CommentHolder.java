@@ -12,17 +12,17 @@ import com.idgi.core.User;
 
 public class CommentHolder extends ParentViewHolder {
 
-    private TextView txtComment, txtAuthor, txtSeeReplies;
+    private TextView txtComment, txtAuthor, txtReplyAmount;
     private ImageView imgProfilePicture;
     private CommentLayout view;
 
         public CommentHolder(View itemView) {
             super(itemView);
 
-            txtComment = (TextView) load(R.id.comment_text);
-			txtSeeReplies = (TextView) load(R.id.lesson_listitem_comment_reply_amount_text);
+            txtComment = (TextView) load(R.id.lesson_listitem_comment_text);
+			txtReplyAmount = (TextView) load(R.id.lesson_listitem_comment_reply_amount_text);
 			txtAuthor = (TextView) load(R.id.comment_author);
-            imgProfilePicture = (ImageView) load(R.id.comment_imageView_profilePicture);
+            imgProfilePicture = (ImageView) load(R.id.lesson_listitem_comment_image_profile_picture);
 
             this.view = (CommentLayout)itemView;
         }
@@ -40,7 +40,7 @@ public class CommentHolder extends ParentViewHolder {
 		view.setComment(comment);
 		txtComment.setText(comment.getText());
 
-		txtSeeReplies.setText("Se svar: " + comment.getNbrOfReplies() + "st");
+		txtReplyAmount.setText(comment.getNbrOfReplies());
 	}
 
 	private void updateAuthor(User author) {

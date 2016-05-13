@@ -51,6 +51,7 @@
     <!-- Content descriptions -->
     <string name="quiz_result_question_list_correctness_image">Image that shows whether the answer was correct</string>
     <string name="quiz_result_question_list_expand_image">Expand question</string>
+    <string name="profile_picture">Profilbild</string>
 
     <!-- For LessonActivity -->
     <string name="go_to_quiz">Gå till quiz</string>
@@ -119,8 +120,13 @@
     <string name="title_activity_my_course">Mina kurser</string>
     <string name="course_no_courses">Det finns inga kurser här.</string>
 
+    <!-- Profile activity -->
     <string name="profile_btn_edit">Redigera</string>
     <string name="profile_btn_save">Spara</string>
+    <string name="profile_hint_name">Namn</string>
+    <string name="profile_hint_age">Ålder</string>
+    <string name="profile_description_profile_image_circle">Cirkel runt profilbild</string>
+
 
     <!-- "Login required"-dialog -->
     <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
