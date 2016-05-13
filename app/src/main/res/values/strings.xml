@@ -41,6 +41,7 @@
 
 
     <!-- For Quiz & Quiz result Activities -->
+    <string name="quiz_out_of_time">Tiden är ute!</string>
     <string name="quiz_leaving_prompt_title">Lämnar quiz</string>
     <string name="quiz_leaving_prompt">Är du säker på att du vill avbryta quiz?</string>
     <string name="quiz_result_finished_text">Finished!</string>

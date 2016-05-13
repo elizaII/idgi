@@ -38,7 +38,6 @@ public class QuizActivity extends AppCompatActivity {
 	private Button btnNext;
 	private AnswerButton[] answerButtons;
     private ProgressBar timeProgressBar;
-    private RelativeLayout relativeLayout;
 
 	private boolean isInTransition = false;
 
@@ -53,7 +52,6 @@ public class QuizActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
-        relativeLayout = (RelativeLayout) findViewById(R.id.quiz_relative_layout);
 
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
@@ -77,22 +75,6 @@ public class QuizActivity extends AppCompatActivity {
 	private void initializeTimeBar(TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
 
-        relativeLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(ACTIVITY_TAG, "Width: " + relativeLayout.getWidth() + ", height: " + relativeLayout.getHeight());
-                if(relativeLayout.getWidth() != 0 && relativeLayout.getHeight() != 0){
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) timeProgressBar.getLayoutParams();
-//                    params.width = relativeLayout.getHeight();
-
-                    Log.d(ACTIVITY_TAG, "Progress bar's height: " + params.height);
-                    Log.d(ACTIVITY_TAG, "Progress bar's width: " + params.width);
-//                    params.height = relativeLayout.getWidth();
-                }
-            }
-        });
-//        timeProgressBar.setMinimumWidth(params.getHeight());
-//        timeProgressBar.setMinimumHeight(params.getWidth());
 
         final int MAX_TIME = timedQuiz.getTime();
         Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
@@ -106,6 +88,8 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+				Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
+				switchToQuizResultActivity();
                 Log.d(ACTIVITY_TAG, "You failed!");
             }
         };
