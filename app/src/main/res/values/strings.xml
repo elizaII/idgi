@@ -108,6 +108,7 @@
     <string name="content_lesson_leave_comment">Skriv en kommentar</string>
     <string name="content_lesson_post_comment">Lämna kommentar</string>
     <string name="content_lesson_no_lesson_found_title">N/A</string>
+    <string name="content_lesson_reply">Svara</string>
 
     <!-- Empty list stuff -->
     <string name="course_no_lessons">There are no lessons here yet.</string>
@@ -121,5 +122,8 @@
     <string name="profile_btn_edit">Redigera</string>
     <string name="profile_btn_save">Spara</string>
 
+    <!-- "Login required"-dialog -->
+    <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
+    <string name="dialog_login_required_button_login">Logga in</string>
 
 </resources>

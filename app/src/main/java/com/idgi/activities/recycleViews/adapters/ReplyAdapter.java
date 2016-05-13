@@ -17,28 +17,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, ReplyHolder> {
-    private ArrayList<Comment> data;
-        private LayoutInflater mInflator;
+    private ArrayList<Comment> comments;
+        private LayoutInflater inflater;
     private Context context;
 
     public ReplyAdapter(Context context, @NonNull List<? extends ParentListItem> parentListItem) {
             super(parentListItem);
-            mInflator = LayoutInflater.from(context);
-        this.data= (ArrayList<Comment>)parentListItem;
+            inflater = LayoutInflater.from(context);
+        this.comments = (ArrayList<Comment>)parentListItem;
         this.context = context;
         }
 
-        // onCreate ...
         @Override
         public CommentHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
-            View commentView = mInflator.inflate(R.layout.list_row_comment, parentViewGroup, false);
+            View commentView = inflater.inflate(R.layout.lesson_listitem_comment, parentViewGroup, false);
             return new CommentHolder(commentView);
         }
 
         @Override
         public ReplyHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
 
-            View replyView = mInflator.inflate(R.layout.list_row_reply, childViewGroup, false);
+            View replyView = inflater.inflate(R.layout.list_row_reply, childViewGroup, false);
             return new ReplyHolder(replyView);
         }
 

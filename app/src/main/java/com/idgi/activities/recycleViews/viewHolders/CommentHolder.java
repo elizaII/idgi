@@ -20,7 +20,7 @@ public class CommentHolder extends ParentViewHolder {
             super(itemView);
 
             txtComment = (TextView) load(R.id.comment_text);
-			txtSeeReplies = (TextView) load(R.id.see_replies_text);
+			txtSeeReplies = (TextView) load(R.id.lesson_listitem_comment_reply_amount_text);
 			txtAuthor = (TextView) load(R.id.comment_author);
             imgProfilePicture = (ImageView) load(R.id.comment_imageView_profilePicture);
 
@@ -38,7 +38,7 @@ public class CommentHolder extends ParentViewHolder {
 
 	private void updateComment(Comment comment) {
 		view.setComment(comment);
-		txtComment.setText(txtComment.getText());
+		txtComment.setText(comment.getText());
 
 		txtSeeReplies.setText("Se svar: " + comment.getNbrOfReplies() + "st");
 	}

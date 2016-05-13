@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.R;
-import com.idgi.Widgets.CreateDialog;
-import com.idgi.Widgets.CreateQuizDialog;
+import com.idgi.activities.dialogs.CreateDialog;
+import com.idgi.activities.dialogs.CreateQuizDialog;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;

@@ -11,6 +11,6 @@ public class Application extends android.app.Application {
 		Firebase.setAndroidContext(this);
 		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
 		FireDatabase.getInstance().initialize();
-		//FireDatabase.getInstance().createSchools();
+		//FireDatabase.getInstance().pushMockDataToFirebase();
 	}
 }

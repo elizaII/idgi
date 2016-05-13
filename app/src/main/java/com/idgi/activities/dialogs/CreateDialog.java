@@ -1,4 +1,4 @@
-package com.idgi.Widgets;
+package com.idgi.activities.dialogs;
 
 import android.app.Dialog;
 import android.os.Bundle;

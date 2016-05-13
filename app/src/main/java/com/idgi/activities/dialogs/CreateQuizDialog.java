@@ -1,4 +1,4 @@
-package com.idgi.Widgets;
+package com.idgi.activities.dialogs;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -53,7 +53,7 @@ public class CreateQuizDialog extends Dialog implements View.OnClickListener {
     }
 
     private void initiateList() {
-        ArrayList<String> questionNames = new ArrayList<String>();
+        ArrayList<String> questionNames = new ArrayList<>();
         for (Question question : questionList) {
             questionNames.add(question.getText());
         }

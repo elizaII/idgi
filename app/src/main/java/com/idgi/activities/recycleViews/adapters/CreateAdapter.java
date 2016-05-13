@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.Widgets.CreateDialog;
+import com.idgi.activities.dialogs.CreateDialog;
 import com.idgi.util.Type;
 
 import java.util.ArrayList;

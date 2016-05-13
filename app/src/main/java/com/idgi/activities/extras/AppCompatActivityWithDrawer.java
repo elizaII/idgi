@@ -1,5 +1,6 @@
 package com.idgi.activities.extras;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.idgi.R;
+import com.idgi.activities.ActivityType;
+import com.idgi.activities.LoginActivity;
+import com.idgi.activities.StartActivity;
 import com.idgi.util.Navigation;
 
 public class AppCompatActivityWithDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +47,9 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 
 	protected void initializeWithTitle(String title) {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle(title);
+		if (toolbar != null)
+			toolbar.setTitle(title);
+
 		initializeDrawer();
 	}
 
@@ -86,6 +92,21 @@ public class AppCompatActivityWithDrawer extends AppCompatActivity implements Na
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void changeToActivity(ActivityType type) {
+		Class target = null;
+
+		switch(type) {
+			case START:
+				target = StartActivity.class;
+				break;
+			case LOGIN:
+				target = LoginActivity.class;
+				break;
+		}
+
+		startActivity(new Intent(this, target));
 	}
 
 

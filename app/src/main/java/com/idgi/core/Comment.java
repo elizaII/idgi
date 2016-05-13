@@ -25,12 +25,13 @@ public class Comment implements ParentListItem{
 	public Comment(Comment replyTo,String text, User author) {
 		this.text = text;
 		this.author = author;
-		replies = new ArrayList<Comment>();
+		replies = new ArrayList<>();
 		this.replyTo=replyTo;
 	}
 
 
-	public void addReply(Comment reply) {
+	public void addReply(String message, User sender) {
+		Comment reply = new Comment(message, sender);
 		replies.add(0,reply);
 	}
 	

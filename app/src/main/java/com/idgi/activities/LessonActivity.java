@@ -11,14 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.extras.DialogFactory;
 import com.idgi.fragments.YoutubeFragment;
 
 import com.idgi.Widgets.CommentLayout;
 
-import com.idgi.Widgets.CommentReplyDialog;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
-import com.idgi.services.MockData;
 import com.idgi.activities.extras.AppCompatActivityWithDrawer;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
@@ -31,7 +30,6 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
-    private MockData database = MockData.getInstance();
     private TextView txtNewComment;
     private ProgressBar pointProgressBar;
     private Lesson lesson;
@@ -78,20 +76,33 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     }
 
     public void onCommentButtonClick(View view) {
-        if(txtNewComment.getText().toString().length() != 0) {
-            database.addComment(new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
-            comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
-            txtNewComment.setText("");
-            //updateComments();
-        }
+		if (SessionData.hasLoggedInUser()) {
+			if (txtNewComment.getText().toString().length() != 0) {
+				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
+				txtNewComment.setText("");
+				updateComments();
+			}
+		} else {
+			showRequireLoginDialog();
+		}
     }
 
     public void onReplyButtonClick(View view) {
-        final CommentLayout layout = (CommentLayout) view.getParent();
-        CommentReplyDialog dialog=new CommentReplyDialog(this, layout.getComment());
-        dialog.show();
-
+		if (SessionData.hasLoggedInUser())
+			showReplyDialog(view);
+		else
+			showRequireLoginDialog();
     }
+
+	private void showRequireLoginDialog() {
+		DialogFactory.createLoginRequiredDialog(this).show();
+	}
+
+	private void showReplyDialog(View childView) {
+		final CommentLayout parentLayout = (CommentLayout) childView.getParent();
+
+		DialogFactory.createCommentReplyDialog(this, parentLayout).show();
+	}
 
     @Override
     public void updatePoints(int value) {
@@ -104,14 +115,9 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             pointProgressBar.setProgress(value);
         }
     }
-   /* public void updateComments(){
-        adapter = new ReplyAdapter(this, comments);
-        recycler.setAdapter(adapter);
-    }*/
-
-    /*private void addReply(Comment comment) {
-        Comment reply = new Comment()
-    }*/
-
+   public void updateComments(){
+	   adapter = new ReplyAdapter(this, comments);
+	   recycler.swapAdapter(adapter, true);
+    }
 }
 

@@ -1,4 +1,4 @@
-package com.idgi.Widgets;
+package com.idgi.activities.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,7 +12,6 @@ import android.widget.Switch;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.services.FireDatabase;
 
 /**
  * Created by Allex on 2016-05-09.
