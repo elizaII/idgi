@@ -15,16 +15,16 @@ import com.idgi.session.SessionData;
 public class CommentReplyDialog extends Dialog implements
             android.view.View.OnClickListener {
 
-        private LessonActivity c;
-        private Dialog d;
+        private LessonActivity activity;
+        private Dialog dialog;
         private Button reply;
         private EditText reply_field;
     private Comment comment;
 
-        public CommentReplyDialog(LessonActivity a, Comment comment) {
-            super(a);
+        public CommentReplyDialog(LessonActivity activity, Comment comment) {
+            super(activity);
             // TODO Auto-generated constructor stub
-            this.c = a;
+            this.activity = activity;
             this.comment = comment;
         }
 
@@ -45,7 +45,7 @@ public class CommentReplyDialog extends Dialog implements
                 case R.id.send_reply_button:
                     if (reply_field.getText().toString().length() !=0) {
                         comment.addReply(new Comment(reply_field.getText().toString(), SessionData.getLoggedInUser()));
-                        c.updateComments();
+                        //activity.updateComments();
                     }
                     break;
                 default:

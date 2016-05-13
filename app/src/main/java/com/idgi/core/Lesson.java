@@ -7,7 +7,7 @@ public class Lesson implements Nameable {
 	private String name;
 	private String id;
 	private Video video;
-	private Discussion discussion;
+	private Discussion discussion = new Discussion();
 	private IQuiz quiz;
 
 	private Lesson() {}

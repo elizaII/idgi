@@ -9,7 +9,7 @@ public class Discussion {
 	private List<Comment> comments;
 	
 	public Discussion() {
-		comments = new ArrayList<Comment>();
+		comments = new ArrayList<>();
 		disabled = false;
 	}
 	

@@ -25,26 +25,25 @@ import com.idgi.session.SessionData;
 import com.idgi.activities.recycleViews.adapters.ReplyAdapter;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LessonActivity extends AppCompatActivityWithDrawer implements YoutubeFragment.FragmentListener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
-    private RecyclerView.LayoutManager manager;
-    private List<Comment> commentList;
     private MockData database = MockData.getInstance();
-    private TextView commentField;
+    private TextView txtNewComment;
     private ProgressBar pointProgressBar;
     private Lesson lesson;
+
+    private List<Comment> comments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
-        Lesson lesson = SessionData.getCurrentLesson();
+        lesson = SessionData.getCurrentLesson();
 
         String title = lesson == null ? getString(R.string.content_lesson_no_lesson_found_title) : lesson.getName();
 
@@ -52,15 +51,18 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
         if (SessionData.hasLoggedInUser())
             initializePointsBar();
+
+        initializeCommentView();
     }
 
     private void initializeCommentView() {
-        commentList = lesson.getDiscussion().getComments();
+        txtNewComment = (TextView) findViewById(R.id.lesson_new_comment_field);
+        comments = lesson.getDiscussion().getComments();
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ReplyAdapter(this, commentList);
+        adapter = new ReplyAdapter(this, comments);
         recycler.setAdapter(adapter);
     }
 
@@ -76,11 +78,11 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
     }
 
     public void onCommentButtonClick(View view) {
-        if(commentField.getText().toString().length() != 0) {
-            database.addComment(new Comment(commentField.getText().toString(), SessionData.getLoggedInUser()));
-            commentList.add(0, new Comment(commentField.getText().toString(), SessionData.getLoggedInUser()));
-            commentField.setText("");
-            updateComments();
+        if(txtNewComment.getText().toString().length() != 0) {
+            database.addComment(new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
+            comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
+            txtNewComment.setText("");
+            //updateComments();
         }
     }
 
@@ -102,11 +104,14 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             pointProgressBar.setProgress(value);
         }
     }
-    public void updateComments(){
-        adapter = new ReplyAdapter(this, commentList);
+   /* public void updateComments(){
+        adapter = new ReplyAdapter(this, comments);
         recycler.setAdapter(adapter);
+    }*/
 
-    }
+    /*private void addReply(Comment comment) {
+        Comment reply = new Comment()
+    }*/
 
 }
 
