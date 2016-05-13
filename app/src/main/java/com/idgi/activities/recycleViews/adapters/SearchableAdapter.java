@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.SubjectListActivity;
+import com.idgi.core.Course;
+import com.idgi.core.Lesson;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
@@ -42,10 +44,10 @@ public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (data.get(position) instanceof Subject) {
             return SUBJECT;
         }
-        else if (data.get(position) instanceof Subject) {
+        else if (data.get(position) instanceof Course) {
             return COURSE;
         }
-        else if (data.get(position) instanceof Subject) {
+        else if (data.get(position) instanceof Lesson) {
             return LESSON;
         }
         return -1;
@@ -84,19 +86,23 @@ public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch(holder.getItemViewType()) {
             case SCHOOL:
                 ViewHolder1 holder1 = (ViewHolder1) holder;
-                holder1.searchTextView.setText(data.get(position).getName());
+                School school = (School) data.get(position);
+                holder1.searchTextView.setText(school.getName());
                 break;
             case SUBJECT:
                 ViewHolder2 holder2 = (ViewHolder2) holder;
-                holder2.searchTextView.setText(data.get(position).getName());
+                Subject subject = (Subject) data.get(position);
+                holder2.searchTextView.setText(subject.getName());
                 break;
             case COURSE:
                 ViewHolder3 holder3 = (ViewHolder3) holder;
-                holder3.searchTextView.setText(data.get(position).getName());
+                Course course = (Course) data.get(position);
+                holder3.searchTextView.setText(course.getName());
                 break;
             case LESSON:
                 ViewHolder4 holder4 = (ViewHolder4) holder;
-                holder4.searchTextView.setText(data.get(position).getName());
+                Lesson lesson = (Lesson) data.get(position);
+                holder4.searchTextView.setText(lesson.getName());
                 break;
             default:
 
