@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,6 +61,17 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
         schoolNames = new ArrayList<>();
         for (School school : database.getSchools())
             schoolNames.add(school.getName());
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        //Inserting a youtube url by choosing it inside the youtube app
+        if(Intent.ACTION_SEND.equals(action) && type != null){
+            if("text/plain".equals(type)) {
+                insertYoutubeLink(intent);
+            }
+        }
     }
 
     public void onClick(View view) {
@@ -280,6 +292,17 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
 		activeDialog = null;
 	}
+
+    /**
+     * Setting the link to the youtube url that was received from the youtube app
+     * @param intent
+     */
+    private void insertYoutubeLink(Intent intent){
+        String youtubeURL = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if(youtubeURL != null){
+            txtYouTubeUrl.setText(youtubeURL);
+        }
+    }
 
     private boolean isYoutubeLink(String url){
         return url.contains("youtube.com") || url.contains("youtu.be");

@@ -66,9 +66,15 @@
             android:label="@string/title_activity_quiz_result" />
         <activity android:name=".activities.CourseActivity" />
         <activity android:name=".activities.StatisticsActivity" />
-        <activity android:name=".activities.CreateLessonActivity" />
+        <activity android:name=".activities.CreateLessonActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.CreateQuizActivity" />
-        <activity android:name=".activities.MyCoursesActivity"></activity>
+        <activity android:name=".activities.MyCoursesActivity" />
     </application>
 
 </manifest>
