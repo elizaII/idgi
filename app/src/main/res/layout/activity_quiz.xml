@@ -24,8 +24,8 @@
         style="@style/timeProgressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="50"
         android:id="@+id/content_quiz_time_progress"
+        android:visibility="invisible"
         android:layout_alignParentTop="true" />
 
     <LinearLayout

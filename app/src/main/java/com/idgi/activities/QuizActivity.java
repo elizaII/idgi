@@ -76,6 +76,7 @@ public class QuizActivity extends AppCompatActivity {
 
 	private void initializeTimeBar(TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
+		timeProgressBar.setVisibility(View.VISIBLE);
 
 
         final int MAX_TIME = timedQuiz.getTime();
