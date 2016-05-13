@@ -1,6 +1,8 @@
 package com.idgi.activities;
 
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,8 +68,10 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
     private void initializePointsBar() {
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
-        pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
-        pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
+		if (pointProgressBar != null) {
+			pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
+			pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
+		}
     }
 
 
@@ -80,7 +84,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 			if (txtNewComment.getText().toString().length() != 0) {
 				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
 				txtNewComment.setText("");
-				updateComments();
+				refreshComments();
 			}
 		} else {
 			showRequireLoginDialog();
@@ -101,7 +105,14 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 	private void showReplyDialog(View childView) {
 		final CommentLayout parentLayout = (CommentLayout) childView.getParent();
 
-		DialogFactory.createCommentReplyDialog(this, parentLayout).show();
+		Dialog replyDialog = DialogFactory.createCommentReplyDialog(this, parentLayout);
+		replyDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			public void onDismiss(DialogInterface dialog) {
+				refreshComments();
+			}
+		});
+
+		replyDialog.show();
 	}
 
     @Override
@@ -115,9 +126,9 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
             pointProgressBar.setProgress(value);
         }
     }
-   public void updateComments(){
+   public void refreshComments(){
 	   adapter = new ReplyAdapter(this, comments);
-	   recycler.swapAdapter(adapter, true);
+	   recycler.setAdapter(adapter);
     }
 }
 

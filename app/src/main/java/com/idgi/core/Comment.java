@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Comment implements ParentListItem{
+public class Comment implements ParentListItem {
 	
 	private String text;
 	private Comment replyTo;
@@ -32,7 +32,8 @@ public class Comment implements ParentListItem{
 
 	public void addReply(String message, User sender) {
 		Comment reply = new Comment(message, sender);
-		replies.add(0,reply);
+		//replies.add(0,reply);
+		replies.add(reply);
 	}
 	
 	public String getText() {
@@ -47,11 +48,11 @@ public class Comment implements ParentListItem{
 		return replies;
 	}
 
-	public int getNbrOfReplies(){ return replies.size(); }
+	public int getNumberOfReplies(){ return replies.size(); }
 
 	@Override
-	public List<?> getChildItemList() {
-		return replies;
+	public List<Comment> getChildItemList() {
+		return getReplies();
 	}
 
 	@Override

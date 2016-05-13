@@ -15,6 +15,7 @@ import com.idgi.R;
 import com.idgi.core.Account;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
+import com.idgi.session.SessionData;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText nameText, phoneText, eMailText;
@@ -28,8 +29,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         nameText = (EditText) findViewById(R.id.nameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
         eMailText = (EditText) findViewById(R.id.eMailText);
+
         Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
-        createAccountButton.setOnClickListener(this);
+        if (createAccountButton != null)
+            createAccountButton.setOnClickListener(this);
     }
 
     public void createAccount() {
@@ -59,6 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
 
         FireDatabase.getInstance().pushAccount(account);
+        SessionData.setLoggedInUser(user);
 
         startActivity(new Intent(CreateAccountActivity.this, StartActivity.class));
 

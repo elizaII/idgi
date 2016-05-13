@@ -45,15 +45,16 @@ public class QuizActivity extends AppCompatActivity {
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
 		quiz = SessionData.getCurrentQuiz();
-		if (quiz == null)
+		if (quiz != null) {
+			quiz.reset();
+
+			initializeNextButton();
+			initializeQuestionView();
+
+			createAnswerButtons(quiz.getCurrentQuestion());
+		} else {
 			finish();
-
-		SessionData.getCurrentQuiz().reset();
-
-		initializeNextButton();
-		initializeQuestionView();
-
-		createAnswerButtons(quiz.getCurrentQuestion());
+		}
 	}
 
 	private void initializeNextButton() {

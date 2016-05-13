@@ -17,15 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, ReplyHolder> {
-    private ArrayList<Comment> comments;
         private LayoutInflater inflater;
-    private Context context;
 
     public ReplyAdapter(Context context, @NonNull List<? extends ParentListItem> parentListItem) {
             super(parentListItem);
             inflater = LayoutInflater.from(context);
-        this.comments = (ArrayList<Comment>)parentListItem;
-        this.context = context;
         }
 
         @Override
@@ -36,16 +32,15 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<CommentHolder, Reply
 
         @Override
         public ReplyHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
-
             View replyView = inflater.inflate(R.layout.list_row_reply, childViewGroup, false);
             return new ReplyHolder(replyView);
         }
 
-        // onBind ...
         @Override
         public void onBindParentViewHolder(CommentHolder commentHolder, int position, ParentListItem parentListItem) {
-            //commentHolder.bind(data.get(position));
-            commentHolder.bind((Comment)parentListItem);
+			Comment comment = (Comment) parentListItem;
+            commentHolder.bind(comment);
+            //commentHolder.bind((Comment)parentListItem);
 
         }
 
