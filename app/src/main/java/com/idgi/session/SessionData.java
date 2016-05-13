@@ -70,4 +70,6 @@ public class SessionData {
 	public static void setCurrentSchool(School school) {
 		currentSchool = school;
 	}
+
+
 }

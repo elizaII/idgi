@@ -37,7 +37,7 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 		start_btn_create_account = (Button) findViewById(R.id.start_btn_create_account);
 		start_btn_account = (Button) findViewById(R.id.start_btn_account);
 		start_btn_create_lesson = (Button) findViewById(R.id.start_btn_create_lesson);
-		if (!Storage.hasActiveUser()){
+		if (!SessionData.hasLoggedInUser()){
 			notLoggedIn();
 		}
 	}
