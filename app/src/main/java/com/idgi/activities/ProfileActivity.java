@@ -3,18 +3,17 @@ package com.idgi.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import com.idgi.R;
 import com.idgi.core.User;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
 
-public class ProfileActivity extends AppCompatActivityWithDrawer {
+public class ProfileActivity extends DrawerActivity {
 
     User user;
     EditText name;

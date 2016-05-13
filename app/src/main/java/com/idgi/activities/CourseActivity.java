@@ -16,13 +16,13 @@ import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
 import com.idgi.R;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends AppCompatActivityWithDrawer {
+public class CourseActivity extends DrawerActivity {
 
     private enum Section {
         LESSON, QUIZ, INFO;

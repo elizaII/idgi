@@ -1,6 +1,5 @@
 package com.idgi.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,16 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.extras.ActivityType;
 import com.idgi.core.IQuiz;
-import com.idgi.core.Quiz;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
-import com.idgi.core.User;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
-import com.idgi.activities.recycleViews.adapters.QuestionAdapter;
+import com.idgi.recycleViews.adapters.QuestionAdapter;
 
 import java.util.Locale;
 
-public class QuizResultActivity extends AppCompatActivityWithDrawer {
+public class QuizResultActivity extends DrawerActivity {
 
 	private IQuiz quiz;
 
@@ -52,7 +50,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		if (btnRetake != null)
 			btnRetake.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					startActivity(new Intent(QuizResultActivity.this, QuizActivity.class));
+					startActivity(ActivityType.QUIZ);
 					finish();
 				}
 			});
@@ -60,7 +58,7 @@ public class QuizResultActivity extends AppCompatActivityWithDrawer {
 		if (btnDone != null)
 			btnDone.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					startActivity(new Intent(QuizResultActivity.this, StartActivity.class));
+					startActivity(ActivityType.START);
 					finish();
 				}
 			});

@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.idgi.R;
+import com.idgi.activities.extras.ActivityType;
 import com.idgi.core.User;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
-public class StartActivity extends AppCompatActivityWithDrawer {
+public class StartActivity extends DrawerActivity {
 
 		private Button start_btn_browse;
 		private Button start_btn_log_in;
@@ -43,8 +44,9 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 	}
 
 	private void notLoggedIn() {
-		start_btn_account.setEnabled(false);
-		start_btn_create_lesson.setEnabled(false);
+		// TODO uncomment, development is significantly slower when this is active
+		/*start_btn_account.setEnabled(false);
+		start_btn_create_lesson.setEnabled(false);*/
 	}
 
 	@Override
@@ -53,16 +55,12 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 	}
 
 	public void onStartButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, BrowseActivity.class));
+		startActivity(ActivityType.BROWSE);
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onLogInButtonClick(View view) {
-
-		Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
-		intent.putExtra("quiz_key", "Quiz123");
-
-		startActivity(intent);
+		startActivity(ActivityType.LOGIN);
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
@@ -78,12 +76,12 @@ public class StartActivity extends AppCompatActivityWithDrawer {
 	}
 
 	public void onAccountButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, ProfileActivity.class));
+		startActivity(ActivityType.PROFILE);
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onLessonButtonClick(View view) {
-		startActivity(new Intent(StartActivity.this, CreateLessonActivity.class));
+		startActivity(ActivityType.CREATE_LESSON);
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 

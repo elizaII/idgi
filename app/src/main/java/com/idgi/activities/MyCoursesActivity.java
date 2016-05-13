@@ -10,13 +10,13 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
 import com.idgi.core.Course;
-import com.idgi.activities.recycleViews.adapters.CourseListAdapter;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.recycleViews.adapters.CourseListAdapter;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 
-public class MyCoursesActivity extends AppCompatActivityWithDrawer {
+public class MyCoursesActivity extends DrawerActivity {
 
     private CourseListAdapter adapter;
     private EmptyRecyclerView recycler;

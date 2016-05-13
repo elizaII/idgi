@@ -7,13 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
-import com.idgi.activities.recycleViews.adapters.SchoolListAdapter;
+import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.recycleViews.adapters.SchoolListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SchoolListActivity extends AppCompatActivityWithDrawer {
+public class SchoolListActivity extends DrawerActivity {
 
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;

@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.viewHolders;
+package com.idgi.recycleViews.viewHolders;
 
 import android.view.View;
 import android.widget.ImageView;

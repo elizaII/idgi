@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.adapters;
+package com.idgi.recycleViews.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.idgi.R;
 import com.idgi.core.Answer;
-import com.idgi.activities.recycleViews.viewHolders.AnswerViewHolder;
+import com.idgi.recycleViews.viewHolders.AnswerViewHolder;
 
 import java.util.List;
 

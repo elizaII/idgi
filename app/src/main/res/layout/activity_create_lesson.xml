@@ -19,6 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:enabled="false" />
 
     <Button
@@ -29,6 +30,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onCreateLessonButtonClick"
         android:enabled="false" />
@@ -41,6 +43,7 @@
         android:layout_above="@+id/youtube_url_editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:enabled="false" />
 
@@ -52,6 +55,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:hint="URL till youtube-klipp"
         android:enabled="false" />
 
@@ -64,6 +68,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -75,6 +81,7 @@
         android:layout_below="@+id/add_school_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:enabled="false" />
 
@@ -87,7 +94,9 @@
         android:layout_below="@+id/add_subject_button"
         android:layout_toRightOf="@+id/lesson_name_editText"
         android:layout_toEndOf="@+id/lesson_name_editText"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:enabled="false" />
 </RelativeLayout>

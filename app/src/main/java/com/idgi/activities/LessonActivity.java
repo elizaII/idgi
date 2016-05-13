@@ -3,7 +3,6 @@ package com.idgi.activities;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.extras.ActivityType;
 import com.idgi.activities.extras.DialogFactory;
 import com.idgi.fragments.YoutubeFragment;
 
@@ -20,15 +20,15 @@ import com.idgi.Widgets.CommentLayout;
 
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
-import com.idgi.activities.recycleViews.adapters.ReplyAdapter;
+import com.idgi.recycleViews.adapters.ReplyAdapter;
 
 
 import java.util.List;
 
-public class LessonActivity extends AppCompatActivityWithDrawer implements YoutubeFragment.FragmentListener {
+public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
@@ -76,7 +76,7 @@ public class LessonActivity extends AppCompatActivityWithDrawer implements Youtu
 
 
     public void onToQuizClick(View view) {
-        startActivity(new Intent(this, QuizActivity.class));
+		startActivity(ActivityType.QUIZ);
     }
 
     public void onCommentButtonClick(View view) {

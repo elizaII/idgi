@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Statistics;
 import com.idgi.core.User;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
-public class StatisticsActivity extends AppCompatActivityWithDrawer {
+public class StatisticsActivity extends DrawerActivity {
 	private TextView txtCompletedCourses, txtOngoingCourses, txtCompletedQuizAmount,
 			txtSeenVideosAmount, txtCommentAmount, txtHatAmount, txtPoints;
 

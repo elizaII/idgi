@@ -8,15 +8,15 @@ import android.support.v7.widget.Toolbar;
 import com.idgi.R;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
-import com.idgi.activities.recycleViews.adapters.SubjectListAdapter;
+import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.recycleViews.adapters.SubjectListAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SubjectListActivity extends AppCompatActivityWithDrawer{
+public class SubjectListActivity extends DrawerActivity {
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;

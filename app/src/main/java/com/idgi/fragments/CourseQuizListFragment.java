@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
 import com.idgi.core.Quiz;
-import com.idgi.activities.recycleViews.adapters.LessonListAdapter;
+import com.idgi.recycleViews.adapters.LessonListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

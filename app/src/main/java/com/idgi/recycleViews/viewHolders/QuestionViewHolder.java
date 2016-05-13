@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.viewHolders;
+package com.idgi.recycleViews.viewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

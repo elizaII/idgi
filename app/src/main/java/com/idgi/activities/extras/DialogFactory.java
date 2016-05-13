@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.CommentLayout;
-import com.idgi.activities.ActivityType;
 import com.idgi.core.Comment;
 import com.idgi.session.SessionData;
+
+import java.util.ArrayList;
 
 public final class DialogFactory {
 
@@ -36,8 +37,8 @@ public final class DialogFactory {
 
 		txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				AppCompatActivityWithDrawer activity = (AppCompatActivityWithDrawer) context;
-				activity.changeToActivity(ActivityType.LOGIN);
+				DrawerActivity activity = (DrawerActivity) context;
+				activity.startActivity(ActivityType.LOGIN);
 			}
 		});
 

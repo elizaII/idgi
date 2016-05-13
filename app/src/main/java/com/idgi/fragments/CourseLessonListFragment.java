@@ -14,7 +14,7 @@ import com.idgi.R;
 import com.idgi.Widgets.EmptyRecyclerView;
 import com.idgi.core.Lesson;
 import com.idgi.services.MockData;
-import com.idgi.activities.recycleViews.adapters.LessonListAdapter;
+import com.idgi.recycleViews.adapters.LessonListAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;

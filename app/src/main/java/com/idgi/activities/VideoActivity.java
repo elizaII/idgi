@@ -20,7 +20,7 @@ import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.idgi.R;
 import com.idgi.util.Config;
-import com.idgi.util.Navigation;
+import com.idgi.activities.extras.Navigation;
 
 public class VideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, NavigationView.OnNavigationItemSelectedListener{
 	private Toolbar toolbar;

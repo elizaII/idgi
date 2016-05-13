@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.adapters;
+package com.idgi.recycleViews.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.idgi.activities.CourseListActivity;
 import com.idgi.R;
-import com.idgi.activities.SubjectListActivity;
-import com.idgi.core.School;
-import com.idgi.services.FireDatabase;
+import com.idgi.core.Subject;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 
-public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
+public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
 
     private ArrayList<String> data;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, ArrayList<String> data){
+    public SubjectListAdapter(Context context, ArrayList<String> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
@@ -37,7 +36,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data.get(position));
+        holder.subjectTextView.setText(data.get(position));
     }
 
     @Override
@@ -48,22 +47,21 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView schoolTextView;
+        public TextView subjectTextView;
 
         public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
-            schoolTextView =(TextView) v.findViewById(R.id.rowTextView);
+            subjectTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View view){
-            String schoolName = schoolTextView.getText().toString();
-            School school = FireDatabase.getInstance().getSchool((schoolName));
-
-            SessionData.setCurrentSchool(school);
+            String subjectName = subjectTextView.getText().toString();
+            Subject subject = SessionData.getCurrentSchool().getSubject(subjectName);
+            SessionData.setCurrentSubject(subject);
 
             Context context = view.getContext();
-            context.startActivity(new Intent(context, SubjectListActivity.class));
+            context.startActivity(new Intent(context, CourseListActivity.class));
         }
 
     }

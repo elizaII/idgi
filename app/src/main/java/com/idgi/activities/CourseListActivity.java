@@ -7,14 +7,14 @@ import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
 import com.idgi.core.Course;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
-import com.idgi.activities.recycleViews.adapters.CourseListAdapter;
+import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.recycleViews.adapters.CourseListAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CourseListActivity extends AppCompatActivityWithDrawer {
+public class CourseListActivity extends DrawerActivity {
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;

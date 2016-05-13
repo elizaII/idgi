@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.adapters;
+package com.idgi.recycleViews.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,22 +8,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.core.Course;
 
 import java.util.ArrayList;
 
-public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAdapter.ViewHolder> {
+public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.ViewHolder>{
 
-    private ArrayList<String> data;
+
+    private ArrayList<Course> data;
     private LayoutInflater inflater;
 
-    public CreateQuestionAdapter(Context context, ArrayList<String> data) {
+
+
+    public MyCoursesAdapter(Context context, ArrayList<Course> data){
         this.data = data;
         inflater = LayoutInflater.from(context);
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_row, parent, false);
+        View view = inflater.inflate(R.layout.list_row_course, parent, false);
 
         return new ViewHolder(view);
 
@@ -32,7 +37,7 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position));
+        holder.textView.setText(data.get(position).getName());
     }
 
     @Override
@@ -41,19 +46,18 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView textView;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v){
             super(v);
             v.setOnClickListener(this);
-            textView = (TextView) v.findViewById(R.id.rowTextView);
+            textView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View view) {
-
+        public void onClick(View view){
+         //   String text = textView.getText().toString();
         }
     }
 }
-

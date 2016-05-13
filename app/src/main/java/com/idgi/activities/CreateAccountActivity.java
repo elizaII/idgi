@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.R;
+import com.idgi.activities.extras.ActivityType;
+import com.idgi.activities.extras.Navigation;
 import com.idgi.core.Account;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
@@ -64,7 +66,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         FireDatabase.getInstance().pushAccount(account);
         SessionData.setLoggedInUser(user);
 
-        startActivity(new Intent(CreateAccountActivity.this, StartActivity.class));
+        Navigation.startActivity(this, ActivityType.START);
 
     }
     private boolean formIsValid() {

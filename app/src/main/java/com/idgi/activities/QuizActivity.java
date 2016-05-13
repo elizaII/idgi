@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idgi.R;
+import com.idgi.activities.extras.ActivityType;
+import com.idgi.activities.extras.Navigation;
 import com.idgi.core.IQuiz;
 import com.idgi.core.TimedQuiz;
 import com.idgi.util.Config;
@@ -154,7 +156,7 @@ public class QuizActivity extends AppCompatActivity {
 
 	public void switchToQuizResultActivity() {
 		leftActivity = true;
-		startActivity(new Intent(QuizActivity.this, QuizResultActivity.class));
+		Navigation.startActivity(this, ActivityType.QUIZ_RESULT);
 		finish();
 	}
 

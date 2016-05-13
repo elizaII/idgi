@@ -11,7 +11,7 @@ import android.widget.Button;
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
-import com.idgi.activities.recycleViews.adapters.CreateQuestionAdapter;
+import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,13 @@
 package com.idgi.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.idgi.R;
-import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+import com.idgi.activities.extras.ActivityType;
+import com.idgi.activities.extras.DrawerActivity;
 
-public class BrowseActivity extends AppCompatActivityWithDrawer {
+public class BrowseActivity extends DrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class BrowseActivity extends AppCompatActivityWithDrawer {
     }
 
     public void onSchoolButtonClick(View view){
-        startActivity(new Intent(BrowseActivity.this, SchoolListActivity.class));
+        startActivity(ActivityType.SCHOOL_LIST);
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 

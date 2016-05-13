@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.adapters;
+package com.idgi.recycleViews.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.idgi.R;
 import com.idgi.core.Question;
-import com.idgi.activities.recycleViews.viewHolders.QuestionViewHolder;
+import com.idgi.recycleViews.viewHolders.QuestionViewHolder;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.idgi.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.R;
-import com.idgi.activities.dialogs.CreateDialog;
+import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
+import com.idgi.activities.extras.ActivityType;
+import com.idgi.activities.extras.Navigation;
+import com.idgi.recycleViews.adapters.SelectNameableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
@@ -24,7 +26,7 @@ import com.idgi.core.ModelUtility;
 
 import java.util.ArrayList;
 
-public class CreateLessonActivity extends AppCompatActivity {
+public class CreateLessonActivity extends AppCompatActivity implements SelectNameableAdapter.ListChangeListener {
 
     private FireDatabase database = FireDatabase.getInstance();
     private EditText txtLessonName, txtYouTubeUrl;
@@ -36,6 +38,8 @@ public class CreateLessonActivity extends AppCompatActivity {
     private Subject subject;
     private Course course;
     private Quiz quiz;
+
+	private SelectNameableDialog activeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,25 +61,25 @@ public class CreateLessonActivity extends AppCompatActivity {
             schoolNames.add(school.getName());
     }
 
-    public void onClick(View v) {
-        CreateDialog dialog = null;
-
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.add_school_button:
-                dialog = new CreateDialog(this, Type.SCHOOL, schoolNames);
+                activeDialog = new SelectNameableDialog(this, Type.SCHOOL, schoolNames);
                 break;
             case R.id.add_subject_button:
-                dialog = new CreateDialog(this, Type.SUBJECT, subjectNames);
+				activeDialog = new SelectNameableDialog(this, Type.SUBJECT, subjectNames);
                 break;
             case R.id.add_course_button:
-                dialog = new CreateDialog(this, Type.COURSE, courseNames);
+				activeDialog = new SelectNameableDialog(this, Type.COURSE, courseNames);
                 break;
             default:
                 break;
         }
 
-        if (dialog != null)
-            dialog.show();
+        if (activeDialog != null) {
+			activeDialog.show();
+			activeDialog.setListChangeListener(this);
+        }
 
     }
 
@@ -85,7 +89,6 @@ public class CreateLessonActivity extends AppCompatActivity {
     }
 
     public void selectItem(String name, Type type) {
-
         if (name.length() > 0) {
             Button btnEnable = null;
             Button btnText = null;
@@ -182,11 +185,7 @@ public class CreateLessonActivity extends AppCompatActivity {
         pushLesson(lesson);
         SessionData.setCurrentLesson(lesson);
 
-        gotoLessonActivity();
-    }
-
-    private void gotoLessonActivity() {
-        startActivity(new Intent(CreateLessonActivity.this, LessonActivity.class));
+        Navigation.startActivity(this, ActivityType.LESSON);
     }
 
     private void pushLesson(Lesson lesson) {
@@ -261,4 +260,12 @@ public class CreateLessonActivity extends AppCompatActivity {
         }
     }
 
+	@Override
+	public void receiveItemData(String name, Type type) {
+		selectItem(name, type);
+		if (activeDialog != null)
+		activeDialog.dismiss();
+
+		activeDialog = null;
+	}
 }
