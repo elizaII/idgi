@@ -113,8 +113,13 @@
     <string name="course_no_lessons">There are no lessons here yet.</string>
     <string name="course_no_quizzes">There are no quizzes here yet.</string>
     <string name="course_no_info">There is no info here yet.</string>
+
     <string name="no_description">Det finns ingen beskrivning för det här objektet.</string>
     <string name="title_activity_my_course">Mina kurser</string>
     <string name="course_no_courses">Det finns inga kurser här.</string>
+
+    <string name="profile_btn_edit">Redigera</string>
+    <string name="profile_btn_save">Spara</string>
+
 
 </resources>

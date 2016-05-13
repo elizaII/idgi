@@ -1,11 +1,13 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idgi.util.Nameable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Course implements Nameable {
 	private String name;
 	private List<Lesson> lessons;

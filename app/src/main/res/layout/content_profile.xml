@@ -31,14 +31,6 @@
         android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <ImageButton
-        android:id="@+id/profile_btn_editName"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:background="@drawable/ic_mode_edit_black_24dp"
-        android:onClick="enableInputFieldButtonClicked"
-        android:layout_alignRight="@+id/profile_editText_name"
-        android:layout_alignEnd="@+id/profile_editText_name" />
 </RelativeLayout>
 
     <RelativeLayout
@@ -51,19 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:text="Min ålder"
+        android:text="Mitt namn"
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <ImageButton
-        android:id="@+id/profile_btn_editAge"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:background="@drawable/ic_mode_edit_black_24dp"
-        android:onClick="enableInputFieldButtonClicked"
-        android:layout_alignRight="@+id/profile_editText_age"
-        android:layout_alignEnd="@+id/profile_editText_age" />
         </RelativeLayout>
 
     <TextView
@@ -72,7 +56,7 @@
         android:layout_height="wrap_content"
         android:text="609 gets"
         android:layout_marginTop="36dp"
-        android:layout_below="@+id/profile_relativeLayout_editAge"
+        android:layout_below="@+id/profile_btn_toggleEdit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <TextView
@@ -93,15 +77,15 @@
     </RelativeLayout>
 
     <ToggleButton
+        style="@style/menu_button"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="toggla"
-        android:id="@+id/toggleButton"
-        android:layout_below="@+id/profile_textView_nrOfGets"
-        android:layout_alignRight="@+id/profile_textView_myHats"
-        android:layout_alignEnd="@+id/profile_textView_myHats"
+        android:id="@+id/profile_btn_toggleEdit"
         android:checked="false"
-        android:textOff="Redigera"
-        android:textOn="Spara" />
-
+        android:onClick="toggleEditState"
+        android:textOff="@string/profile_btn_edit"
+        android:textOn="@string/profile_btn_save"
+        android:layout_below="@+id/profile_relativeLayout_editAge"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

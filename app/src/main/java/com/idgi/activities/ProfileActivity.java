@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import com.idgi.R;
 import com.idgi.core.User;
 import com.idgi.activities.extras.AppCompatActivityWithDrawer;
+
 
 public class ProfileActivity extends AppCompatActivityWithDrawer {
 
@@ -27,10 +29,15 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
 
         name = (EditText) findViewById(R.id.profile_editText_name);
         age = (EditText) findViewById(R.id.profile_editText_age);
+    //    user = Storage.getActiveUser();
+
+     //   name.setText(user.getName());
+       // age.setText(user.getAge());
+       // age.setText(user.getEmail());
 
         initializeDrawer();
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -45,8 +52,42 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
+    private void enableInputField(EditText field) {
+ //       field.setFocusableInTouchMode(true);
+  //      field.setClickable(true);
+        field.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
+  //      field.setTag("enabled");
+    }
+    private void disableInputField(EditText field) {
+ //       field.setFocusableInTouchMode(false);
+   //     field.setClickable(false);
+        field.clearFocus();
+     //   field.setTag("disabled");
+    }
 
+    private void saveInfo() {
+      //  user.setName(name.getText().toString());
+       // user.setAge(age.getText().toString());
+    }
+    public void toggleEditState(View view) {
+        boolean checked = ((ToggleButton)view).isChecked();
+        if (checked == true) {
+            enableInputField(age);
+            enableInputField(name);
+        }
+        if (checked == false) {
+            disableInputField(name);
+            disableInputField(age);
+            saveInfo();
+        }
+
+    }
+
+/*
     public void enableInputFieldButtonClicked(View view) {
         if (view.getId() == R.id.profile_btn_editName ) {
             if (name.getTag() == "enabled") {
@@ -63,25 +104,5 @@ public class ProfileActivity extends AppCompatActivityWithDrawer {
                 enableInputField(age);
             }
         }
-    }
-
-    private void enableInputField(EditText field) {
-        field.setFocusableInTouchMode(true);
-        field.setClickable(true);
-        field.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(field, InputMethodManager.SHOW_IMPLICIT);
-        field.setTag("enabled");
-    }
-    private void disableInputField(EditText field) {
-        field.setFocusableInTouchMode(false);
-        field.setClickable(false);
-        field.clearFocus();
-        field.setTag("disabled");
-    }
-
-    private void saveInfo(View view) {
-        user.setName(name.getText().toString());
-        user.setAge(age.getText().toString());
-    }
+    }*/
 }
