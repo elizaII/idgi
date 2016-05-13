@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -175,17 +176,29 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
     public void onCreateLessonButtonClick(View view){
 
-        String videoUrl = txtYouTubeUrl.getText().toString();
-        String lessonName = txtLessonName.getText().toString();
+        if(isYoutubeLink(txtYouTubeUrl.getText().toString())){
 
-        Video video = Video.from(videoUrl);
-        Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(quiz);
-        course.addLesson(lesson);
+            //Todo... trim youtubelink
+            String videoUrl = txtYouTubeUrl.getText().toString();
+            String lessonName = txtLessonName.getText().toString();
 
-        pushLesson(lesson);
-        SessionData.setCurrentLesson(lesson);
+            Video video = Video.from(videoUrl);
+            Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(quiz);
+            course.addLesson(lesson);
 
-        Navigation.startActivity(this, ActivityType.LESSON);
+            pushLesson(lesson);
+            SessionData.setCurrentLesson(lesson);
+
+            Navigation.startActivity(this, ActivityType.LESSON);
+        } else{
+
+            //Show dialog when user has given an invalid link
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle(getString(R.string.create_lesson_invalid_link_title))
+                    .setMessage(getString(R.string.create_lesson_invalid_link_message))
+                    .setPositiveButton(getString(R.string.ok),null)
+                    .show();
+        }
     }
 
     private void pushLesson(Lesson lesson) {
@@ -268,4 +281,8 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
 		activeDialog = null;
 	}
+
+    private boolean isYoutubeLink(String url){
+        return url.contains("youtube.com") || url.contains("youtu.be");
+    }
 }

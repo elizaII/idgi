@@ -14,6 +14,7 @@
 
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
+    <string name="ok">OK</string>
 
     <string name="quiz_next_question">Next Question</string>
     <string name="quiz_finish">Finish</string>
@@ -133,5 +134,9 @@
     <!-- "Login required"-dialog -->
     <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
     <string name="dialog_login_required_button_login">Logga in</string>
+
+    <!-- For create lesson activity -->
+    <string name="create_lesson_invalid_link_title">Ogiltig länk</string>
+    <string name="create_lesson_invalid_link_message">Din länk funkar inte. Var vänlig klistra in med en fungerande youtube-länk.</string>
 
 </resources>
