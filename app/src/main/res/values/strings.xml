@@ -130,7 +130,6 @@
     <string name="profile_hint_age">Ålder</string>
     <string name="profile_description_profile_image_circle">Cirkel runt profilbild</string>
 
-
     <!-- "Login required"-dialog -->
     <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
     <string name="dialog_login_required_button_login">Logga in</string>
@@ -144,5 +143,8 @@
     <string name="search_hint">Sök</string>
     <string name="action_search" />
 
+    <!-- Hats-->
+    <string name="hat_image_content_description">Hat image</string>
+    <string name="hat_points">poäng</string>
 
 </resources>
