@@ -41,6 +41,8 @@ public class QuizActivity extends AppCompatActivity {
 	private AnswerButton[] answerButtons;
     private ProgressBar timeProgressBar;
 
+	private CountDownTimer timer;
+
 	private boolean isInTransition = false;
 
 	//To stop weird transitions after we've already exited the activity
@@ -74,6 +76,7 @@ public class QuizActivity extends AppCompatActivity {
 		}
 	}
 
+	//Todo... Refactor this huge method
 	private void initializeTimeBar(final TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
 		timeProgressBar.setVisibility(View.VISIBLE);
@@ -83,7 +86,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
         timeProgressBar.setMax(MAX_TIME);
 
-        CountDownTimer timer = new CountDownTimer(MAX_TIME, 1) {
+        timer = new CountDownTimer(MAX_TIME, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeProgressBar.setProgress(MAX_TIME - (int)millisUntilFinished);
@@ -91,10 +94,12 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-				Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
+				if(timeProgressBar.getProgress() == MAX_TIME){
+					Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
+				}
 				switchToQuizResultActivity();
-				timedQuiz.setRemainingTime(timeProgressBar.getProgress());
-				Log.d(ACTIVITY_TAG, "Remaining time: " + timeProgressBar.getProgress());
+				timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
+				Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
 				Log.d(ACTIVITY_TAG, "You failed!");
             }
         };
@@ -150,7 +155,11 @@ public class QuizActivity extends AppCompatActivity {
 		quiz.nextQuestion();
 
 		if (quiz.isFinished())
-			switchToQuizResultActivity();
+			if(quiz instanceof TimedQuiz) {
+				timer.onFinish();
+				timer.cancel();
+			} else
+				switchToQuizResultActivity();
 		else
 			showQuestion(quiz.getCurrentQuestion());
 
