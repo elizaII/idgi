@@ -6,14 +6,19 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.activities.extras.ActivityType;
 import com.idgi.activities.extras.DialogFactory;
+import com.idgi.core.IQuiz;
+import com.idgi.core.TimedQuiz;
 import com.idgi.fragments.YoutubeFragment;
 
 import com.idgi.Widgets.CommentLayout;
@@ -26,9 +31,12 @@ import com.idgi.session.SessionData;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
 
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.Time;
 import java.util.List;
 
-public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener {
+public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener, PropertyChangeListener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
@@ -76,7 +84,13 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
 
     public void onToQuizClick(View view) {
-		startActivity(ActivityType.QUIZ);
+        PickQuizDialog quizTypes = new PickQuizDialog(this);
+
+        //Listens to the dialog
+        quizTypes.addPropertyChangeListener(this);
+
+        quizTypes.show();
+        quizTypes.getWindow().setGravity(Gravity.CENTER);
     }
 
     public void onCommentButtonClick(View view) {
@@ -129,6 +143,26 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
    public void refreshComments(){
 	   adapter = new ReplyAdapter(this, comments);
 	   recycler.setAdapter(adapter);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        if(event.getPropertyName().equals("PickQuizDialog")) {
+            if(event.getNewValue().equals("normal")){
+                //Do nothing...
+            } else if(event.getNewValue().equals("timed")) {
+                IQuiz normalQuiz = lesson.getQuiz();
+                lesson.setQuiz(new TimedQuiz(normalQuiz, 5000));
+                TimedQuiz timedQuiz = (TimedQuiz) lesson.getQuiz();
+
+                //Since Json can't recognise parameters we have to manually set
+                //the time after creating the TimedQuiz too
+                //Todo... better solution for Json's unrecognising of properties
+                timedQuiz.setTime(6000);
+            }
+
+            startActivity(ActivityType.QUIZ);
+        }
     }
 }
 
