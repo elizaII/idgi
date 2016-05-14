@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.idgi.activities.LessonActivity;
@@ -46,11 +47,13 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView lessonTextView;
+        public ImageView lessonThumbnail;
 
         public ViewHolder(View view){
             super(view);
             view.setOnClickListener(this);
-            lessonTextView =(TextView) view.findViewById(R.id.rowTextView);
+            lessonTextView = (TextView) view.findViewById(R.id.rowTextView);
+            lessonThumbnail = (ImageView) view.findViewById(R.id.lesson_thumbnail);
         }
 
         public void onClick(View view){
