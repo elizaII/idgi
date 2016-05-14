@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.Query;
@@ -17,6 +18,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
+import com.idgi.services.MockData;
 import com.idgi.util.Nameable;
 
 import java.lang.reflect.Array;
@@ -40,7 +42,7 @@ public class SearchableActivity extends DrawerActivity {
         if(intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
             query.toLowerCase();
-            searchDatabase(query);
+            searchDatabase(query.toLowerCase());
         }
 
 
@@ -55,23 +57,23 @@ public class SearchableActivity extends DrawerActivity {
     private void searchDatabase(String query){
         ArrayList<Nameable> results = new ArrayList<>();
 
-        FireDatabase ref = FireDatabase.getInstance();
+        MockData ref = MockData.getInstance();
         List<School> schools = ref.getSchools();
 
         for(School school: schools){
-            if(school.getName().toLowerCase().equals(query)){
+            if(school.getName().toLowerCase().contains(query)){
                 results.add(school);
             }
             for(Subject subject : school.getSubjects()){
-                if(subject.getName().toLowerCase().equals(query)){
+                if(subject.getName().toLowerCase().contains(query)){
                     results.add(subject);
                 }
                 for(Course course: subject.getCourses()){
-                    if(course.getName().toLowerCase().equals(query)){
+                    if(course.getName().toLowerCase().contains(query)){
                         results.add(course);
                     }
                     for(Lesson lesson : course.getLessons()){
-                        if(lesson.getName().toLowerCase().equals(query)){
+                        if(lesson.getName().toLowerCase().contains(query)){
                             results.add(lesson);
                         }
                     }
