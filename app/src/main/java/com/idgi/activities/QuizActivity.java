@@ -74,7 +74,7 @@ public class QuizActivity extends AppCompatActivity {
 		}
 	}
 
-	private void initializeTimeBar(TimedQuiz timedQuiz) {
+	private void initializeTimeBar(final TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
 		timeProgressBar.setVisibility(View.VISIBLE);
 
@@ -93,7 +93,9 @@ public class QuizActivity extends AppCompatActivity {
             public void onFinish() {
 				Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
 				switchToQuizResultActivity();
-                Log.d(ACTIVITY_TAG, "You failed!");
+				timedQuiz.setRemainingTime(timeProgressBar.getProgress());
+				Log.d(ACTIVITY_TAG, "Remaining time: " + timeProgressBar.getProgress());
+				Log.d(ACTIVITY_TAG, "You failed!");
             }
         };
 
