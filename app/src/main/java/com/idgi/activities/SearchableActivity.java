@@ -46,6 +46,10 @@ public class SearchableActivity extends DrawerActivity {
 
         manager = new LinearLayoutManager(this);
         adapter = new SearchableAdapter(this, searchResults);
+
+        recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(manager);
     }
 
     private void searchDatabase(String query){
