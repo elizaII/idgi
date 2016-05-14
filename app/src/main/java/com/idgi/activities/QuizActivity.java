@@ -94,13 +94,14 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-				if(timeProgressBar.getProgress() == MAX_TIME){
+				//Todo... change the time unit
+				if((MAX_TIME - timeProgressBar.getProgress()) <= 10){
 					Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
+					Log.d(ACTIVITY_TAG, "You failed!");
 				}
 				switchToQuizResultActivity();
 				timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
 				Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
-				Log.d(ACTIVITY_TAG, "You failed!");
             }
         };
 
