@@ -21,15 +21,22 @@ import com.idgi.core.Subject;
 import com.idgi.core.Video;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
-import com.idgi.util.Type;
 import com.idgi.core.ModelUtility;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class CreateLessonActivity extends AppCompatActivity implements PropertyChangeListener {
+
+    /**
+     * The type of a list-item that has a name attribute
+     */
+    private enum ItemType {
+        SCHOOL, SUBJECT, COURSE
+    }
 
     private FireDatabase database = FireDatabase.getInstance();
     private EditText txtLessonName, txtYouTubeUrl;
@@ -74,28 +81,36 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
     }
 
     public void onClick(View view) {
-		SelectNameableDialog dialog = null;
+		SelectNameableDialog dialog;
+        final ItemType requestedType;
+
+		List<String> itemList = null;
 
         switch (view.getId()) {
             case R.id.add_school_button:
-				dialog = new SelectNameableDialog(this, Type.SCHOOL, schoolNames);
+                requestedType = ItemType.SCHOOL;
+				itemList = schoolNames;
                 break;
             case R.id.add_subject_button:
-				dialog = new SelectNameableDialog(this, Type.SUBJECT, subjectNames);
+                requestedType = ItemType.SUBJECT;
+				itemList = subjectNames;
                 break;
             case R.id.add_course_button:
-				dialog = new SelectNameableDialog(this, Type.COURSE, courseNames);
+                requestedType = ItemType.COURSE;
+				itemList = courseNames;
                 break;
             default:
+                requestedType = null;
                 break;
         }
 
-        if (dialog != null) {
+        if (itemList != null) {
+			dialog = new SelectNameableDialog(this, getItemTypeName(requestedType), itemList);
 			dialog.show();
 			dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 				public void onDismiss(DialogInterface dialog) {
 					SelectNameableDialog selectionDialog = (SelectNameableDialog) dialog;
-					selectItem(selectionDialog.getSelectedItemName(), selectionDialog.getItemType());
+					selectItem(selectionDialog.getSelectedItemText(), requestedType);
 				}
 			});
         }
@@ -107,7 +122,7 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
         btnText.setText(text);
     }
 
-    public void selectItem(String name, Type type) {
+    public void selectItem(String name, ItemType type) {
         if (name.length() > 0) {
             Button btnEnable = null;
             Button btnText = null;
@@ -224,7 +239,7 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
     public void setSelectedSchool(School school) {
         this.school = school;
 
-        clearChildData(Type.SCHOOL);
+        clearChildData(ItemType.SCHOOL);
 
         refreshSubjects();
     }
@@ -235,7 +250,7 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
         if (school != null)
             school.addSubject(subject);
 
-        clearChildData(Type.SUBJECT);
+        clearChildData(ItemType.SUBJECT);
 
         refreshSubjects();
         refreshCourses();
@@ -247,11 +262,11 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
         if (subject != null)
             subject.addCourse(course);
 
-        clearChildData(Type.COURSE);
+        clearChildData(ItemType.COURSE);
         refreshCourses();
     }
 
-    private void clearChildData(Type type) {
+    private void clearChildData(ItemType type) {
         //No break is intentional, we want cascading behavior
         switch(type) {
             case SCHOOL:
@@ -263,28 +278,44 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
         }
     }
 
-    private void clearQuiz() {
-        questionList.clear();
-        quiz = null;
-		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "quiz");
-        btnAddQuiz.setText(text);
-    }
+	private void clearSubject() {
+		if (subject != null) {
+			subject = null;
+			courseNames.clear();
+			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "ämne");
+			btnAddSubject.setText(text);
+			btnAddCourse.setEnabled(false);
+		}
+	}
 
     private void clearCourse() {
         course = null;
 
 		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "kurs");
         btnAddCourse.setText(text);
+		btnAddQuiz.setEnabled(false);
     }
 
-    private void clearSubject() {
-        if (subject != null) {
-            subject = null;
-            courseNames.clear();
-			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "ämne");
-            btnAddSubject.setText(text);
-        }
-    }
+	private void clearQuiz() {
+		questionList.clear();
+		quiz = null;
+		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "quiz");
+		btnAddQuiz.setText(text);
+	}
+
+	/* Returns a readable name of the ItemType from resources */
+	private String getItemTypeName(ItemType itemType) {
+		switch (itemType) {
+			case SCHOOL:
+				return getResources().getString(R.string.school);
+			case SUBJECT:
+				return getResources().getString(R.string.subject);
+			case COURSE:
+				return getResources().getString(R.string.course);
+		}
+
+		return null;
+	}
 
     /**
      * Setting the link to the youtube url that was received from the youtube app

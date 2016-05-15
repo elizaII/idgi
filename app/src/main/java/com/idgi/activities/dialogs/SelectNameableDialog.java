@@ -13,24 +13,24 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.recycleViews.adapters.SelectNameableAdapter;
-import com.idgi.util.Type;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class SelectNameableDialog extends Dialog implements PropertyChangeListener {
     private EditText txtCreateNew;
-    private Type itemType;
     private SelectNameableAdapter adapter;
-    private ArrayList<String> itemNames;
+    private List<String> itemNames;
 
-	private String itemName;
+	private String itemTypeName;
 
-    public SelectNameableDialog(Context context, Type itemType, ArrayList<String> itemNames) {
+	private String selectedItemText = "";
+
+    public SelectNameableDialog(Context context, String itemTypeName, List<String> itemNames) {
         super(context);
-        this.itemType = itemType;
+		this.itemTypeName = itemTypeName;
         this.itemNames = itemNames;
     }
 
@@ -51,11 +51,11 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
 
 		//Load title
 		String title = getContext().getResources().getString(R.string.dialog_select_nameable_title);
-		txtTitle.setText(String.format(Locale.ENGLISH, title, itemType));
+		txtTitle.setText(String.format(Locale.ENGLISH, title, itemTypeName));
 
 		//Load hint
 		String hint = getContext().getResources().getString(R.string.dialog_select_nameable_hint);
-		txtCreateNew.setHint(String.format(Locale.ENGLISH, hint, itemType));
+		txtCreateNew.setHint(String.format(Locale.ENGLISH, hint, itemTypeName));
 		btnCreateNew.setOnClickListener(onCreateClick);
 	}
 
@@ -71,34 +71,29 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
     /* Triggers when you click an element in the list, like a School or Subject. */
     private final View.OnClickListener onCreateClick = new View.OnClickListener() {
         public void onClick(View view) {
-            String itemName = txtCreateNew.getText().toString();
-			selectItem(itemName, itemType);
+            String itemText = txtCreateNew.getText().toString();
+			setSelectedItemText(itemText);
 			dismiss();
         }
     };
 
-	private void selectItem(String itemName, Type itemType) {
-		this.itemName = itemName;
-		this.itemType = itemType;
+	private void setSelectedItemText(String itemName) {
+		this.selectedItemText = itemName;
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		switch(event.getPropertyName()) {
 			case "listItemSelected":
-				String itemName = (String) event.getNewValue();
-				selectItem(itemName, itemType);
+				String itemText = (String) event.getNewValue();
+				setSelectedItemText(itemText);
 				dismiss();
 				break;
 		}
 	}
 
-	public String getSelectedItemName() {
-		return itemName;
-	}
-
-	public Type getItemType() {
-		return itemType;
+	public String getSelectedItemText() {
+		return selectedItemText;
 	}
 }
 

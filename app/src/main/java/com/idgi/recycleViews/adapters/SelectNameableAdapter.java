@@ -8,21 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.activities.dialogs.SelectNameableDialog;
-import com.idgi.util.Type;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAdapter.ViewHolder> {
 
-    private ArrayList<String> itemNames;
+    private List<String> itemNames;
     private LayoutInflater inflater;
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public SelectNameableAdapter(Context context, ArrayList<String> itemNames){
+    public SelectNameableAdapter(Context context, List<String> itemNames){
         this.itemNames = itemNames;
         inflater = LayoutInflater.from(context);
         }

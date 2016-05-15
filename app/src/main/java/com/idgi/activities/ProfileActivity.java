@@ -18,7 +18,7 @@ public class ProfileActivity extends DrawerActivity {
 
     User user;
     EditText name;
-    EditText age;
+    EditText txtAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class ProfileActivity extends DrawerActivity {
         String userEmail = User.getLoggedInUserEmail(this);
 
         name = (EditText) findViewById(R.id.profile_editText_name);
-        age = (EditText) findViewById(R.id.profile_editText_age);
+        txtAge = (EditText) findViewById(R.id.profile_editText_age);
         user = SessionData.getLoggedInUser();
        if (user != null) {
            name.setText(user.getName());
-           age.setText(user.getAge());
-           age.setText(user.getEmail());
+           txtAge.setText(user.getAge());
+           txtAge.setText(user.getEmail());
        }
         initializeDrawer();
     }
@@ -56,23 +56,43 @@ public class ProfileActivity extends DrawerActivity {
     private void saveInfo() {
         if (user != null) {
             user.setName(name.getText().toString());
-            user.setAge(age.getText().toString());
+            // TODO check if it actually is parse-able. This is gonna crash if it is not an int
+            user.setAge(Integer.parseInt(txtAge.getText().toString()));
         }
     }
     public void toggleEditState(View view) {
         boolean checked = ((ToggleButton)view).isChecked();
-        if (checked == true) {
-            enableInputField(age);
+        if (checked) {
+            enableInputField(txtAge);
             enableInputField(name);
         }
-        if (checked == false) {
+        if (!checked) {
             disableInputField(name);
-            disableInputField(age);
+            disableInputField(txtAge);
             saveInfo();
         }
     }
+
     public void showMyHats(View view) {
         Intent intent = new Intent(this, HatListActivity.class);
         startActivity(intent);
+    }
+
+    public void enableInputFieldButtonClicked(View view) {
+        if (view.getId() == R.id.profile_btn_editName ) {
+            if (name.getTag() == "enabled") {
+                disableInputField(name);
+            }
+            else {
+                enableInputField(name);
+            }
+        } else if (view.getId() == R.id.profile_btn_editAge) {
+            if (txtAge.getTag() == "enabled") {
+                disableInputField(txtAge);
+            }
+            else {
+                enableInputField(txtAge);
+            }
+        }
     }
 }
