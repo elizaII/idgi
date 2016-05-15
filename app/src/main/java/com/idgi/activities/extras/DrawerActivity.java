@@ -14,10 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
-import com.idgi.activities.LessonActivity;
-import com.idgi.util.ActivityType;
-
-import java.beans.PropertyChangeEvent;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

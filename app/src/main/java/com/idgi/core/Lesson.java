@@ -1,7 +1,5 @@
 package com.idgi.core;
 
-import com.idgi.util.Nameable;
-
 public class Lesson implements Nameable {
 
 	private String name;

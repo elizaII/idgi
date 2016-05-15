@@ -12,7 +12,6 @@ import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.recycleViews.adapters.SchoolListAdapter;
-import com.idgi.util.ActivityType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -63,16 +62,8 @@ public class SchoolListActivity extends DrawerActivity implements PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         switch(event.getPropertyName()) {
-            case "startActivity":
-                ActivityType activityType = (ActivityType) event.getNewValue();
-
-                switch (activityType) {
-                    case SUBJECT_LIST:
+            case "startSubjectListActivity":
                         startActivity(new Intent(this, SubjectListActivity.class));
-                        break;
-                }
-
-                break;
         }
     }
 }

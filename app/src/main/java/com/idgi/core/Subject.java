@@ -1,7 +1,5 @@
 package com.idgi.core;
 
-import com.idgi.util.Nameable;
-
 import java.util.ArrayList;
 
 public class Subject implements Nameable {

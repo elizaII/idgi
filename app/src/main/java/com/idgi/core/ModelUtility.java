@@ -1,7 +1,5 @@
 package com.idgi.core;
 
-import com.idgi.util.Nameable;
-
 import java.util.List;
 
 public final class ModelUtility {

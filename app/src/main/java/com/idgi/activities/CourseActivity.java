@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.idgi.util.ActivityType;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
@@ -149,15 +148,8 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         switch(event.getPropertyName()) {
-			case "startActivity":
-				ActivityType activityType = (ActivityType) event.getNewValue();
-
-				switch (activityType) {
-					case LESSON:
-					startActivity(new Intent(this, LessonActivity.class));
-						break;
-				}
-
+			case "startLessonActivity":
+				startActivity(new Intent(this, LessonActivity.class));
 				break;
 		}
     }

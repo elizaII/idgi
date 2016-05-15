@@ -10,7 +10,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.idgi.R;
-import com.idgi.util.ActivityType;
 import com.idgi.core.Lesson;
 import com.idgi.session.SessionData;
 import java.beans.PropertyChangeSupport;
@@ -105,7 +104,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
             Lesson lesson = SessionData.getCurrentCourse().getLesson(lessonName);
             SessionData.setCurrentLesson(lesson);
 
-			pcs.firePropertyChange("startActivity", null, ActivityType.LESSON);
+			pcs.firePropertyChange("startLessonActivity", null, null);
         }
 
     }

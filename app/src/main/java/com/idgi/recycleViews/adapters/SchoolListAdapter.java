@@ -1,7 +1,6 @@
 package com.idgi.recycleViews.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
-import com.idgi.util.ActivityType;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -76,7 +73,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
             SessionData.setCurrentSchool(school);
 
-			pcs.firePropertyChange("startActivity", null, ActivityType.SUBJECT_LIST);
+			pcs.firePropertyChange("startSubjectListActivity", null, null);
         }
 
     }

@@ -1,4 +1,4 @@
-package com.idgi.util;
+package com.idgi.core;
 
 public interface Nameable {
 	String getName();
