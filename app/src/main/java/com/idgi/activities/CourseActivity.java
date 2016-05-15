@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -28,32 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseActivity extends DrawerActivity implements PropertyChangeListener {
-    private enum Section {
-        LESSON, QUIZ, INFO;
 
-        public static Section fromInteger(int x) {
-            switch (x) {
-                case 0:
-                    return LESSON;
-                case 1:
-                    return QUIZ;
-                case 2:
-                    return INFO;
-                default:
-                    return INFO;
-            }
-        }
-    }
-
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView emptyViewText;
-
-    private RecyclerView recycler;
-    private RecyclerView.Adapter recyclerAdapter;
-    private RecyclerView.LayoutManager recyclerManager;
-
     private ViewPagerAdapter pagerAdapter;
 
     @Override
@@ -61,20 +36,23 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        String courseName = SessionData.getCurrentCourse().getName();
+		initializeToolbar();
+        initializeDrawer();
+        setupViewPager();
+    }
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+	private void initializeToolbar() {
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+
+		String courseName = SessionData.getCurrentCourse().getName();
+
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			actionBar.setTitle(courseName);
 		}
-
-        initializeDrawer();
-
-        setupViewPager();
-    }
+	}
 
     private void setupViewPager() {
         viewPager = (ViewPager) findViewById(R.id.course_pager);
@@ -93,7 +71,7 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
         viewPager.addOnPageChangeListener(pageChangeListener);
         //refreshViewPager();
 
-        tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
 		if (tabLayout != null)
         	tabLayout.setupWithViewPager(viewPager);
     }
@@ -176,7 +154,7 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
 
 				switch (activityType) {
 					case LESSON:
-					startActivity(new Intent(CourseActivity.this, LessonActivity.class));
+					startActivity(new Intent(this, LessonActivity.class));
 						break;
 				}
 

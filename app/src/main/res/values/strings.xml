@@ -36,12 +36,15 @@
         completions."
     </string>
 
+    <!-- SchoolListActivity -->
+    <string name="list_school_title">Välj skola</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
-    <!-- For Quiz & Quiz result Activities -->
+    <!-- Quiz & Quiz result Activities -->
     <string name="quiz_out_of_time">Tiden är ute!</string>
     <string name="quiz_leaving_prompt_title">Lämnar quiz</string>
     <string name="quiz_leaving_prompt">Är du säker på att du vill avbryta quiz?</string>
@@ -56,27 +59,27 @@
     <string name="quiz_result_question_list_expand_image">Expand question</string>
     <string name="profile_picture">Profilbild</string>
 
-    <!-- For LessonActivity -->
+    <!-- LessonActivity -->
     <string name="go_to_quiz">Gå till quiz</string>
 
-    <!-- For BrowseActivity -->
+    <!-- BrowseActivity -->
     <string name="browse_btn_subject">Sök via ämnen</string>
     <string name="browse_btn_school">Sök via skolor</string>
     <string name="browse_text_find">Hitta kurser</string>
 
-    <!-- For Lists -->
+    <!-- Lists -->
     <string name="add_to_my_courses">Lägg till i mina kurser</string>
     <string name="added_to_my_courses">Ta bort från mina kurser</string>
     <string name="log_in_message">logga in för denna funktion</string>
 
 
-    <!-- For StartActivity -->
+    <!-- StartActivity -->
     <string name="start_btn_find_course">Hitta kurser</string>
     <string name="start_btn_log_in">Logga in</string>
     <string name="start_btn_create_account">Skapa konto</string>
     <string name="start_btn_account">Konto</string>
 
-    <!-- For Toolbars -->
+    <!-- Toolbars -->
     <string name="title_activity_start">Välkommen till IDGI</string>
     <string name="title_activity_browse">Hitta kurser</string>
     <string name="title_activity_video">VideoActivity</string>

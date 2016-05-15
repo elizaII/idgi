@@ -13,16 +13,21 @@ import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.School;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
+import com.idgi.util.ActivityType;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private ArrayList<String> schoolNames;
     private LayoutInflater inflater;
 
-    public SchoolListAdapter(Context context, ArrayList<String> data){
-        this.data = data;
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+    public SchoolListAdapter(Context context, ArrayList<String> schoolNames){
+        this.schoolNames = schoolNames;
         inflater = LayoutInflater.from(context);
 
     }
@@ -31,24 +36,33 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.list_row, parent, false);
 
-        return new ViewHolder(view);
+		ViewHolder viewHolder = new ViewHolder(view);
+
+		//Pass on the PropertyChangeSupport object for communication between ViewHolder other classes
+		viewHolder.pcs = pcs;
+
+        return viewHolder;
 
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(data.get(position));
+        holder.schoolTextView.setText(schoolNames.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return schoolNames.size();
     }
 
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView schoolTextView;
+		public PropertyChangeSupport pcs;
 
         public ViewHolder(View v){
             super(v);
@@ -62,8 +76,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.Vi
 
             SessionData.setCurrentSchool(school);
 
-            Context context = view.getContext();
-            context.startActivity(new Intent(context, SubjectListActivity.class));
+			pcs.firePropertyChange("startActivity", null, ActivityType.SUBJECT_LIST);
         }
 
     }

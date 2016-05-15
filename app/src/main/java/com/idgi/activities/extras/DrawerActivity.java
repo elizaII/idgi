@@ -1,7 +1,7 @@
 package com.idgi.activities.extras;
-
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
+import com.idgi.activities.LessonActivity;
+import com.idgi.util.ActivityType;
+
+import java.beans.PropertyChangeEvent;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
