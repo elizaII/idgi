@@ -39,6 +39,7 @@ public class CourseQuizListFragment extends Fragment {
 
         ArrayList<String> quizIds = new ArrayList<>();
 
+/* Interrupts work with CourseLessonListFragment
         // TODO add actual quizzes
         List<Quiz> quizzes = Arrays.asList(new Quiz(), new Quiz());
 
@@ -49,11 +50,12 @@ public class CourseQuizListFragment extends Fragment {
 
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this.getContext());
         RecyclerView.Adapter recyclerAdapter = new LessonListAdapter(this.getContext(), quizIds);
-
+*/
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
-        recycler.setAdapter(recyclerAdapter);
-        recycler.setLayoutManager(recyclerManager);
+  /*      recycler.setAdapter(recyclerAdapter);
 
+        recycler.setLayoutManager(recyclerManager);
+*/
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
 
         recycler.setEmptyView(emptyView);

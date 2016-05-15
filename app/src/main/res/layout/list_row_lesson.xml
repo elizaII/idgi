@@ -7,7 +7,7 @@
     android:longClickable="true"
     android:background="@drawable/list_border">
     
-    <ImageView
+    <com.google.android.youtube.player.YouTubeThumbnailView
         android:id="@+id/lesson_thumbnail"
         android:scaleType="fitXY"
         android:layout_width="48dip"

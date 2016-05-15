@@ -47,16 +47,11 @@ public class CourseLessonListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
 
-        ArrayList<String> lessonNames = new ArrayList<>();
         lessons = SessionData.getCurrentCourse().getLessons();
 
-        for(Lesson lesson : lessons)
-            lessonNames.add(lesson.getName());
-
-        Collections.sort(lessonNames);
 
         recyclerManager = new LinearLayoutManager(this.getContext());
-        recyclerAdapter = new LessonListAdapter(this.getContext(), lessonNames);
+        recyclerAdapter = new LessonListAdapter(this.getContext(), lessons);
 
         recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(recyclerAdapter);
