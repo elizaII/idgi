@@ -6,22 +6,27 @@
     android:clickable="true"
     android:longClickable="true"
     android:background="@drawable/list_border">
-    
+
+    <!-- Video Thumbnail -->
     <com.google.android.youtube.player.YouTubeThumbnailView
         android:id="@+id/lesson_thumbnail"
-        android:scaleType="fitXY"
-        android:layout_width="48dip"
-        android:layout_height="48dip" />
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:scaleType="centerCrop"
+        android:background="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="2dp" />
 
+    <!-- Video Title -->
     <TextView
         android:id="@+id/rowTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="Sample"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_toRightOf="@id/lesson_thumbnail"
+        android:layout_alignTop="@id/lesson_thumbnail"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"/>
 
 </RelativeLayout>

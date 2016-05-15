@@ -72,7 +72,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
 
             }
 
-    });
+        });
 
 
     }
@@ -81,23 +81,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
     public int getItemCount() {
         return data.size();
     }
-/*
-    @Override
-    public void onInitializationSuccess(YouTubeThumbnailView thumbnailView,
-                                        YouTubeThumbnailLoader thumbnailLoader) {
 
-        thumbnailLoader.setOnThumbnailLoadedListener(new ThumbnailLoadedListener());
-        thumbnailLoader.setVideo(data.get());
-
-        Log.d("thumbnail", "worked");
-
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
-        Log.d("thumbnail", "didn't work");
-    }
-*/
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView lessonTextView;
