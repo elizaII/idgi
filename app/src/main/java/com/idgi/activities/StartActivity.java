@@ -4,17 +4,18 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.idgi.Application;
+import com.idgi.session.Application;
 import com.idgi.R;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
+import com.idgi.util.Config;
 
-@TargetApi(16)
 public class StartActivity extends DrawerActivity {
 
 		private Button start_btn_browse;
@@ -70,12 +71,7 @@ public class StartActivity extends DrawerActivity {
 	public void onCreateAccountButtonClick(View view) {
 		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
 		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-		Drawable profilePicture;
-
-		if (Application.getMinSdk() >= 21)
-			profilePicture = getResources().getDrawable(R.drawable.yoda, getTheme());
-		else
-			profilePicture = getResources().getDrawable(R.drawable.yoda);
+		Drawable profilePicture = ContextCompat.getDrawable(this, R.drawable.yoda);
 
 		User user = new User("Yoda");
 		user.setEmail("test@gmail.com");

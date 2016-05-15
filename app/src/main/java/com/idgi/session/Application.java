@@ -1,4 +1,4 @@
-package com.idgi;
+package com.idgi.session;
 
 import android.os.Build;
 
@@ -14,9 +14,5 @@ public class Application extends android.app.Application {
 		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
 		FireDatabase.getInstance().initialize();
 		//FireDatabase.getInstance().pushMockDataToFirebase();
-	}
-
-	public static int getMinSdk() {
-		return Build.VERSION.SDK_INT;
 	}
 }

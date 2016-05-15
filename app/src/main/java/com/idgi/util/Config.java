@@ -1,5 +1,7 @@
 package com.idgi.util;
 
+import android.os.Build;
+
 public final class Config {
 
 	public enum FirebaseMode {
@@ -20,4 +22,7 @@ public final class Config {
 	public static final int MAX_POINTS_FOR_VIDEO = 600;
 	public static final int POINTS_PER_TICK = 85;
 
+	public static int getMinSdk() {
+		return Build.VERSION.SDK_INT;
+	}
 }
