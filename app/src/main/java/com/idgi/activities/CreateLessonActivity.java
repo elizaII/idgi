@@ -12,8 +12,6 @@ import android.widget.EditText;
 import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
-import com.idgi.activities.extras.ActivityType;
-import com.idgi.activities.extras.Navigation;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;

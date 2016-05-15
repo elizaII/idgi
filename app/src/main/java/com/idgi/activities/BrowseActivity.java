@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
 import com.idgi.activities.extras.DrawerActivity;
 
 public class BrowseActivity extends DrawerActivity {

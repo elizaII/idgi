@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
 import com.idgi.core.Course;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.recycleViews.adapters.CourseListAdapter;

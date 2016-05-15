@@ -10,23 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
-import com.idgi.activities.extras.Navigation;
 import com.idgi.core.IQuiz;
 import com.idgi.core.TimedQuiz;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.core.Quiz;
 import com.idgi.activities.extras.ButtonFactory;
 import com.idgi.Widgets.AnswerButton;
 
@@ -79,7 +74,8 @@ public class QuizActivity extends AppCompatActivity {
 	//Todo... Refactor this huge method
 	private void initializeTimeBar(final TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
-		timeProgressBar.setVisibility(View.VISIBLE);
+		if (timeProgressBar != null)
+			timeProgressBar.setVisibility(View.VISIBLE);
 
 
         final int MAX_TIME = timedQuiz.getTime();
@@ -169,7 +165,7 @@ public class QuizActivity extends AppCompatActivity {
 
 	public void switchToQuizResultActivity() {
 		leftActivity = true;
-		Navigation.startActivity(this, ActivityType.QUIZ_RESULT);
+		startActivity(new Intent(this, QuizResultActivity.class));
 		finish();
 	}
 

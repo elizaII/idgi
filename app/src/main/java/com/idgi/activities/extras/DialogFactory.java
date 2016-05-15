@@ -2,6 +2,7 @@ package com.idgi.activities.extras;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.Widgets.CommentLayout;
+import com.idgi.activities.LoginActivity;
 import com.idgi.core.Comment;
 import com.idgi.session.SessionData;
 
@@ -38,7 +40,7 @@ public final class DialogFactory {
 		txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				DrawerActivity activity = (DrawerActivity) context;
-				activity.startActivity(ActivityType.LOGIN);
+				activity.startActivity(new Intent(activity, LoginActivity.class));
 			}
 		});
 

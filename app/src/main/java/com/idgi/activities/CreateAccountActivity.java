@@ -1,8 +1,6 @@
 package com.idgi.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
-import com.idgi.activities.extras.Navigation;
 import com.idgi.core.Account;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
@@ -66,8 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         FireDatabase.getInstance().pushAccount(account);
         SessionData.setLoggedInUser(user);
 
-        Navigation.startActivity(this, ActivityType.START);
-
+        startActivity(new Intent(this, StartActivity.class));
     }
     private boolean formIsValid() {
         if (nameText.getText().toString().equals("")) {

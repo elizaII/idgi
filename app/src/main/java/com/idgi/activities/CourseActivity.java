@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,11 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.idgi.util.ActivityType;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
@@ -19,11 +22,12 @@ import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends DrawerActivity {
-
+public class CourseActivity extends DrawerActivity implements PropertyChangeListener {
     private enum Section {
         LESSON, QUIZ, INFO;
 
@@ -61,8 +65,11 @@ public class CourseActivity extends DrawerActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(courseName);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setTitle(courseName);
+		}
 
         initializeDrawer();
 
@@ -73,7 +80,11 @@ public class CourseActivity extends DrawerActivity {
         viewPager = (ViewPager) findViewById(R.id.course_pager);
 
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new CourseLessonListFragment(), "Lessons");
+
+		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
+		lessonListFragment.addPropertyChangeListener(this);
+        pagerAdapter.addFragment(lessonListFragment, "Lessons");
+
         pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
 
@@ -83,7 +94,8 @@ public class CourseActivity extends DrawerActivity {
         //refreshViewPager();
 
         tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
+		if (tabLayout != null)
+        	tabLayout.setupWithViewPager(viewPager);
     }
 
     /* Makes sure the appropriate values (like empty-list text message) are used */
@@ -154,5 +166,21 @@ public class CourseActivity extends DrawerActivity {
 
         TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
         textView.setText(text);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        switch(event.getPropertyName()) {
+			case "startActivity":
+				ActivityType activityType = (ActivityType) event.getNewValue();
+
+				switch (activityType) {
+					case LESSON:
+					startActivity(new Intent(CourseActivity.this, LessonActivity.class));
+						break;
+				}
+
+				break;
+		}
     }
 }

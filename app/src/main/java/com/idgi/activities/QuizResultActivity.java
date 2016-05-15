@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
 import com.idgi.core.IQuiz;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
