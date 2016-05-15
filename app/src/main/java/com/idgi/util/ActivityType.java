@@ -1,8 +1,7 @@
-package com.idgi.activities.extras;
+package com.idgi.util;
 
 /**
- * Used as a parameter to switch between activities.
- * The actual switch is implemented in AppCompatActivityWithDrawer
+ * Enumeration of all activities in the application
  */
 public enum ActivityType {
 	BROWSE, COURSE, COURSE_LIST, CREATE_ACCOUNT, CREATE_LESSON, LESSON,

@@ -17,6 +17,8 @@ import com.idgi.services.MockData;
 import com.idgi.recycleViews.adapters.LessonListAdapter;
 import com.idgi.session.SessionData;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,12 +27,12 @@ import java.util.List;
 public class CourseLessonListFragment extends Fragment {
 
     private EmptyRecyclerView recycler;
-    private RecyclerView.Adapter recyclerAdapter;
+    private LessonListAdapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerManager;
 
-    private MockData database = MockData.getInstance();
-
     private List<Lesson> lessons;
+
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public CourseLessonListFragment() {
         // Required empty public constructor
@@ -52,6 +54,7 @@ public class CourseLessonListFragment extends Fragment {
 
         recyclerManager = new LinearLayoutManager(this.getContext());
         recyclerAdapter = new LessonListAdapter(this.getContext(), lessons);
+		recyclerAdapter.setPropertyChangeSupport(pcs);
 
         recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(recyclerAdapter);
@@ -67,5 +70,7 @@ public class CourseLessonListFragment extends Fragment {
         return view;
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
 }
-
