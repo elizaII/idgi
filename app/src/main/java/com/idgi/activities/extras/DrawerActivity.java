@@ -78,13 +78,4 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-
-		return id == R.id.action_settings || super.onOptionsItemSelected(item);
-	}
-
-
 }

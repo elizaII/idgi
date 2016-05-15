@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.activities.dialogs.PickQuizDialog;
-import com.idgi.activities.extras.ActivityType;
 import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.TimedQuiz;
@@ -34,7 +33,6 @@ import com.idgi.recycleViews.adapters.ReplyAdapter;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.sql.Time;
 import java.util.List;
 
 public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener, PropertyChangeListener {
@@ -149,9 +147,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if(event.getPropertyName().equals("PickQuizDialog")) {
-            if(event.getNewValue().equals("normal")){
-                //Do nothing...
-            } else if(event.getNewValue().equals("timed")) {
+			if(event.getNewValue().equals("timed")) {
                 IQuiz normalQuiz = lesson.getQuiz();
                 lesson.setQuiz(new TimedQuiz(normalQuiz, 5000));
                 TimedQuiz timedQuiz = (TimedQuiz) lesson.getQuiz();
@@ -162,7 +158,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
                 timedQuiz.setTime(6000);
             }
 
-            startActivity(ActivityType.QUIZ);
+            startActivity(new Intent(this, QuizActivity.class));
         }
     }
 }

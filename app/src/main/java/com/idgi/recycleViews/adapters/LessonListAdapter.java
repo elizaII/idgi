@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
@@ -53,13 +54,13 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.lessonTextView.setText(data.get(position).getName());
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.lessonTextView.setText(lessons.get(position).getName());
         holder.lessonThumbnail.initialize(API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
 
             @Override
             public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
-                youTubeThumbnailLoader.setVideo(data.get(position).getVideo().getUrl());
+                youTubeThumbnailLoader.setVideo(lessons.get(holder.getAdapterPosition()).getVideo().getUrl());
                 Log.d("thumbnail", "worked");
 
             }
@@ -72,12 +73,12 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
 
         });
 
-        holder.lessonTextView.setText(lessonNames.get(position));
+        holder.lessonTextView.setText(lessons.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return lessonNames.size();
+        return lessons.size();
     }
 
 	public void setPropertyChangeSupport(PropertyChangeSupport pcs) {

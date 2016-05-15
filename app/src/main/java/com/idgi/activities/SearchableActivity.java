@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.core.Nameable;
 import com.idgi.recycleViews.adapters.SearchableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.MockData;
-import com.idgi.util.Nameable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class SearchableActivity extends DrawerActivity {
         setContentView(R.layout.activity_searchable);
 
         Intent intent = getIntent();
-        if(intent.ACTION_SEARCH.equals(intent.getAction())){
+        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
             searchDatabase(query.toLowerCase());
         }
@@ -43,8 +43,10 @@ public class SearchableActivity extends DrawerActivity {
         adapter = new SearchableAdapter(this, searchResults);
 
         recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
-        recycler.setAdapter(adapter);
-        recycler.setLayoutManager(manager);
+        if (recycler != null) {
+            recycler.setAdapter(adapter);
+            recycler.setLayoutManager(manager);
+        }
 
         initializeDrawer();
     }

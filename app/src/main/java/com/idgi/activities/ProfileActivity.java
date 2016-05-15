@@ -78,7 +78,8 @@ public class ProfileActivity extends DrawerActivity {
         startActivity(intent);
     }
 
-    public void enableInputFieldButtonClicked(View view) {
+	// TODO Remove? Is this going to be used?
+   /* public void enableInputFieldButtonClicked(View view) {
         if (view.getId() == R.id.profile_btn_editName ) {
             if (name.getTag() == "enabled") {
                 disableInputField(name);
@@ -94,5 +95,5 @@ public class ProfileActivity extends DrawerActivity {
                 enableInputField(txtAge);
             }
         }
-    }
+    }*/
 }

@@ -12,7 +12,6 @@ import com.idgi.R;
 import com.idgi.activities.CourseActivity;
 import com.idgi.activities.CourseListActivity;
 import com.idgi.activities.LessonActivity;
-import com.idgi.activities.SchoolListActivity;
 import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
@@ -21,22 +20,18 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
-import com.idgi.util.Nameable;
+import com.idgi.core.Nameable;
+import java.util.List;
 
-import java.util.ArrayList;
-
-/**
- * Created by Emil on 12/05/2016.
- */
 public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<Nameable> data;
+    private List<Nameable> data;
 
     private final int SCHOOL = 0, SUBJECT = 1, COURSE = 2, LESSON = 3;
 
     private LayoutInflater inflater;
 
-    public SearchableAdapter(Context context, ArrayList<Nameable>data){
+    public SearchableAdapter(Context context, List<Nameable>data){
         this.data = data;
         inflater = LayoutInflater.from(context);
 
