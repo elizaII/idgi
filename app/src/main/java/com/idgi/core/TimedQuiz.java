@@ -19,9 +19,6 @@ public class TimedQuiz extends QuizDecorator {
     }
 
 
-    //Since Json can't recognise parameters we have to manually set
-    //the time after creating the TimedQuiz too
-    //Todo... better solution for Json's unrecognising of properties
     /**
      * Creates a quiz with a timer
      * @param decoratedQuiz The normal quiz that doesn't have a set time
@@ -29,7 +26,7 @@ public class TimedQuiz extends QuizDecorator {
      */
     public TimedQuiz(IQuiz decoratedQuiz, int time){
         super(decoratedQuiz);
-        time = this.time;
+        this.time = time;
     }
 
     @Override

@@ -149,13 +149,11 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         if(event.getPropertyName().equals("PickQuizDialog")) {
 			if(event.getNewValue().equals("timed")) {
                 IQuiz normalQuiz = lesson.getQuiz();
-                lesson.setQuiz(new TimedQuiz(normalQuiz, 5000));
-                TimedQuiz timedQuiz = (TimedQuiz) lesson.getQuiz();
 
-                //Since Json can't recognise parameters we have to manually set
-                //the time after creating the TimedQuiz too
-                //Todo... better solution for Json's unrecognising of properties
-                timedQuiz.setTime(6000);
+                //The amount of time for each question is 5 seconds
+                int time = normalQuiz.getQuestions().size() * 5000;
+                lesson.setQuiz(new TimedQuiz(normalQuiz, time));
+                TimedQuiz timedQuiz = (TimedQuiz) lesson.getQuiz();
             }
 
             startActivity(new Intent(this, QuizActivity.class));
