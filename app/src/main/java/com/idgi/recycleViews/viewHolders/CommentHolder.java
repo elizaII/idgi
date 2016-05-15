@@ -63,8 +63,8 @@ public class CommentHolder extends ParentViewHolder {
 		String authorName = author == null ? "N/A" : author.getName();
 		txtAuthor.setText(authorName);
 
-		if (author != null && author.getImage() != null) {
-			imgProfilePicture.setImageDrawable(author.getImage());
+		if (author != null && author.getProfilePicture() != null) {
+			imgProfilePicture.setImageDrawable(author.getProfilePicture());
 			imgProfilePicture.setBackground(null);
 		}
 	}

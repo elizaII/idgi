@@ -13,29 +13,22 @@ import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
 
-/**
- * Created by Allex on 2016-05-09.
- */
-public class CreateQuestionDialog extends Dialog implements
-        View.OnClickListener {
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
-    private CreateQuizDialog c;
-    private Button create_quiz_button;
-    private EditText quiz_question_editText;
-    private EditText quiz_hint_editText;
-    private EditText quiz_answer_editText1;
-    private EditText quiz_answer_editText2;
-    private EditText quiz_answer_editText3;
-    private EditText quiz_answer_editText4;
-    private Switch quiz_set_correct_switch1;
-    private Switch quiz_set_correct_switch2;
-    private Switch quiz_set_correct_switch3;
-    private Switch quiz_set_correct_switch4;
+public class CreateQuestionDialog extends Dialog {
+
+    private Button btnCreateQuiz;
+    private EditText txtQuizQuestion;
+    private EditText txtQuizHint;
+	private EditText[] txtQuizAnswers = new EditText[4];
+	private Switch[] correctAnswerSwitches = new Switch[4];
+
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 
-    public CreateQuestionDialog(CreateQuizDialog a, Context context) {
+    public CreateQuestionDialog(Context context) {
         super(context);
-        this.c = a;
     }
 
     @Override
@@ -44,50 +37,62 @@ public class CreateQuestionDialog extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.create_question_dialog);
 
-        quiz_question_editText = (EditText) findViewById(R.id.quiz_question_editText);
-        quiz_hint_editText = (EditText) findViewById(R.id.quiz_hint_editText);
-        quiz_answer_editText1 = (EditText) findViewById(R.id.quiz_answer_editText1);
-        quiz_answer_editText2 = (EditText) findViewById(R.id.quiz_answer_editText2);
-        quiz_answer_editText3 = (EditText) findViewById(R.id.quiz_answer_editText3);
-        quiz_answer_editText4 = (EditText) findViewById(R.id.quiz_answer_editText4);
-        quiz_set_correct_switch1 = (Switch) findViewById(R.id.quiz_set_correct_switch1);
-        quiz_set_correct_switch2 = (Switch) findViewById(R.id.quiz_set_correct_switch2);
-        quiz_set_correct_switch3 = (Switch) findViewById(R.id.quiz_set_correct_switch3);
-        quiz_set_correct_switch4 = (Switch) findViewById(R.id.quiz_set_correct_switch4);
-        create_quiz_button = (Button) findViewById(R.id.create_quiz_button);
-        create_quiz_button.setOnClickListener(this);
-
+        txtQuizQuestion = (EditText) findViewById(R.id.quiz_question_editText);
+        txtQuizHint = (EditText) findViewById(R.id.quiz_hint_editText);
+        txtQuizAnswers[0] = (EditText) findViewById(R.id.quiz_answer_editText1);
+		txtQuizAnswers[1] = (EditText) findViewById(R.id.quiz_answer_editText2);
+		txtQuizAnswers[2] = (EditText) findViewById(R.id.quiz_answer_editText3);
+		txtQuizAnswers[3] = (EditText) findViewById(R.id.quiz_answer_editText4);
+        correctAnswerSwitches[0] = (Switch) findViewById(R.id.quiz_set_correct_switch1);
+		correctAnswerSwitches[1] = (Switch) findViewById(R.id.quiz_set_correct_switch2);
+		correctAnswerSwitches[2] = (Switch) findViewById(R.id.quiz_set_correct_switch3);
+		correctAnswerSwitches[3] = (Switch) findViewById(R.id.quiz_set_correct_switch4);
+        btnCreateQuiz = (Button) findViewById(R.id.create_quiz_button);
+        btnCreateQuiz.setOnClickListener(onCreateClick);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.create_quiz_button:
-                Question question = new Question(quiz_question_editText.getText().toString());
-                Answer answer1 = new Answer(quiz_answer_editText1.getText().toString());
-                Answer answer2 = new Answer(quiz_answer_editText2.getText().toString());
-                Answer answer3 = new Answer(quiz_answer_editText3.getText().toString());
-                Answer answer4 = new Answer(quiz_answer_editText4.getText().toString());
+	/**
+	 * Add the given answers to the new question
+	 */
+	private void updateAnswers(Question question) {
+		for (int i = 0; i < txtQuizAnswers.length; ++i) {
+			String answerText = txtQuizAnswers[i].getText().toString();
+			boolean isCorrect = correctAnswerSwitches[i].isChecked();
+			Answer answer = isCorrect ? Answer.correct(answerText) : Answer.incorrect(answerText);
+			question.addAnswer(answer);
+		}
+	}
 
-                answer1.setCorrect(quiz_set_correct_switch1.isChecked());
-                answer2.setCorrect(quiz_set_correct_switch2.isChecked());
-                answer3.setCorrect(quiz_set_correct_switch3.isChecked());
-                answer4.setCorrect(quiz_set_correct_switch4.isChecked());
+	/**
+	 * Update the hint for the new question
+	 */
+	private void updateHint(Question question) {
+		if(includeHint()) {
+			String hint = txtQuizHint.getText().toString();
+			question.setHint(hint);
+		}
+	}
 
-                if(quiz_hint_editText.getText().toString().length()>0) {
-                    question.setHint(quiz_hint_editText.getText().toString());
-                }
-                question.addAnswers(answer1, answer2, answer3, answer4);
+	/**
+	 * Returns true if there is a hint
+	 */
+	private boolean includeHint() {
+		return !txtQuizHint.getText().toString().isEmpty();
+	}
 
-                c.updateQuestionList(question);
+	private final View.OnClickListener onCreateClick = new View.OnClickListener() {
+		public void onClick(View view) {
+			Question question = new Question(txtQuizQuestion.getText().toString());
 
-                break;
-            default:
-                break;
-        }
+			updateAnswers(question);
+			updateHint(question);
+			pcs.firePropertyChange("questionCreated", null, question);
+			dismiss();
+		}
+	};
 
-        dismiss();
-
-    }
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
 }
 

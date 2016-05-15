@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,7 +18,7 @@ public class BrowseActivity extends DrawerActivity {
     }
 
     public void onSchoolButtonClick(View view){
-        startActivity(ActivityType.SCHOOL_LIST);
+        startActivity(new Intent(this, SchoolListActivity.class));
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 

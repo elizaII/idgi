@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,6 @@ import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
 import com.idgi.activities.extras.ActivityType;
 import com.idgi.activities.extras.Navigation;
-import com.idgi.recycleViews.adapters.SelectNameableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
@@ -26,9 +26,12 @@ import com.idgi.session.SessionData;
 import com.idgi.util.Type;
 import com.idgi.core.ModelUtility;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class CreateLessonActivity extends AppCompatActivity implements SelectNameableAdapter.ListChangeListener {
+public class CreateLessonActivity extends AppCompatActivity implements PropertyChangeListener {
 
     private FireDatabase database = FireDatabase.getInstance();
     private EditText txtLessonName, txtYouTubeUrl;
@@ -40,8 +43,6 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
     private Subject subject;
     private Course course;
     private Quiz quiz;
-
-	private SelectNameableDialog activeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,23 +76,30 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
     }
 
     public void onClick(View view) {
+		SelectNameableDialog dialog = null;
+
         switch (view.getId()) {
             case R.id.add_school_button:
-                activeDialog = new SelectNameableDialog(this, Type.SCHOOL, schoolNames);
+				dialog = new SelectNameableDialog(this, Type.SCHOOL, schoolNames);
                 break;
             case R.id.add_subject_button:
-				activeDialog = new SelectNameableDialog(this, Type.SUBJECT, subjectNames);
+				dialog = new SelectNameableDialog(this, Type.SUBJECT, subjectNames);
                 break;
             case R.id.add_course_button:
-				activeDialog = new SelectNameableDialog(this, Type.COURSE, courseNames);
+				dialog = new SelectNameableDialog(this, Type.COURSE, courseNames);
                 break;
             default:
                 break;
         }
 
-        if (activeDialog != null) {
-			activeDialog.show();
-			activeDialog.setListChangeListener(this);
+        if (dialog != null) {
+			dialog.show();
+			dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				public void onDismiss(DialogInterface dialog) {
+					SelectNameableDialog selectionDialog = (SelectNameableDialog) dialog;
+					selectItem(selectionDialog.getSelectedItemName(), selectionDialog.getItemType());
+				}
+			});
         }
 
     }
@@ -133,14 +141,14 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
     private void updateSelectedSchool(String schoolName) {
         School existingSchool = ModelUtility.findByName(database.getSchools(), schoolName);
         School school = existingSchool == null ? new School(schoolName) : existingSchool;
-        setSchool(school);
+        setSelectedSchool(school);
     }
 
     private void updateSelectedSubject(String subjectName) {
         if (school != null) {
             Subject existingSubject = ModelUtility.findByName(school.getSubjects(), subjectName);
             Subject subject = existingSubject == null ? new Subject(subjectName) : existingSubject;
-            setSubject(subject);
+            setSelectedSubject(subject);
         }
     }
 
@@ -148,7 +156,7 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
         if (subject != null) {
             Course existingCourse = ModelUtility.findByName(subject.getCourses(), courseName);
             Course course = existingCourse == null ? new Course(courseName) : existingCourse;
-            setCourse(course);
+            setSelectedCourse(course);
         }
     }
 
@@ -174,16 +182,8 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
 
     public void onAddQuizButtonClick(View view) {
         CreateQuizDialog dialog = new CreateQuizDialog(this, questionList);
+		dialog.addPropertyChangeListener(this);
         dialog.show();
-    }
-
-    public void setQuiz() {
-        if (questionList.size() > 0) {
-            Quiz quiz = new Quiz();
-            quiz.addQuestions(questionList);
-            btnAddQuiz.setText("Quiz is added.");
-            this.quiz = quiz;
-        }
     }
 
     public void onCreateLessonButtonClick(View view){
@@ -200,7 +200,7 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
             pushLesson(lesson);
             SessionData.setCurrentLesson(lesson);
 
-            Navigation.startActivity(this, ActivityType.LESSON);
+            startActivity(new Intent(this, LessonActivity.class));
         } else{
 
             //Show dialog when user has given an invalid link
@@ -220,10 +220,10 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
     }
 
     private boolean isNewSchool(School school) {
-        return database.getSchools().contains(school);
+        return !database.getSchools().contains(school);
     }
 
-    public void setSchool(School school) {
+    public void setSelectedSchool(School school) {
         this.school = school;
 
         clearChildData(Type.SCHOOL);
@@ -231,7 +231,7 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
         refreshSubjects();
     }
 
-    public void setSubject(Subject subject) {
+    public void setSelectedSubject(Subject subject) {
         this.subject = subject;
 
         if (school != null)
@@ -243,7 +243,7 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
         refreshCourses();
     }
 
-    public void setCourse(Course course) {
+    public void setSelectedCourse(Course course) {
         this.course = course;
 
         if (subject != null)
@@ -268,34 +268,28 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
     private void clearQuiz() {
         questionList.clear();
         quiz = null;
-        btnAddQuiz.setText("Lägg till quiz");
+		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "quiz");
+        btnAddQuiz.setText(text);
     }
 
     private void clearCourse() {
         course = null;
-        btnAddCourse.setText("Lägg till kurs");
+
+		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "kurs");
+        btnAddCourse.setText(text);
     }
 
     private void clearSubject() {
         if (subject != null) {
             subject = null;
             courseNames.clear();
-            btnAddSubject.setText("Lägg till ämne");
+			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "ämne");
+            btnAddSubject.setText(text);
         }
     }
 
-	@Override
-	public void receiveItemData(String name, Type type) {
-		selectItem(name, type);
-		if (activeDialog != null)
-		activeDialog.dismiss();
-
-		activeDialog = null;
-	}
-
     /**
      * Setting the link to the youtube url that was received from the youtube app
-     * @param intent
      */
     private void insertYoutubeLink(Intent intent){
         String youtubeURL = intent.getStringExtra(Intent.EXTRA_TEXT);
@@ -353,5 +347,16 @@ public class CreateLessonActivity extends AppCompatActivity implements SelectNam
         //because the method isYoutubeLink checks
         //if it's a valid link in beforehand
         return "";
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        switch(event.getPropertyName()) {
+            case "quizCreated":
+				String text = getResources().getString(R.string.create_lesson_quiz_has_been_added);
+                btnAddQuiz.setText(text);
+                this.quiz = (Quiz) event.getNewValue();
+				break;
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.idgi.activities;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -130,7 +131,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 	}
 
     @Override
-    public void updatePoints(int value) {
+    public void onUpdatePoints(int value) {
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             ObjectAnimator animation = ObjectAnimator.ofInt(pointProgressBar, "progress", value);
             animation.setDuration(400);

@@ -83,16 +83,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_search) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
-	public void startActivity(ActivityType type) {
-		Navigation.startActivity(this, type);
+		return id == R.id.action_settings || super.onOptionsItemSelected(item);
 	}
 
 

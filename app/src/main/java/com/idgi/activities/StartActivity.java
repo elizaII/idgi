@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,12 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.idgi.Application;
 import com.idgi.R;
-import com.idgi.activities.extras.ActivityType;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
+@TargetApi(16)
 public class StartActivity extends DrawerActivity {
 
 		private Button start_btn_browse;
@@ -27,7 +29,8 @@ public class StartActivity extends DrawerActivity {
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.title_activity_start);
+		if (toolbar != null)
+        	toolbar.setTitle(R.string.title_activity_start);
 
 		initializeDrawer();
 
@@ -55,33 +58,39 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	public void onStartButtonClick(View view) {
-		startActivity(ActivityType.BROWSE);
+		startActivity(new Intent(this, BrowseActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onLogInButtonClick(View view) {
-		startActivity(ActivityType.LOGIN);
+		startActivity(new Intent(this, LoginActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onCreateAccountButtonClick(View view) {
 		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
 		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-		Drawable d = getResources().getDrawable(R.drawable.yoda);
+		Drawable profilePicture;
+
+		if (Application.getMinSdk() >= 21)
+			profilePicture = getResources().getDrawable(R.drawable.yoda, getTheme());
+		else
+			profilePicture = getResources().getDrawable(R.drawable.yoda);
+
 		User user = new User("Yoda");
 		user.setEmail("test@gmail.com");
-		user.setImage(d);
+		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
 
 	}
 
 	public void onAccountButtonClick(View view) {
-		startActivity(ActivityType.PROFILE);
+		startActivity(new Intent(this, ProfileActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onLessonButtonClick(View view) {
-		startActivity(ActivityType.CREATE_LESSON);
+		startActivity(new Intent(this, CreateLessonActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 

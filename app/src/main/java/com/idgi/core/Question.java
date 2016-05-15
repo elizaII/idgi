@@ -35,7 +35,10 @@ public class Question implements ParentListItem {
 	public Question(String text) {
 		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
 	}
-	
+
+	public void addAnswer(Answer answer) {
+		this.answers.add(answer);
+	}
 	public void addAnswers(Answer... answers) {
 		this.answers.addAll(Arrays.asList(answers));
 	}

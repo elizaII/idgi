@@ -27,15 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handles navigation between activities.
+ * Handles the navigation between activities from the navigation drawer.
  */
 public class Navigation {
 
 	/* Connects MenuItem-IDs to Activity classes */
 	private static Map<Integer, Class> itemMap = new HashMap<>();
-
-	/* Connects ActivityTypes to Activity classes */
-	private static Map<ActivityType, Class> activityMap = new HashMap<>();
 
     public static void onMenuItemSelected(Activity activity, MenuItem item) {
         if (itemMap.isEmpty())
@@ -55,39 +52,8 @@ public class Navigation {
         setTargetActivity(R.id.nav_create_profile, CreateAccountActivity.class);
     }
 
-	private static void initializeActivityMap() {
-		setTargetActivity(ActivityType.BROWSE, BrowseActivity.class);
-		setTargetActivity(ActivityType.COURSE, CourseActivity.class);
-		setTargetActivity(ActivityType.COURSE_LIST, CourseListActivity.class);
-		setTargetActivity(ActivityType.CREATE_ACCOUNT, CreateAccountActivity.class);
-		setTargetActivity(ActivityType.CREATE_LESSON, CreateLessonActivity.class);
-		setTargetActivity(ActivityType.LESSON, LessonActivity.class);
-		setTargetActivity(ActivityType.LOGIN, LoginActivity.class);
-		setTargetActivity(ActivityType.MY_COURSES, MyCoursesActivity.class);
-		setTargetActivity(ActivityType.PROFILE, ProfileActivity.class);
-		setTargetActivity(ActivityType.QUIZ, QuizActivity.class);
-		setTargetActivity(ActivityType.QUIZ_RESULT, QuizResultActivity.class);
-		setTargetActivity(ActivityType.SCHOOL_LIST, SchoolListActivity.class);
-		setTargetActivity(ActivityType.START, StartActivity.class);
-		setTargetActivity(ActivityType.STATISTICS, StatisticsActivity.class);
-		setTargetActivity(ActivityType.SUBJECT_LIST, SubjectListActivity.class);
-		setTargetActivity(ActivityType.VIDEO, VideoActivity.class);
-	}
-
     private static void setTargetActivity(int resource, Class targetClass) {
         itemMap.put(resource, targetClass);
     }
-
-	private static void setTargetActivity(ActivityType type, Class targetClass) {
-		activityMap.put(type, targetClass);
-	}
-
-	public static void startActivity(Context context, ActivityType type) {
-		if (activityMap.isEmpty())
-			initializeActivityMap();
-
-		context.startActivity(new Intent(context, activityMap.get(type)));
-	}
-
 
 }

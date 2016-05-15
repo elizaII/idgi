@@ -6,17 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import java.util.List;
 
 import com.idgi.R;
 
-import java.util.ArrayList;
-
 public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAdapter.ViewHolder> {
 
-    private ArrayList<String> data;
+    private List<String> data;
     private LayoutInflater inflater;
 
-    public CreateQuestionAdapter(Context context, ArrayList<String> data) {
+    public CreateQuestionAdapter(Context context, List<String> data) {
         this.data = data;
         inflater = LayoutInflater.from(context);
     }

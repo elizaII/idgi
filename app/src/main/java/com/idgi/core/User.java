@@ -8,9 +8,7 @@ import android.graphics.drawable.Drawable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
@@ -21,7 +19,7 @@ public class User {
     private String age;
 
     @JsonIgnore
-    private Drawable image;
+    private Drawable profilePicture;
 
     private Statistics statistics;
 
@@ -35,7 +33,7 @@ public class User {
 		this.name = name;
 		this.statistics = new Statistics();
 
-        myCourses=new ArrayList<>();
+        myCourses = new ArrayList<>();
 	}
 
     public void setName(String name) {
@@ -44,13 +42,13 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public void setEmail(String eMail) {
-        this.email = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @JsonIgnore
-    public void setImage(Drawable image) {
-        this.image = image;
+    public void setProfilePicture(Drawable profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public void setAge(String age) {
@@ -73,6 +71,10 @@ public class User {
         this.myCourses = myCourses;
     }
 
+    public boolean isInMyCourses(Course course) {
+        return getMyCourses().contains(course);
+    }
+
     public String getEmail(){
         return this.email;
     }
@@ -92,8 +94,8 @@ public class User {
     }
 
     @JsonIgnore
-    public Drawable getImage() {
-        return image;
+    public Drawable getProfilePicture() {
+        return profilePicture;
     }
 
     @JsonIgnore

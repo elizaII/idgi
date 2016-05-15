@@ -8,27 +8,25 @@
     android:background="@drawable/list_border">
 
     <TextView
-        android:id="@+id/rowTextView"
+        android:id="@+id/course_list_listitem_course_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="Sample"
+        android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/my_courses_button"
-        android:layout_toStartOf="@+id/my_courses_button" />
+        android:layout_toLeftOf="@+id/course_list_listitem_course_my_courses_button"
+        android:layout_toStartOf="@+id/course_list_listitem_course_my_courses_button" />
 
     <Button
+        android:id="@+id/course_list_listitem_course_my_courses_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_to_my_courses"
-        android:id="@+id/my_courses_button"
-        android:layout_alignTop="@+id/rowTextView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="10dp" />
+        android:textSize="12sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,7 +34,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/courseInformationTextView"
-        android:layout_below="@+id/rowTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

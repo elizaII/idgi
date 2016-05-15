@@ -1,6 +1,7 @@
 package com.idgi.activities.dialogs;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,26 +12,31 @@ import android.widget.Button;
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
+import com.idgi.core.Quiz;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateQuizDialog extends Dialog implements View.OnClickListener {
+public class CreateQuizDialog extends Dialog implements PropertyChangeListener {
 
-    private CreateLessonActivity c;
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
     private CreateQuestionAdapter adapter;
     private Button add_question_button;
     private Button question_done_button;
 
-    private List<Question> questionList;
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public CreateQuizDialog(CreateLessonActivity a, List<Question> questionList) {
-        super(a);
-        this.c = a;
-        this.questionList=questionList;
+    private List<Question> questionList;
+	public List<String> questionNames;
+
+    public CreateQuizDialog(Context context, List<Question> questionList) {
+        super(context);
+        this.questionList = questionList;
     }
 
     @Override
@@ -42,41 +48,59 @@ public class CreateQuizDialog extends Dialog implements View.OnClickListener {
         add_question_button = (Button) findViewById(R.id.add_question_button);
         question_done_button = (Button) findViewById(R.id.question_done_button);
 
-        add_question_button.setOnClickListener(this);
-        question_done_button.setOnClickListener(this);
+        add_question_button.setOnClickListener(onCreateQuestionClick);
+        question_done_button.setOnClickListener(onDoneClick);
 
-        manager = new LinearLayoutManager(c);
+        manager = new LinearLayoutManager(getContext());
         recyclerView = (RecyclerView) findViewById(R.id.create_quiz_list_recycler_view);
         recyclerView.setLayoutManager(manager);
 
         initiateList();
     }
 
-    private void initiateList() {
-        ArrayList<String> questionNames = new ArrayList<>();
+	private void initiateList() {
+        questionNames = new ArrayList<>();
         for (Question question : questionList) {
             questionNames.add(question.getText());
         }
         adapter = new CreateQuestionAdapter(this.getContext(), questionNames);
         recyclerView.setAdapter(adapter);
-
     }
 
+	private void updateQuestionList(Question question) {
+		questionList.add(question);
+		questionNames.add(question.getText());
+		adapter.notifyDataSetChanged();
+	}
 
-    public void updateQuestionList(Question question) {
-        questionList.add(question);
-        initiateList();
-    }
+	private final View.OnClickListener onCreateQuestionClick = new View.OnClickListener() {
+		public void onClick(View view) {
+			CreateQuestionDialog dialog = new CreateQuestionDialog(getContext());
+			dialog.addPropertyChangeListener(CreateQuizDialog.this);
+			dialog.show();
+		}
+	};
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.add_question_button) {
-            CreateQuestionDialog dialog = new CreateQuestionDialog(this, c);
-            dialog.show();
-        }
-        if (v.getId() == R.id.question_done_button) {
-            c.setQuiz();
-            dismiss();
-        }
-    }
+	private final View.OnClickListener onDoneClick = new View.OnClickListener() {
+		public void onClick(View view) {
+			if (!questionList.isEmpty()) {
+				Quiz quiz = new Quiz();
+				quiz.addQuestions(questionList);
+				pcs.firePropertyChange("quizCreated", null, quiz);
+				dismiss();
+			}
+		}
+	};
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getPropertyName().equals("questionCreated")) {
+			Question question = (Question) event.getNewValue();
+			updateQuestionList(question);
+		}
+	}
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.pcs.addPropertyChangeListener(listener);
+	}
 }

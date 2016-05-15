@@ -24,8 +24,8 @@ public class ReplyHolder extends ChildViewHolder {
     public void bind(Comment reply ) {
         txtReply.setText(reply.getText());
         txtAuthor.setText(reply.getAuthor().getName());
-        if (reply.getAuthor().getImage() != null) {
-            imgProfilePicture.setImageDrawable(reply.getAuthor().getImage());
+        if (reply.getAuthor().getProfilePicture() != null) {
+            imgProfilePicture.setImageDrawable(reply.getAuthor().getProfilePicture());
             imgProfilePicture.setBackground(null);
         }
     }

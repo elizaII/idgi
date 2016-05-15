@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.idgi.core.Video;
 import com.idgi.util.Config;
 import com.idgi.session.SessionData;
 
@@ -55,14 +56,13 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
-
-
         youTubePlayer.setPlayerStateChangeListener(playStateListener);
         youTubePlayer.setPlaybackEventListener(playbackListener);
 
         if(!wasRestored){
-            if(SessionData.getCurrentVideo() != null) {
-                youTubePlayer.cueVideo(SessionData.getCurrentVideo().getUrl());
+            Video currentVideo = SessionData.getCurrentVideo();
+            if(currentVideo != null) {
+                youTubePlayer.cueVideo(currentVideo.getUrl());
             } else {
                 //Todo... better error-handling
                 youTubePlayer.cueVideo("ZXilG7pH3is");
@@ -151,22 +151,27 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     };
 
     private void awardPoints(int points) {
-        Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
-        SessionData.getLoggedInUser().givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
-        updatePointProgressBar();
+		if (SessionData.hasLoggedInUser()) {
+			Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
+			SessionData.getLoggedInUser().givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
+			updatePointProgressBar();
+		}
     }
 
     private void updateTimeSpentWatching() {
-        milliSecondsSpentWatching += 2000;
-        if (milliSecondsSpentWatching % TIME_TO_GET_POINTS == 0)
-            awardPoints(Config.POINTS_PER_TICK);
+		if (SessionData.hasLoggedInUser()) {
+			milliSecondsSpentWatching += 2000;
+			if (milliSecondsSpentWatching % TIME_TO_GET_POINTS == 0)
+				awardPoints(Config.POINTS_PER_TICK);
+		}
     }
 
     public interface FragmentListener {
-        void updatePoints(int value);
+        void onUpdatePoints(int value);
     }
 
     private void updatePointProgressBar() {
-        listener.updatePoints(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
+		int points = SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo());
+        listener.onUpdatePoints(points);
     }
 }

@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,7 +51,7 @@ public class QuizResultActivity extends DrawerActivity {
 		if (btnRetake != null)
 			btnRetake.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					startActivity(ActivityType.QUIZ);
+					startActivity(new Intent(QuizResultActivity.this, QuizActivity.class));
 					finish();
 				}
 			});
@@ -58,7 +59,7 @@ public class QuizResultActivity extends DrawerActivity {
 		if (btnDone != null)
 			btnDone.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					startActivity(ActivityType.START);
+					startActivity(new Intent(QuizResultActivity.this, StartActivity.class));
 					finish();
 				}
 			});
@@ -78,10 +79,14 @@ public class QuizResultActivity extends DrawerActivity {
 	private void populateQuestionList() {
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.quiz_result_recycler_view_questions_roundup);
 
-		QuestionAdapter adapter = new QuestionAdapter(this, quiz.getQuestions());
-		recyclerView.setAdapter(adapter);
+		if (recyclerView != null) {
+			QuestionAdapter adapter = new QuestionAdapter(this, quiz.getQuestions());
 
-		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-		recyclerView.setLayoutManager(layoutManager);
+			recyclerView.setAdapter(adapter);
+
+			RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+			recyclerView.setLayoutManager(layoutManager);
+
+		}
 	}
 }

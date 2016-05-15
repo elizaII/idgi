@@ -8,22 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.util.Type;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAdapter.ViewHolder> {
 
     private ArrayList<String> itemNames;
     private LayoutInflater inflater;
-    private Type itemType;
 
-    private ListChangeListener listener;
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public SelectNameableAdapter(Context context, ArrayList<String> itemNames, Type itemType){
+    public SelectNameableAdapter(Context context, ArrayList<String> itemNames){
         this.itemNames = itemNames;
         inflater = LayoutInflater.from(context);
-        this.itemType = itemType;
         }
 
     @Override
@@ -32,7 +33,6 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
 
         return new ViewHolder(view);
         }
-
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -43,14 +43,6 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
     public int getItemCount() {
         return itemNames.size();
         }
-
-	public interface ListChangeListener {
-		void receiveItemData(String text, Type type);
-	}
-
-	public void setListChangeListener(ListChangeListener listener) {
-		this.listener = listener;
-	}
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -64,7 +56,11 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
 
         public void onClick(View view){
             String itemName = textView.getText().toString();
-            listener.receiveItemData(itemName, itemType);
+			pcs.firePropertyChange("listItemSelected", null, itemName);
         }
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
     }
 }

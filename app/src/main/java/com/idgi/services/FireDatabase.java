@@ -159,7 +159,6 @@ public class FireDatabase implements IDatabase {
 
 			schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
 				public void onDataChange(DataSnapshot snapshot) {
-
 					for (DataSnapshot child : snapshot.getChildren()) {
 						School school = child.getValue(School.class);
 						schools.add(school);

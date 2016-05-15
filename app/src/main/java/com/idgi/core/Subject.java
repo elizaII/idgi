@@ -45,7 +45,7 @@ public class Subject implements Nameable {
         if (object.getClass() != Subject.class) return false;
 
         Subject that = (Subject) object;
-        return this.name.equals(that.name) && this.courses.equals(that.courses);
+        return this.name.equals(that.name) && this.getCourses().equals(that.getCourses());
     }
 
     @Override

@@ -33,9 +33,9 @@ public class School implements Nameable {
 	}
 
 	public List<Subject> getSubjects() {
-		if (subjects == null)
-			subjects = new ArrayList<>();
-		
+		/*if (subjects == null)
+			subjects = new ArrayList<>();*/
+
 		return subjects;
 	}
 

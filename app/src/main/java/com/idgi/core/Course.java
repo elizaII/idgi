@@ -39,7 +39,7 @@ public class Course implements Nameable {
 
 	public List<Lesson> getLessons() {
 		if (lessons == null)
-			lessons = Collections.emptyList();
+			lessons = new ArrayList<>();
 
 		return lessons;
 	}
