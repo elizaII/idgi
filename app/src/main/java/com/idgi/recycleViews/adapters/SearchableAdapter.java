@@ -9,9 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.activities.CourseActivity;
+import com.idgi.activities.CourseListActivity;
+import com.idgi.activities.LessonActivity;
+import com.idgi.activities.SchoolListActivity;
 import com.idgi.activities.SubjectListActivity;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
+import com.idgi.core.ModelUtility;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
@@ -60,23 +65,24 @@ public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (viewType) {
             case SCHOOL:
                 View v1 = inflater.inflate(R.layout.list_row, parent, false);
-                viewHolder = new ViewHolder1(v1);
+                viewHolder = new ViewHolderSchool(v1);
                 break;
             case SUBJECT:
                 View v2 = inflater.inflate(R.layout.list_row, parent, false);
-                viewHolder = new ViewHolder2(v2);
+                viewHolder = new ViewHolderSubject(v2);
                 break;
             case COURSE:
                 View v3 = inflater.inflate(R.layout.list_row, parent, false);
-                viewHolder = new ViewHolder3(v3);
+                viewHolder = new ViewHolderCourse(v3);
                 break;
             case LESSON:
                 View v4 = inflater.inflate(R.layout.list_row, parent, false);
-                viewHolder = new ViewHolder4(v4);
+                viewHolder = new ViewHolderLesson(v4);
                 break;
             default:
+                //TODO some other default
                 View v = inflater.inflate(R.layout.list_row, parent, false);
-                viewHolder = new ViewHolder1(v);
+                viewHolder = new ViewHolderSchool(v);
         }
         return viewHolder;
     }
@@ -85,22 +91,22 @@ public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch(holder.getItemViewType()) {
             case SCHOOL:
-                ViewHolder1 holder1 = (ViewHolder1) holder;
+                ViewHolderSchool holder1 = (ViewHolderSchool) holder;
                 School school = (School) data.get(position);
                 holder1.searchTextView.setText(school.getName());
                 break;
             case SUBJECT:
-                ViewHolder2 holder2 = (ViewHolder2) holder;
+                ViewHolderSubject holder2 = (ViewHolderSubject) holder;
                 Subject subject = (Subject) data.get(position);
                 holder2.searchTextView.setText(subject.getName());
                 break;
             case COURSE:
-                ViewHolder3 holder3 = (ViewHolder3) holder;
+                ViewHolderCourse holder3 = (ViewHolderCourse) holder;
                 Course course = (Course) data.get(position);
                 holder3.searchTextView.setText(course.getName());
                 break;
             case LESSON:
-                ViewHolder4 holder4 = (ViewHolder4) holder;
+                ViewHolderLesson holder4 = (ViewHolderLesson) holder;
                 Lesson lesson = (Lesson) data.get(position);
                 holder4.searchTextView.setText(lesson.getName());
                 break;
@@ -115,63 +121,87 @@ public class SearchableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public static class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolderSchool extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView searchTextView;
 
-        public ViewHolder1(View v){
+        public ViewHolderSchool(View v){
             super(v);
             v.setOnClickListener(this);
             searchTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View view){
-            //TODO implement so that navigation to selected item works
+            String schoolName = searchTextView.getText().toString();
+            School school = FireDatabase.getInstance().getSchool((schoolName));
+
+            SessionData.setCurrentSchool(school);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, SubjectListActivity.class));
         }
     }
 
-    public static class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolderSubject extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView searchTextView;
 
-        public ViewHolder2(View v){
+        public ViewHolderSubject(View v){
             super(v);
             v.setOnClickListener(this);
             searchTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View view){
-            //TODO implement so that navigation to selected item works
+            String subjectName = searchTextView.getText().toString();
+            Subject subject = ModelUtility.findByName(FireDatabase.getInstance().getSubjects(SessionData.getCurrentSchool()), subjectName);
+
+            SessionData.setCurrentSubject(subject);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, CourseListActivity.class));
         }
     }
 
-    public static class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolderCourse extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView searchTextView;
 
-        public ViewHolder3(View v){
+        public ViewHolderCourse(View v){
             super(v);
             v.setOnClickListener(this);
             searchTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View view){
-            //TODO implement so that navigation to selected item works
+            String courseName = searchTextView.getText().toString();
+            Course course = ModelUtility.findByName(FireDatabase.getInstance().getCourses(SessionData.getCurrentSubject()), courseName);
+
+            SessionData.setCurrentCourse(course);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, CourseActivity.class));
         }
     }
 
-    public static class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolderLesson extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView searchTextView;
 
-        public ViewHolder4(View v){
+        public ViewHolderLesson(View v){
             super(v);
             v.setOnClickListener(this);
             searchTextView =(TextView) v.findViewById(R.id.rowTextView);
         }
 
-        public void onClick(View view){
-            //TODO implement so that navigation to selected item works
+        public void onClick(View view) {
+            String lessonName = searchTextView.getText().toString();
+            Lesson lesson = ModelUtility.findByName(FireDatabase.getInstance().getLessons(SessionData.getCurrentCourse()), lessonName);
+
+            SessionData.setCurrentLesson(lesson);
+
+            Context context = view.getContext();
+            context.startActivity(new Intent(context, LessonActivity.class));
         }
     }
 }
