@@ -1,6 +1,7 @@
 package com.idgi.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -36,22 +37,6 @@ public class ProfileActivity extends DrawerActivity {
        }
         initializeDrawer();
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    */
 
     private void enableInputField(EditText field) {
         field.setFocusableInTouchMode(true);
@@ -85,25 +70,9 @@ public class ProfileActivity extends DrawerActivity {
             disableInputField(age);
             saveInfo();
         }
-
     }
-
-/*
-    public void enableInputFieldButtonClicked(View view) {
-        if (view.getId() == R.id.profile_btn_editName ) {
-            if (name.getTag() == "enabled") {
-                disableInputField(name);
-            }
-            else {
-                enableInputField(name);
-            }
-        } else if (view.getId() == R.id.profile_btn_editAge) {
-            if (age.getTag() == "enabled") {
-                disableInputField(age);
-            }
-            else {
-                enableInputField(age);
-            }
-        }
-    }*/
+    public void showMyHats(View view) {
+        Intent intent = new Intent(this, HatListActivity.class);
+        startActivity(intent);
+    }
 }

@@ -76,7 +76,6 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CreateQuizActivity" />
         <activity android:name=".activities.MyCoursesActivity"/>
         <activity android:name=".activities.SearchableActivity" >
             <intent-filter>
@@ -85,6 +84,11 @@
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
+
+        <activity
+            android:name=".activities.HatListActivity"
+            android:label="@string/title_activity_my_hats"
+            android:theme="@style/AppTheme" />
 
     </application>
 

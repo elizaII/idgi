@@ -1,4 +1,4 @@
-package com.idgi.activities.recycleViews.adapters;
+package com.idgi.recycleViews.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.idgi.R;
-import com.idgi.activities.recycleViews.viewHolders.HatViewHolder;
+import com.idgi.recycleViews.viewHolders.HatViewHolder;
 import com.idgi.core.Hat;
 
 import java.util.ArrayList;

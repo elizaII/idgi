@@ -18,21 +18,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_account_circle_black_24dp"/>
-<RelativeLayout
-    android:id="@+id/profile_relativeLayout_editName"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/lesson_listitem_comment_image_profile_picture">
-    <EditText
-        android:id="@+id/profile_editText_name"
+
+    <RelativeLayout
+        android:id="@+id/profile_relativeLayout_editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/profile_hint_name"
-        android:clickable="false"
-        android:focusableInTouchMode="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+        android:layout_below="@+id/lesson_listitem_comment_image_profile_picture">
+        <EditText
+            android:id="@+id/profile_editText_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/profile_hint_name"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/profile_relativeLayout_editAge"
@@ -57,30 +58,32 @@
         android:layout_height="wrap_content"
         android:text="609 gets"
         android:layout_marginTop="36dp"
-        android:layout_below="@+id/profile_btn_toggleEdit"
+        android:layout_below="@+id/profile_btn_myHats"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <TextView
-        android:id="@+id/profile_textView_myHats"
+    <Button
+        android:id="@+id/profile_btn_myHats"
+        style="@style/menu_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_btn_toggleEdit"
         android:text="Mina hattar"
         android:layout_marginTop="27dp"
-        android:layout_below="@+id/profile_textView_nrOfGets"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="showMyHats"/>
     <RelativeLayout
         android:id="@+id/profile_relativeLayout_ownedHats"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_below="@id/profile_textView_myHats">
+        android:layout_below="@id/profile_btn_myHats">
 
     </RelativeLayout>
 
     <ToggleButton
         style="@style/menu_button"
         android:padding="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/profile_btn_toggleEdit"
         android:checked="false"
