@@ -10,6 +10,7 @@ import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.TimedQuiz;
+import com.idgi.core.User;
 import com.idgi.core.Video;
 import com.idgi.session.SessionData;
 
@@ -87,6 +88,8 @@ public final class MockData implements IDatabase {
 
 		Random rand = new Random();
 
+		String nameOfUser = "Kalle";
+
 		List<Comment> comments = new ArrayList<>();
 
 		for (int i = 0; i < 10; ++i) {
@@ -95,9 +98,17 @@ public final class MockData implements IDatabase {
 			while(k-- >= 0) {
 				text += " " + words[rand.nextInt(words.length)];
 			}
-			comments.add(new Comment(text + ".", SessionData.getLoggedInUser()));
+			comments.add(new Comment(text + ".", getUser()));
 		}
         return comments;
+	}
+
+	private User getUser() {
+		User user = new User("Pelle");
+		user.setEmail("pelleBoy@gmail.com");
+		user.setAge(9);
+
+		return user;
 	}
 
 	//public List<User> getUsers() {

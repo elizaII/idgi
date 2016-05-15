@@ -16,7 +16,7 @@ public class User {
     private String email;
 
     private String phoneNumber;
-    private String age;
+    private int age;
 
     @JsonIgnore
     private Drawable profilePicture;
@@ -51,7 +51,7 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -81,7 +81,7 @@ public class User {
     public String getName(){
         return this.name;
     }
-    public String getAge() {
+    public int getAge() {
         return this.age;
     }
     public String getPhoneNumber(){
