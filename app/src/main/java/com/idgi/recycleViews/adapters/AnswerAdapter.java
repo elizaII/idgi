@@ -7,14 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.idgi.R;
 import com.idgi.core.Answer;
-import com.idgi.recycleViews.viewHolders.AnswerViewHolder;
 
 import java.util.List;
 
-public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
+public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
 
 	private List<Answer> answers;
 	private int itemLayout;
@@ -68,4 +69,16 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
 		int resource = correct ? R.string.quiz_result_answer_correct : R.string.quiz_result_answer_incorrect;
 		return context.getResources().getString(resource);
 	}
+
+    public class AnswerViewHolder extends ChildViewHolder {
+
+        public TextView answerTextView, feedbackTextView;
+
+        public AnswerViewHolder(View itemView) {
+            super(itemView);
+
+            answerTextView = (TextView) itemView.findViewById(R.id.quiz_result_listitem_answer_text);
+            feedbackTextView = (TextView) itemView.findViewById(R.id.quiz_result_listitem_answer_selected_text);
+        }
+    }
 }

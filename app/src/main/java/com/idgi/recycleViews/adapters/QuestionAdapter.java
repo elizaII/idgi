@@ -10,14 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Question;
-import com.idgi.recycleViews.viewHolders.QuestionViewHolder;
 
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
 	private List<Question> questions;
 	private LayoutInflater inflater;
@@ -78,5 +78,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionViewHolder> {
 
 		dialog.getWindow().setGravity(Gravity.CENTER);
 		dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+	}
+
+	public class QuestionViewHolder extends RecyclerView.ViewHolder {
+
+		public View background;
+		public TextView txtQuestion;
+
+		public QuestionViewHolder(View itemView) {
+			super(itemView);
+
+			txtQuestion = (TextView) itemView.findViewById(R.id.quiz_result_question_text);
+			background = itemView.findViewById(R.id.quiz_result_listitem_background);
+		}
 	}
 }
