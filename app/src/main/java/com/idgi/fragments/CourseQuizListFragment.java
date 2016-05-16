@@ -3,21 +3,14 @@ package com.idgi.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.idgi.R;
-import com.idgi.Widgets.EmptyRecyclerView;
-import com.idgi.core.Quiz;
-import com.idgi.recycleViews.adapters.LessonListAdapter;
+import com.idgi.recycleViews.EmptyRecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 
 public class CourseQuizListFragment extends Fragment {

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
     tools:context="com.idgi.activities.MyCoursesActivity"
     layout="@style/AppTheme.Base">
     <include
@@ -25,17 +24,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Mina kurser"
             android:id="@+id/textView11"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:textAlignment="center" />
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +41,7 @@
             tools:context=".fragments.CourseLessonListFragment">
 
 
-            <com.idgi.Widgets.EmptyRecyclerView
+            <com.idgi.recycleViews.EmptyRecyclerView
                 android:id="@+id/my_courses_list_recycler_view"
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
@@ -57,7 +53,7 @@
 
         </FrameLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
 </ScrollView>
 

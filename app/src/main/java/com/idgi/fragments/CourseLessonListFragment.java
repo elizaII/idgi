@@ -11,16 +11,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.Widgets.EmptyRecyclerView;
+import com.idgi.recycleViews.EmptyRecyclerView;
 import com.idgi.core.Lesson;
-import com.idgi.services.MockData;
 import com.idgi.recycleViews.adapters.LessonListAdapter;
 import com.idgi.session.SessionData;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 

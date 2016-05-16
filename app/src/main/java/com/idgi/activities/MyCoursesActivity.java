@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.Widgets.EmptyRecyclerView;
+import com.idgi.recycleViews.EmptyRecyclerView;
 import com.idgi.core.Course;
 import com.idgi.recycleViews.adapters.CourseListAdapter;
 import com.idgi.activities.extras.DrawerActivity;
@@ -21,7 +21,7 @@ public class MyCoursesActivity extends DrawerActivity {
     private CourseListAdapter adapter;
     private EmptyRecyclerView recycler;
     private RecyclerView.LayoutManager manager;
-    private ArrayList<Course> data;
+    private ArrayList<Course> courses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +33,23 @@ public class MyCoursesActivity extends DrawerActivity {
         toolbar.setTitle(R.string.title_activity_my_course);
 
         initializeDrawer();
-        this.data = new ArrayList<>();
-        data = SessionData.getLoggedInUser().getMyCourses();
-
-
-
-        manager = new LinearLayoutManager(this);
-        recycler = (EmptyRecyclerView) findViewById(R.id.my_courses_list_recycler_view);
-        recycler.setLayoutManager(manager);
-
-        View emptyView = findViewById(R.id.lesson_list_empty_view);
-
-        recycler.setEmptyView(emptyView);
+        this.courses = new ArrayList<>();
+        courses = SessionData.getLoggedInUser().getMyCourses();
 
         TextView textView = (TextView) findViewById(R.id.lesson_list_empty_view_text);
         textView.setText(getResources().getString(R.string.course_no_courses));
 
-        adapter = new CourseListAdapter(this, this.data);
-        recycler.setAdapter(adapter);
+        manager = new LinearLayoutManager(this);
+        recycler = (EmptyRecyclerView) findViewById(R.id.my_courses_list_recycler_view);
+        if (recycler != null) {
+            recycler.setLayoutManager(manager);
+
+            View emptyView = findViewById(R.id.lesson_list_empty_view);
+            recycler.setEmptyView(emptyView);
+
+            adapter = new CourseListAdapter(this, this.courses);
+            recycler.setAdapter(adapter);
+        }
     }
 
 }
