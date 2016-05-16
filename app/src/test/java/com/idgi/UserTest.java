@@ -1,3 +1,4 @@
+
 package com.idgi;
 
 import android.util.Log;
@@ -12,7 +13,7 @@ import org.junit.Test;
 
 public class UserTest {
 
-	private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
+	/*private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
 	private Question question2 = new Question("What is 5 + 7?", "It is more than 11 and less than 13.");
 
 	@Test
@@ -62,5 +63,5 @@ public class UserTest {
 		q2a2.setSelected(false);
 		user.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 		assertTrue(pointsNow == user.getPoints());
-	}
+	}*/
 }
