@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.idgi.core.StudentUser;
 import com.idgi.core.Video;
 import com.idgi.Config;
 import com.idgi.session.SessionData;
@@ -151,9 +152,10 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     };
 
     private void awardPoints(int points) {
-		if (SessionData.hasLoggedInUser()) {
+		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser)) {
 			Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
-			SessionData.getLoggedInUser().givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
+            ((StudentUser) SessionData.getLoggedInUser()).
+                    givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
 			updatePointProgressBar();
 		}
     }
@@ -171,7 +173,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     }
 
     private void updatePointProgressBar() {
-		int points = SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo());
+		int points = ((StudentUser) SessionData.getLoggedInUser()).getPointsForVideo(SessionData.getCurrentVideo());
         listener.onUpdatePoints(points);
     }
 }

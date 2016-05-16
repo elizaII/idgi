@@ -8,6 +8,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
+import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.TimedQuiz;
 import com.idgi.core.User;
@@ -104,7 +105,7 @@ public final class MockData implements IDatabase {
 	}
 
 	private User getUser() {
-		User user = new User("Pelle");
+		User user = new StudentUser("Pelle");
 		user.setEmail("pelleBoy@gmail.com");
 		user.setAge(9);
 

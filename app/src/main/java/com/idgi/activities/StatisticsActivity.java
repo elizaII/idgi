@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Statistics;
+import com.idgi.core.StudentUser;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
@@ -25,8 +26,10 @@ public class StatisticsActivity extends DrawerActivity {
 
 		findViews();
 
-		User user = SessionData.getLoggedInUser();
-		loadStatistics(user);
+		if(SessionData.getLoggedInUser() instanceof StudentUser){
+		    StudentUser user = (StudentUser) SessionData.getLoggedInUser();
+		    loadStatistics(user);
+        }
 	}
 
 
@@ -40,7 +43,7 @@ public class StatisticsActivity extends DrawerActivity {
 		//txtPoints = (TextView) findViewById(R.id.statistics_txt_points);
 	}
 
-	private void loadStatistics(User user) {
+	private void loadStatistics(StudentUser user) {
 		txtCompletedCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_COURSES)));
 		txtOngoingCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.ONGOING_COURSES)));
 		txtCompletedQuizAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_QUIZZES)));

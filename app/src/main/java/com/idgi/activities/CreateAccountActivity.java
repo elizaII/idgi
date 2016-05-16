@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.idgi.R;
 import com.idgi.core.Account;
+import com.idgi.core.StudentUser;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
@@ -44,7 +45,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = "hej123";
 
         Account account = new Account(accountName, password);
-        User user = new User(name);
+        //Todo... Checks type of account before creating
+        User user = new StudentUser(name);
         user.setEmail(email);
         account.setUser(user);
 

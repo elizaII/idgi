@@ -17,6 +17,7 @@ import com.idgi.R;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
+import com.idgi.core.StudentUser;
 import com.idgi.core.TimedQuiz;
 import com.idgi.event.QuizSelectionBus;
 import com.idgi.fragments.YoutubeFragment;
@@ -77,7 +78,10 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
 		if (pointProgressBar != null) {
 			pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
-			pointProgressBar.setProgress(SessionData.getLoggedInUser().getPointsForVideo(SessionData.getCurrentVideo()));
+            if(SessionData.getLoggedInUser() instanceof StudentUser){
+                StudentUser studentUser = (StudentUser) SessionData.getLoggedInUser();
+			    pointProgressBar.setProgress(studentUser.getPointsForVideo(SessionData.getCurrentVideo()));
+            }
 		}
     }
 

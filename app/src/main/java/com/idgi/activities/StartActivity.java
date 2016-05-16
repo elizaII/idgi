@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.idgi.R;
+import com.idgi.core.StudentUser;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
@@ -70,7 +71,7 @@ public class StartActivity extends DrawerActivity {
 		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 		Drawable profilePicture = ContextCompat.getDrawable(this, R.drawable.yoda);
 
-		User user = new User("Yoda");
+		User user = new StudentUser("Yoda");
 		user.setEmail("test@gmail.com");
 		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
