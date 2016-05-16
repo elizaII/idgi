@@ -22,7 +22,7 @@ import com.idgi.Config;
 import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.activities.extras.ButtonFactory;
+import com.idgi.activities.extras.AnswerButtonFactory;
 import com.idgi.Widgets.AnswerButton;
 
 import java.util.List;
@@ -191,18 +191,17 @@ public class QuizActivity extends AppCompatActivity {
 		buttonContainer.removeAllViews();
 
 		List<Answer> answers = question.getAnswers();
-
 		answerButtons = new AnswerButton[answers.size()];
 
 		LinearLayout buttonRow = createNewButtonRow();
 
-		int i = 0;
+		for (int i = 0; i < answers.size(); ++i) {
+			Answer answer = answers.get(i);
 
-		for (Answer answer : answers) {
-			AnswerButton answerButton = ButtonFactory.createAnswerButton(this, answer);
+			AnswerButton answerButton = AnswerButtonFactory.createButton(this, answer);
 			answerButton.setOnClickListener(answerButtonClickListener);
 
-			answerButtons[i++] = answerButton;
+			answerButtons[i] = answerButton;
 			buttonRow.addView(answerButton);
 
 			if (buttonRowIsFull(buttonRow)) {

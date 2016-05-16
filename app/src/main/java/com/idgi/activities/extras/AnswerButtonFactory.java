@@ -10,11 +10,11 @@ import com.idgi.R;
 import com.idgi.Widgets.AnswerButton;
 import com.idgi.core.Answer;
 
-public class ButtonFactory {
+public class AnswerButtonFactory {
 
 	private static LinearLayout.LayoutParams buttonLayoutParams = null;
 
-	public static AnswerButton createAnswerButton(final Context context, final Answer answer) {
+	public static AnswerButton createButton(final Context context, final Answer answer) {
 		final AnswerButton button = new AnswerButton(new ContextThemeWrapper(context, R.style.quiz_answer_button), null, R.style.quiz_answer_button, answer);
 		button.setText(answer.getText());
 		button.setLayoutParams(getAnswerButtonLayout());

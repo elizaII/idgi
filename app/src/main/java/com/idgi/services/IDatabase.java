@@ -20,5 +20,4 @@ public interface IDatabase {
 	List<Course> getCourses(Subject subject);
 	List<Comment> getComments(Lesson lesson);
 	void retrieveUsers();
-
 }
