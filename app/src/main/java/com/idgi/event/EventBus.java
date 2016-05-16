@@ -1,5 +1,6 @@
 package com.idgi.event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 public abstract class EventBus<T> {
 
-    private List<T> listeners;
+    private List<T> listeners = new ArrayList<>();
 
     public void addListener(T listener) {
         listeners.add(listener);
