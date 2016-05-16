@@ -19,6 +19,7 @@ import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.TimedQuiz;
+import com.idgi.event.QuizSelectionBus;
 import com.idgi.fragments.YoutubeFragment;
 
 import com.idgi.Widgets.CommentLayout;
@@ -35,7 +36,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener, PropertyChangeListener {
+public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener, QuizSelectionBus.Listener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
@@ -86,7 +87,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         PickQuizDialog quizTypes = new PickQuizDialog(this);
 
         //Listens to the dialog
-        quizTypes.addPropertyChangeListener(this);
+        quizTypes.addListener(this);
 
         quizTypes.show();
         quizTypes.getWindow().setGravity(Gravity.CENTER);
@@ -145,19 +146,14 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        if(event.getPropertyName().equals("PickQuizDialog")) {
-			if(event.getNewValue().equals("timed")) {
-                IQuiz normalQuiz = lesson.getQuiz();
+    public void onQuizSelected(QuizSelectionBus.QuizType quizType) {
+        if(quizType == QuizSelectionBus.QuizType.TIMED) {
+            IQuiz normalQuiz = lesson.getQuiz();
 
-                //The amount of time for each question is 5 seconds
-                int time = normalQuiz.getQuestions().size() * 5000;
-                lesson.setQuiz(new TimedQuiz(normalQuiz, time));
-                TimedQuiz timedQuiz = (TimedQuiz) lesson.getQuiz();
-            }
-
-            startActivity(new Intent(this, QuizActivity.class));
+            lesson.setQuiz(new TimedQuiz(normalQuiz));
         }
+
+        startActivity(new Intent(this, QuizActivity.class));
     }
 }
 

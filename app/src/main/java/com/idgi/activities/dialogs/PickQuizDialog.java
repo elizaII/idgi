@@ -8,13 +8,14 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.idgi.R;
+import com.idgi.event.QuizSelectionBus;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class PickQuizDialog extends Dialog{
 
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private final QuizSelectionBus quizSelectionBus = new QuizSelectionBus();
     private Button normalQuizBtn, timedQuizBtn;
 
     public PickQuizDialog(Context context) {
@@ -37,23 +38,23 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onNormalClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            pcs.firePropertyChange("PickQuizDialog", null, "normal");
+            quizSelectionBus.broadcastQuizSelection(QuizSelectionBus.QuizType.NORMAL);
         }
     };
 
     private final View.OnClickListener onTimedClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            pcs.firePropertyChange("PickQuizDialog", null, "timed");
+            quizSelectionBus.broadcastQuizSelection(QuizSelectionBus.QuizType.TIMED);
         }
     };
 
-    public void addPropertyChangeListener(PropertyChangeListener listener){
-        pcs.addPropertyChangeListener(listener);
+    public void addListener(QuizSelectionBus.Listener listener){
+        quizSelectionBus.addListener(listener);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener){
-        pcs.removePropertyChangeListener(listener);
+    public void removeListener(QuizSelectionBus.Listener listener){
+        quizSelectionBus.removeListener(listener);
     }
 
 
