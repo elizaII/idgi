@@ -62,8 +62,8 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
 		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
 		lessonListFragment.addListener(this);
-        pagerAdapter.addFragment(lessonListFragment, "Lessons");
 
+        pagerAdapter.addFragment(lessonListFragment, "Lessons");
         pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
 

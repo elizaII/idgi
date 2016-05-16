@@ -1,6 +1,7 @@
 package com.idgi.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,18 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
+import com.idgi.core.ModelUtility;
 import com.idgi.core.School;
+import com.idgi.core.Subject;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.services.FireDatabase;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.recycleViews.adapters.SchoolListAdapter;
+import com.idgi.session.SessionData;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class SchoolListActivity extends DrawerActivity implements PropertyChangeListener {
+public class SchoolListActivity extends DrawerActivity implements NameableSelectionBus.Listener {
 
+	private List<School> schools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +51,11 @@ public class SchoolListActivity extends DrawerActivity implements PropertyChange
 	}
 
 	private void initializeSchoolList() {
-		ArrayList<String> schoolNames = new ArrayList<>();
-		for(School school: FireDatabase.getInstance().getSchools())
-			schoolNames.add(school.getName());
+		schools = FireDatabase.getInstance().getSchools();
 
-		Collections.sort(schoolNames);
-		SchoolListAdapter adapter = new SchoolListAdapter(this, schoolNames);
-		adapter.addPropertyChangeListener(this);
+		SchoolListAdapter adapter = new SchoolListAdapter(this, schools);
+
+		adapter.addListener(this);
 
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.school_list_recycler_view);
 		if (recycler != null) {
@@ -59,11 +64,11 @@ public class SchoolListActivity extends DrawerActivity implements PropertyChange
 		}
 	}
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        switch(event.getPropertyName()) {
-            case "startSubjectListActivity":
-                        startActivity(new Intent(this, SubjectListActivity.class));
-        }
-    }
+	@Override
+	public void onNameableSelected(String name) {
+		School school = FireDatabase.getInstance().getSchool(name);
+		SessionData.setCurrentSchool(school);
+
+		startActivity(new Intent(this, SubjectListActivity.class));
+	}
 }

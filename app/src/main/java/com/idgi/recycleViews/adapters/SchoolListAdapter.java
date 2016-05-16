@@ -9,74 +9,50 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.School;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.List;
 
-public class SchoolListAdapter extends RecyclerView.Adapter<SchoolListAdapter.ViewHolder> {
+public class SchoolListAdapter extends NameableAdapter<SchoolListAdapter.ViewHolder> {
 
-    private ArrayList<String> schoolNames;
-    private LayoutInflater inflater;
-
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-
-    public SchoolListAdapter(Context context, ArrayList<String> schoolNames){
-        this.schoolNames = schoolNames;
-        inflater = LayoutInflater.from(context);
-
+    public SchoolListAdapter(Context context, List<School> schools){
+        super(context, schools);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.list_row, parent, false);
-
-		ViewHolder viewHolder = new ViewHolder(view);
-
-		//Pass on the PropertyChangeSupport object for communication between ViewHolder other classes
-		viewHolder.pcs = pcs;
-
-        return viewHolder;
+        View view = getInflater().inflate(R.layout.list_row, parent, false);
+        return new ViewHolder(view, getBus());
 
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.schoolTextView.setText(schoolNames.get(position));
+        holder.schoolTextView.setText(nameables.get(position).getName());
     }
 
-    @Override
-    public int getItemCount() {
-        return schoolNames.size();
+    public void addListener(NameableSelectionBus.Listener listener) {
+        getBus().addListener(listener);
     }
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
-	}
-
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends NameableAdapter.ViewHolder implements View.OnClickListener{
 
         public TextView schoolTextView;
-		public PropertyChangeSupport pcs;
 
-        public ViewHolder(View v){
-            super(v);
-            v.setOnClickListener(this);
-            schoolTextView =(TextView) v.findViewById(R.id.rowTextView);
+        public ViewHolder(View view, NameableSelectionBus bus){
+            super(view, bus);
+            view.setOnClickListener(this);
+            schoolTextView = (TextView) view.findViewById(R.id.rowTextView);
         }
 
         public void onClick(View view){
             String schoolName = schoolTextView.getText().toString();
-            School school = FireDatabase.getInstance().getSchool((schoolName));
-
-            SessionData.setCurrentSchool(school);
-
-			pcs.firePropertyChange("startSubjectListActivity", null, null);
+            broadcastSelection(schoolName);
         }
-
     }
-
-
 }

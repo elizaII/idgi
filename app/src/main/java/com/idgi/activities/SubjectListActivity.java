@@ -7,21 +7,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
+import com.idgi.core.ModelUtility;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.adapters.SubjectListAdapter;
+import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class SubjectListActivity extends DrawerActivity implements PropertyChangeListener {
-    private List<Subject> subjects = new ArrayList<>();
-	private School school;
+public class SubjectListActivity extends DrawerActivity implements NameableSelectionBus.Listener{
+    private List<Subject> subjects;
+    private School school;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +32,12 @@ public class SubjectListActivity extends DrawerActivity implements PropertyChang
             finish();
         }
 
-		school = SessionData.getCurrentSchool();
-
         setContentView(R.layout.activity_subject_list);
 
-		initializeToolbar();
         initializeDrawer();
 		initializeSubjectList();
+        initializeToolbar();
+
     }
 
 	private void initializeToolbar() {
@@ -50,8 +48,12 @@ public class SubjectListActivity extends DrawerActivity implements PropertyChang
 	}
 
 	private void initializeSubjectList() {
-		SubjectListAdapter adapter = new SubjectListAdapter(this, getSubjectNames());
-		adapter.addPropertyChangeListener(this);
+        school = SessionData.getCurrentSchool();
+        subjects = school.getSubjects();
+
+		SubjectListAdapter adapter = new SubjectListAdapter(this, subjects);
+
+        adapter.addListener(this);
 
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.subject_list_recycler_view);
 		if (recycler != null) {
@@ -60,24 +62,11 @@ public class SubjectListActivity extends DrawerActivity implements PropertyChang
 		}
 	}
 
-    private ArrayList<String> getSubjectNames() {
-		subjects = school.getSubjects();
-
-        ArrayList<String> subjectNames = new ArrayList<>();
-        for(Subject subject: subjects)
-            subjectNames.add(subject.getName());
-
-        Collections.sort(subjectNames);
-
-        return subjectNames;
-    }
-
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        switch(event.getPropertyName()) {
-            case "startCourseListActivity":
-				startActivity(new Intent(this, CourseListActivity.class));
-				break;
-        }
+    public void onNameableSelected(String name) {
+        Subject subject = ModelUtility.findByName(FireDatabase.getInstance().getSubjects(SessionData.getCurrentSchool()), name);
+        SessionData.setCurrentSubject(subject);
+
+        startActivity(new Intent(this, CourseListActivity.class));
     }
 }
