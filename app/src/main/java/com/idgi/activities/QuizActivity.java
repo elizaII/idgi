@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.idgi.R;
 import com.idgi.core.IQuiz;
 import com.idgi.core.TimedQuiz;
-import com.idgi.util.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;

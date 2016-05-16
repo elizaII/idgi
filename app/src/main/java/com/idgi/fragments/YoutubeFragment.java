@@ -9,7 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.idgi.core.Video;
-import com.idgi.util.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 
 /**

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
@@ -27,7 +26,7 @@ import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.util.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
 

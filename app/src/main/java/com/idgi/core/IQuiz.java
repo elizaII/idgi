@@ -15,6 +15,10 @@ import java.util.List;
 })
 public interface IQuiz {
 
+    enum Type {
+        NORMAL, TIMED
+    }
+
     String getID();
 
     int length();

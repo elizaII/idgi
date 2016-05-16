@@ -9,12 +9,11 @@ import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
-import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.ModelUtility;
-import com.idgi.util.Config;
+import com.idgi.Config;
 
 import java.util.ArrayList;
 import java.util.Collections;

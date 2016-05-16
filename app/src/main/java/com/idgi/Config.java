@@ -1,4 +1,4 @@
-package com.idgi.util;
+package com.idgi;
 
 import android.os.Build;
 

@@ -1,4 +1,4 @@
-package com.idgi.session;
+package com.idgi;
 
 import android.os.Build;
 

@@ -2,7 +2,7 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.idgi.util.Config;
+import com.idgi.Config;
 
 import java.util.HashMap;
 
