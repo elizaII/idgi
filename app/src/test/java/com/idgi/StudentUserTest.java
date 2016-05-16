@@ -1,82 +1,70 @@
+
 package com.idgi;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import android.util.Log;
+
+import com.idgi.core.Answer;
+import com.idgi.core.Question;
+import com.idgi.core.Quiz;
 import com.idgi.core.StudentUser;
-import com.idgi.core.TeacherUser;
 import com.idgi.core.User;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.containsString;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
 public class StudentUserTest {
 
-    @Test
-    public void correctStudentUserType() throws JsonProcessingException,
-            IOException{
-        User student = new StudentUser("Tuyen");
-        student.setAge(19);
-        student.setEmail("kim_tuyen_ngo@hotmail.com");
-        student.setPhoneNumber("0000007070");
+private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
+	private Question question2 = new Question("What is 5 + 7?", "It is more than 11 and less than 13.");
 
-        String result = new ObjectMapper().writeValueAsString(student);
+	@Test
+	public void testAddPointsThroughQuiz() {
+		StudentUser user = new StudentUser("Test");
 
-        System.out.println(result);
+		Quiz quiz = new Quiz();
 
-        assertThat(result, containsString("type"));
-        assertThat(result, containsString("student"));
-    }
+		Answer q1a1 = new Answer("Correct answer.");
+		q1a1.setCorrect(true);
+		q1a1.setSelected(true);
 
-    @Test
-    public void deserializeStudentUser() throws JsonProcessingException,
-            IOException {
-        User student = new StudentUser("Tuyen");
-        student.setAge(19);
+		Answer q1a2 = new Answer("Inorrect answer.");
 
-        String json = "{\"type\":\"student\",\"name\":\"Tuyen\"," +
-                "\"email\":\"kim_tuyen_ngo@hotmail.com\"," +
-                "\"phoneNumber\":\"0000007070\",\"age\":19,\"myCourses\":[]}";
+		question1.addAnswers(q1a1, q1a2);
 
-        StudentUser studentUser = new ObjectMapper().reader()
-                .withType(StudentUser.class)
-                .readValue(json);
 
-        assertEquals(19, studentUser.getAge());
-    }
+		Answer q2a1 = new Answer("Correct answer.");
+		q2a1.setCorrect(true);
 
-    @Test
-    public void correctTeacherUserType() throws JsonProcessingException,
-            IOException {
-        User teacher = new TeacherUser("Niklas Grip");
+		Answer q2a2 = new Answer("Inorrect answer.");
 
-        teacher.setEmail("nigr@mikaelelias.se");
+		q2a2.setSelected(true);
 
-        String result = new ObjectMapper().writeValueAsString(teacher);
+		question2.addAnswers(q2a1, q2a2);
 
-        System.out.println(result);
+		quiz.addQuestion(question1);
+		quiz.addQuestion(question2);
 
-        assertThat(result, containsString("type"));
-        assertThat(result, containsString("teacher"));
-    }
+		quiz.nextQuestion();
+		quiz.nextQuestion();
 
-    @Test
-    public void deserializeTeacherUser() throws JsonProcessingException,
-            IOException {
-        User teacher = new TeacherUser("Niklas Grip");
+		//Get half correct
+		user.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 
-        teacher.setEmail("nigr@mikaelelias.se");
+		int pointsAfterHalfRight = user.getPoints();
+		assertTrue(pointsAfterHalfRight > 0);
+		System.out.println(Integer.toString(pointsAfterHalfRight));
 
-        String json = "{\"type\":\"teacher\",\"name\":\"Niklas Grip\"," +
-                "\"email\":\"nigr@mikaelelias.se\",\"phoneNumber\":null," +
-                "\"age\":0,\"myCourses\":[]}";
+		q2a2.setSelected(false);
+		q2a1.setSelected(true);
 
-        TeacherUser teacherUser = new ObjectMapper().reader()
-                                                    .withType(TeacherUser.class)
-                                                    .readValue(json);
+		user.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
+		int pointsNow = user.getPoints();
 
-        assertEquals("Niklas Grip", teacherUser.getName());
-    }
+		assertTrue(pointsAfterHalfRight < user.getPoints());
+
+		q2a2.setSelected(false);
+		user.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
+		assertTrue(pointsNow == user.getPoints());
+	}
+
 }
