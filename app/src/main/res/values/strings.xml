@@ -157,5 +157,6 @@
     <string name="hat_image_content_description">Hat image</string>
     <string name="hat_points">poäng</string>
     <string name="title_activity_my_hats">Mina hattar</string>
+    <string name="hat_name">Hattens namn</string>
 
 </resources>
