@@ -7,31 +7,34 @@ import android.graphics.drawable.Drawable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.ArrayList;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class User {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = StudentUser.class, name = "student"),
+        @JsonSubTypes.Type(value = TeacherUser.class, name = "teacher")
+})
+public abstract class User {
     private String name;
     private String email;
-
     private String phoneNumber;
     private int age;
 
     @JsonIgnore
     private Drawable profilePicture;
 
-    private Statistics statistics;
-
-
-
     private ArrayList<Course> myCourses;
 
-    private User() {}
+    public User() {}
 
 	public User(String name){
 		this.name = name;
-		this.statistics = new Statistics();
 
         myCourses = new ArrayList<>();
 	}
@@ -88,32 +91,9 @@ public class User {
         return this.phoneNumber;
     }
 
-	@JsonIgnore
-    public int getStat(Statistics.Property property) {
-        return statistics.get(property);
-    }
-
     @JsonIgnore
     public Drawable getProfilePicture() {
         return profilePicture;
-    }
-
-    @JsonIgnore
-    public int getPointsForVideo(Video video) {
-        return statistics.getVideoPoints(video);
-    }
-
-    public void givePointsForQuiz(String quizID, int points) {
-        statistics.updateQuizPoints(quizID, points);
-    }
-
-    public void givePointsForViewingVideo(Video video, int points) {
-        statistics.addVideoPoints(video, points);
-    }
-
-    @JsonIgnore
-    public int getPoints() {
-        return statistics.get(Statistics.Property.POINTS);
     }
 
     public void saveEmailToLocalStorage(Activity activity) {
