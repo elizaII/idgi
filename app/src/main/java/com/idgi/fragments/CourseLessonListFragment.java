@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.EmptyRecyclerView;
 import com.idgi.core.Lesson;
 import com.idgi.recycleViews.adapters.LessonListAdapter;
+import com.idgi.recycleViews.adapters.LessonListAdapterNew;
+import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
 import java.beans.PropertyChangeListener;
@@ -23,16 +26,12 @@ import java.util.List;
 
 public class CourseLessonListFragment extends Fragment {
 
-    private EmptyRecyclerView recycler;
-    private LessonListAdapter recyclerAdapter;
-    private RecyclerView.LayoutManager recyclerManager;
-
     private List<Lesson> lessons;
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private NameableSelectionBus bus;
 
     public CourseLessonListFragment() {
-        // Required empty public constructor
+		bus = new NameableSelectionBus();
     }
 
     @Override
@@ -43,19 +42,15 @@ public class CourseLessonListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
-
         lessons = SessionData.getCurrentCourse().getLessons();
 
+        NameableAdapter recyclerAdapter = new LessonListAdapterNew(this.getContext(), lessons);
+		recyclerAdapter.setBus(this.bus);
 
-        recyclerManager = new LinearLayoutManager(this.getContext());
-        recyclerAdapter = new LessonListAdapter(this.getContext(), lessons);
-		recyclerAdapter.setPropertyChangeSupport(pcs);
-
-        recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
+        EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         recycler.setAdapter(recyclerAdapter);
-        recycler.setLayoutManager(recyclerManager);
+        recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
 
@@ -67,7 +62,7 @@ public class CourseLessonListFragment extends Fragment {
         return view;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(listener);
+    public void addListener(NameableSelectionBus.Listener listener) {
+        bus.addListener(listener);
     }
 }

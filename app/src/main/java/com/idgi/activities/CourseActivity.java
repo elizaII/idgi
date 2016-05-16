@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.idgi.core.Lesson;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
@@ -25,7 +27,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends DrawerActivity implements PropertyChangeListener {
+public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener {
 
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
@@ -59,7 +61,7 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
-		lessonListFragment.addPropertyChangeListener(this);
+		lessonListFragment.addListener(this);
         pagerAdapter.addFragment(lessonListFragment, "Lessons");
 
         pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
@@ -145,12 +147,11 @@ public class CourseActivity extends DrawerActivity implements PropertyChangeList
         textView.setText(text);
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        switch(event.getPropertyName()) {
-			case "startLessonActivity":
-				startActivity(new Intent(this, LessonActivity.class));
-				break;
-		}
-    }
+	@Override
+	public void onNameableSelected(String lessonName) {
+		Lesson lesson = SessionData.getCurrentCourse().getLesson(lessonName);
+		SessionData.setCurrentLesson(lesson);
+
+		startActivity(new Intent(this, LessonActivity.class));
+	}
 }
