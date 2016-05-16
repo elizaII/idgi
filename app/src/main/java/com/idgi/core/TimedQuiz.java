@@ -13,11 +13,23 @@ public class TimedQuiz extends QuizDecorator {
 
     private String type = "timedQuiz";
 
+    private static final int TIME_PER_QUESTION = 5000;
+
     //Dummy constructor for Json because it can't provide arguments
     private TimedQuiz(){
         super();
     }
 
+
+    /**
+     * Creates a timed quiz with the time set to 5 seconds per question
+     * @param decoratedQuiz The normal quiz without a set time
+     */
+    public TimedQuiz(IQuiz decoratedQuiz) {
+        super(decoratedQuiz);
+        int amountOfQuestions = decoratedQuiz.getQuestions().size();
+        this.time = amountOfQuestions * TIME_PER_QUESTION;
+    }
 
     /**
      * Creates a quiz with a timer
