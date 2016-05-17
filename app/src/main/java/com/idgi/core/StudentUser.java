@@ -45,17 +45,19 @@ public class StudentUser extends User{
 
 
     public List<Hat> getHats() {
-            return hats;
+        return hats;
     }
 
     public void giveHats() {
         if (getPoints() >= 100) {
-            //hats.add();
+       //     addHat();
         }
     }
 
-    public void addHat(Hat hat){
-        hats.add(hat);
+    public void addHat(Hat hat) {
+        if (!containsHat(hat)) {
+            hats.add(hat);
+        }
     }
 
     public boolean containsHat(Hat hat) {
