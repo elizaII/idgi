@@ -14,6 +14,7 @@ import com.idgi.core.ModelUtility;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.event.NameableSelectionBus;
+import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.services.FireDatabase;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.recycleViews.adapters.SchoolListAdapter;
@@ -56,15 +57,11 @@ public class SchoolListActivity extends DrawerActivity implements NameableSelect
 	private void initializeSchoolList() {
 		schools = FireDatabase.getInstance().getSchools();
 
+		RecyclerView recycler = (RecyclerView) findViewById(R.id.school_list_recycler_view);
 		SchoolListAdapter adapter = new SchoolListAdapter(this, schools);
-
 		adapter.addListener(this);
 
-		RecyclerView recycler = (RecyclerView) findViewById(R.id.school_list_recycler_view);
-		if (recycler != null) {
-			recycler.setAdapter(adapter);
-			recycler.setLayoutManager(new LinearLayoutManager(this));
-		}
+		RecyclerViewUtility.connect(this, recycler, adapter);
 	}
 
 	@Override

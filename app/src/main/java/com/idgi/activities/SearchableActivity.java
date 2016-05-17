@@ -3,14 +3,13 @@ package com.idgi.activities;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.firebase.client.Firebase;
 import com.idgi.Config;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Nameable;
+import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.SearchableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
@@ -27,10 +26,6 @@ public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
 
-    private RecyclerView recycler;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager manager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +37,9 @@ public class SearchableActivity extends DrawerActivity {
             searchDatabase(query.toLowerCase());
         }
 
-
-        manager = new LinearLayoutManager(this);
-        adapter = new SearchableAdapter(this, searchResults);
-
-        recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
-        if (recycler != null) {
-            recycler.setAdapter(adapter);
-            recycler.setLayoutManager(manager);
-        }
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
+		SearchableAdapter adapter = new SearchableAdapter(this, searchResults);
+		RecyclerViewUtility.connect(this, recycler, adapter);
 
         initializeDrawer();
     }

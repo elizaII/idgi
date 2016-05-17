@@ -12,6 +12,7 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.event.NameableSelectionBus;
+import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.SubjectListAdapter;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
@@ -41,18 +42,13 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
 
 
 	private void initializeSubjectList() {
-        school = SessionData.getCurrentSchool();
-        subjects = school.getSubjects();
-
-		SubjectListAdapter adapter = new SubjectListAdapter(this, subjects);
-
-        adapter.addListener(this);
+        subjects = SessionData.getCurrentSchool().getSubjects();
 
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.subject_list_recycler_view);
-		if (recycler != null) {
-			recycler.setAdapter(adapter);
-			recycler.setLayoutManager(new LinearLayoutManager(this));
-		}
+		SubjectListAdapter adapter = new SubjectListAdapter(this, subjects);
+        adapter.addListener(this);
+
+		RecyclerViewUtility.connect(this, recycler, adapter);
 	}
 
     @Override
