@@ -82,13 +82,13 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     private YouTubePlayer.PlaybackEventListener playbackListener = new YouTubePlayer.PlaybackEventListener() {
         @Override
         public void onPlaying() {
-            Toast.makeText(getContext(), "Playing!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getBaseContext(), "Playing!", Toast.LENGTH_SHORT).show();
             videoPaused = false;
         }
 
         @Override
         public void onPaused() {
-            //Toast.makeText(getContext(), "Pausing.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity().getBaseContext(), "Pausing.", Toast.LENGTH_SHORT).show();
             videoPaused = true;
         }
 
@@ -142,7 +142,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
         @Override
         public void onVideoEnded() {
-            Toast.makeText(getContext(), "Video ended.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getBaseContext(), "Video ended.", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -153,7 +153,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
     private void awardPoints(int points) {
 		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser)) {
-			Toast.makeText(getContext(), "Points for you!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity().getBaseContext(), "Points for you!", Toast.LENGTH_SHORT).show();
             ((StudentUser) SessionData.getLoggedInUser()).
                     givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
 			updatePointProgressBar();
