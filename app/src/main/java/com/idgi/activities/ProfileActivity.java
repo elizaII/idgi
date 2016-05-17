@@ -91,23 +91,4 @@ public class ProfileActivity extends DrawerActivity {
         Intent intent = new Intent(this, HatListActivity.class);
         startActivity(intent);
     }
-
-	// TODO Remove? Is this going to be used?
-   /* public void enableInputFieldButtonClicked(View view) {
-        if (view.getId() == R.id.profile_btn_editName ) {
-            if (name.getTag() == "enabled") {
-                disableInputField(name);
-            }
-            else {
-                enableInputField(name);
-            }
-        } else if (view.getId() == R.id.profile_btn_editAge) {
-            if (txtAge.getTag() == "enabled") {
-                disableInputField(txtAge);
-            }
-            else {
-                enableInputField(txtAge);
-            }
-        }
-    }*/
 }

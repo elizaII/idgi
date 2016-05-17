@@ -3,8 +3,13 @@ package com.idgi.core;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonTypeName("student")
 public class StudentUser extends User{
+
+    List<Hat> hats = new ArrayList<Hat>();
 
     private Statistics statistics;
 
@@ -36,6 +41,25 @@ public class StudentUser extends User{
     @JsonIgnore
     public int getPoints() {
         return statistics.get(Statistics.Property.POINTS);
+    }
+
+
+    public List<Hat> getHats() {
+            return hats;
+    }
+
+    public void giveHats() {
+        if (getPoints() >= 100) {
+            //hats.add();
+        }
+    }
+
+    public void addHat(Hat hat){
+        hats.add(hat);
+    }
+
+    public boolean containsHat(Hat hat) {
+        return hats.contains(hat);
     }
 
 }

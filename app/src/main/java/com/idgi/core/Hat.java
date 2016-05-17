@@ -1,5 +1,7 @@
 package com.idgi.core;
 
+import android.media.Image;
+
 public class Hat {
 
     private int imageId;
