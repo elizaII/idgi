@@ -2,17 +2,16 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.List;
 
+@JsonTypeName("timedQuiz")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimedQuiz extends QuizDecorator {
 
     private int time;
     private int remainingTime;
-
-    //Used by JSON deserialization
-    private String type = "timedQuiz";
 
     private static final int TIME_PER_QUESTION = 5000;
 

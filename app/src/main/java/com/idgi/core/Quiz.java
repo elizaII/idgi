@@ -2,20 +2,20 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@JsonTypeName("quiz")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quiz implements IQuiz{
 
 	@JsonIgnore
 	private int currentIndex = 0;
 
-	//For JSon deserialization
-	private String type = "quiz";
-	
 	List<Question> questions;
 
 	private String id;
@@ -71,14 +71,17 @@ public class Quiz implements IQuiz{
 		return this.questions;
 	}
 
+	@JsonIgnore
 	public boolean isLastQuestion() {
 		return currentIndex == length() - 1;
 	}
 
+	@JsonIgnore
 	public boolean isFinished() {
 		return currentIndex == length();
 	}
 
+	@JsonProperty("correctAnswerAmount")
 	public int getCorrectAnswerAmount() {
 		int n = 0;
 
@@ -135,15 +138,5 @@ public class Quiz implements IQuiz{
 		for (Question question : questions) {
 			question.reset();
 		}
-	}
-
-	//Do not use; this is for JSon deserialization
-	public String getType() {
-		return type;
-	}
-
-	//Do not use; This is for JSon deserialization
-	public void setType(String type) {
-		this.type = type;
 	}
 }
