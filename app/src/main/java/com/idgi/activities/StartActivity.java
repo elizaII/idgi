@@ -56,6 +56,7 @@ public class StartActivity extends DrawerActivity {
 
 		User user = new StudentUser("Yoda");
 		user.setEmail("test@gmail.com");
+		user.setAge(9);
 		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
 

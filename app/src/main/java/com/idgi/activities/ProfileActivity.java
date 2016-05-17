@@ -13,6 +13,8 @@ import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
+import java.util.Locale;
+
 
 public class ProfileActivity extends DrawerActivity {
 
@@ -32,7 +34,7 @@ public class ProfileActivity extends DrawerActivity {
         user = SessionData.getLoggedInUser();
        if (user != null) {
            name.setText(user.getName());
-           txtAge.setText(user.getAge());
+           txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
            txtAge.setText(user.getEmail());
        }
         initializeDrawer();
@@ -56,10 +58,22 @@ public class ProfileActivity extends DrawerActivity {
     private void saveInfo() {
         if (user != null) {
             user.setName(name.getText().toString());
-            // TODO check if it actually is parse-able. This is gonna crash if it is not an int
-            user.setAge(Integer.parseInt(txtAge.getText().toString()));
+            String ageText = txtAge.getText().toString();
+
+            if (canBeParsedToInt(ageText))
+            user.setAge(Integer.parseInt(ageText));
         }
     }
+
+    private boolean canBeParsedToInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
     public void toggleEditState(View view) {
         boolean checked = ((ToggleButton)view).isChecked();
         if (checked) {
