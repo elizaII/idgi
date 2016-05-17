@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Skapa fråga"
+        android:text="@string/dialog_create_question_title"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -30,35 +30,38 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:id="@+id/quiz_question_editText"
         android:layout_gravity="center_horizontal"
         android:textColor="#000"
-        android:hint="Skriv en fråga"
+        android:hint="@string/dialog_create_question_write_a_question"
         android:layout_weight="1.60"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:minLines="1" />
+        android:minLines="1"
+        android:singleLine="true"/>
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_hint_editText"
-        android:hint="Skriv en ledtråd. (frivilligt)"
-        android:layout_marginBottom="10dp" />
+        android:hint="@string/dialog_create_question_hint"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText1"
-        android:hint="Svarsalternativ 1" />
+        android:hint="@string/dialog_create_question_answer_1"
+        android:singleLine="true"/>
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Korrekt svar:"
+        android:text="@string/dialog_create_question_correct_answer"
         android:id="@+id/quiz_set_correct_switch1"
         android:layout_gravity="right"
         android:checked="false"
@@ -69,12 +72,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText2"
-        android:hint="Svarsalternativ 2" />
+        android:hint="@string/dialog_create_question_answer_2"
+        android:singleLine="true"/>
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Korrekt svar:"
+        android:text="@string/dialog_create_question_correct_answer"
         android:id="@+id/quiz_set_correct_switch2"
         android:layout_gravity="right"
         android:checked="false"
@@ -85,13 +89,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText3"
-        android:hint="Svarsalternativ 3"
-        />
+        android:hint="@string/dialog_create_question_answer_3"
+        android:singleLine="true" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Korrekt svar:"
+        android:text="@string/dialog_create_question_correct_answer"
         android:id="@+id/quiz_set_correct_switch3"
         android:layout_gravity="right"
         android:checked="false"
@@ -102,12 +106,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText4"
-        android:hint="Svarsalternativ 4" />
+        android:hint="@string/dialog_create_question_answer_4"
+        android:singleLine="true" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Korrekt Svar:"
+        android:text="@string/dialog_create_question_correct_answer"
         android:id="@+id/quiz_set_correct_switch4"
         android:layout_gravity="right"
         android:checked="false"
@@ -120,7 +125,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:clickable="true"
-        android:text="Skapa"
+        android:text="@string/dialog_create_question_btn_create"
         android:textColor="#000"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
