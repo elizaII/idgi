@@ -21,16 +21,15 @@ import java.util.List;
 
 public class CourseListActivity extends DrawerActivity implements NameableSelectionBus.Listener {
     private List<Course> courses;
-    private NameableSelectionBus bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        initializeToolbar();
-        initializeDrawer();
         initializeCourseList();
+        String title = SessionData.getCurrentSubject().getName();
+        super.initializeWithTitle(title);
     }
 
     private void initializeCourseList() {
@@ -47,9 +46,9 @@ public class CourseListActivity extends DrawerActivity implements NameableSelect
             recycler.setLayoutManager(new LinearLayoutManager(this));
         }
     }
-
+/*Why actionbar?
     private void initializeToolbar() {
-        String title = getResources().getString(R.string.list_school_title);
+        String title = SessionData.getCurrentSubject().getName();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,7 +58,7 @@ public class CourseListActivity extends DrawerActivity implements NameableSelect
             actionBar.setTitle(title);
         }
     }
-
+*/
     @Override
     public void onNameableSelected(String name) {
         Course course = ModelUtility.findByName(FireDatabase.getInstance().getCourses(SessionData.getCurrentSubject()), name);

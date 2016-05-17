@@ -34,18 +34,11 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
 
         setContentView(R.layout.activity_subject_list);
 
-        initializeDrawer();
 		initializeSubjectList();
-        initializeToolbar();
+        super.initializeWithTitle(school.getName());
 
     }
 
-	private void initializeToolbar() {
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		if (toolbar != null)
-			toolbar.setTitle(school.getName());
-	}
 
 	private void initializeSubjectList() {
         school = SessionData.getCurrentSchool();

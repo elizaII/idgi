@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.idgi.R;
 import com.idgi.core.ModelUtility;
@@ -33,11 +34,13 @@ public class SchoolListActivity extends DrawerActivity implements NameableSelect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_list);
 
-		initializeToolbar();
-        initializeDrawer();
 		initializeSchoolList();
-    }
+		String title = getResources().getString(R.string.list_school_title);
+		super.initializeWithTitle(title);
+	}
 
+
+/*Doesn't set title now. Why actionbar?
 	private void initializeToolbar() {
 		String title = getResources().getString(R.string.list_school_title);
 
@@ -49,7 +52,7 @@ public class SchoolListActivity extends DrawerActivity implements NameableSelect
 			actionBar.setTitle(title);
 		}
 	}
-
+*/
 	private void initializeSchoolList() {
 		schools = FireDatabase.getInstance().getSchools();
 
