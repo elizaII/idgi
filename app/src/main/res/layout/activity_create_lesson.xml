@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lägg till quiz"
+        android:text="@string/create_lesson_btn_add_quiz"
         android:id="@+id/add_quiz_button"
         android:onClick="onAddQuizButtonClick"
         android:layout_below="@+id/add_course_button"
@@ -25,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skapa lektion"
+        android:text="@string/create_lesson_btn_create_lesson"
         android:id="@+id/create_lesson_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -39,12 +39,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lesson_name_editText"
-        android:hint="Namn på lektion"
+        android:hint="@string/create_lesson_et_lesson_name"
         android:layout_above="@+id/youtube_url_editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:inputType="textCapSentences"
+        android:singleLine="true"
         android:enabled="false" />
 
     <EditText
@@ -56,13 +58,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:hint="URL till youtube-klipp"
+        android:inputType="textUri"
+        android:hint="@string/create_lesson_et_youtube_url"
         android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Lägg till skola"
+        android:text="@string/create_lesson_btn_add_school"
         android:id="@+id/add_school_button"
         android:onClick="onClick"
         android:layout_alignParentTop="true"
@@ -75,7 +78,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Lägg till ämne"
+        android:text="@string/create_lesson_btn_add_subject"
         android:id="@+id/add_subject_button"
         android:onClick="onClick"
         android:layout_below="@+id/add_school_button"
@@ -88,7 +91,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Lägg till kurs"
+        android:text="@string/create_lesson_btn_add_course"
         android:id="@+id/add_course_button"
         android:onClick="onClick"
         android:layout_below="@+id/add_subject_button"

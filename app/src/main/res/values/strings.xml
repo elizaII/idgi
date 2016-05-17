@@ -159,6 +159,13 @@
     <string name="create_lesson_invalid_link_message">Din länk funkar inte. Var vänlig klistra in med en fungerande youtube-länk.</string>
     <string name="create_lesson_add_item">Lägg till %1$s</string>
     <string name="create_lesson_quiz_has_been_added">Quiz har lagts till</string>
+    <string name="create_lesson_btn_create_lesson">Skapa lektion</string>
+    <string name="create_lesson_btn_add_quiz">Lägg till quiz</string>
+    <string name="create_lesson_btn_add_school">Lägg till skola</string>
+    <string name="create_lesson_btn_add_subject">Lägg till ämne</string>
+    <string name="create_lesson_btn_add_course">Lägg till kurs</string>
+    <string name="create_lesson_et_lesson_name">Namn på lektion</string>
+    <string name="create_lesson_et_youtube_url">URL till youtube-klipp</string>
 
     <!-- Searchable-->
     <string name="idgi">IDGI</string>

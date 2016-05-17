@@ -40,6 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:minLines="1"
+        android:inputType="textCapSentences"
         android:singleLine="true"/>
 
 
@@ -49,6 +50,7 @@
         android:id="@+id/quiz_hint_editText"
         android:hint="@string/dialog_create_question_hint"
         android:layout_marginBottom="10dp"
+        android:inputType="textCapSentences"
         android:singleLine="true"/>
 
     <EditText
@@ -56,6 +58,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText1"
         android:hint="@string/dialog_create_question_answer_1"
+        android:inputType="textCapSentences"
         android:singleLine="true"/>
 
     <Switch
@@ -73,6 +76,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText2"
         android:hint="@string/dialog_create_question_answer_2"
+        android:inputType="textCapSentences"
         android:singleLine="true"/>
 
     <Switch
@@ -90,6 +94,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText3"
         android:hint="@string/dialog_create_question_answer_3"
+        android:inputType="textCapSentences"
         android:singleLine="true" />
 
     <Switch
@@ -106,6 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_answer_editText4"
+        android:inputType="textCapSentences"
         android:hint="@string/dialog_create_question_answer_4"
         android:singleLine="true" />
 
