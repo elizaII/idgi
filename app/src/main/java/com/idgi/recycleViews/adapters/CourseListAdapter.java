@@ -3,6 +3,7 @@ package com.idgi.recycleViews.adapters;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Course;
@@ -27,6 +28,13 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.schoolTextView.setText(nameables.get(position).getName());
+        if(position % 2 != 0)
+        {
+            holder.listBackground.setBackgroundResource(R.color.colorPrimaryDark);
+        }
+        else {
+            holder.listBackground.setBackgroundResource(R.color.white);
+        }
     }
 
     public void addListener(NameableSelectionBus.Listener listener) {
@@ -36,11 +44,13 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
     public static class ViewHolder extends NameableAdapter.ViewHolder implements View.OnClickListener {
 
         public TextView schoolTextView;
+        public RelativeLayout listBackground;
 
         public ViewHolder(View view, NameableSelectionBus bus) {
             super(view, bus);
             view.setOnClickListener(this);
             schoolTextView = (TextView) view.findViewById(R.id.rowTextView);
+            listBackground = (RelativeLayout) view.findViewById(R.id.list_background);
         }
 
         public void onClick(View view) {
