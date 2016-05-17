@@ -21,7 +21,6 @@ import java.util.List;
 
 public class SubjectListActivity extends DrawerActivity implements NameableSelectionBus.Listener{
     private List<Subject> subjects;
-    private School school;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,8 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
         setContentView(R.layout.activity_subject_list);
 
 		initializeSubjectList();
-        super.initializeWithTitle(school.getName());
+
+        super.initializeWithTitle(SessionData.getCurrentSchool().getName());
 
     }
 
@@ -53,7 +53,7 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
 
     @Override
     public void onNameableSelected(String name) {
-        Subject subject = ModelUtility.findByName(FireDatabase.getInstance().getSubjects(SessionData.getCurrentSchool()), name);
+        Subject subject = ModelUtility.findByName(subjects, name);
         SessionData.setCurrentSubject(subject);
 
         startActivity(new Intent(this, CourseListActivity.class));
