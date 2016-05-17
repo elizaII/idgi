@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     private TextView txtNewComment;
     private ProgressBar pointProgressBar;
     private Lesson lesson;
+    private Button quizButton;
 
     private List<Comment> comments;
 
@@ -59,6 +61,13 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
         if (SessionData.hasLoggedInUser())
             initializePointsBar();
+
+        if(lesson.hasQuiz()){
+            quizButton = (Button) findViewById(R.id.content_lesson_quiz_button);
+            if(quizButton != null) {
+                quizButton.setVisibility(View.VISIBLE);
+            }
+        }
 
         initializeCommentView();
     }

@@ -32,7 +32,11 @@ public class Lesson implements Nameable {
 		setQuiz(quiz);
 		return this;
 	}
-	
+
+	public boolean hasQuiz() {
+		return quiz != null;
+	}
+
 	public void setQuiz(IQuiz quiz) {
 		this.quiz = quiz;
 	}

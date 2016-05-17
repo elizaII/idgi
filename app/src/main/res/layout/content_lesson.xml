@@ -37,7 +37,8 @@
                 style="?android:attr/progressBarStyleHorizontal"/>
 
             <Button
-                android:id="@+id/button"
+                android:visibility="gone"
+                android:id="@+id/content_lesson_quiz_button"
                 android:text="@string/go_to_quiz"
                 android:onClick="onToQuizClick"
                 android:layout_width="fill_parent"

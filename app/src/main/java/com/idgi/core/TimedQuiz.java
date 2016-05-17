@@ -28,7 +28,7 @@ public class TimedQuiz extends QuizDecorator {
      */
     public TimedQuiz(IQuiz decoratedQuiz) {
         super(decoratedQuiz);
-        int amountOfQuestions = decoratedQuiz.getQuestions().size();
+        int amountOfQuestions = getQuestions().size();
         this.time = amountOfQuestions * TIME_PER_QUESTION;
     }
 
