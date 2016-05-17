@@ -53,6 +53,7 @@ public abstract class NameableAdapter<ExternalViewHolder extends RecyclerView.Vi
 		return this.bus;
 	}
 
+
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 		private NameableSelectionBus bus;
 

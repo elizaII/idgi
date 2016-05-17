@@ -63,6 +63,7 @@ public class SchoolListAdapter extends NameableAdapter<SchoolListAdapter.ViewHol
         public void onClick(View view){
             String schoolName = schoolTextView.getText().toString();
             broadcastSelection(schoolName);
+
         }
     }
 }
