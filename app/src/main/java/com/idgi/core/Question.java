@@ -92,7 +92,7 @@ public class Question implements ParentListItem {
 	public boolean hasAnswer(Answer answer) {
 		return answers.contains(answer);
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		if (other == null) return false;
@@ -109,6 +109,14 @@ public class Question implements ParentListItem {
 				return false;
 		
 		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = text.hashCode();
+		result = 31 * result + hint.hashCode();
+		result = 31 * result + answers.hashCode();
+		return result;
 	}
 
 	@JsonIgnore

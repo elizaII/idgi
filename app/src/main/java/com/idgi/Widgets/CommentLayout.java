@@ -16,12 +16,9 @@ public class CommentLayout extends RelativeLayout {
 
 
     private Comment comment;
-    private TextView txtReplyAmount;
 
     public CommentLayout(Context context, AttributeSet attributeSet, int defStyleAttr) {
         super(context, attributeSet, defStyleAttr);
-
-        txtReplyAmount = (TextView) findViewById(R.id.lesson_listitem_comment_reply_amount_text);
     }
 
     public CommentLayout(Context context, AttributeSet attributeSet) {

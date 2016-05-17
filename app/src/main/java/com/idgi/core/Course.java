@@ -66,5 +66,9 @@ public class Course implements Nameable {
 		this.parentSchool = parentSchool;
 	}
 
+	@Override
+	public Type getType() {
+		return Type.COURSE;
+	}
 
 }

@@ -70,7 +70,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 		return context.getResources().getString(resource);
 	}
 
-    public class AnswerViewHolder extends ChildViewHolder {
+    public static class AnswerViewHolder extends ChildViewHolder {
 
         public TextView answerTextView, feedbackTextView;
 

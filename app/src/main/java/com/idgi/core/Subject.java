@@ -40,7 +40,7 @@ public class Subject implements Nameable {
 
     public boolean equals(Object object) {
         if (object == null) return false;
-        if (object.getClass() != Subject.class) return false;
+        if (this.getClass() != object.getClass()) return false;
 
         Subject that = (Subject) object;
         return this.name.equals(that.name) && this.getCourses().equals(that.getCourses());
@@ -49,5 +49,10 @@ public class Subject implements Nameable {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public Type getType() {
+        return Type.SUBJECT;
     }
 }

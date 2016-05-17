@@ -11,11 +11,12 @@ public class TimedQuiz extends QuizDecorator {
     private int time;
     private int remainingTime;
 
+    //Used by JSON deserialization
     private String type = "timedQuiz";
 
     private static final int TIME_PER_QUESTION = 5000;
 
-    //Dummy constructor for Json because it can't provide arguments
+    //Dummy constructor for JSON because it can't provide arguments
     private TimedQuiz(){
         super();
     }
@@ -66,7 +67,7 @@ public class TimedQuiz extends QuizDecorator {
     }
 
     private int calculateTimeBonus(){
-        return (int) remainingTime/10;
+        return remainingTime/10;
     }
 
 }

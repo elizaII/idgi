@@ -18,11 +18,12 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 
 public final class MockData implements IDatabase {
-	private static MockData instance = null;
+	private static volatile MockData instance = null;
 
 	// TODO Implement this properly
 	public IQuiz getQuiz(String key) {
@@ -89,17 +90,18 @@ public final class MockData implements IDatabase {
 
 		Random rand = new Random();
 
-		String nameOfUser = "Kalle";
-
 		List<Comment> comments = new ArrayList<>();
 
 		for (int i = 0; i < 10; ++i) {
-			String text = "";
 			int k = rand.nextInt(5);
+			StringBuilder buffer = new StringBuilder();
 			while(k-- >= 0) {
-				text += " " + words[rand.nextInt(words.length)];
+				String randomWord = words[rand.nextInt(words.length)];
+				buffer.append(String.format(Locale.ENGLISH, " %s", randomWord));
 			}
-			comments.add(new Comment(text + ".", getUser()));
+
+			buffer.append(".");
+			comments.add(new Comment(buffer.toString(), getUser()));
 		}
         return comments;
 	}

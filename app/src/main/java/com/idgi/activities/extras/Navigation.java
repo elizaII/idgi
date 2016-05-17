@@ -1,27 +1,18 @@
 package com.idgi.activities.extras;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
 import com.idgi.activities.BrowseActivity;
-import com.idgi.activities.CourseActivity;
-import com.idgi.activities.CourseListActivity;
 import com.idgi.activities.CreateAccountActivity;
-import com.idgi.activities.CreateLessonActivity;
-import com.idgi.activities.LessonActivity;
 import com.idgi.activities.LoginActivity;
 import com.idgi.activities.MyCoursesActivity;
 import com.idgi.activities.ProfileActivity;
 import com.idgi.activities.QuizActivity;
 import com.idgi.R;
-import com.idgi.activities.QuizResultActivity;
-import com.idgi.activities.SchoolListActivity;
 import com.idgi.activities.StartActivity;
 import com.idgi.activities.StatisticsActivity;
-import com.idgi.activities.SubjectListActivity;
-import com.idgi.activities.VideoActivity;
 
 import java.util.HashMap;
 import java.util.Map;

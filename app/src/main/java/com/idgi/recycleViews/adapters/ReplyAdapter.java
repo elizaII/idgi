@@ -76,7 +76,7 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
         }
     }
 
-    public class CommentHolder extends ParentViewHolder {
+    public static class CommentHolder extends ParentViewHolder {
 
         private TextView txtComment, txtAuthor, txtReplyAmount;
         private ImageView imgProfilePicture;

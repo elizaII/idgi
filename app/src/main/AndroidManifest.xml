@@ -28,11 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.VideoActivity"
-            android:label="@string/title_activity_video"
-            android:parentActivityName=".activities.StartActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
-        <activity
             android:name=".activities.QuizActivity"
             android:label="@string/title_activity_quiz" />
         <activity

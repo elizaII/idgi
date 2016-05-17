@@ -52,7 +52,7 @@ public class School implements Nameable {
 
 	public boolean equals(Object object) {
 		if (object == null) return false;
-		if (object.getClass() != School.class) return false;
+		if (this.getClass() != object.getClass()) return false;
 
 		School that = (School) object;
 		if (this.getKey() != null)
@@ -69,4 +69,11 @@ public class School implements Nameable {
 
 		return result;
 	}
+
+	@Override
+	public Type getType() {
+		return Type.SCHOOL;
+	}
+
+
 }

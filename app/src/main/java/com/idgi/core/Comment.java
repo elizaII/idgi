@@ -10,23 +10,16 @@ import java.util.TreeSet;
 public class Comment implements ParentListItem {
 	
 	private String text;
-	private Comment replyTo;
 	private List<Comment> replies;
 	private User author;
 
 
 	private Comment() {}
+
 	public Comment(String text, User author) {
 		this.text = text;
 		this.author = author;
 		replies = new ArrayList<>();
-	}
-
-	public Comment(Comment replyTo,String text, User author) {
-		this.text = text;
-		this.author = author;
-		replies = new ArrayList<>();
-		this.replyTo=replyTo;
 	}
 
 

@@ -25,7 +25,7 @@ public class AnswerButtonFactory {
 		return button;
 	}
 
-	private static LinearLayout.LayoutParams getAnswerButtonLayout() {
+	private static synchronized LinearLayout.LayoutParams getAnswerButtonLayout() {
 		if (buttonLayoutParams == null) {
 			buttonLayoutParams = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.MATCH_PARENT,

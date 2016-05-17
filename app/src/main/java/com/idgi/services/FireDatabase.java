@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class FireDatabase implements IDatabase {
-	private static FireDatabase instance = null;
+	private static volatile FireDatabase instance = null;
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
 
 	private List<School> schools;

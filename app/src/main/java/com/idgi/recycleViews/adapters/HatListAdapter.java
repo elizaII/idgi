@@ -13,10 +13,8 @@ import com.idgi.R;
 import com.idgi.core.Hat;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-/**
- * Created by tove on 2016-05-13.
- */
 public class HatListAdapter extends RecyclerView.Adapter<HatListAdapter.HatViewHolder> {
 
     private Context context;
@@ -46,7 +44,7 @@ public class HatListAdapter extends RecyclerView.Adapter<HatListAdapter.HatViewH
     }
 
 
-    public class HatViewHolder extends ChildViewHolder {
+    public static class HatViewHolder extends ChildViewHolder {
 
         private Context context;
 
@@ -69,7 +67,8 @@ public class HatListAdapter extends RecyclerView.Adapter<HatListAdapter.HatViewH
         public void setUpView(Hat hat) {
             imageView.setImageResource(hat.getImageId());
             nameView.setText(hat.getName());
-            pointsView.setText(hat.getPoints() + " " + context.getResources().getString(R.string.hat_points));
+            String pointText = context.getResources().getString(R.string.hat_points);
+            pointsView.setText(String.format(Locale.ENGLISH, pointText, hat.getPoints()));
             descriptionView.setText(hat.getDescription());
         }
     }

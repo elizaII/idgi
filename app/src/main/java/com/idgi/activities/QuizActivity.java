@@ -74,13 +74,14 @@ public class QuizActivity extends AppCompatActivity {
 	//Todo... Refactor this huge method
 	private void initializeTimeBar(final TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
-		if (timeProgressBar != null)
+
+		final int MAX_TIME = timedQuiz.getTime();
+		Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
+
+		if (timeProgressBar != null) {
 			timeProgressBar.setVisibility(View.VISIBLE);
-
-
-        final int MAX_TIME = timedQuiz.getTime();
-        Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
-        timeProgressBar.setMax(MAX_TIME);
+			timeProgressBar.setMax(MAX_TIME);
+		}
 
         timer = new CountDownTimer(MAX_TIME, 1) {
             @Override

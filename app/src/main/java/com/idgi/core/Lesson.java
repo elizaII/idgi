@@ -60,4 +60,9 @@ public class Lesson implements Nameable {
 	/* Is likely to not have functionality. Here to please Firebase */
 	public void setDiscussion(Discussion discussion) {
 	}
+
+	@Override
+	public Type getType() {
+		return Type.LESSON;
+	}
 }

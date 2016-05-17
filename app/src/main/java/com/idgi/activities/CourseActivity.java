@@ -77,6 +77,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         	tabLayout.setupWithViewPager(viewPager);
     }
 
+	// TODO remove? Not used as of writing this (17/05/2016)
     /* Makes sure the appropriate values (like empty-list text message) are used */
     private void refreshViewPager() {
         //We do it this way since there's no refresh() equivalent method.
@@ -93,7 +94,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentNameList = new ArrayList<>();
 
