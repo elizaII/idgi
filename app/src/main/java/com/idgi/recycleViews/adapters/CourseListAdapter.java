@@ -30,7 +30,10 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.courseTextView.setText(nameables.get(position).getName());
+        Course course = (Course)nameables.get(position);
+        holder.courseTextView.setText(course.getName());
+        holder.courseDescriptionTextView.setText(course.getDescription());
+        holder.courseInformationTextView.setText(course.getParentSchool() + " > " + course.getParentSubject());
         if(position % 2 != 0)
         {
             holder.listBackground.setBackgroundResource(R.color.colorPrimaryDark);
@@ -57,6 +60,8 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
     public static class ViewHolder extends NameableAdapter.ViewHolder implements View.OnClickListener {
 
         public TextView courseTextView;
+        public TextView courseDescriptionTextView;
+        public TextView courseInformationTextView;
         public RelativeLayout listBackground;
         public Button myCoursesButton;
         public boolean isAddedToMyCourses = false;
@@ -66,6 +71,8 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
             super(view, bus);
             view.setOnClickListener(this);
             courseTextView = (TextView) view.findViewById(R.id.rowTextView);
+            courseInformationTextView = (TextView) view.findViewById(R.id.courseInformationTextView);
+            courseDescriptionTextView = (TextView) view.findViewById(R.id.courseDescriptionTextView);
             listBackground = (RelativeLayout) view.findViewById(R.id.list_background);
             myCoursesButton = (Button) view.findViewById(R.id.course_list_listitem_course_my_courses_button);
             myCoursesButton.setOnClickListener(this);
