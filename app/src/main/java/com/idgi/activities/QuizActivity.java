@@ -95,7 +95,7 @@ public class QuizActivity extends AppCompatActivity {
 					Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
 					Log.d(ACTIVITY_TAG, "You failed!");
 				}
-				switchToQuizResultActivity();
+				finishQuiz();
 				timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
 				Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
             }
@@ -156,14 +156,14 @@ public class QuizActivity extends AppCompatActivity {
 				timer.onFinish();
 				timer.cancel();
 			} else
-				switchToQuizResultActivity();
+				finishQuiz();
 		else
 			showQuestion(quiz.getCurrentQuestion());
 
 		setInTransition(false);
 	}
 
-	public void switchToQuizResultActivity() {
+	public void finishQuiz() {
 		leftActivity = true;
 		startActivity(new Intent(this, QuizResultActivity.class));
 		finish();

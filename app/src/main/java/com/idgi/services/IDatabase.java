@@ -15,6 +15,7 @@ public interface IDatabase {
 
 	IQuiz getQuiz(String key);
 	void retrieveSchools();
+	List<School> getSchools();
 	List<Subject> getSubjects(School school);
 	List<Lesson> getLessons(Course course);
 	List<Course> getCourses(Subject subject);
