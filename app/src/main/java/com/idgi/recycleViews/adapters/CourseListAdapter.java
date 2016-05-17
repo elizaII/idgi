@@ -32,7 +32,12 @@ public class CourseListAdapter extends NameableAdapter<CourseListAdapter.ViewHol
     public void onBindViewHolder(ViewHolder holder, int position) {
         Course course = (Course)nameables.get(position);
         holder.courseTextView.setText(course.getName());
-        holder.courseDescriptionTextView.setText(course.getDescription());
+        if (course.getDescription().length()>0) {
+            holder.courseDescriptionTextView.setText(course.getDescription());
+        }
+        else{
+            holder.courseDescriptionTextView.setText(R.string.no_description);
+        }
         holder.courseInformationTextView.setText(course.getParentSchool() + " > " + course.getParentSubject());
         if(position % 2 != 0)
         {
