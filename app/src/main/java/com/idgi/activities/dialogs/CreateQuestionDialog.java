@@ -12,6 +12,7 @@ import android.widget.Switch;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
+import com.idgi.event.CreateQuestionBus;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -24,7 +25,7 @@ public class CreateQuestionDialog extends Dialog {
 	private EditText[] txtQuizAnswers = new EditText[4];
 	private Switch[] correctAnswerSwitches = new Switch[4];
 
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private final CreateQuestionBus createQuestionBus = new CreateQuestionBus();
 
 
     public CreateQuestionDialog(Context context) {
@@ -86,13 +87,17 @@ public class CreateQuestionDialog extends Dialog {
 
 			updateAnswers(question);
 			updateHint(question);
-			pcs.firePropertyChange("questionCreated", null, question);
+			createQuestionBus.broadcastCreatedQuestion(question);
 			dismiss();
 		}
 	};
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+	public void addListener(CreateQuestionBus.Listener listener) {
+		createQuestionBus.addListener(listener);
+	}
+
+	public void removeListener(CreateQuestionBus.Listener listener) {
+		createQuestionBus.removeListener(listener);
 	}
 }
 

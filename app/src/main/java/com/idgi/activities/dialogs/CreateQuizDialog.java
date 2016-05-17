@@ -13,6 +13,7 @@ import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
+import com.idgi.event.CreateQuestionBus;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
 import java.beans.PropertyChangeEvent;
@@ -21,7 +22,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateQuizDialog extends Dialog implements PropertyChangeListener {
+public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listener {
 
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
@@ -76,7 +77,7 @@ public class CreateQuizDialog extends Dialog implements PropertyChangeListener {
 	private final View.OnClickListener onCreateQuestionClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			CreateQuestionDialog dialog = new CreateQuestionDialog(getContext());
-			dialog.addPropertyChangeListener(CreateQuizDialog.this);
+			dialog.addListener(CreateQuizDialog.this);
 			dialog.show();
 		}
 	};
@@ -92,15 +93,12 @@ public class CreateQuizDialog extends Dialog implements PropertyChangeListener {
 		}
 	};
 
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (event.getPropertyName().equals("questionCreated")) {
-			Question question = (Question) event.getNewValue();
-			updateQuestionList(question);
-		}
-	}
-
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		this.pcs.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void onQuestionCreated(Question question) {
+		updateQuestionList(question);
 	}
 }
