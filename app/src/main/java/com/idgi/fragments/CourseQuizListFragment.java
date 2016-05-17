@@ -1,19 +1,28 @@
 package com.idgi.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.idgi.R;
+import com.idgi.activities.QuizActivity;
+import com.idgi.core.Lesson;
+import com.idgi.core.ModelUtility;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.EmptyRecyclerView;
+import com.idgi.recycleViews.adapters.QuizListAdapter;
+import com.idgi.session.SessionData;
+import java.util.List;
 
-import java.util.ArrayList;
 
+public class CourseQuizListFragment extends Fragment implements NameableSelectionBus.Listener {
 
-public class CourseQuizListFragment extends Fragment {
+    private List<Lesson> lessons;
 
     public CourseQuizListFragment() {
         // Required empty public constructor
@@ -27,33 +36,30 @@ public class CourseQuizListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_course_quiz_list, container, false);
-
-        ArrayList<String> quizIds = new ArrayList<>();
-
-/* Interrupts work with CourseLessonListFragment
-        // TODO add actual quizzes
-        List<Quiz> quizzes = Arrays.asList(new Quiz(), new Quiz());
-
-        for(Quiz quiz : quizzes)
-            quizIds.add(quiz.getID());
-
-        Collections.sort(quizIds);
+        lessons = SessionData.getCurrentCourse().getLessons();
 
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this.getContext());
-        RecyclerView.Adapter recyclerAdapter = new LessonListAdapter(this.getContext(), quizIds);
-*/
+        QuizListAdapter recyclerAdapter = new QuizListAdapter(this.getContext(), lessons);
+        recyclerAdapter.addListener(this);
+
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
-  /*      recycler.setAdapter(recyclerAdapter);
 
-        recycler.setLayoutManager(recyclerManager);
-*/
+        if(recycler != null) {
+            recycler.setAdapter(recyclerAdapter);
+            recycler.setLayoutManager(recyclerManager);
+        }
+
+        // why do we have this?
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
-
         recycler.setEmptyView(emptyView);
 
         return view;
     }
 
+    @Override
+    public void onNameableSelected(String name) {
+        SessionData.setCurrentLesson(ModelUtility.findByName(SessionData.getCurrentCourse().getLessons(), name));
+        startActivity(new Intent(this.getContext(), QuizActivity.class));
+    }
 }
