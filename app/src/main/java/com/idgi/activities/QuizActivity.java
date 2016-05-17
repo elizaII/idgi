@@ -244,6 +244,9 @@ public class QuizActivity extends AppCompatActivity {
 				.setMessage(getString(R.string.quiz_leaving_prompt))
 				.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
+						if(quiz instanceof TimedQuiz){
+							timer.cancel();
+						}
 						finish();
 					}
 				}).setNegativeButton(getString(R.string.no), null)

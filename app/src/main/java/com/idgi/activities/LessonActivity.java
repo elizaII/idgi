@@ -46,6 +46,8 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     private Lesson lesson;
     private Button quizButton;
 
+    private PickQuizDialog quizTypes;
+
     private List<Comment> comments;
 
     @Override
@@ -99,7 +101,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         IQuiz normalQuiz = lesson.getQuiz();
         SessionData.setCurrentQuiz(normalQuiz);
 
-        PickQuizDialog quizTypes = new PickQuizDialog(this);
+        quizTypes = new PickQuizDialog(this);
 
         //Listens to the dialog
         quizTypes.addListener(this);
@@ -170,6 +172,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         }
 
         startActivity(new Intent(this, QuizActivity.class));
+        quizTypes.dismiss();
     }
 }
 
