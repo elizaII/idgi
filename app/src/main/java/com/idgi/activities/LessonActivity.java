@@ -96,6 +96,9 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
 
     public void onToQuizClick(View view) {
+        IQuiz normalQuiz = lesson.getQuiz();
+        SessionData.setCurrentQuiz(normalQuiz);
+
         PickQuizDialog quizTypes = new PickQuizDialog(this);
 
         //Listens to the dialog
@@ -152,17 +155,18 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
             pointProgressBar.setProgress(value);
         }
     }
-   public void refreshComments(){
-	   adapter = new ReplyAdapter(this, comments);
-	   recycler.setAdapter(adapter);
+
+    public void refreshComments(){
+        adapter = new ReplyAdapter(this, comments);
+        recycler.setAdapter(adapter);
     }
 
     @Override
-    public void onQuizSelected(QuizSelectionBus.QuizType quizType) {
+    public void onQuizTypeSelected(QuizSelectionBus.QuizType quizType) {
         if(quizType == QuizSelectionBus.QuizType.TIMED) {
-            IQuiz normalQuiz = lesson.getQuiz();
-
-            lesson.setQuiz(new TimedQuiz(normalQuiz));
+            SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
+        } else if(quizType == QuizSelectionBus.QuizType.NORMAL) {
+            SessionData.setCurrentQuiz(lesson.getQuiz());
         }
 
         startActivity(new Intent(this, QuizActivity.class));

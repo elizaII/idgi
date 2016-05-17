@@ -42,6 +42,14 @@ public class TimedQuiz extends QuizDecorator {
         this.time = time;
     }
 
+    public static TimedQuiz create(IQuiz quiz) {
+        if(quiz instanceof Quiz){
+            return new TimedQuiz(quiz);
+        }
+
+        return (TimedQuiz) quiz;
+    }
+
     @Override
     public int getPointsEarned() {
         int maximalScore = this.getCorrectAnswerAmount()*100;

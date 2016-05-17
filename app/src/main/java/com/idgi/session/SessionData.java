@@ -14,6 +14,7 @@ public class SessionData {
 	private static Course currentCourse;
 	private static Lesson currentLesson;
 	private static User loggedInUser;
+	private static IQuiz currentQuiz;
 
 	public static Subject getCurrentSubject() {
 		return currentSubject;
@@ -42,11 +43,16 @@ public class SessionData {
 		return loggedInUser != null;
 	}
 
-	/* Returns the current lesson's quiz.
-	 * If there is no current lesson, returns null. */
+	/* Returns the current quiz.
+	 * It is set by the LessonActivity which retrieves the
+	 * current lesson's quiz. */
 	public static IQuiz getCurrentQuiz() {
-		return currentLesson != null ? currentLesson.getQuiz() : null;
+		return currentQuiz;
 	}
+
+    public static void setCurrentQuiz(IQuiz quiz) {
+        currentQuiz = quiz;
+    }
 
 	public static Video getCurrentVideo() {
 		return currentLesson != null ? currentLesson.getVideo() : null;

@@ -7,7 +7,7 @@ public class QuizSelectionBus extends EventBus<QuizSelectionBus.Listener>{
 
     public void broadcastQuizSelection(QuizType quizType) {
         for(Listener listener : getListeners()) {
-            listener.onQuizSelected(quizType);
+            listener.onQuizTypeSelected(quizType);
         }
     }
 
@@ -16,6 +16,6 @@ public class QuizSelectionBus extends EventBus<QuizSelectionBus.Listener>{
     }
 
     public interface Listener {
-        void onQuizSelected(QuizType quizType);
+        void onQuizTypeSelected(QuizType quizType);
     }
 }
