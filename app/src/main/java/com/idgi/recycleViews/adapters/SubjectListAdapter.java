@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.idgi.R;
@@ -33,6 +34,14 @@ public class SubjectListAdapter extends NameableAdapter<SubjectListAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.subjectTextView.setText(nameables.get(position).getName());
+
+        if(position % 2 != 0)
+        {
+            holder.listBackground.setBackgroundResource(R.color.colorPrimaryDark);
+        }
+        else{
+            holder.listBackground.setBackgroundResource(R.color.white);
+        }
     }
 
 
@@ -43,11 +52,13 @@ public class SubjectListAdapter extends NameableAdapter<SubjectListAdapter.ViewH
     public static class ViewHolder extends NameableAdapter.ViewHolder implements View.OnClickListener{
 
         public TextView subjectTextView;
+        public RelativeLayout listBackground;
 
         public ViewHolder(View view, NameableSelectionBus bus){
             super(view, bus);
             view.setOnClickListener(this);
             subjectTextView = (TextView) view.findViewById(R.id.rowTextView);
+            listBackground = (RelativeLayout) view.findViewById(R.id.list_background);
         }
 
         public void onClick(View view){
