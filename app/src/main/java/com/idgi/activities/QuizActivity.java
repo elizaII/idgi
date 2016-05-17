@@ -71,36 +71,15 @@ public class QuizActivity extends AppCompatActivity {
 		}
 	}
 
-	//Todo... Refactor this huge method
 	private void initializeTimeBar(final TimedQuiz timedQuiz) {
         timeProgressBar = (ProgressBar) findViewById(R.id.content_quiz_time_progress);
 
-		final int MAX_TIME = timedQuiz.getTime();
-		Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
-
 		if (timeProgressBar != null) {
 			timeProgressBar.setVisibility(View.VISIBLE);
-			timeProgressBar.setMax(MAX_TIME);
+			timeProgressBar.setMax(timedQuiz.getTime());
 		}
 
-        timer = new CountDownTimer(MAX_TIME, 1) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeProgressBar.setProgress(MAX_TIME - (int)millisUntilFinished);
-            }
-
-            @Override
-            public void onFinish() {
-				//Todo... change the time unit
-				if((MAX_TIME - timeProgressBar.getProgress()) <= 10){
-					Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
-					Log.d(ACTIVITY_TAG, "You failed!");
-				}
-				finishQuiz();
-				timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
-				Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
-            }
-        };
+        timer = new QuizTimer(timedQuiz, timedQuiz.getTime(), 1);
 
         timer.start();
     }
@@ -269,4 +248,34 @@ public class QuizActivity extends AppCompatActivity {
 			}
 		}
 	};
+
+    private class QuizTimer extends CountDownTimer{
+
+        private final int MAX_TIME;
+        private TimedQuiz timedQuiz;
+
+        public QuizTimer(TimedQuiz timedQuiz, long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            this.timedQuiz = timedQuiz;
+            MAX_TIME = timedQuiz.getTime();
+            Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            timeProgressBar.setProgress(MAX_TIME - (int)millisUntilFinished);
+        }
+
+        @Override
+        public void onFinish() {
+            //Todo... change the time unit
+            if((MAX_TIME - timeProgressBar.getProgress()) <= 10){
+                Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
+                Log.d(ACTIVITY_TAG, "You failed!");
+            }
+            finishQuiz();
+            timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
+            Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
+        }
+    }
 }
