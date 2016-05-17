@@ -13,12 +13,14 @@ import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
 import com.idgi.core.Course;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.Video;
+import com.idgi.event.CreateQuizBus;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 import com.idgi.core.ModelUtility;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CreateLessonActivity extends AppCompatActivity implements PropertyChangeListener {
+public class CreateLessonActivity extends AppCompatActivity implements CreateQuizBus.Listener {
 
     /**
      * The type of a list-item that has a name attribute
@@ -195,7 +197,7 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
 
     public void onAddQuizButtonClick(View view) {
         CreateQuizDialog dialog = new CreateQuizDialog(this, questionList);
-		dialog.addPropertyChangeListener(this);
+		dialog.addListener(this);
         dialog.show();
     }
 
@@ -379,13 +381,9 @@ public class CreateLessonActivity extends AppCompatActivity implements PropertyC
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        switch(event.getPropertyName()) {
-            case "quizCreated":
-				String text = getResources().getString(R.string.create_lesson_quiz_has_been_added);
-                btnAddQuiz.setText(text);
-                this.quiz = (Quiz) event.getNewValue();
-				break;
-        }
+    public void onQuizCreated(IQuiz quiz) {
+        String text = getResources().getString(R.string.create_lesson_quiz_has_been_added);
+        btnAddQuiz.setText(text);
+        this.quiz = (Quiz) quiz;
     }
 }

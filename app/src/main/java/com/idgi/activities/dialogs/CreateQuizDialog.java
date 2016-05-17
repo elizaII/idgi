@@ -14,6 +14,7 @@ import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.event.CreateQuestionBus;
+import com.idgi.event.CreateQuizBus;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
 import java.beans.PropertyChangeEvent;
@@ -30,7 +31,7 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
     private Button add_question_button;
     private Button question_done_button;
 
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private final CreateQuizBus createQuizBus = new CreateQuizBus();
 
     private List<Question> questionList;
 	public List<String> questionNames;
@@ -87,14 +88,14 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
 			if (!questionList.isEmpty()) {
 				Quiz quiz = new Quiz();
 				quiz.addQuestions(questionList);
-				pcs.firePropertyChange("quizCreated", null, quiz);
+				createQuizBus.broadcastQuizCreated(quiz);
 				dismiss();
 			}
 		}
 	};
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		this.pcs.addPropertyChangeListener(listener);
+	public void addListener(CreateQuizBus.Listener listener){
+		createQuizBus.addListener(listener);
 	}
 
 	@Override
