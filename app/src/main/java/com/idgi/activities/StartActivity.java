@@ -29,7 +29,6 @@ public class StartActivity extends DrawerActivity {
 		if (!SessionData.hasLoggedInUser())
 			notLoggedIn();
 
-		FireDatabase.getInstance().pushHatsToFirebase();
 	}
 
 	private void notLoggedIn() {
