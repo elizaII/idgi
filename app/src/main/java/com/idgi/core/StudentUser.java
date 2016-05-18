@@ -9,7 +9,7 @@ import java.util.List;
 @JsonTypeName("student")
 public class StudentUser extends User{
 
-    List<Hat> hats = new ArrayList<Hat>();
+    private List<Hat> hats = new ArrayList<Hat>();
 
     private Statistics statistics;
 
@@ -42,7 +42,6 @@ public class StudentUser extends User{
     public int getPoints() {
         return statistics.get(Statistics.Property.POINTS);
     }
-
 
     public List<Hat> getHats() {
         return hats;

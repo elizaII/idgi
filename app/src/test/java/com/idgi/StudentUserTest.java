@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class StudentUserTest {
 
 	Hat testHat1;
@@ -23,8 +25,10 @@ public class StudentUserTest {
 	Video video;
 	String url;
 	StudentUser studentUser;
+    Quiz quiz;
+//    private List<Hat> hats;
 
-	private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
+    private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
 	private Question question2 = new Question("What is 5 + 7?", "It is more than 11 and less than 13.");
 
 	@Before
@@ -50,6 +54,8 @@ public class StudentUserTest {
 		url = new String("urlen");
 
 		video = new Video(url);
+
+        quiz = new Quiz();
 	}
 
 	@Test
@@ -112,9 +118,15 @@ public class StudentUserTest {
 
 	@Test
 	public void testAddPointForVideo() {
-		studentUser.givePointsForViewingVideo(video, point);
-		assertTrue("Should have points", studentUser.getPoints()>0);
+        assertFalse("Should not have points", studentUser.getPoints()>0);
+        studentUser.givePointsForViewingVideo(video, point);
+		assertTrue("Should have points", studentUser.getPoints() > 0);
 	}
 
-
+    @Test
+    public void testAddPointForQuiz() {
+        assertFalse("Should not have points", studentUser.getPoints() > 0);
+        studentUser.givePointsForQuiz(quiz.getID(), point);
+        assertTrue("Should have points", studentUser.getPoints() > 0);
+    }
 }
