@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 
 import com.idgi.R;
 import com.idgi.core.StudentUser;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 
 public class StartActivity extends DrawerActivity {
@@ -26,6 +28,8 @@ public class StartActivity extends DrawerActivity {
 
 		if (!SessionData.hasLoggedInUser())
 			notLoggedIn();
+
+		FireDatabase.getInstance().pushHatsToFirebase();
 	}
 
 	private void notLoggedIn() {

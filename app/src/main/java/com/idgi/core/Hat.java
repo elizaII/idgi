@@ -8,6 +8,19 @@ public class Hat {
     private String name;
     private int points;
     private String description;
+    private String key;
+
+    public Hat () {
+
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
 
     public int getImageId() {
         return imageId;

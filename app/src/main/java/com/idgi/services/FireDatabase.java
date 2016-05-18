@@ -1,5 +1,7 @@
 package com.idgi.services;
 
+import android.util.Log;
+
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -7,6 +9,7 @@ import com.firebase.client.ValueEventListener;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.Hat;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.School;
@@ -35,6 +38,14 @@ public class FireDatabase implements IDatabase {
 		Firebase push = ref.child("schools").push();
 		school.setKey(push.getKey());
 		push.setValue(school);
+	}
+
+	public void pushHat(Hat hat) {
+        Log.d("tove", "uygjhgfh");
+
+		Firebase push = ref.child("hats").child(hat.getName());
+		hat.setKey(push.getKey());
+		push.setValue(hat);
 	}
 
 	public List<School> getSchools() {
@@ -134,6 +145,14 @@ public class FireDatabase implements IDatabase {
 
 		return schools;
 	}
+
+    public void pushHatsToFirebase() {
+        MockData mock = MockData.getInstance();
+
+        for (Hat hat : mock.getHats()) {
+            pushHat(hat);
+        }
+    }
 
 	public void pushMockDataToFirebase() {
 		List<School> mockSchools = createSchools();

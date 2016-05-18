@@ -1,8 +1,10 @@
 package com.idgi.services;
 
+import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.Hat;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Question;
@@ -104,6 +106,48 @@ public final class MockData implements IDatabase {
 			comments.add(new Comment(buffer.toString(), getUser()));
 		}
         return comments;
+	}
+
+	public List<Hat> getHats() {
+
+		Hat regularHat = new Hat();
+		regularHat.setName("Vanlig hatt");
+		regularHat.setImageId(R.drawable.hat_black);
+		regularHat.setDescription("Hatten för dig som inte vet vad du vill än");
+		regularHat.setPoints(100);
+
+		Hat cowboyhat = new Hat();
+		cowboyhat.setName("Cowboyhatt");
+		cowboyhat.setImageId(R.drawable.hat_black);
+		cowboyhat.setPoints(300);
+		cowboyhat.setDescription("En hatt för den tuffa eleven");
+
+		Hat tophat = new Hat();
+		tophat.setName("Hög hatt");
+		tophat.setImageId(R.drawable.hat_black);
+		tophat.setPoints(500);
+		tophat.setDescription("Det här är en väldigt värdefull hatt");
+
+		Hat magicHat = new Hat();
+		magicHat.setName("Magihatt");
+		magicHat.setImageId(R.drawable.hat_black);
+		magicHat.setDescription("Abrakadabra");
+		magicHat.setPoints(1000);
+
+		Hat catHat = new Hat();
+		catHat.setName("Katthatt");
+		catHat.setImageId(R.drawable.hat_black);
+		catHat.setDescription("Mjau prrr");
+		catHat.setPoints(2000);
+
+		List<Hat> hats = new ArrayList<Hat>();
+		hats.add(0, regularHat);
+		hats.add(1, cowboyhat);
+		hats.add(2, tophat);
+		hats.add(3, magicHat);
+		hats.add(4, catHat);
+
+		return hats;
 	}
 
 	private User getUser() {
