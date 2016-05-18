@@ -1,11 +1,14 @@
 
 package com.idgi;
 
+import android.graphics.Point;
+
 import com.idgi.core.Answer;
 import com.idgi.core.Hat;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.StudentUser;
+import com.idgi.core.Video;
 
 import static org.junit.Assert.*;
 
@@ -16,12 +19,20 @@ public class StudentUserTest {
 
 	Hat testHat1;
 	Hat testHat2;
+	Integer point;
+	Video video;
+	String url;
+	StudentUser studentUser;
 
 	private Question question1 = new Question("What is 5 + 5?", "It is more than 9 and less than 11.");
 	private Question question2 = new Question("What is 5 + 7?", "It is more than 11 and less than 13.");
 
 	@Before
 	public void setUp() {
+
+		studentUser = new StudentUser("Namn");
+		studentUser.setEmail("email");
+
 		testHat1 = new Hat();
 		testHat1.setName("Testhatt 1");
 		testHat1.setDescription("Hattbeskrivning 1");
@@ -33,6 +44,12 @@ public class StudentUserTest {
 		testHat2.setDescription("Hattbeskrivning 2");
 		testHat2.setPoints(200);
 		testHat2.setImageId(R.drawable.hat_pink);
+
+		point = 1;
+
+		url = new String("urlen");
+
+		video = new Video(url);
 	}
 
 	@Test
@@ -85,12 +102,18 @@ public class StudentUserTest {
 	}
 
 	@Test
-	public void testContainsHat(){
+	public void testContainsHat() {
 		StudentUser user = new StudentUser("Test");
 		user.addHat(testHat1);
 
 		assertTrue("Should contain testHat2", user.containsHat(testHat1));
 		assertFalse("Should not contain testHat2", user.containsHat(testHat2));
+	}
+
+	@Test
+	public void testAddPointForVideo() {
+		studentUser.givePointsForViewingVideo(video, point);
+		assertTrue("Should have points", studentUser.getPoints()>0);
 	}
 
 
