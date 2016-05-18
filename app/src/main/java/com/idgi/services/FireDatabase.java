@@ -95,7 +95,7 @@ public class FireDatabase implements IDatabase {
 
 
 	public List<Lesson> getLessons(Course course) {
-		return course.getLessons();
+		return null;
 	}
 
 	public List<Course> getCourses(Subject subject) {

@@ -74,7 +74,7 @@ public abstract class User {
         this.myCourses = myCourses;
     }
 
-    public boolean isInMyCourses(Course course) {
+    public boolean hasCourse(Course course) {
         return getMyCourses().contains(course);
     }
 

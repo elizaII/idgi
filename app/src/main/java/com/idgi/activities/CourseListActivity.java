@@ -11,7 +11,7 @@ import com.idgi.core.ModelUtility;
 import com.idgi.core.Subject;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
-import com.idgi.recycleViews.adapters.CourseListAdapter;
+import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.List;
@@ -35,24 +35,12 @@ public class CourseListActivity extends DrawerActivity implements NameableSelect
         courses = subject.getCourses();
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.course_list_recycler_view);
-        CourseListAdapter adapter = new CourseListAdapter(this, courses);
+        NameableAdapter adapter = new NameableAdapter(this, courses);
         adapter.addListener(this);
 
         RecyclerViewUtility.connect(this, recycler, adapter);
     }
-/*Why actionbar?
-    private void initializeToolbar() {
-        String title = SessionData.getCurrentSubject().getName();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(title);
-        }
-    }
-*/
     @Override
     public void onNameableSelected(String name) {
         Course course = ModelUtility.findByName(courses, name);

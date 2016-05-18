@@ -10,7 +10,7 @@ import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Nameable;
 import com.idgi.recycleViews.RecyclerViewUtility;
-import com.idgi.recycleViews.adapters.SearchableAdapter;
+import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.School;
@@ -21,6 +21,7 @@ import com.idgi.services.MockData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SearchableActivity extends DrawerActivity {
 
@@ -34,11 +35,11 @@ public class SearchableActivity extends DrawerActivity {
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
-            searchDatabase(query.toLowerCase());
+            searchDatabase(query.toLowerCase(Locale.ENGLISH));
         }
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
-		SearchableAdapter adapter = new SearchableAdapter(this, searchResults);
+		NameableAdapter adapter = new NameableAdapter(this, searchResults);
 		RecyclerViewUtility.connect(this, recycler, adapter);
 
         initializeDrawer();
@@ -56,19 +57,19 @@ public class SearchableActivity extends DrawerActivity {
         List<School> schools = database.getSchools();
 
         for(School school: schools){
-            if(school.getName().toLowerCase().contains(query))
+            if(school.getName().toLowerCase(Locale.ENGLISH).contains(query))
                 results.add(school);
 
             for(Subject subject : school.getSubjects()){
-                if(subject.getName().toLowerCase().contains(query))
+                if(subject.getName().toLowerCase(Locale.ENGLISH).contains(query))
                     results.add(subject);
 
                 for(Course course: subject.getCourses()){
-                    if(course.getName().toLowerCase().contains(query))
+                    if(course.getName().toLowerCase(Locale.ENGLISH).contains(query))
                         results.add(course);
 
                     for(Lesson lesson : course.getLessons()){
-                        if(lesson.getName().toLowerCase().contains(query))
+                        if(lesson.getName().toLowerCase(Locale.ENGLISH).contains(query))
                             results.add(lesson);
                     }
                 }

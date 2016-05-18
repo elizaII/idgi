@@ -1,26 +1,58 @@
 package com.idgi.recycleViews.adapters;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.idgi.R;
 import com.idgi.core.Nameable;
-import com.idgi.event.EventBus;
 import com.idgi.event.NameableSelectionBus;
+import com.idgi.recycleViews.viewHolder.NameableViewHolder;
+import com.idgi.recycleViews.viewHolder.ViewHolderFactory;
 
-import java.beans.PropertyChangeSupport;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class NameableAdapter<ExternalViewHolder extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<ExternalViewHolder> {
-    protected List<? extends Nameable> nameables;
+public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private List<? extends Nameable> nameables;
     private LayoutInflater inflater;
 
-	private NameableSelectionBus bus = new NameableSelectionBus();
+    private NameableSelectionBus bus = new NameableSelectionBus();
+
+    public NameableAdapter(Context context, List<? extends Nameable> nameables){
+        Collections.sort(nameables, SORT_BY_NAME);
+
+        this.nameables = nameables;
+        inflater = LayoutInflater.from(context);
+    }
+
+    public NameableAdapter(Context context, List<? extends Nameable> nameables, NameableSelectionBus bus) {
+        this(context, nameables);
+        this.bus = bus;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Nameable nameable = nameables.get(position);
+        return nameable.getType().getValue();
+    }
+
+    public void addListener(NameableSelectionBus.Listener listener) {
+        bus.addListener(listener);
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return ViewHolderFactory.createNameableViewHolder(inflater, parent, bus, viewType);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        NameableViewHolder nameableViewHolder = (NameableViewHolder) viewHolder;
+        nameableViewHolder.bind(nameables.get(position));
+        nameableViewHolder.applyRowStriping(position);
+    }
 
     private final Comparator<Nameable> SORT_BY_NAME = new Comparator<Nameable>() {
         public int compare(Nameable first, Nameable second) {
@@ -28,47 +60,8 @@ public abstract class NameableAdapter<ExternalViewHolder extends RecyclerView.Vi
         }
     };
 
-    public NameableAdapter(Context context, List<? extends Nameable> nameables){
-        inflater = LayoutInflater.from(context);
-
-		Collections.sort(nameables, SORT_BY_NAME);
-        this.nameables = nameables;
-    }
-
     @Override
     public int getItemCount() {
         return nameables.size();
     }
-
-	public void addListener(NameableSelectionBus.Listener listener) {
-		bus.addListener(listener);
-	}
-
-	/** Should only be called if necessary. Creates a bus on its own in normal circumstances. */
-	public void setBus(NameableSelectionBus bus) {
-		this.bus = bus;
-	}
-
-	public NameableSelectionBus getBus() {
-		return this.bus;
-	}
-
-
-	public static class ViewHolder extends RecyclerView.ViewHolder {
-		private NameableSelectionBus bus;
-
-		public ViewHolder(View view, NameableSelectionBus bus){
-			super(view);
-
-			this.bus = bus;
-		}
-
-		public void broadcastSelection(String name) {
-			bus.broadcastSelection(name);
-		}
-	}
-
-	protected LayoutInflater getInflater() {
-		return this.inflater;
-	}
 }

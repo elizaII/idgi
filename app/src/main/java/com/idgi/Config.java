@@ -9,7 +9,7 @@ public final class Config {
 	}
 
 	/* Firebase */
-	public static final FirebaseMode firebaseMode = FirebaseMode.ACTIVE;
+	public static final FirebaseMode firebaseMode = FirebaseMode.INACTIVE;
 
 	/* YouTube */
 	public static final String YOUTUBE_API_KEY = "AIzaSyC0sOK4dltFQ9aThbYRshysc1i35wcdaDU";

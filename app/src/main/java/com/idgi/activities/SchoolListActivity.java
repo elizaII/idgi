@@ -1,29 +1,17 @@
 package com.idgi.activities;
 
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.idgi.R;
-import com.idgi.core.ModelUtility;
 import com.idgi.core.School;
-import com.idgi.core.Subject;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
+import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.services.FireDatabase;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.recycleViews.adapters.SchoolListAdapter;
 import com.idgi.session.SessionData;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SchoolListActivity extends DrawerActivity implements NameableSelectionBus.Listener {
@@ -40,25 +28,11 @@ public class SchoolListActivity extends DrawerActivity implements NameableSelect
 		super.initializeWithTitle(title);
 	}
 
-
-/*Doesn't set title now. Why actionbar?
-	private void initializeToolbar() {
-		String title = getResources().getString(R.string.list_school_title);
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(title);
-		}
-	}
-*/
 	private void initializeSchoolList() {
 		schools = FireDatabase.getInstance().getSchools();
 
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.school_list_recycler_view);
-		SchoolListAdapter adapter = new SchoolListAdapter(this, schools);
+		NameableAdapter adapter = new NameableAdapter(this, schools);
 		adapter.addListener(this);
 
 		RecyclerViewUtility.connect(this, recycler, adapter);
