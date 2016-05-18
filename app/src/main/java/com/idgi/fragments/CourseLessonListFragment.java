@@ -3,18 +3,16 @@ package com.idgi.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.core.Nameable;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.EmptyRecyclerView;
-import com.idgi.core.Lesson;
 import com.idgi.recycleViews.RecyclerViewUtility;
-import com.idgi.recycleViews.adapters.LessonListAdapter;
 import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
@@ -37,10 +35,9 @@ public class CourseLessonListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
-        List<Lesson> lessons = SessionData.getCurrentCourse().getLessons();
+        List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
 
-        NameableAdapter adapter = new LessonListAdapter(this.getContext(), lessons);
-		adapter.setBus(this.bus);
+        NameableAdapter adapter = new NameableAdapter(this.getContext(), lessons, this.bus);
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);

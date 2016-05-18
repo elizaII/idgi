@@ -2,19 +2,15 @@ package com.idgi.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
 import com.idgi.core.ModelUtility;
-import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
-import com.idgi.recycleViews.adapters.SubjectListAdapter;
-import com.idgi.services.FireDatabase;
+import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.List;
@@ -45,7 +41,7 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
         subjects = SessionData.getCurrentSchool().getSubjects();
 
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.subject_list_recycler_view);
-		SubjectListAdapter adapter = new SubjectListAdapter(this, subjects);
+		NameableAdapter adapter = new NameableAdapter(this, subjects);
         adapter.addListener(this);
 
 		RecyclerViewUtility.connect(this, recycler, adapter);
