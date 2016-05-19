@@ -1,5 +1,7 @@
 package com.idgi;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Build;
 
 import com.firebase.client.Firebase;
@@ -15,8 +17,14 @@ public class Application extends android.app.Application {
 		super.onCreate();
 		Firebase.setAndroidContext(this);
 		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
-		FireDatabase.getInstance().initialize();
+		FireDatabase.getInstance().initialize(connectedToInternet());
 		//FireDatabase.getInstance().pushMockDataToFirebase();
 
+	}
+
+	private boolean connectedToInternet() {
+		ConnectivityManager connectivityManager =  (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		return connectivityManager != null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 }

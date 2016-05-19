@@ -1,5 +1,7 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Lesson implements Nameable {
 
 	private String name;
@@ -66,6 +68,7 @@ public class Lesson implements Nameable {
 	public void setDiscussion(Discussion discussion) {
 	}
 
+	@JsonIgnore
 	@Override
 	public Type getType() {
 		return Type.LESSON;

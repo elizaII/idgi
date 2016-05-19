@@ -1,7 +1,11 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Subject implements Nameable {
     private String name;
 
@@ -16,6 +20,9 @@ public class Subject implements Nameable {
 
     public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Course> getCourses() {
@@ -51,6 +58,7 @@ public class Subject implements Nameable {
         return name.hashCode();
     }
 
+    @JsonIgnore
     @Override
     public Type getType() {
         return Type.SUBJECT;

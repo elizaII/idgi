@@ -23,12 +23,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-
-public final class MockData implements IDatabase {
+/**
+ * This class creates mock data which the application will use if no internet connection is available.
+ */
+public final class MockData {
 	private static volatile MockData instance = null;
 
-	// TODO Implement this properly
-	public IQuiz getQuiz(String key) {
+	public IQuiz getQuiz() {
 		Question question = new Question("What is 5 + 5?", "It is 10.");
 		question.addAnswers(Answer.incorrect("8"), Answer.correct("10"), Answer.incorrect("16"), Answer.incorrect("9"));
 
@@ -59,7 +60,7 @@ public final class MockData implements IDatabase {
 		return Arrays.asList(schools);
 	}
 
-	public List<Subject> getSubjects(School school){
+	public List<Subject> getSubjects(){
 		String[] subjectNames = {"Math", "English", "Swedish", "Physics"};
 		List<Subject> subjects = new ArrayList<>();
 
@@ -69,7 +70,7 @@ public final class MockData implements IDatabase {
 		return subjects;
 	}
 
-	public List<Course> getCourses(Subject subject){
+	public List<Course> getCourses(){
 		Course math1 = new Course("Matte 1c");
 		Course math2 = new Course("Matte 2c");
 		Course math3 = new Course("Matte 3c");
@@ -77,16 +78,38 @@ public final class MockData implements IDatabase {
 		return Arrays.asList(math1, math2, math3);
 	}
 
-
-	public List<Lesson> getLessons(Course course){
+	public List<Lesson> getLessons(){
 		Video video = Video.from("ffLLmV4mZwU");
 
-		Lesson complex1 = Lesson.create("Lektion 1").withVideo(video).withQuiz(getQuiz(""));
-		Lesson complex2 = Lesson.create("Lektion 2").withVideo(video).withQuiz(getQuiz(""));
-		Lesson complex3 = Lesson.create("Lektion 3").withVideo(video).withQuiz(getQuiz(""));
+		Lesson complex1 = Lesson.create("Lektion 1").withVideo(video).withQuiz(getQuiz());
+		Lesson complex2 = Lesson.create("Lektion 2").withVideo(video).withQuiz(getQuiz());
+		Lesson complex3 = Lesson.create("Lektion 3").withVideo(video).withQuiz(getQuiz());
 
 		return Arrays.asList(complex1, complex2, complex3);
 	}
+
+	public List<School> createSchools() {
+		MockData mock = MockData.getInstance();
+		List<School> schools = new ArrayList<>();
+
+		for (School school : mock.getSchools()) {
+			for (Subject subject : mock.getSubjects()) {
+				if (subject.getName().equals("Math"))
+					for (Course course : mock.getCourses()) {
+						for (Lesson lesson : mock.getLessons())
+							course.addLesson(lesson);
+						subject.addCourse(course);
+					}
+
+				school.addSubject(subject);
+			}
+
+			schools.add(school);
+		}
+
+		return schools;
+	}
+
     public List<Comment> getComments(Lesson lesson){
 		String[] words = {"I", "am", "hello", "rad", "totally", "dude", "fantastic"};
 
@@ -116,17 +139,17 @@ public final class MockData implements IDatabase {
 		regularHat.setDescription("Hatten för dig som inte vet vad du vill än");
 		regularHat.setPoints(100);
 
-		Hat cowboyhat = new Hat();
-		cowboyhat.setName("Cowboyhatt");
-		cowboyhat.setImageId(R.drawable.hat_black);
-		cowboyhat.setPoints(300);
-		cowboyhat.setDescription("En hatt för den tuffa eleven");
+		Hat cowboyHat = new Hat();
+		cowboyHat.setName("Cowboyhatt");
+		cowboyHat.setImageId(R.drawable.hat_black);
+		cowboyHat.setPoints(300);
+		cowboyHat.setDescription("En hatt för den tuffa eleven");
 
-		Hat tophat = new Hat();
-		tophat.setName("Hög hatt");
-		tophat.setImageId(R.drawable.hat_black);
-		tophat.setPoints(500);
-		tophat.setDescription("Det här är en väldigt värdefull hatt");
+		Hat topHat = new Hat();
+		topHat.setName("Hög hatt");
+		topHat.setImageId(R.drawable.hat_black);
+		topHat.setPoints(500);
+		topHat.setDescription("Det här är en väldigt värdefull hatt");
 
 		Hat magicHat = new Hat();
 		magicHat.setName("Magihatt");
@@ -140,38 +163,14 @@ public final class MockData implements IDatabase {
 		catHat.setDescription("Mjau prrr");
 		catHat.setPoints(2000);
 
-		List<Hat> hats = new ArrayList<Hat>();
-		hats.add(0, regularHat);
-		hats.add(1, cowboyhat);
-		hats.add(2, tophat);
-		hats.add(3, magicHat);
-		hats.add(4, catHat);
-
-		return hats;
+		return Arrays.asList(regularHat, cowboyHat, topHat, magicHat, catHat);
 	}
 
 	private User getUser() {
 		User user = new StudentUser("Pelle");
-		user.setEmail("pelleBoy@gmail.com");
+		user.setEmail("pelles_mail@gmail.com");
 		user.setAge(9);
 
 		return user;
 	}
-
-	//public List<User> getUsers() {
-
-	//}
-
-	public void setUser() {
-
-	}
-	public void addComment(Comment comment){
-		System.out.println(comment.getText());
-	}
-
-	//Does nothing
-	public void retrieveSchools() {}
-
-	//Does nothing
-	public void retrieveUsers() {}
 }

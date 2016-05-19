@@ -52,8 +52,7 @@ public class SearchableActivity extends DrawerActivity implements NameableSelect
     }
 
     private IDatabase getDatabase() {
-        return Config.firebaseMode == Config.FirebaseMode.ACTIVE ?
-				FireDatabase.getInstance() : MockData.getInstance();
+        return FireDatabase.getInstance();
     }
 
     private void searchDatabase(String query){

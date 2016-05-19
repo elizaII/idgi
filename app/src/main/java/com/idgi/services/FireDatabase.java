@@ -12,15 +12,16 @@ import com.idgi.core.Course;
 import com.idgi.core.Hat;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.ModelUtility;
 import com.idgi.Config;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class FireDatabase implements IDatabase {
 	private static volatile FireDatabase instance = null;
@@ -29,6 +30,8 @@ public class FireDatabase implements IDatabase {
 	private List<School> schools;
 	private List<User> users;
 	private List<Hat> hats;
+
+	private List<String> schoolsIssuedForUpdateByKey = new ArrayList<>();
 
 	public IQuiz getQuiz(String key) {
 		return null;
@@ -127,28 +130,6 @@ public class FireDatabase implements IDatabase {
 		return instance;
 	}
 
-	public List<School> createSchools() {
-		MockData mock = MockData.getInstance();
-		List<School> schools = new ArrayList<>();
-
-		for (School school : mock.getSchools()) {
-			for (Subject subject : mock.getSubjects(null)) {
-				if (subject.getName().equals("Math"))
-					for (Course course : mock.getCourses(null)) {
-						for (Lesson lesson : mock.getLessons(null))
-							course.addLesson(lesson);
-						subject.addCourse(course);
-					}
-
-				school.addSubject(subject);
-			}
-
-			schools.add(school);
-		}
-
-		return schools;
-	}
-
     public void pushHatsToFirebase() {
         MockData mock = MockData.getInstance();
 
@@ -158,40 +139,133 @@ public class FireDatabase implements IDatabase {
     }
 
 	public void pushMockDataToFirebase() {
-		List<School> mockSchools = createSchools();
+		List<School> mockSchools = MockData.getInstance().createSchools();
 		for (School school : mockSchools)
 			pushSchool(school);
 	}
 
 	/**
 	 * Adds a lesson to a school
+	 * Throws IllegalArgumentException if there is no school with the given schoolKey
 	 */
 	public void pushLessonToSchool(Lesson lesson, String schoolKey, String subjectName, String courseName) {
-		String path = String.format("schools/%s/subjects/%s/courses/%s/lessons/", schoolKey, subjectName, courseName);
+		School school = getSchoolByKey(schoolKey);
+		if (school == null)
+			throw new IllegalArgumentException(String.format(Locale.ENGLISH, "There is no school with key: %s", schoolKey));
+
+		Subject subject = school.getSubject(subjectName);
+		List<Lesson> lessons = subject.getCourse(courseName).getLessons();
+
+		int subjectIndex = findIndexForNameableByName(school.getSubjects(), subjectName);
+		int courseIndex = findIndexForNameableByName(subject.getCourses(), courseName);
+		int lessonIndex = findIndexForNameableByName(lessons, lesson.getName());
+
+		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d/courses/%d/lessons/%d", schoolKey, subjectIndex, courseIndex, lessonIndex);
 
 		ref.child(path).setValue(lesson);
+		requestSchoolUpdate(schoolKey);
 	}
 
-	public void retrieveSchools() {
-		if (Config.firebaseMode == Config.FirebaseMode.ACTIVE) {
-			schools = new ArrayList<>();
+	/** Returns the index of the first Nameable in the list with the given name.
+	 * If no Nameable with given name was found, returns -1*/
+	private int getIndexByName(List<? extends Nameable> list, String name) {
+		for (int i = 0; i < list.size(); ++i)
+			if (name.equals(list.get(i).getName()))
+				return i;
 
-			Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
+		return -1;
+	}
 
-			schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
-				public void onDataChange(DataSnapshot snapshot) {
-					for (DataSnapshot child : snapshot.getChildren()) {
-						School school = child.getValue(School.class);
-						schools.add(school);
+	/** Return the index for a nameable. Returns the size of the list if nameable is not in list */
+	private int findIndexForNameableByName(List<? extends Nameable> list, String name) {
+		int indexInList = getIndexByName(list, name);
+
+		return indexInList != -1 ? indexInList : list.size();
+	}
+
+	/** Lets the listener for changes know which schools have been changed since last pull */
+	private void requestSchoolUpdate(String schoolKey) {
+		schoolsIssuedForUpdateByKey.add(schoolKey);
+	}
+
+	private School getSchoolByKey(String key) {
+		int i = findSchoolIndexByKey(key);
+		School school = schools.get(i);
+
+		return school != null ? school : null;
+	}
+
+	public void retrieveSchools(boolean isOfflineMode) {
+		if (isOfflineMode) {
+			schools = MockData.getInstance().createSchools();
+		} else {
+				schools = new ArrayList<>();
+
+				//Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
+				Firebase schoolRef = ref.child("schools");
+				addValueListener(schoolRef);
+
+				/*schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
+					public void onDataChange(DataSnapshot snapshot) {
+						for (DataSnapshot child : snapshot.getChildren()) {
+							School school = child.getValue(School.class);
+							addNewSchool(school);
+						}
+					}
+
+					public void onCancelled(FirebaseError firebaseError) {
+					}
+				});*/
+		}
+	}
+
+	private void addNewSchool(School school) {
+		schools.add(school);
+	}
+
+	private void addValueListener(Firebase ref) {
+		ref.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot snapshot) {
+				for (DataSnapshot child : snapshot.getChildren()) {
+					String schoolKey = child.getKey();
+					if (isNewSchool(schoolKey)) {
+						School newSchool = child.getValue(School.class);
+						addNewSchool(newSchool);
+					} else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
+						School updatedSchool = child.getValue(School.class);
+						replaceSchool(schoolKey, updatedSchool);
 					}
 				}
+			}
+			@Override public void onCancelled(FirebaseError error) { }
+		});
+	}
 
-				public void onCancelled(FirebaseError firebaseError) {
-				}
-			});
-		} else {
-			schools = createSchools();
-		}
+	private boolean isNewSchool(String schoolKey) {
+		return findSchoolIndexByKey(schoolKey) == -1;
+	}
+
+	/** Replace the school with given key with a new School.
+	 * Should only be used to update a school.
+	 * Throws IllegalArgumentException if there is no school with the given key in schools.*/
+	private void replaceSchool(String key, School newSchool) {
+		int index = findSchoolIndexByKey(key);
+
+		if (index == -1)
+			throw new IllegalArgumentException(String.format(Locale.ENGLISH, "There is no school with key %s", key));
+
+		schoolsIssuedForUpdateByKey.remove(key);
+		schools.set(index, newSchool);
+	}
+
+	/** Returns the index of a School with the given key. If no matching key was found, returns -1*/
+	private int findSchoolIndexByKey(String key) {
+		for (int i = 0; i < schools.size(); ++i)
+			if (key.equals(schools.get(i).getKey()))
+				return i;
+
+		return -1;
 	}
 
 	public void retrieveUsers() {
@@ -212,10 +286,10 @@ public class FireDatabase implements IDatabase {
 			}
 		});
 	}
-
-	public void initialize() {
-		retrieveSchools();
-        retrieveHats();
+	public void initialize(boolean hasInternetConnection) {
+		boolean isOfflineMode = !hasInternetConnection || Config.firebaseMode == Config.FirebaseMode.INACTIVE;
+		retrieveSchools(isOfflineMode);
+		retrieveHats();
 	}
 
     public void retrieveHats() {

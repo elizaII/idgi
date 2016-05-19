@@ -1,5 +1,6 @@
 package com.idgi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class Course implements Nameable {
 	}
 
 	@Override
+	@JsonIgnore
 	public Type getType() {
 		return Type.COURSE;
 	}

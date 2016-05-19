@@ -10,6 +10,9 @@ import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class SessionData {
 	private static School currentSchool;
 	private static Course currentCourse;
@@ -77,6 +80,5 @@ public class SessionData {
 	public static void setCurrentSchool(School school) {
 		currentSchool = school;
 	}
-
 
 }
