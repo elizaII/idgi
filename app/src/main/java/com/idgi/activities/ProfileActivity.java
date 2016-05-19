@@ -34,15 +34,18 @@ public class ProfileActivity extends DrawerActivity {
 
         name = (EditText) findViewById(R.id.profile_editText_name);
         txtAge = (EditText) findViewById(R.id.profile_editText_age);
+
         user = SessionData.getLoggedInUser();
+
        if (user != null) {
            name.setText(user.getName());
            txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
            txtAge.setText(user.getEmail());
+
+//      if (user.getType() == User.Type.Student) {
            if (user instanceof StudentUser) {
-               user = (StudentUser) user;
                points = (TextView) findViewById(R.id.profile_textView_nrOfPoints);
-               points.setText(String.valueOf(user.getPoints()));
+               points.setText(String.valueOf(((StudentUser) user).getPoints()));
            }
        }
         initializeDrawer();
@@ -105,6 +108,5 @@ public class ProfileActivity extends DrawerActivity {
         if (user instanceof StudentUser) {
             ((StudentUser) user).getPoints();
         }
-
     }
 }

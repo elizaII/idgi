@@ -5,6 +5,7 @@ import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
+import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
@@ -65,8 +66,8 @@ public class SessionData {
     public static Lesson getCurrentLesson() {
         return currentLesson;
     }
-	public static User getLoggedInUser() {
-		return loggedInUser;
+	public static StudentUser getLoggedInUser() {
+		return (StudentUser) loggedInUser;
 	}
 
 	public static School getCurrentSchool() {

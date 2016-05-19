@@ -2,6 +2,8 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.firebase.client.Firebase;
+import com.idgi.services.FireDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +34,12 @@ public class StudentUser extends User{
 
     public void givePointsForQuiz(String quizID, int points) {
         statistics.updateQuizPoints(quizID, points);
+        giveHats();
     }
 
     public void givePointsForViewingVideo(Video video, int points) {
         statistics.addVideoPoints(video, points);
+        giveHats();
     }
 
     @JsonIgnore
@@ -48,8 +52,11 @@ public class StudentUser extends User{
     }
 
     public void giveHats() {
-        if (getPoints() >= 100) {
-       //     addHat();
+        List<Hat> allHats = FireDatabase.getInstance().getHats();
+        for (Hat hat : allHats) {
+            if (getPoints() >= hat.getPoints()) {
+                addHat(hat);
+            }
         }
     }
 

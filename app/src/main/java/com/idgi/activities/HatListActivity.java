@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Hat;
+import com.idgi.core.StudentUser;
 import com.idgi.recycleViews.adapters.HatListAdapter;
+import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
@@ -23,8 +25,6 @@ public class HatListActivity extends DrawerActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    private ArrayList<Hat> hats = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,23 +37,9 @@ public class HatListActivity extends DrawerActivity {
 
         initializeDrawer();
 
-        Hat hat1 = new Hat();
-        hat1.setImageId(R.drawable.hat_pink);
-        hat1.setName("Snygghatt");
-        hat1.setDescription("Den bästa hatten du kan få");
-        hat1.setPoints(1000);
-        hats.add(hat1);
+        StudentUser user = SessionData.getLoggedInUser();
 
-        Hat hat2 = new Hat();
-        hat2.setImageId(R.drawable.hat_black);
-        hat2.setName("Vanlig hatt");
-        hat2.setDescription("En helt vanlig hatt");
-        hat2.setPoints(100);
-        hats.add(hat2);
-//
-//        hats.add();
-
-        adapter = new HatListAdapter(this, hats);
+        adapter = new HatListAdapter(this, user.getHats());
 
         manager = new LinearLayoutManager(this);
 
