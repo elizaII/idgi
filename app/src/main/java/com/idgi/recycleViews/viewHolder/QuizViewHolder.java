@@ -20,6 +20,7 @@ public class QuizViewHolder extends NameableViewHolder {
 
     public TextView nameTextView;
     public RelativeLayout listBackground;
+    private Nameable nameable;
 
     public QuizViewHolder(View view, NameableSelectionBus bus){
         super(view, bus);
@@ -28,14 +29,14 @@ public class QuizViewHolder extends NameableViewHolder {
 
     private final View.OnClickListener onViewClick = new View.OnClickListener() {
         public void onClick(View view) {
-            String quizName = nameTextView.getText().toString();
-            broadcastSelection(quizName);
+            broadcastSelection(nameable);
         }
     };
 
     @Override
     public void bind(Nameable nameable) {
         nameTextView.setText(nameable.getName());
+        this.nameable = nameable;
     }
 
     @Override

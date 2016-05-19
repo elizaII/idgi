@@ -1,17 +1,20 @@
 package com.idgi.event;
 
+
+import com.idgi.core.Nameable;
+
 /**
  * Communicates between quiz dialog and lesson-activity to tell which quiz has been picked
  */
 public class NameableSelectionBus extends EventBus<NameableSelectionBus.Listener>{
 
-    public void broadcastSelection(String name) {
+    public void broadcastSelection(Nameable nameable) {
         for(Listener listener : getListeners()) {
-            listener.onNameableSelected(name);
+            listener.onNameableSelected(nameable);
         }
     }
 
     public interface Listener {
-        void onNameableSelected(String name);
+        void onNameableSelected(Nameable nameable);
     }
 }

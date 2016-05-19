@@ -23,8 +23,8 @@ public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 		initialize();
 	}
 
-	public void broadcastSelection(String name) {
-		bus.broadcastSelection(name);
+	public void broadcastSelection(Nameable nameable) {
+		bus.broadcastSelection(nameable);
 	}
 
 	protected View findViewById(int id) {

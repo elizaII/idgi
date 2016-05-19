@@ -1,6 +1,5 @@
 package com.idgi.recycleViews.viewHolder;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ public class LessonViewHolder extends NameableViewHolder {
 	public TextView nameTextView;
 	public YouTubeThumbnailView lessonThumbnail;
 	public RelativeLayout listBackground;
+	private Nameable nameable;
 
 	public LessonViewHolder(View view, NameableSelectionBus bus) {
 		super(view, bus);
@@ -32,13 +32,13 @@ public class LessonViewHolder extends NameableViewHolder {
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			String lessonName = nameTextView.getText().toString();
-			broadcastSelection(lessonName);
+			broadcastSelection(nameable);
 		}
 	};
 
 	@Override
 	public void bind(final Nameable nameable) {
+		this.nameable = nameable;
 		nameTextView.setText(nameable.getName());
 		lessonThumbnail.initialize(Config.YOUTUBE_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
 			public void onInitializationSuccess(YouTubeThumbnailView view, YouTubeThumbnailLoader loader) {

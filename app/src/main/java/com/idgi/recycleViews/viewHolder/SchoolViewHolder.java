@@ -1,6 +1,6 @@
 package com.idgi.recycleViews.viewHolder;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,7 @@ public class SchoolViewHolder extends NameableViewHolder {
 
 	public TextView nameTextView;
 	public RelativeLayout listBackground;
+	private Nameable nameable;
 
 	public SchoolViewHolder(View view, NameableSelectionBus bus){
 		super(view, bus);
@@ -25,13 +26,13 @@ public class SchoolViewHolder extends NameableViewHolder {
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			String schoolName = nameTextView.getText().toString();
-			broadcastSelection(schoolName);
+			broadcastSelection(nameable);
 		}
 	};
 
 	@Override
 	public void bind(Nameable nameable) {
+		this.nameable = nameable;
 		nameTextView.setText(nameable.getName());
 	}
 

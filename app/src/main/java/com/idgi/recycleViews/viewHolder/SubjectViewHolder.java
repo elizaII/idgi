@@ -17,6 +17,7 @@ public class SubjectViewHolder extends NameableViewHolder {
 
 	public TextView nameTextView;
 	public RelativeLayout listBackground;
+	private Nameable nameable;
 
 	public SubjectViewHolder(View view, NameableSelectionBus bus){
 		super(view, bus);
@@ -25,13 +26,13 @@ public class SubjectViewHolder extends NameableViewHolder {
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			String subjectName = nameTextView.getText().toString();
-			broadcastSelection(subjectName);
+			broadcastSelection(nameable);
 		}
 	};
 
 	@Override
 	public void bind(Nameable nameable) {
+		this.nameable = nameable;
 		nameTextView.setText(nameable.getName());
 	}
 

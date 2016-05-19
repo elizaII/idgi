@@ -22,6 +22,7 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	private TextView courseTextView, descriptionTextView, breadCrumbTextView;
 	private Button addToCoursesButton;
+	private Nameable nameable;
 
 	public CourseViewHolder(View view, NameableSelectionBus bus){
 		super(view, bus);
@@ -30,8 +31,7 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			String courseName = courseTextView.getText().toString();
-			broadcastSelection(courseName);
+			broadcastSelection(nameable);
 		}
 	};
 
@@ -69,6 +69,7 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	@Override
 	public void bind(Nameable nameable) {
+		this.nameable = nameable;
 		Course course = (Course) nameable;
 
 		setName(course.getName());
