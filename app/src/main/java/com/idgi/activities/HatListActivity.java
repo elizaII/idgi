@@ -50,6 +50,8 @@ public class HatListActivity extends DrawerActivity {
         hat2.setDescription("En helt vanlig hatt");
         hat2.setPoints(100);
         hats.add(hat2);
+//
+//        hats.add();
 
         adapter = new HatListAdapter(this, hats);
 

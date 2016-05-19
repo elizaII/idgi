@@ -39,10 +39,8 @@
     <!-- SchoolListActivity -->
     <string name="list_school_title">Välj skola</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
     <!-- Quiz & Quiz result Activities -->
     <string name="quiz_out_of_time">Tiden är ute!</string>
@@ -132,6 +130,8 @@
     <string name="profile_hint_name">Namn</string>
     <string name="profile_hint_age">Ålder</string>
     <string name="profile_description_profile_image_circle">Cirkel runt profilbild</string>
+    <string name="profile_text_nr_of_points"></string>
+    logged getPoints()
 
     <!-- "Login required"-dialog -->
     <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
@@ -151,8 +151,6 @@
     <string name="dialog_create_question_answer_3">Svarsalternativ 3</string>
     <string name="dialog_create_question_answer_4">Svarsalternativ 4</string>
     <string name="dialog_create_question_btn_create">Skapa</string>
-
-
 
     <!-- For create lesson activity -->
     <string name="create_lesson_invalid_link_title">Ogiltig länk</string>

@@ -53,14 +53,14 @@
         </RelativeLayout>
 
     <TextView
-        android:id="@+id/profile_textView_nrOfGets"
+        android:id="@+id/profile_textView_nrOfPoints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="609 gets"
+        android:text="showMyPoints"
         android:layout_marginTop="36dp"
         android:layout_below="@+id/profile_btn_myHats"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
     <Button
         android:id="@+id/profile_btn_myHats"
         style="@style/menu_button"

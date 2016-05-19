@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.idgi.R;
 import com.idgi.core.User;
+import com.idgi.core.StudentUser;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
@@ -21,6 +23,7 @@ public class ProfileActivity extends DrawerActivity {
     User user;
     EditText name;
     EditText txtAge;
+    TextView points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,11 @@ public class ProfileActivity extends DrawerActivity {
            name.setText(user.getName());
            txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
            txtAge.setText(user.getEmail());
+           if (user instanceof StudentUser) {
+               user = (StudentUser) user;
+               points = (TextView) findViewById(R.id.profile_textView_nrOfPoints);
+               points.setText(String.valueOf(user.getPoints()));
+           }
        }
         initializeDrawer();
     }
@@ -90,5 +98,13 @@ public class ProfileActivity extends DrawerActivity {
     public void showMyHats(View view) {
         Intent intent = new Intent(this, HatListActivity.class);
         startActivity(intent);
+    }
+
+    public void showMyPoints(User user) {
+        user = SessionData.getLoggedInUser();
+        if (user instanceof StudentUser) {
+            ((StudentUser) user).getPoints();
+        }
+
     }
 }
