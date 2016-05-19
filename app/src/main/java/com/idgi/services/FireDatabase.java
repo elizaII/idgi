@@ -28,6 +28,7 @@ public class FireDatabase implements IDatabase {
 
 	private List<School> schools;
 	private List<User> users;
+	private List<Hat> hats;
 
 	public IQuiz getQuiz(String key) {
 		return null;
@@ -41,11 +42,15 @@ public class FireDatabase implements IDatabase {
 	}
 
 	public void pushHat(Hat hat) {
-        Log.d("tove", "uygjhgfh");
-
 		Firebase push = ref.child("hats").child(hat.getName());
 		hat.setKey(push.getKey());
 		push.setValue(hat);
+	}
+
+	public List<Hat> getHats() {
+		if (hats == null)
+			hats = Collections.emptyList();
+		return hats;
 	}
 
 	public List<School> getSchools() {
@@ -99,11 +104,9 @@ public class FireDatabase implements IDatabase {
 		}
 	}
 
-
 	public List<Subject> getSubjects(String schoolName) {
 		return getSchool(schoolName).getSubjects();
 	}
-
 
 	public List<Lesson> getLessons(Course course) {
 		return null;
@@ -212,7 +215,29 @@ public class FireDatabase implements IDatabase {
 
 	public void initialize() {
 		retrieveSchools();
+        retrieveHats();
 	}
 
+    public void retrieveHats() {
+        if (Config.firebaseMode == Config.FirebaseMode.ACTIVE) {
+            hats = new ArrayList<>();
 
+            Firebase hatRef = new Firebase("https://scorching-torch-4835.firebaseio.com/hats");
+
+            hatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                public void onDataChange(DataSnapshot snapshot) {
+                    for (DataSnapshot child : snapshot.getChildren()) {
+                        Hat hat = child.getValue(Hat.class);
+                        hats.add(hat);
+                    }
+                }
+
+                public void onCancelled(FirebaseError firebaseError) {
+                }
+            });
+        } else {
+            MockData mock = MockData.getInstance();
+            hats = mock.getHats();
+        }
+    }
 }

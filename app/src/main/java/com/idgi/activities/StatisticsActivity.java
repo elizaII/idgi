@@ -32,7 +32,6 @@ public class StatisticsActivity extends DrawerActivity {
         }
 	}
 
-
 	private void findViews() {
 		txtCompletedCourses = (TextView) findViewById(R.id.statistics_txt_completed_courses);
 		txtOngoingCourses = (TextView) findViewById(R.id.statistics_txt_ongoing_courses);

@@ -11,17 +11,17 @@ import android.widget.TextView;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.idgi.R;
 import com.idgi.core.Hat;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class HatListAdapter extends RecyclerView.Adapter<HatListAdapter.HatViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<Hat> hats;
+    private List<Hat> hats;
 
-    public HatListAdapter(Context context, ArrayList<Hat> hats) {
+    public HatListAdapter(Context context, List<Hat> hats) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.hats = hats;
