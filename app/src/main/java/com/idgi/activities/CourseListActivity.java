@@ -8,6 +8,7 @@ import com.idgi.R;
 import com.idgi.core.Course;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.ModelUtility;
+import com.idgi.core.Nameable;
 import com.idgi.core.Subject;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
@@ -42,10 +43,12 @@ public class CourseListActivity extends DrawerActivity implements NameableSelect
     }
 
     @Override
-    public void onNameableSelected(String name) {
-        Course course = ModelUtility.findByName(courses, name);
-        SessionData.setCurrentCourse(course);
+    public void onNameableSelected(Nameable nameable) {
+        if(nameable instanceof Course){
+            Course course = (Course) nameable;
+            SessionData.setCurrentCourse(course);
 
-        startActivity(new Intent(this, CourseActivity.class));
+            startActivity(new Intent(this, CourseActivity.class));
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
+import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
@@ -39,10 +40,12 @@ public class SchoolListActivity extends DrawerActivity implements NameableSelect
 	}
 
 	@Override
-	public void onNameableSelected(String name) {
-		School school = FireDatabase.getInstance().getSchool(name);
-		SessionData.setCurrentSchool(school);
+	public void onNameableSelected(Nameable nameable) {
+		if(nameable instanceof School){
+			School school = (School) nameable;
+			SessionData.setCurrentSchool(school);
 
-		startActivity(new Intent(this, SubjectListActivity.class));
+			startActivity(new Intent(this, SubjectListActivity.class));
+		}
 	}
 }

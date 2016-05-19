@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
 import com.idgi.core.ModelUtility;
+import com.idgi.core.Nameable;
 import com.idgi.core.Subject;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.event.NameableSelectionBus;
@@ -48,10 +49,12 @@ public class SubjectListActivity extends DrawerActivity implements NameableSelec
 	}
 
     @Override
-    public void onNameableSelected(String name) {
-        Subject subject = ModelUtility.findByName(subjects, name);
-        SessionData.setCurrentSubject(subject);
+    public void onNameableSelected(Nameable nameable) {
+        if(nameable instanceof Subject){
+            Subject subject = (Subject) nameable;
+            SessionData.setCurrentSubject(subject);
 
-        startActivity(new Intent(this, CourseListActivity.class));
+            startActivity(new Intent(this, CourseListActivity.class));
+        }
     }
 }

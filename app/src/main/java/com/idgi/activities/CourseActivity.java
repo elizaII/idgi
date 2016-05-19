@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.Nameable;
 import com.idgi.core.TimedQuiz;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.event.QuizSelectionBus;
@@ -35,14 +36,11 @@ import java.util.List;
 
 public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener, QuizSelectionBus.Listener {
 
-    private final int LESSON = 0;
-    private final int QUIZ = 1;
-
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
 
     private PickQuizDialog quizTypes;
-    private Lesson selectedLesson;
+    private IQuiz selectedQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,30 +161,22 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
     }
 
 	@Override
-	public void onNameableSelected(String lessonName) {
-		selectedLesson = SessionData.getCurrentCourse().getLesson(lessonName);
-		SessionData.setCurrentLesson(selectedLesson);
+	public void onNameableSelected(Nameable nameable) {
+        if(nameable instanceof Lesson) {
+            Lesson lesson = (Lesson) nameable;
+            SessionData.setCurrentLesson(lesson);
+            startActivity(new Intent(this, LessonActivity.class));
+        } else if(nameable instanceof IQuiz){
+            selectedQuiz = (IQuiz) nameable;
+            SessionData.setCurrentQuiz(selectedQuiz);
 
-        int listType = viewPager.getCurrentItem();
+            quizTypes = new PickQuizDialog(this);
 
-        switch(listType) {
-            case LESSON:
-                startActivity(new Intent(this, LessonActivity.class));
-                break;
-            case QUIZ:
-                IQuiz normalQuiz = selectedLesson.getQuiz();
-                SessionData.setCurrentQuiz(normalQuiz);
+            //Listens to the dialog
+            quizTypes.addListener(this);
 
-                quizTypes = new PickQuizDialog(this);
-
-                //Listens to the dialog
-                quizTypes.addListener(this);
-
-                quizTypes.show();
-                quizTypes.getWindow().setGravity(Gravity.CENTER);
-                break;
-            default:
-                break;
+            quizTypes.show();
+            quizTypes.getWindow().setGravity(Gravity.CENTER);
         }
 	}
 
@@ -195,7 +185,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         if(quizType == QuizSelectionBus.QuizType.TIMED) {
             SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
         } else if(quizType == QuizSelectionBus.QuizType.NORMAL) {
-            SessionData.setCurrentQuiz(selectedLesson.getQuiz());
+            SessionData.setCurrentQuiz(selectedQuiz);
         }
 
         startActivity(new Intent(this, QuizActivity.class));
