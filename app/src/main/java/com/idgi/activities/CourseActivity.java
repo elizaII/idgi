@@ -47,23 +47,10 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-		initializeToolbar();
-        initializeDrawer();
+		String courseName = SessionData.getCurrentCourse().getName();
+        initializeWithTitle(courseName);
         setupViewPager();
     }
-
-	private void initializeToolbar() {
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-
-		String courseName = SessionData.getCurrentCourse().getName();
-
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(courseName);
-		}
-	}
 
     private void setupViewPager() {
         viewPager = (ViewPager) findViewById(R.id.course_pager);
@@ -80,7 +67,6 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
 
         viewPager.setAdapter(pagerAdapter);
-
         viewPager.addOnPageChangeListener(pageChangeListener);
         //refreshViewPager();
 

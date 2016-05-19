@@ -11,6 +11,8 @@ import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyCoursesActivity extends DrawerActivity {
@@ -22,11 +24,11 @@ public class MyCoursesActivity extends DrawerActivity {
 		String title = getResources().getString(R.string.title_activity_my_course);
 		initializeWithTitle(title);
 
-        List<Course> courses = SessionData.getLoggedInUser().getMyCourses();
-
         TextView textView = (TextView) findViewById(R.id.lesson_list_empty_view_text);
 		if (textView != null)
         	textView.setText(getResources().getString(R.string.course_no_courses));
+
+		List<Course> courses = SessionData.hasLoggedInUser() ? SessionData.getLoggedInUser().getMyCourses() : new ArrayList<Course>();
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) findViewById(R.id.my_courses_list_recycler_view);
 		NameableAdapter adapter = new NameableAdapter(this, courses);

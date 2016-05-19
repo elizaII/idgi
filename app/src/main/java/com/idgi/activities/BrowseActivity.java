@@ -13,7 +13,8 @@ public class BrowseActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
-        initializeDrawer();
+        String title = getResources().getString(R.string.title_activity_browse);
+        initializeWithTitle(title);
     }
 
     public void onSchoolButtonClick(View view){
@@ -23,6 +24,5 @@ public class BrowseActivity extends DrawerActivity {
 
     public void onSubjectButtonClick(View view){
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-
     }
 }

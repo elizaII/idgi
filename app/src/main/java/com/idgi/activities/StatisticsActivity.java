@@ -39,7 +39,7 @@ public class StatisticsActivity extends DrawerActivity {
 		txtSeenVideosAmount = (TextView) findViewById(R.id.statistics_txt_seen_videos_amount);
 		txtCommentAmount = (TextView) findViewById(R.id.statistics_txt_comment_amount);
 		//txtHatAmount = (TextView) findViewById(R.id.statistics_txt_hat_amount);
-		//txtPoints = (TextView) findViewById(R.id.statistics_txt_points);
+		txtPoints = (TextView) findViewById(R.id.statistics_txt_points);
 	}
 
 	private void loadStatistics(StudentUser user) {
@@ -48,7 +48,7 @@ public class StatisticsActivity extends DrawerActivity {
 		txtCompletedQuizAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_QUIZZES)));
 		txtSeenVideosAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.SEEN_VIDEOS)));
 		txtCommentAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMMENTS)));
-		//txtPoints.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.POINTS)));
+		txtPoints.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.POINTS)));
 		//txtHatAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.HATS)));
 	}
 
