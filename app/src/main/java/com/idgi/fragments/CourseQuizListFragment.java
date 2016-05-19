@@ -45,7 +45,9 @@ public class CourseQuizListFragment extends Fragment {
         ArrayList<IQuiz> quizzes = new ArrayList<>();
 
         for(Lesson lesson: lessons){
-            quizzes.add(lesson.getQuiz());
+            IQuiz quiz = lesson.getQuiz();
+            if (quiz != null)
+                quizzes.add(quiz);
         }
 
         NameableAdapter adapter = new NameableAdapter(this.getContext(), quizzes, this.bus);
