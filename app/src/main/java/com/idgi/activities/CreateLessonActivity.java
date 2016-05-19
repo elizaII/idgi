@@ -15,6 +15,7 @@ import com.idgi.activities.dialogs.CreateQuizDialog;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.Nameable;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
@@ -25,8 +26,6 @@ import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 import com.idgi.core.ModelUtility;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -46,17 +45,17 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     private ArrayList<Question> questionList;
     private Button btnAddSchool, btnAddSubject, btnAddCourse, btnAddQuiz, btnCreateLesson;
 
-    private School school;
-    private Subject subject;
-    private Course course;
-    private Quiz quiz;
+    //These are static to preserve state if user navigates away and then returns
+    private static School selectedSchool;
+    private static Subject selectedSubject;
+    private static Course selectedCourse;
+    private static IQuiz selectedQuiz;
+    private static String lessonName, youtubeUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
-
-        questionList = new ArrayList<>();
 
         txtLessonName = (EditText) findViewById(R.id.lesson_name_editText);
         txtYouTubeUrl = (EditText) findViewById(R.id.youtube_url_editText);
@@ -67,12 +66,18 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         btnCreateLesson = (Button) findViewById(R.id.create_lesson_button);
 
         schoolNames = new ArrayList<>();
+        subjectNames = new ArrayList<>();
+        courseNames = new ArrayList<>();
+        questionList = new ArrayList<>();
+
         for (School school : database.getSchools())
             schoolNames.add(school.getName());
 
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
+
+        loadPreviousData();
 
         //Inserting a youtube url by choosing it inside the youtube app
         if(Intent.ACTION_SEND.equals(action) && type != null){
@@ -82,8 +87,33 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         }
     }
 
+    private void loadPreviousData() {
+        if (selectedSchool != null) {
+            btnAddSchool.setText(selectedSchool.getName());
+            btnAddSubject.setEnabled(true);
+        }
+        if (selectedSubject != null) {
+            btnAddSubject.setText(selectedSubject.getName());
+            btnAddCourse.setEnabled(true);
+        }
+        if (selectedCourse != null) {
+            btnAddCourse.setText(selectedCourse.getName());
+            btnAddQuiz.setEnabled(true);
+            txtLessonName.setEnabled(true);
+            txtYouTubeUrl.setEnabled(true);
+            btnCreateLesson.setEnabled(true);
+        }
+        if (selectedQuiz != null) {
+            setSelectedQuiz(selectedQuiz);
+        }
+
+        if (lessonName != null)
+            txtLessonName.setText(lessonName);
+
+        if (youtubeUrl != null)
+            txtYouTubeUrl.setText(youtubeUrl);
+    }
     public void onClick(View view) {
-		SelectNameableDialog dialog;
         final ItemType requestedType;
 
 		List<String> itemList = null;
@@ -106,22 +136,20 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
                 break;
         }
 
-        if (itemList != null) {
-			dialog = new SelectNameableDialog(this, getItemTypeName(requestedType), itemList);
-			dialog.show();
-			dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-				public void onDismiss(DialogInterface dialog) {
-					SelectNameableDialog selectionDialog = (SelectNameableDialog) dialog;
-					selectItem(selectionDialog.getSelectedItemText(), requestedType);
-				}
-			});
-        }
-
+        showSelectionDialog(itemList, requestedType);
     }
 
-    private void setEnabledAndText(Button btnEnable, Button btnText, String text) {
-        btnEnable.setEnabled(true);
-        btnText.setText(text);
+    private void showSelectionDialog(List<String> list, final ItemType requestedType) {
+        if (list != null) {
+            SelectNameableDialog dialog = new SelectNameableDialog(this, getItemTypeName(requestedType), list);
+            dialog.show();
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                public void onDismiss(DialogInterface dialog) {
+                    SelectNameableDialog selectionDialog = (SelectNameableDialog) dialog;
+                    selectItem(selectionDialog.getSelectedItemText(), requestedType);
+                }
+            });
+        }
     }
 
     public void selectItem(String name, ItemType type) {
@@ -148,9 +176,18 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
                     break;
             }
 
-            if (btnEnable != null && btnText != null)
-                setEnabledAndText(btnEnable, btnText, name);
+            if (btnEnable != null && btnText != null) {
+                btnEnable.setEnabled(true);
+                btnText.setText(name);
+            }
         }
+    }
+
+    public void onPause() {
+        super.onPause();
+
+        lessonName = txtLessonName.getText().toString();
+        youtubeUrl = txtYouTubeUrl.getText().toString();
     }
 
     private void updateSelectedSchool(String schoolName) {
@@ -160,16 +197,16 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
     private void updateSelectedSubject(String subjectName) {
-        if (school != null) {
-            Subject existingSubject = ModelUtility.findByName(school.getSubjects(), subjectName);
+        if (selectedSchool != null) {
+            Subject existingSubject = ModelUtility.findByName(selectedSchool.getSubjects(), subjectName);
             Subject subject = existingSubject == null ? new Subject(subjectName) : existingSubject;
             setSelectedSubject(subject);
         }
     }
 
     private void updateSelectedCourse(String courseName) {
-        if (subject != null) {
-            Course existingCourse = ModelUtility.findByName(subject.getCourses(), courseName);
+        if (selectedSubject != null) {
+            Course existingCourse = ModelUtility.findByName(selectedSubject.getCourses(), courseName);
             Course course = existingCourse == null ? new Course(courseName) : existingCourse;
             setSelectedCourse(course);
         }
@@ -178,7 +215,7 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     private void refreshSubjects() {
         subjectNames = new ArrayList<>();
 
-        for (Subject subject : school.getSubjects()) {
+        for (Subject subject : selectedSchool.getSubjects()) {
             subjectNames.add(subject.getName());
         }
     }
@@ -186,7 +223,7 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     private void refreshCourses() {
         courseNames = new ArrayList<>();
 
-        for (Course course : subject.getCourses())
+        for (Course course : selectedSubject.getCourses())
             courseNames.add(course.getName());
     }
 
@@ -209,8 +246,8 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
             String lessonName = txtLessonName.getText().toString();
 
             Video video = Video.from(videoUrl);
-            Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(quiz);
-            course.addLesson(lesson);
+            Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(selectedQuiz);
+            selectedCourse.addLesson(lesson);
 
             pushLesson(lesson);
             SessionData.setCurrentLesson(lesson);
@@ -228,10 +265,10 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
     private void pushLesson(Lesson lesson) {
-        if (!isNewSchool(school))
-            database.pushLessonToSchool(lesson, school.getKey(), subject.getName(), course.getName());
+        if (!isNewSchool(selectedSchool))
+            database.pushLessonToSchool(lesson, selectedSchool.getKey(), selectedSubject.getName(), selectedCourse.getName());
         else
-            database.pushSchool(school);
+            database.pushSchool(selectedSchool);
     }
 
     private boolean isNewSchool(School school) {
@@ -239,7 +276,7 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
     public void setSelectedSchool(School school) {
-        this.school = school;
+        selectedSchool = school;
 
         clearChildData(ItemType.SCHOOL);
 
@@ -247,10 +284,10 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
     public void setSelectedSubject(Subject subject) {
-        this.subject = subject;
+        selectedSubject = subject;
 
-        if (school != null)
-            school.addSubject(subject);
+        if (selectedSchool != null)
+            selectedSchool.addSubject(subject);
 
         clearChildData(ItemType.SUBJECT);
 
@@ -258,14 +295,20 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         refreshCourses();
     }
 
-    public void setSelectedCourse(Course course) {
-        this.course = course;
+    private void setSelectedCourse(Course course) {
+        selectedCourse = course;
 
-        if (subject != null)
-            subject.addCourse(course);
+        if (selectedSubject != null)
+            selectedSubject.addCourse(course);
 
         clearChildData(ItemType.COURSE);
         refreshCourses();
+    }
+
+    private void setSelectedQuiz(IQuiz quiz) {
+        String text = getResources().getString(R.string.create_lesson_quiz_has_been_added);
+        btnAddQuiz.setText(text);
+        selectedQuiz = quiz;
     }
 
     private void clearChildData(ItemType type) {
@@ -281,8 +324,8 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
 	private void clearSubject() {
-		if (subject != null) {
-			subject = null;
+		if (selectedSubject != null) {
+            CreateLessonActivity.selectedSubject = null;
 			courseNames.clear();
 			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "ämne");
 			btnAddSubject.setText(text);
@@ -291,7 +334,7 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
 	}
 
     private void clearCourse() {
-        course = null;
+        CreateLessonActivity.selectedCourse = null;
 
 		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "kurs");
         btnAddCourse.setText(text);
@@ -300,7 +343,7 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
 
 	private void clearQuiz() {
 		questionList.clear();
-		quiz = null;
+        CreateLessonActivity.selectedQuiz = null;
 		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "quiz");
 		btnAddQuiz.setText(text);
 	}
@@ -382,8 +425,6 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
 
     @Override
     public void onQuizCreated(IQuiz quiz) {
-        String text = getResources().getString(R.string.create_lesson_quiz_has_been_added);
-        btnAddQuiz.setText(text);
-        this.quiz = (Quiz) quiz;
+        setSelectedQuiz(quiz);
     }
 }
