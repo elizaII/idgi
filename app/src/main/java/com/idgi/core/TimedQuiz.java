@@ -3,6 +3,7 @@ package com.idgi.core;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.idgi.session.SessionData;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class TimedQuiz extends QuizDecorator {
 
     private int time;
     private int remainingTime;
+
+    private String name;
 
     private static final int TIME_PER_QUESTION = 5000;
 
@@ -29,6 +32,7 @@ public class TimedQuiz extends QuizDecorator {
         super(decoratedQuiz);
         int amountOfQuestions = getQuestions().size();
         this.time = amountOfQuestions * TIME_PER_QUESTION;
+
     }
 
     /**
@@ -47,6 +51,11 @@ public class TimedQuiz extends QuizDecorator {
         }
 
         return (TimedQuiz) quiz;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -77,4 +86,13 @@ public class TimedQuiz extends QuizDecorator {
         return remainingTime/10;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Nameable.Type getType() {
+        return Nameable.Type.QUIZ;
+    }
 }

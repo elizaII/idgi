@@ -39,6 +39,7 @@ public class Lesson implements Nameable {
 
 	public void setQuiz(IQuiz quiz) {
 		this.quiz = quiz;
+		quiz.setName(this.getName());
 	}
 
 	public IQuiz getQuiz() {

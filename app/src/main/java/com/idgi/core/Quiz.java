@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Quiz implements IQuiz{
 	List<Question> questions;
 
 	private String id;
+	private String name;
 
 	public Quiz() {
 		questions = new ArrayList<>();
@@ -33,7 +35,7 @@ public class Quiz implements IQuiz{
 	public void addQuestion(Question question) {
 		questions.add(question);
 	}
-	
+
 	public void addQuestions(List<Question> questions) {
 		for (Question question : questions)
 			this.questions.add(question);
@@ -138,5 +140,20 @@ public class Quiz implements IQuiz{
 		for (Question question : questions) {
 			question.reset();
 		}
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public Nameable.Type getType() {
+		return Nameable.Type.QUIZ;
 	}
 }

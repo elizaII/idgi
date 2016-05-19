@@ -13,7 +13,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = Quiz.class, name = "quiz"),
         @JsonSubTypes.Type(value = TimedQuiz.class, name = "timedQuiz")
 })
-public interface IQuiz {
+public interface IQuiz extends Nameable{
 
     enum Type {
         NORMAL, TIMED
@@ -30,6 +30,8 @@ public interface IQuiz {
     void nextQuestion();
 
     void reset();
+
+    void setName(String name);
 
     Question getCurrentQuestion();
 
