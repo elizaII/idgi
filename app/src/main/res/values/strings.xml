@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">IDGI</string>
-    <string name="home">Home</string>
+    <string name="home">Hem</string>
     <string name="action_settings">Inställningar</string>
-    <string name="player_error">Error initializing YouTube player.  %1$s</string>
-    <string name="seek_to">Jump To</string>
-    <string name="seek_to_hint">Seconds</string>
+    <string name="player_error">Kunde inte starta YouTube-spelaren.  %1$s</string>
+    <string name="seek_to">Gå till</string>
+    <string name="seek_to_hint">Sekunder</string>
 
     <!-- General -->
     <string name="school">skola</string>
@@ -16,11 +16,8 @@
     <string name="no">Nej</string>
     <string name="ok">OK</string>
 
-    <string name="quiz_next_question">Next Question</string>
-    <string name="quiz_finish">Finish</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quiz_next_question">Nästa fråga</string>
+    <string name="quiz_finish">Slutför</string>
 
 
     <!-- Strings related to login -->
@@ -39,8 +36,8 @@
     <!-- SchoolListActivity -->
     <string name="list_school_title">Välj skola</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Öppna navigation drawer</string>
+    <string name="navigation_drawer_close">Stäng navigation drawer</string>
 
     <!-- Quiz & Quiz result Activities -->
     <string name="quiz_out_of_time">Tiden är ute!</string>
@@ -53,8 +50,6 @@
     <string name="quiz_result_answer_incorrect">Fel svar</string>
 
     <!-- Content descriptions -->
-    <string name="quiz_result_question_list_correctness_image">Image that shows whether the answer was correct</string>
-    <string name="quiz_result_question_list_expand_image">Expand question</string>
     <string name="profile_picture">Profilbild</string>
 
     <!-- LessonActivity -->
@@ -80,10 +75,9 @@
     <!-- Toolbars -->
     <string name="title_activity_start">Välkommen till IDGI</string>
     <string name="title_activity_browse">Hitta kurser</string>
-    <string name="title_activity_video">VideoActivity</string>
     <string name="title_activity_login">Logga in</string>
     <string name="title_activity_create_account">Skapa konto</string>
-    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_account">Mitt konto</string>
     <string name="title_activity_profile">Min profil</string>
     <string name="title_activity_statistics">Statistik</string>
     <string name="title_activity_quiz">Quiz</string>
@@ -116,9 +110,9 @@
     <string name="content_lesson_reply">Svara</string>
 
     <!-- Empty list stuff -->
-    <string name="course_no_lessons">There are no lessons here yet.</string>
-    <string name="course_no_quizzes">There are no quizzes here yet.</string>
-    <string name="course_no_info">There is no info here yet.</string>
+    <string name="course_no_lessons">Det finns inga lektioner här just nu.</string>
+    <string name="course_no_quizzes">Det finns inga quiz här just nu.</string>
+    <string name="course_no_info">Det finns ingen information om den här kursen just nu.</string>
 
     <string name="no_description">Det finns ingen beskrivning för det här objektet.</string>
     <string name="title_activity_my_course">Mina kurser</string>
@@ -130,8 +124,6 @@
     <string name="profile_hint_name">Namn</string>
     <string name="profile_hint_age">Ålder</string>
     <string name="profile_description_profile_image_circle">Cirkel runt profilbild</string>
-    <string name="profile_text_nr_of_points"></string>
-    logged getPoints()
 
     <!-- "Login required"-dialog -->
     <string name="dialog_login_required_info_text">Du måste vara inloggad för att komma åt den här funktionen.</string>
@@ -171,7 +163,7 @@
     <string name="action_search" />
 
     <!-- Hats-->
-    <string name="hat_image_content_description">Hat image</string>
+    <string name="hat_image_content_description">Bild på hatt</string>
     <string name="hat_points">%1$d poäng</string>
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
