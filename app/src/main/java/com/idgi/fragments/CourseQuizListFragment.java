@@ -3,20 +3,33 @@ package com.idgi.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.core.IQuiz;
+import com.idgi.core.Lesson;
+import com.idgi.core.Nameable;
+import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.EmptyRecyclerView;
+import com.idgi.recycleViews.RecyclerViewUtility;
+import com.idgi.recycleViews.adapters.NameableAdapter;
+import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.jar.Attributes;
 
 
 public class CourseQuizListFragment extends Fragment {
+    private NameableSelectionBus bus;
 
     public CourseQuizListFragment() {
-        // Required empty public constructor
+        bus = new NameableSelectionBus();
     }
 
     @Override
@@ -27,33 +40,30 @@ public class CourseQuizListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_course_quiz_list, container, false);
+        List<Lesson> lessons = SessionData.getCurrentCourse().getLessons();
+        ArrayList<IQuiz> quizzes = new ArrayList<>();
 
-        ArrayList<String> quizIds = new ArrayList<>();
+        for(Lesson lesson: lessons){
+            quizzes.add(lesson.getQuiz());
+        }
 
-/* Interrupts work with CourseLessonListFragment
-        // TODO add actual quizzes
-        List<Quiz> quizzes = Arrays.asList(new Quiz(), new Quiz());
+        NameableAdapter adapter = new NameableAdapter(this.getContext(), quizzes, this.bus);
 
-        for(Quiz quiz : quizzes)
-            quizIds.add(quiz.getID());
-
-        Collections.sort(quizIds);
-
-        RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this.getContext());
-        RecyclerView.Adapter recyclerAdapter = new LessonListAdapter(this.getContext(), quizIds);
-*/
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
-  /*      recycler.setAdapter(recyclerAdapter);
+        RecyclerViewUtility.connect(getContext(), recycler, adapter);
 
-        recycler.setLayoutManager(recyclerManager);
-*/
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
-
         recycler.setEmptyView(emptyView);
 
+        TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
+        textView.setText(getResources().getString(R.string.course_no_quizzes));
+
         return view;
+    }
+
+    public void addListener(NameableSelectionBus.Listener listener) {
+        bus.addListener(listener);
     }
 
 }

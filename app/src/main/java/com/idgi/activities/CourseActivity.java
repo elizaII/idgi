@@ -10,11 +10,17 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.idgi.activities.dialogs.PickQuizDialog;
+import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.TimedQuiz;
 import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.QuizSelectionBus;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
@@ -27,10 +33,16 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener {
+public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener, QuizSelectionBus.Listener {
+
+    private final int LESSON = 0;
+    private final int QUIZ = 1;
 
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
+
+    private PickQuizDialog quizTypes;
+    private Lesson selectedLesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +73,12 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
-		lessonListFragment.addListener(this);
+        lessonListFragment.addListener(this);
+        CourseQuizListFragment quizListFragment = new CourseQuizListFragment();
+        quizListFragment.addListener(this);
 
         pagerAdapter.addFragment(lessonListFragment, "Lessons");
-        pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
+        pagerAdapter.addFragment(quizListFragment, "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
 
         viewPager.setAdapter(pagerAdapter);
@@ -150,9 +164,41 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
 	@Override
 	public void onNameableSelected(String lessonName) {
-		Lesson lesson = SessionData.getCurrentCourse().getLesson(lessonName);
-		SessionData.setCurrentLesson(lesson);
+		selectedLesson = SessionData.getCurrentCourse().getLesson(lessonName);
+		SessionData.setCurrentLesson(selectedLesson);
 
-		startActivity(new Intent(this, LessonActivity.class));
+        int listType = viewPager.getCurrentItem();
+
+        switch(listType) {
+            case LESSON:
+                startActivity(new Intent(this, LessonActivity.class));
+                break;
+            case QUIZ:
+                IQuiz normalQuiz = selectedLesson.getQuiz();
+                SessionData.setCurrentQuiz(normalQuiz);
+
+                quizTypes = new PickQuizDialog(this);
+
+                //Listens to the dialog
+                quizTypes.addListener(this);
+
+                quizTypes.show();
+                quizTypes.getWindow().setGravity(Gravity.CENTER);
+                break;
+            default:
+                break;
+        }
 	}
+
+    @Override
+    public void onQuizTypeSelected(QuizSelectionBus.QuizType quizType) {
+        if(quizType == QuizSelectionBus.QuizType.TIMED) {
+            SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
+        } else if(quizType == QuizSelectionBus.QuizType.NORMAL) {
+            SessionData.setCurrentQuiz(selectedLesson.getQuiz());
+        }
+
+        startActivity(new Intent(this, QuizActivity.class));
+        quizTypes.dismiss();
+    }
 }
