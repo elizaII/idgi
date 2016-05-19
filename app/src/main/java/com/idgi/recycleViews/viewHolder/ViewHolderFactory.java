@@ -16,6 +16,8 @@ public class ViewHolderFactory {
 				return CourseViewHolder.create(inflater, parent, bus);
 			case LESSON:
 				return LessonViewHolder.create(inflater, parent, bus);
+			case QUIZ:
+				return QuizViewHolder.create(inflater, parent, bus);
 			default:
 				return null;
 		}
