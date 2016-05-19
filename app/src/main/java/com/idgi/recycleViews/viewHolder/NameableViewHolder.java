@@ -35,13 +35,6 @@ public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 		return inflater.inflate(viewType, parent, false);
 	}
 
-	public void applyRowStriping(int position) {
-		boolean even = position % 2 == 0;
-		int resource = even ?  R.color.white: R.color.colorPrimaryDark;
-
-		rootView.setBackgroundResource(resource);
-	}
-
 	/** Initialize any views here. This is called when the ViewHolder is created. */
 	public abstract void initialize();
 

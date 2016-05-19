@@ -51,7 +51,6 @@ public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         NameableViewHolder nameableViewHolder = (NameableViewHolder) viewHolder;
         nameableViewHolder.bind(nameables.get(position));
-        nameableViewHolder.applyRowStriping(position);
     }
 
     private final Comparator<Nameable> SORT_BY_NAME = new Comparator<Nameable>() {
