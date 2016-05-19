@@ -177,5 +177,6 @@
     <string name="hat_points">%1$d poäng</string>
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
+    <string name="search_title">Sökresultat</string>
 
 </resources>

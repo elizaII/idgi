@@ -47,7 +47,8 @@ public class SearchableActivity extends DrawerActivity implements NameableSelect
         adapter.addListener(this);
 		RecyclerViewUtility.connect(this, recycler, adapter);
 
-        initializeDrawer();
+        String title = getResources().getString(R.string.search_title);
+        super.initializeWithTitle(title);
     }
 
     private IDatabase getDatabase() {
@@ -58,7 +59,7 @@ public class SearchableActivity extends DrawerActivity implements NameableSelect
     private void searchDatabase(String query){
         ArrayList<Nameable> results = new ArrayList<>();
 
-        FireDatabase database = FireDatabase.getInstance();
+        IDatabase database = getDatabase();
         List<School> schools = database.getSchools();
 
         for(School school: schools){
