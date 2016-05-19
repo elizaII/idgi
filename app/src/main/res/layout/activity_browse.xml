@@ -19,11 +19,6 @@
         <include
             layout="@layout/app_bar"/>
 
-        <TextView
-            style="@style/title_text"
-            android:text="@string/browse_text_find"
-            android:id="@+id/textView3" />
-
         <Button
             style="@style/menu_button"
             android:text="@string/browse_btn_subject"
