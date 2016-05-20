@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
@@ -32,7 +33,7 @@ public class CreateQuizDialog extends Dialog {
     private Button add_question_button;
     private Button question_done_button;
 
-	private final EventBus bus = new EventBus();
+	private final EventBus bus = Application.getEventBus();
 
     private List<Question> questionList;
 	public List<String> questionNames;

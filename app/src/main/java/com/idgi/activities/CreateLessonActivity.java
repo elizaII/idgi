@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
@@ -54,7 +55,7 @@ public class CreateLessonActivity extends AppCompatActivity{
     private static IQuiz selectedQuiz;
     private static String lessonName, youtubeUrl;
 
-    private final EventBus bus = new EventBus();
+    private final EventBus bus = Application.getEventBus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,6 +267,7 @@ public class CreateLessonActivity extends AppCompatActivity{
             SessionData.setCurrentLesson(lesson);
 
             startActivity(new Intent(this, LessonActivity.class));
+            finish();
         } else{
 
             //Show dialog when user has given an invalid link
@@ -390,10 +392,8 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
 
-    /**
+    /*
      * Trims a youtube link to get the unique ID of a video
-     * @param url The youtube link that will be trimmed
-     * @return The unique identifier for a youtube video
      */
     private String trimYoutubeLink(String url){
         if(url.contains("youtube.com")){
@@ -434,6 +434,13 @@ public class CreateLessonActivity extends AppCompatActivity{
         //because the method isYoutubeLink checks
         //if it's a valid link in beforehand
         return "";
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        bus.unregister(this);
     }
 
     @Subscribe

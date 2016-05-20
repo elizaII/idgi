@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.google.common.eventbus.EventBus;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
@@ -26,7 +27,7 @@ public class CreateQuestionDialog extends Dialog {
 	private EditText[] txtQuizAnswers = new EditText[4];
 	private Switch[] correctAnswerSwitches = new Switch[4];
 
-	private final EventBus bus = new EventBus();
+	private final EventBus bus = Application.getEventBus();
 
     public CreateQuestionDialog(Context context) {
         super(context);
@@ -91,5 +92,12 @@ public class CreateQuestionDialog extends Dialog {
 			dismiss();
 		}
 	};
+
+	@Override
+	public void dismiss(){
+		super.dismiss();
+
+		bus.unregister(this);
+	}
 }
 
