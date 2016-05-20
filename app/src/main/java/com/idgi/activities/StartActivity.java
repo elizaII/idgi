@@ -62,7 +62,6 @@ public class StartActivity extends DrawerActivity {
 		user.setAge(9);
 		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
-
 	}
 
 	public void onAccountButtonClick(View view) {
@@ -74,5 +73,4 @@ public class StartActivity extends DrawerActivity {
 		startActivity(new Intent(this, CreateLessonActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
-
 }
