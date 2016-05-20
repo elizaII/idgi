@@ -8,20 +8,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.idgi.Application;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
 import com.idgi.core.TimedQuiz;
 import com.idgi.event.NameableSelectionBus;
-import com.idgi.event.QuizSelectionBus;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
@@ -29,12 +28,10 @@ import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.session.SessionData;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener, QuizSelectionBus.Listener {
+public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener{
 
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
@@ -42,10 +39,15 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
     private PickQuizDialog quizTypes;
     private IQuiz selectedQuiz;
 
+    private final EventBus bus = Application.getEventBus();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        //Subscribe for quiz-type-events
+        bus.register(this);
 
 		String courseName = SessionData.getCurrentCourse().getName();
         initializeWithTitle(courseName);
@@ -158,23 +160,21 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
             quizTypes = new PickQuizDialog(this);
 
-            //Listens to the dialog
-            quizTypes.addListener(this);
-
             quizTypes.show();
             quizTypes.getWindow().setGravity(Gravity.CENTER);
         }
 	}
 
-    @Override
-    public void onQuizTypeSelected(QuizSelectionBus.QuizType quizType) {
-        if(quizType == QuizSelectionBus.QuizType.TIMED) {
+    @Subscribe
+    public void onQuizTypeSelected(IQuiz.Type quizType) {
+        if(quizType == IQuiz.Type.TIMED) {
             SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
-        } else if(quizType == QuizSelectionBus.QuizType.NORMAL) {
+        } else if(quizType == IQuiz.Type.NORMAL) {
             SessionData.setCurrentQuiz(selectedQuiz);
         }
 
         startActivity(new Intent(this, QuizActivity.class));
         quizTypes.dismiss();
+        bus.unregister(this);
     }
 }

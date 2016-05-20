@@ -13,15 +13,10 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.Application;
 import com.idgi.R;
-import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
-import com.idgi.event.CreateQuestionBus;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 

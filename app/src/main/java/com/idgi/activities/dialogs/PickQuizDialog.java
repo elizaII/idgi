@@ -7,15 +7,17 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.google.common.eventbus.EventBus;
+import com.idgi.Application;
 import com.idgi.R;
-import com.idgi.event.QuizSelectionBus;
+import com.idgi.core.IQuiz;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class PickQuizDialog extends Dialog{
 
-    private final QuizSelectionBus quizSelectionBus = new QuizSelectionBus();
+    private final EventBus bus = Application.getEventBus();
     private Button normalQuizBtn, timedQuizBtn;
 
     public PickQuizDialog(Context context) {
@@ -38,24 +40,15 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onNormalClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            quizSelectionBus.broadcastQuizSelection(QuizSelectionBus.QuizType.NORMAL);
+            bus.post(IQuiz.Type.NORMAL);
         }
     };
 
     private final View.OnClickListener onTimedClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            quizSelectionBus.broadcastQuizSelection(QuizSelectionBus.QuizType.TIMED);
+            bus.post(IQuiz.Type.TIMED);
         }
     };
-
-    public void addListener(QuizSelectionBus.Listener listener){
-        quizSelectionBus.addListener(listener);
-    }
-
-    public void removeListener(QuizSelectionBus.Listener listener){
-        quizSelectionBus.removeListener(listener);
-    }
-
 
 }

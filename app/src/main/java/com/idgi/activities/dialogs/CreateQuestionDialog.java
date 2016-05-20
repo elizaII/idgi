@@ -14,10 +14,6 @@ import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.event.CreateQuestionBus;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public class CreateQuestionDialog extends Dialog {
 
