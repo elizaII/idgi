@@ -3,12 +3,15 @@ package com.idgi.activities;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.idgi.R;
 import com.idgi.core.StudentUser;
+import com.idgi.core.TeacherUser;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.services.FireDatabase;
@@ -26,9 +29,21 @@ public class StartActivity extends DrawerActivity {
 
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
-		if (!SessionData.hasLoggedInUser())
-			notLoggedIn();
+		if (SessionData.hasLoggedInUser()) {
+			if(SessionData.getLoggedInUser() instanceof TeacherUser) {
+				FloatingActionButton createLessonButton = (FloatingActionButton)
+						findViewById(R.id.start_fab_create_lesson);
+				createLessonButton.setVisibility(View.VISIBLE);
+			}
 
+			Button createAccountButton = (Button) findViewById(R.id.start_btn_create_account);
+			Button logInButton = (Button) findViewById(R.id.start_btn_log_in);
+			Button accountButton = (Button) findViewById(R.id.start_btn_account);
+
+			createAccountButton.setVisibility(View.GONE);
+			logInButton.setVisibility(View.GONE);
+			accountButton.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void notLoggedIn() {
@@ -70,7 +85,7 @@ public class StartActivity extends DrawerActivity {
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
-	public void onLessonButtonClick(View view) {
+	public void onLessonFabClick(View view) {
 		startActivity(new Intent(this, CreateLessonActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
