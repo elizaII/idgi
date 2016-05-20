@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CreateLessonActivity extends AppCompatActivity implements CreateQuizBus.Listener {
+public class CreateLessonActivity extends AppCompatActivity{
 
     /**
      * The type of a list-item that has a name attribute
@@ -52,10 +54,15 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     private static IQuiz selectedQuiz;
     private static String lessonName, youtubeUrl;
 
+    private final EventBus bus = new EventBus();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
+
+        //Register as a subscriber
+        bus.register(this);
 
         txtLessonName = (EditText) findViewById(R.id.lesson_name_editText);
         txtYouTubeUrl = (EditText) findViewById(R.id.youtube_url_editText);
@@ -236,7 +243,6 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
 
     public void onAddQuizButtonClick(View view) {
         CreateQuizDialog dialog = new CreateQuizDialog(this, questionList);
-		dialog.addListener(this);
         dialog.show();
     }
 
@@ -430,8 +436,9 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         return "";
     }
 
-    @Override
+    @Subscribe
     public void onQuizCreated(IQuiz quiz) {
         setSelectedQuiz(quiz);
     }
+
 }

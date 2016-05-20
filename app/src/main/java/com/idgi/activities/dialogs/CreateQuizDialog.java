@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.activities.CreateLessonActivity;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.event.CreateQuestionBus;
-import com.idgi.event.CreateQuizBus;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
 import java.beans.PropertyChangeEvent;
@@ -23,7 +24,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listener {
+public class CreateQuizDialog extends Dialog {
 
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
@@ -31,7 +32,7 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
     private Button add_question_button;
     private Button question_done_button;
 
-	private final CreateQuizBus createQuizBus = new CreateQuizBus();
+	private final EventBus bus = new EventBus();
 
     private List<Question> questionList;
 	public List<String> questionNames;
@@ -46,6 +47,9 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.create_quiz_dialog);
+
+		//Register as a subscriber
+		bus.register(this);
 
         add_question_button = (Button) findViewById(R.id.add_question_button);
         question_done_button = (Button) findViewById(R.id.question_done_button);
@@ -78,7 +82,6 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
 	private final View.OnClickListener onCreateQuestionClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			CreateQuestionDialog dialog = new CreateQuestionDialog(getContext());
-			dialog.addListener(CreateQuizDialog.this);
 			dialog.show();
 		}
 	};
@@ -88,17 +91,13 @@ public class CreateQuizDialog extends Dialog implements CreateQuestionBus.Listen
 			if (!questionList.isEmpty()) {
 				Quiz quiz = new Quiz();
 				quiz.addQuestions(questionList);
-				createQuizBus.broadcastQuizCreated(quiz);
+				bus.post(quiz);
 				dismiss();
 			}
 		}
 	};
 
-	public void addListener(CreateQuizBus.Listener listener){
-		createQuizBus.addListener(listener);
-	}
-
-	@Override
+	@Subscribe
 	public void onQuestionCreated(Question question) {
 		updateQuestionList(question);
 	}
