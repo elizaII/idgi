@@ -91,10 +91,12 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         if (selectedSchool != null) {
             btnAddSchool.setText(selectedSchool.getName());
             btnAddSubject.setEnabled(true);
+            refreshSubjects();
         }
         if (selectedSubject != null) {
             btnAddSubject.setText(selectedSubject.getName());
             btnAddCourse.setEnabled(true);
+            refreshCourses();
         }
         if (selectedCourse != null) {
             btnAddCourse.setText(selectedCourse.getName());
@@ -246,7 +248,12 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
             String lessonName = txtLessonName.getText().toString();
 
             Video video = Video.from(videoUrl);
-            Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(selectedQuiz);
+
+
+            Lesson lesson = new Lesson(lessonName).withVideo(video);
+            if (selectedQuiz != null)
+                lesson = lesson.withQuiz(selectedQuiz);
+
             selectedCourse.addLesson(lesson);
 
             pushLesson(lesson);
