@@ -71,6 +71,7 @@
     <string name="start_btn_log_in">Logga in</string>
     <string name="start_btn_create_account">Skapa konto</string>
     <string name="start_btn_account">Konto</string>
+    <string name="start_txt_welcome_msg">Välkommen, %1$s!</string>
 
     <!-- Toolbars -->
     <string name="title_activity_start">Välkommen till IDGI</string>
