@@ -43,13 +43,13 @@ public class UserListActivity extends DrawerActivity {
 
         List<User> users = FireDatabase.getInstance().getUsers();
 
-        Log.d("dfgf", users.size() + "");
-
         adapter = new UserListAdapter(this, users);
         manager = new LinearLayoutManager(this);
 
         recycler = (RecyclerView) findViewById(R.id.user_list_recycler_view);
-        recycler.setAdapter(adapter);
-        recycler.setLayoutManager(manager);
+        if (recycler != null) {
+            recycler.setAdapter(adapter);
+            recycler.setLayoutManager(manager);
+        }
     }
 }

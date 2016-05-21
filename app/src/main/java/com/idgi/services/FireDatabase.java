@@ -1,23 +1,22 @@
 package com.idgi.services;
 
-import android.util.Log;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.idgi.Config;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Hat;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
-import com.idgi.core.ModelUtility;
-import com.idgi.Config;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +27,7 @@ public class FireDatabase implements IDatabase {
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
 
 	private List<School> schools;
-	private List<User> users;
+    private List<Account> accounts;
 	private List<Hat> hats;
 
 	private List<String> schoolsIssuedForUpdateByKey = new ArrayList<>();
@@ -63,9 +62,18 @@ public class FireDatabase implements IDatabase {
 		return schools;
 	}
 
+    public List<Account> getAccounts() {
+        if (accounts == null)
+            accounts = Collections.emptyList();
+
+        return accounts;
+    }
+
 	public List<User> getUsers() {
-		if (users == null)
-			users = Collections.emptyList();
+        List<User> users = new ArrayList<>();
+        for (Account account : accounts) {
+            users.add(account.getUser());
+        }
 
 		return users;
 	}
@@ -221,21 +229,24 @@ public class FireDatabase implements IDatabase {
 
 	private void addValueListener(Firebase ref) {
 		ref.addValueEventListener(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot snapshot) {
-				for (DataSnapshot child : snapshot.getChildren()) {
-					String schoolKey = child.getKey();
-					if (isNewSchool(schoolKey)) {
-						School newSchool = child.getValue(School.class);
-						addNewSchool(newSchool);
-					} else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
-						School updatedSchool = child.getValue(School.class);
-						replaceSchool(schoolKey, updatedSchool);
-					}
-				}
-			}
-			@Override public void onCancelled(FirebaseError error) { }
-		});
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    String schoolKey = child.getKey();
+                    if (isNewSchool(schoolKey)) {
+                        School newSchool = child.getValue(School.class);
+                        addNewSchool(newSchool);
+                    } else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
+                        School updatedSchool = child.getValue(School.class);
+                        replaceSchool(schoolKey, updatedSchool);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
 	}
 
 	private boolean isNewSchool(String schoolKey) {
@@ -264,28 +275,30 @@ public class FireDatabase implements IDatabase {
 		return -1;
 	}
 
-	public void retrieveUsers() {
-		users = new ArrayList<>();
+    public void retrieveAccounts() {
+        accounts = new ArrayList<Account>();
 
-		Firebase userRef = ref.child("users");
+        Firebase accountRef = ref.child("accounts");
 
-		userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-			public void onDataChange(DataSnapshot snapshot) {
+        accountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot snapshot) {
 
-				for (DataSnapshot child : snapshot.getChildren()) {
-					User user = child.getValue(User.class);
-					users.add(user);
-				}
-			}
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Account account = child.getValue(Account.class);
+                    accounts.add(account);
+                }
+            }
 
-			public void onCancelled(FirebaseError firebaseError) {
-			}
-		});
-	}
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+    }
+
 	public void initialize(boolean hasInternetConnection) {
 		boolean isOfflineMode = !hasInternetConnection || Config.firebaseMode == Config.FirebaseMode.INACTIVE;
 		retrieveSchools(isOfflineMode);
 		retrieveHats();
+        retrieveAccounts();
 	}
 
     public void retrieveHats() {

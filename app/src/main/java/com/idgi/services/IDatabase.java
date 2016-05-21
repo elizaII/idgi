@@ -2,6 +2,7 @@ package com.idgi.services;
 
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
+import com.idgi.core.Hat;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Quiz;
@@ -20,5 +21,6 @@ public interface IDatabase {
 	List<Lesson> getLessons(Course course);
 	List<Course> getCourses(Subject subject);
 	List<Comment> getComments(Lesson lesson);
-	void retrieveUsers();
+	void retrieveHats();
+	void retrieveAccounts();
 }
