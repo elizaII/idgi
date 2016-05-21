@@ -169,5 +169,6 @@
     <string name="hat_name">Hattens namn</string>
     <string name="search_title">Sökresultat</string>
     <string name="createAccount_hint_password">Lösenord</string>
+    <string name="create_account_successful_toast">Ditt konto har skapats</string>
 
 </resources>

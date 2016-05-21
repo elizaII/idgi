@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.idgi.R;
 import com.idgi.core.Account;
@@ -90,6 +91,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         FireDatabase.getInstance().pushAccount(account);
         SessionData.setLoggedInUser(user);
+
+        Toast.makeText(this, R.string.create_account_successful_toast, Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(this, StartActivity.class));
     }
