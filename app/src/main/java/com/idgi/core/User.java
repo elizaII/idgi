@@ -31,7 +31,9 @@ public abstract class User {
 
     private ArrayList<Course> myCourses;
 
-    public User() {}
+    public User() {
+        myCourses = new ArrayList<>();
+    }
 
 	public User(String name){
 		this.name = name;

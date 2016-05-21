@@ -26,6 +26,7 @@ import com.idgi.fragments.CourseLessonListFragment;
 import com.idgi.fragments.CourseQuizListFragment;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.fragments.CourseUserListFragment;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         pagerAdapter.addFragment(lessonListFragment, "Lessons");
         pagerAdapter.addFragment(quizListFragment, "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
+        pagerAdapter.addFragment(new CourseUserListFragment(), "Users");
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
@@ -131,6 +133,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
                     getResources().getString(R.string.course_no_lessons),
                     getResources().getString(R.string.course_no_quizzes),
                     getResources().getString(R.string.course_no_info),
+                    getResources().getString(R.string.course_no_users)
             };
 
             String text = messages[position];

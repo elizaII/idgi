@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.core.Course;
 
 /**
  * Created by tove on 2016-05-21.
@@ -28,7 +27,7 @@ public class BrowseUsersActivity extends DrawerActivity {
     }
 
     public void onCourseButtonClick(View view){
-        startActivity(new Intent(this, CourseListActivity.class));
+        startActivity(new Intent(this, SchoolListActivity.class));
         overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
 }
