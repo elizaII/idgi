@@ -37,7 +37,7 @@ public class HatListActivity extends DrawerActivity {
 
         initializeDrawer();
 
-        StudentUser user = SessionData.getLoggedInUser();
+        StudentUser user = (StudentUser) SessionData.getLoggedInUser();
 
         adapter = new HatListAdapter(this, user.getHats());
 

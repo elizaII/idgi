@@ -3,38 +3,58 @@ package com.idgi.activities;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.StudentUser;
+import com.idgi.core.TeacherUser;
 import com.idgi.core.User;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
+
+import java.util.Locale;
 
 public class StartActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
 
-		String title = getResources().getString(R.string.title_activity_start);
-		initializeWithTitle(title);
+		if (SessionData.hasLoggedInUser()) {
+			loggedIn();
+			if (SessionData.getLoggedInUser() instanceof TeacherUser) {
+				enableTeacherFunctionality();
+			}
+		} else {
+			setContentView(R.layout.activity_start_not_logged_in);
+		}
 
+		initializeWithTitle(getString(R.string.app_name));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-
-		if (!SessionData.hasLoggedInUser())
-			notLoggedIn();
 
 	}
 
-	private void notLoggedIn() {
-		// TODO uncomment, development is significantly slower when this is active
-		/*start_btn_account.setEnabled(false);
-		start_btn_create_lesson.setEnabled(false);*/
+	private void loggedIn() {
+		setContentView(R.layout.activity_start_logged_in);
+		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
+
+		String welcomeMsg = String.format(Locale.ENGLISH,
+				getResources().getString(R.string.start_txt_welcome_msg),
+				SessionData.getLoggedInUser().getName());
+
+		if(welcomeText != null)
+			welcomeText.setText(welcomeMsg);
+	}
+
+	private void enableTeacherFunctionality(){
+		FloatingActionButton createLessonButton = (FloatingActionButton)
+				findViewById(R.id.start_fab_create_lesson);
+
+		if(createLessonButton != null)
+			createLessonButton.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -69,7 +89,7 @@ public class StartActivity extends DrawerActivity {
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
-	public void onLessonButtonClick(View view) {
+	public void onLessonFabClick(View view) {
 		startActivity(new Intent(this, CreateLessonActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}

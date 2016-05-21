@@ -69,8 +69,9 @@ public class SessionData {
     public static Lesson getCurrentLesson() {
         return currentLesson;
     }
-	public static StudentUser getLoggedInUser() {
-		return (StudentUser) loggedInUser;
+
+	public static User getLoggedInUser() {
+		return loggedInUser;
 	}
 
 	public static School getCurrentSchool() {

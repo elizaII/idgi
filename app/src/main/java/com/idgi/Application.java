@@ -7,6 +7,7 @@ import android.os.Build;
 import com.firebase.client.Firebase;
 import com.google.common.eventbus.EventBus;
 import com.idgi.core.StudentUser;
+import com.idgi.core.TeacherUser;
 import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
@@ -22,6 +23,7 @@ public class Application extends android.app.Application {
 		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
 		FireDatabase.getInstance().initialize(connectedToInternet());
 		//FireDatabase.getInstance().pushMockDataToFirebase();
+//		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
 
 	}
 
