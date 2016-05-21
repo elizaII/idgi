@@ -61,6 +61,14 @@
             android:label="@string/title_activity_browse"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".activities.BrowseUsersActivity"
+            android:label="@string/title_activity_browse"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.UserListActivity"
+            android:label="@string/title_activity_browse"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".activities.QuizResultActivity"
             android:label="@string/title_activity_quiz_result" />
         <activity android:name=".activities.CourseActivity" />

@@ -170,5 +170,9 @@
     <string name="search_title">Sökresultat</string>
     <string name="createAccount_hint_password">Lösenord</string>
     <string name="create_account_successful_toast">Ditt konto har skapats</string>
+    <string name="title_activity_browse_users">Hitta användare</string>
+    <string name="browse_users_btn_name">Sök via namn</string>
+    <string name="browse_users_btn_course">Sök via kurs</string>
+    <string name="list_user_name">Användare</string>
 
 </resources>

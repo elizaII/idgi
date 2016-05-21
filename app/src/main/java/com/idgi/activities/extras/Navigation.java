@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import com.idgi.activities.BrowseActivity;
+import com.idgi.activities.BrowseUsersActivity;
 import com.idgi.activities.CreateAccountActivity;
 import com.idgi.activities.LoginActivity;
 import com.idgi.activities.MyCoursesActivity;
@@ -39,6 +40,7 @@ public class Navigation {
         setTargetActivity(R.id.nav_my_courses, MyCoursesActivity.class);
         setTargetActivity(R.id.nav_quiz, QuizActivity.class);
         setTargetActivity(R.id.nav_browse, BrowseActivity.class);
+        setTargetActivity(R.id.nav_browse_users, BrowseUsersActivity.class);
         setTargetActivity(R.id.nav_log_in, LoginActivity.class);
         setTargetActivity(R.id.nav_create_profile, CreateAccountActivity.class);
     }
