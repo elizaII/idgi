@@ -28,8 +28,8 @@ public class Course implements Nameable {
 			lessons.add(lesson);
 	}
 
-	public Lesson getLesson(String courseName) {
-		return ModelUtility.findByName(lessons, courseName);
+	public Lesson getLesson(String lessonName) {
+		return ModelUtility.findByName(lessons, lessonName);
 	}
 	
 	public String getName() {

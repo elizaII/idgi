@@ -145,8 +145,8 @@ public class QuizActivity extends AppCompatActivity {
 
 	public void finishQuiz() {
 		leftActivity = true;
-		startActivity(new Intent(this, QuizResultActivity.class));
 		finish();
+		startActivity(new Intent(this, QuizResultActivity.class));
 	}
 
 	private void showCorrectAnswers() {

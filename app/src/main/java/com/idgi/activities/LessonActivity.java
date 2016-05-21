@@ -14,13 +14,15 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.StudentUser;
 import com.idgi.core.TimedQuiz;
-import com.idgi.event.QuizSelectionBus;
 import com.idgi.fragments.YoutubeFragment;
 
 import com.idgi.Widgets.CommentLayout;
@@ -37,7 +39,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener, QuizSelectionBus.Listener {
+public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener{
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
@@ -48,12 +50,17 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
     private PickQuizDialog quizTypes;
 
+    private final EventBus bus = Application.getEventBus();
+
     private List<Comment> comments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
+
+        //Subscribe for quiz-type-events
+        bus.register(this);
 
         lesson = SessionData.getCurrentLesson();
 
@@ -102,9 +109,6 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         SessionData.setCurrentQuiz(normalQuiz);
 
         quizTypes = new PickQuizDialog(this);
-
-        //Listens to the dialog
-        quizTypes.addListener(this);
 
         quizTypes.show();
         quizTypes.getWindow().setGravity(Gravity.CENTER);
@@ -163,16 +167,18 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         recycler.setAdapter(adapter);
     }
 
-    @Override
-    public void onQuizTypeSelected(QuizSelectionBus.QuizType quizType) {
-        if(quizType == QuizSelectionBus.QuizType.TIMED) {
+    @Subscribe
+    public void onQuizTypeSelected(IQuiz.Type quizType) {
+        if(quizType == IQuiz.Type.TIMED) {
             SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
-        } else if(quizType == QuizSelectionBus.QuizType.NORMAL) {
+        } else if(quizType == IQuiz.Type.NORMAL) {
             SessionData.setCurrentQuiz(lesson.getQuiz());
         }
 
         startActivity(new Intent(this, QuizActivity.class));
         quizTypes.dismiss();
+        bus.unregister(this);
     }
+
 }
 

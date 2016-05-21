@@ -37,7 +37,7 @@ public class CourseLessonListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
         List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
 
-        NameableAdapter adapter = new NameableAdapter(this.getContext(), lessons, this.bus);
+        NameableAdapter adapter = new NameableAdapter(getContext().getApplicationContext(), lessons, this.bus);
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);

@@ -9,19 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
-import com.idgi.core.Nameable;
 import com.idgi.core.Question;
-import com.idgi.core.Quiz;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.Video;
-import com.idgi.event.CreateQuizBus;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 import com.idgi.core.ModelUtility;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CreateLessonActivity extends AppCompatActivity implements CreateQuizBus.Listener {
+public class CreateLessonActivity extends AppCompatActivity{
 
     /**
      * The type of a list-item that has a name attribute
@@ -52,10 +52,15 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     private static IQuiz selectedQuiz;
     private static String lessonName, youtubeUrl;
 
+    private final EventBus bus = Application.getEventBus();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
+
+        //Register as a subscriber
+        bus.register(this);
 
         txtLessonName = (EditText) findViewById(R.id.lesson_name_editText);
         txtYouTubeUrl = (EditText) findViewById(R.id.youtube_url_editText);
@@ -91,10 +96,12 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
         if (selectedSchool != null) {
             btnAddSchool.setText(selectedSchool.getName());
             btnAddSubject.setEnabled(true);
+            refreshSubjects();
         }
         if (selectedSubject != null) {
             btnAddSubject.setText(selectedSubject.getName());
             btnAddCourse.setEnabled(true);
+            refreshCourses();
         }
         if (selectedCourse != null) {
             btnAddCourse.setText(selectedCourse.getName());
@@ -234,7 +241,6 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
 
     public void onAddQuizButtonClick(View view) {
         CreateQuizDialog dialog = new CreateQuizDialog(this, questionList);
-		dialog.addListener(this);
         dialog.show();
     }
 
@@ -246,13 +252,19 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
             String lessonName = txtLessonName.getText().toString();
 
             Video video = Video.from(videoUrl);
-            Lesson lesson = new Lesson(lessonName).withVideo(video).withQuiz(selectedQuiz);
+
+
+            Lesson lesson = new Lesson(lessonName).withVideo(video);
+            if (selectedQuiz != null)
+                lesson = lesson.withQuiz(selectedQuiz);
+
             selectedCourse.addLesson(lesson);
 
             pushLesson(lesson);
             SessionData.setCurrentLesson(lesson);
 
             startActivity(new Intent(this, LessonActivity.class));
+            finish();
         } else{
 
             //Show dialog when user has given an invalid link
@@ -377,10 +389,8 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
 
-    /**
+    /*
      * Trims a youtube link to get the unique ID of a video
-     * @param url The youtube link that will be trimmed
-     * @return The unique identifier for a youtube video
      */
     private String trimYoutubeLink(String url){
         if(url.contains("youtube.com")){
@@ -424,7 +434,15 @@ public class CreateLessonActivity extends AppCompatActivity implements CreateQui
     }
 
     @Override
+    public void finish(){
+        super.finish();
+
+        bus.unregister(this);
+    }
+
+    @Subscribe
     public void onQuizCreated(IQuiz quiz) {
         setSelectedQuiz(quiz);
     }
+
 }

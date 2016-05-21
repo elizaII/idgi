@@ -154,15 +154,24 @@ public class FireDatabase implements IDatabase {
 			throw new IllegalArgumentException(String.format(Locale.ENGLISH, "There is no school with key: %s", schoolKey));
 
 		Subject subject = school.getSubject(subjectName);
-		List<Lesson> lessons = subject.getCourse(courseName).getLessons();
+
+		if (subject == null)
+			subject = new Subject(subjectName);
+
+		Course course = subject.getCourse(courseName);
+
+		if (course == null) {
+			course = new Course(courseName);
+			subject.addCourse(course);
+		}
+
+		if (course.getLesson(lesson.getName()) == null)
+			course.addLesson(lesson);
 
 		int subjectIndex = findIndexForNameableByName(school.getSubjects(), subjectName);
-		int courseIndex = findIndexForNameableByName(subject.getCourses(), courseName);
-		int lessonIndex = findIndexForNameableByName(lessons, lesson.getName());
+		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d", schoolKey, subjectIndex);
 
-		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d/courses/%d/lessons/%d", schoolKey, subjectIndex, courseIndex, lessonIndex);
-
-		ref.child(path).setValue(lesson);
+		ref.child(path).setValue(subject);
 		requestSchoolUpdate(schoolKey);
 	}
 
@@ -201,21 +210,8 @@ public class FireDatabase implements IDatabase {
 		} else {
 				schools = new ArrayList<>();
 
-				//Firebase schoolRef = new Firebase("https://scorching-torch-4835.firebaseio.com/schools");
 				Firebase schoolRef = ref.child("schools");
 				addValueListener(schoolRef);
-
-				/*schoolRef.addListenerForSingleValueEvent(new ValueEventListener() {
-					public void onDataChange(DataSnapshot snapshot) {
-						for (DataSnapshot child : snapshot.getChildren()) {
-							School school = child.getValue(School.class);
-							addNewSchool(school);
-						}
-					}
-
-					public void onCancelled(FirebaseError firebaseError) {
-					}
-				});*/
 		}
 	}
 

@@ -9,13 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.google.common.eventbus.EventBus;
+import com.idgi.Application;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
-import com.idgi.event.CreateQuestionBus;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public class CreateQuestionDialog extends Dialog {
 
@@ -25,8 +23,7 @@ public class CreateQuestionDialog extends Dialog {
 	private EditText[] txtQuizAnswers = new EditText[4];
 	private Switch[] correctAnswerSwitches = new Switch[4];
 
-    private final CreateQuestionBus createQuestionBus = new CreateQuestionBus();
-
+	private final EventBus bus = Application.getEventBus();
 
     public CreateQuestionDialog(Context context) {
         super(context);
@@ -87,17 +84,16 @@ public class CreateQuestionDialog extends Dialog {
 
 			updateAnswers(question);
 			updateHint(question);
-			createQuestionBus.broadcastCreatedQuestion(question);
+			bus.post(question);
 			dismiss();
 		}
 	};
 
-	public void addListener(CreateQuestionBus.Listener listener) {
-		createQuestionBus.addListener(listener);
-	}
+	@Override
+	public void dismiss(){
+		super.dismiss();
 
-	public void removeListener(CreateQuestionBus.Listener listener) {
-		createQuestionBus.removeListener(listener);
+		bus.unregister(this);
 	}
 }
 
