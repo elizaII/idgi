@@ -25,21 +25,6 @@ public abstract class User {
     private String email;
     private String phoneNumber;
     private int age;
-    private Type type;
-
-    public enum Type {
-        Teacher,
-        Student,
-        Admin;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
 
     @JsonIgnore
     private Drawable profilePicture;

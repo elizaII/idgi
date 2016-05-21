@@ -8,7 +8,6 @@ public class Account {
 	private User user;
 	private String name;
 	private String password;
-
 	private String key;
 
 	private Account() {}

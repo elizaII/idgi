@@ -64,10 +64,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     public void createAccount() {
         String name = this.nameText.getText().toString();
         String email = this.eMailText.getText().toString();
-        String accountName = email;
         String password = this.passwordText.getText().toString();
 
-        Account account = new Account(accountName, password);
+        Account account = new Account(email, password);
 
         User user;
         if (selectedAccountType.equals(ACCOUNT_TYPE_STUDENT)) {
