@@ -11,6 +11,8 @@ import com.google.common.eventbus.EventBus;
 import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.IQuiz;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 public class PickQuizDialog extends Dialog{
 
@@ -37,7 +39,8 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onNormalClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bus.post(IQuiz.Type.NORMAL);
+            BusEvent event = new BusEvent(Event.QUIZ_SELECTED, IQuiz.Type.NORMAL);
+            bus.post(event);
             dismiss();
         }
     };
@@ -45,7 +48,8 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onTimedClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bus.post(IQuiz.Type.TIMED);
+            BusEvent event = new BusEvent(Event.QUIZ_SELECTED, IQuiz.Type.TIMED);
+            bus.post(event);
             dismiss();
         }
     };

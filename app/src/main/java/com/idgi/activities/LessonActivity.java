@@ -23,6 +23,8 @@ import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.StudentUser;
 import com.idgi.core.TimedQuiz;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.fragments.YoutubeFragment;
 
 import com.idgi.Widgets.CommentLayout;
@@ -56,9 +58,6 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
-
-        //Subscribe for quiz-type-events
-        bus.register(this);
 
         lesson = SessionData.getCurrentLesson();
 
@@ -107,6 +106,9 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         SessionData.setCurrentQuiz(normalQuiz);
 
         quizTypes = new PickQuizDialog(this);
+
+        //Subscribe for quiz-type-events
+        bus.register(this);
 
         quizTypes.show();
         quizTypes.getWindow().setGravity(Gravity.CENTER);
@@ -166,11 +168,15 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
     @Subscribe
-    public void onQuizTypeSelected(IQuiz.Type quizType) {
-        if(quizType == IQuiz.Type.TIMED) {
-            SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
-        } else if(quizType == IQuiz.Type.NORMAL) {
-            SessionData.setCurrentQuiz(lesson.getQuiz());
+    public void onQuizTypeSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.QUIZ_SELECTED) {
+            IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
+
+            if(quizType == IQuiz.Type.TIMED) {
+                SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
+            } else if(quizType == IQuiz.Type.NORMAL) {
+                SessionData.setCurrentQuiz(lesson.getQuiz());
+            }
         }
 
         startActivity(new Intent(this, QuizActivity.class));

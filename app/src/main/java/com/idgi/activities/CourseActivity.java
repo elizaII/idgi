@@ -21,6 +21,8 @@ import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
 import com.idgi.core.TimedQuiz;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.fragments.CourseInfoFragment;
 import com.idgi.fragments.CourseLessonListFragment;
@@ -46,8 +48,6 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        //Subscribe for quiz-type-events
-        bus.register(this);
 
 		String courseName = SessionData.getCurrentCourse().getName();
         initializeWithTitle(courseName);
@@ -163,17 +163,24 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
             Dialog dialog = new PickQuizDialog(this);
 
+            //Subscribe for quiz-type-events
+            bus.register(this);
+
             dialog.show();
             dialog.getWindow().setGravity(Gravity.CENTER);
         }
 	}
 
     @Subscribe
-    public void onQuizTypeSelected(IQuiz.Type quizType) {
-        if(quizType == IQuiz.Type.TIMED) {
-            SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
-        } else if(quizType == IQuiz.Type.NORMAL) {
-            SessionData.setCurrentQuiz(selectedQuiz);
+    public void onQuizTypeSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.QUIZ_SELECTED) {
+            IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
+
+            if(quizType == IQuiz.Type.TIMED) {
+                SessionData.setCurrentQuiz(TimedQuiz.create(selectedQuiz));
+            } else if(quizType == IQuiz.Type.NORMAL) {
+                SessionData.setCurrentQuiz(selectedQuiz);
+            }
         }
 
         bus.unregister(this);
