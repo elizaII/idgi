@@ -23,7 +23,7 @@ public class Application extends android.app.Application {
 		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
 		FireDatabase.getInstance().initialize(connectedToInternet());
 		//FireDatabase.getInstance().pushMockDataToFirebase();
-		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
+//		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
 
 	}
 
