@@ -168,5 +168,6 @@
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
     <string name="search_title">Sökresultat</string>
+    <string name="createAccount_hint_password">Lösenord</string>
 
 </resources>
