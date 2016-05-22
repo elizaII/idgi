@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -169,7 +170,8 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
     @Subscribe
     public void onQuizTypeSelected(BusEvent busEvent) {
-        if(busEvent.getEvent() == Event.QUIZ_SELECTED) {
+        if(busEvent.getEvent() == Event.QUIZ_TYPE_SELECTED) {
+            Log.d("QUIZ_ACTIVITY", "Lesson");
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {
@@ -177,11 +179,12 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
             } else if(quizType == IQuiz.Type.NORMAL) {
                 SessionData.setCurrentQuiz(lesson.getQuiz());
             }
+
+            startActivity(new Intent(this, QuizActivity.class));
+            quizTypes.dismiss();
+            bus.unregister(this);
         }
 
-        startActivity(new Intent(this, QuizActivity.class));
-        quizTypes.dismiss();
-        bus.unregister(this);
     }
 
 }

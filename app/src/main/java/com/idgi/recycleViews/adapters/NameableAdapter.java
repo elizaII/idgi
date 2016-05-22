@@ -18,18 +18,11 @@ public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<? extends Nameable> nameables;
     private LayoutInflater inflater;
 
-    private NameableSelectionBus bus = new NameableSelectionBus();
-
     public NameableAdapter(Context context, List<? extends Nameable> nameables){
         Collections.sort(nameables, SORT_BY_NAME);
 
         this.nameables = nameables;
         inflater = LayoutInflater.from(context);
-    }
-
-    public NameableAdapter(Context context, List<? extends Nameable> nameables, NameableSelectionBus bus) {
-        this(context, nameables);
-        this.bus = bus;
     }
 
     @Override
@@ -38,13 +31,9 @@ public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return nameable.getType().getValue();
     }
 
-    public void addListener(NameableSelectionBus.Listener listener) {
-        bus.addListener(listener);
-    }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolderFactory.createNameableViewHolder(inflater, parent, bus, viewType);
+        return ViewHolderFactory.createNameableViewHolder(inflater, parent, viewType);
     }
 
     @Override

@@ -11,7 +11,8 @@ import com.idgi.core.Course;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.User;
-import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
@@ -24,14 +25,15 @@ public class CourseViewHolder extends NameableViewHolder {
 	private Button addToCoursesButton;
 	private Nameable nameable;
 
-	public CourseViewHolder(View view, NameableSelectionBus bus){
-		super(view, bus);
+	public CourseViewHolder(View view){
+		super(view);
 		view.setOnClickListener(onViewClick);
 	}
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			broadcastSelection(nameable);
+			BusEvent nameableEvent = new BusEvent(Event.COURSE_SELECTED, nameable);
+			postToBus(nameableEvent);
 		}
 	};
 
@@ -104,8 +106,8 @@ public class CourseViewHolder extends NameableViewHolder {
 		breadCrumbTextView.setText(breadCrumb);
 	}
 
-	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent, NameableSelectionBus bus) {
+	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
-		return new CourseViewHolder(view, bus);
+		return new CourseViewHolder(view);
 	}
 }

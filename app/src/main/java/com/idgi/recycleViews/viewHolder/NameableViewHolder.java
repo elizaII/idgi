@@ -7,24 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.common.eventbus.EventBus;
+import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Nameable;
+import com.idgi.event.BusEvent;
 import com.idgi.event.NameableSelectionBus;
 
 public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
-	private NameableSelectionBus bus;
+	private EventBus bus = Application.getEventBus();
 	private View rootView;
 
-	public NameableViewHolder(View view, NameableSelectionBus bus){
+	public NameableViewHolder(View view){
 		super(view);
 		this.rootView = view;
-		this.bus = bus != null ? bus : new NameableSelectionBus();
 
 		initialize();
 	}
 
-	public void broadcastSelection(Nameable nameable) {
-		bus.broadcastSelection(nameable);
+	public void postToBus(BusEvent nameable) {
+		bus.post(nameable);
 	}
 
 	protected View findViewById(int id) {

@@ -35,7 +35,6 @@ public abstract class NameableListActivity extends DrawerActivity implements Nam
 	private void initializeNameableList() {
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.activity_list_nameable_recycler_view);
 		NameableAdapter adapter = new NameableAdapter(this, getNameables());
-		adapter.addListener(this);
 		RecyclerViewUtility.connect(this, recycler, adapter);
 	}
 }

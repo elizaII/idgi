@@ -14,7 +14,8 @@ import com.idgi.Config;
 import com.idgi.R;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 public class LessonViewHolder extends NameableViewHolder {
 
@@ -25,14 +26,15 @@ public class LessonViewHolder extends NameableViewHolder {
 	public RelativeLayout listBackground;
 	private Nameable nameable;
 
-	public LessonViewHolder(View view, NameableSelectionBus bus) {
-		super(view, bus);
+	public LessonViewHolder(View view) {
+		super(view);
 		view.setOnClickListener(onViewClick);
 	}
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			broadcastSelection(nameable);
+			BusEvent nameableEvent = new BusEvent(Event.LESSON_SELECTED, nameable);
+			postToBus(nameableEvent);
 		}
 	};
 
@@ -59,8 +61,8 @@ public class LessonViewHolder extends NameableViewHolder {
 		listBackground = (RelativeLayout) findViewById(R.id.list_background);
 	}
 
-	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent, NameableSelectionBus bus) {
+	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
-		return new LessonViewHolder(view, bus);
+		return new LessonViewHolder(view);
 	}
 }

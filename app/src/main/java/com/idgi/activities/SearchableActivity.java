@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.core.Course;
@@ -24,14 +29,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchableActivity extends DrawerActivity implements NameableSelectionBus.Listener{
+public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
+
+    private final EventBus bus = Application.getEventBus();
+
+    private static final String ACTIVITY_TAG = "SEARCH_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchable);
+
+        bus.register(this);
 
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
@@ -41,11 +52,17 @@ public class SearchableActivity extends DrawerActivity implements NameableSelect
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.searchable_recycler_view);
 		NameableAdapter adapter = new NameableAdapter(this, searchResults);
-        adapter.addListener(this);
 		RecyclerViewUtility.connect(this, recycler, adapter);
 
         String title = getResources().getString(R.string.search_title);
         super.initializeWithTitle(title);
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+        bus.register(this);
     }
 
     private IDatabase getDatabase() {
@@ -80,32 +97,47 @@ public class SearchableActivity extends DrawerActivity implements NameableSelect
         this.searchResults = results;
     }
 
-    @Override
-    public void onNameableSelected(Nameable nameable) {
-        if(nameable != null) {
-            if (nameable instanceof School) {
-                School school = (School) nameable;
-                SessionData.setCurrentSchool(school);
-                startActivity((new Intent(this, SubjectListActivity.class)));
-                Log.d("search", "school");
-            } else if (nameable instanceof Subject) {
-                Subject subject = (Subject) nameable;
-                SessionData.setCurrentSubject(subject);
-                startActivity((new Intent(this, CourseListActivity.class)));
-                Log.d("search", "subject");
-            } else if (nameable instanceof Course) {
-                Course course = (Course) nameable;
-                SessionData.setCurrentCourse(course);
-                startActivity((new Intent(this, CourseActivity.class)));
-                Log.d("search", "course");
-            } else if (nameable instanceof Lesson) {
-                Lesson lesson = (Lesson) nameable;
-                SessionData.setCurrentLesson(lesson);
-                startActivity((new Intent(this, LessonActivity.class)));
-                Log.d("search", "lesson");
-            } else {
-                return;
-            }
+    @Subscribe
+    public void onSchoolSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.SCHOOL_SELECTED) {
+            School school = (School) busEvent.getData();
+            SessionData.setCurrentSchool(school);
+            startActivity((new Intent(this, SubjectListActivity.class)));
+            bus.unregister(this);
+            Log.d("search", "school");
+        }
+    }
+
+    @Subscribe
+    public void onSubjectSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.SUBJECT_SELECTED) {
+            Subject subject = (Subject) busEvent.getData();
+            SessionData.setCurrentSubject(subject);
+            startActivity((new Intent(this, CourseListActivity.class)));
+            bus.unregister(this);
+            Log.d("search", "subject");
+        }
+    }
+
+    @Subscribe
+    public void onCourseSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.COURSE_SELECTED) {
+            Course course = (Course) busEvent.getData();
+            SessionData.setCurrentCourse(course);
+            startActivity((new Intent(this, CourseActivity.class)));
+            bus.unregister(this);
+            Log.d("search", "course");
+        }
+    }
+
+    @Subscribe
+    public void onLessonSelected(BusEvent busEvent) {
+        if(busEvent.getEvent() == Event.LESSON_SELECTED) {
+            Lesson lesson = (Lesson) busEvent.getData();
+            SessionData.setCurrentLesson(lesson);
+            startActivity((new Intent(this, LessonActivity.class)));
+            bus.unregister(this);
+            Log.d("search", "lesson");
         }
     }
 }

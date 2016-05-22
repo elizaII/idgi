@@ -26,10 +26,8 @@ import java.util.jar.Attributes;
 
 
 public class CourseQuizListFragment extends Fragment {
-    private NameableSelectionBus bus;
 
     public CourseQuizListFragment() {
-        bus = new NameableSelectionBus();
     }
 
     @Override
@@ -56,7 +54,7 @@ public class CourseQuizListFragment extends Fragment {
                 quizzes.add(quiz);
         }
 
-        NameableAdapter adapter = new NameableAdapter(this.getContext(), quizzes, this.bus);
+        NameableAdapter adapter = new NameableAdapter(this.getContext(), quizzes);
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
@@ -72,8 +70,5 @@ public class CourseQuizListFragment extends Fragment {
         textView.setText(getResources().getString(R.string.course_no_quizzes));
     }
 
-    public void addListener(NameableSelectionBus.Listener listener) {
-        bus.addListener(listener);
-    }
 
 }

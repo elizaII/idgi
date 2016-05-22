@@ -1,6 +1,5 @@
 package com.idgi.recycleViews.viewHolder;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,9 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
-/**
- * Created by Emil on 18/05/2016.
- */
 public class QuizViewHolder extends NameableViewHolder {
 
     public static final int LAYOUT = R.layout.list_row;
@@ -22,14 +19,15 @@ public class QuizViewHolder extends NameableViewHolder {
     public RelativeLayout listBackground;
     private Nameable nameable;
 
-    public QuizViewHolder(View view, NameableSelectionBus bus){
-        super(view, bus);
+    public QuizViewHolder(View view){
+        super(view);
         view.setOnClickListener(onViewClick);
     }
 
     private final View.OnClickListener onViewClick = new View.OnClickListener() {
         public void onClick(View view) {
-            broadcastSelection(nameable);
+            BusEvent nameableEvent = new BusEvent(Event.QUIZ_SELECTED, nameable);
+            postToBus(nameableEvent);
         }
     };
 
@@ -45,8 +43,8 @@ public class QuizViewHolder extends NameableViewHolder {
         listBackground = (RelativeLayout) findViewById(R.id.list_background);
     }
 
-    public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent, NameableSelectionBus bus) {
+    public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
         View view = getLayout(inflater, parent, LAYOUT);
-        return new QuizViewHolder(view, bus);
+        return new QuizViewHolder(view);
     }
 }

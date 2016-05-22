@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends DrawerActivity implements NameableSelectionBus.Listener{
+public class CourseActivity extends DrawerActivity{
 
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
@@ -48,10 +49,31 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
+        bus.register(this);
 
 		String courseName = SessionData.getCurrentCourse().getName();
         initializeWithTitle(courseName);
         setupViewPager();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        bus.register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        //This stops this activity to listen to events,
+        //but it needs to register the bus again to remove
+        //nullPointerException.
+        //Don't need to unregister in handler-methods?
+        bus.register(this);
+        bus.unregister(this);
+
+        Log.d("QUIZ_ACTIVITY", "onStop is called");
+        super.onStop();
     }
 
     private void setupViewPager() {
@@ -60,9 +82,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
-        lessonListFragment.addListener(this);
         CourseQuizListFragment quizListFragment = new CourseQuizListFragment();
-        quizListFragment.addListener(this);
 
         pagerAdapter.addFragment(lessonListFragment, "Lessons");
         pagerAdapter.addFragment(quizListFragment, "Quiz");
@@ -150,30 +170,32 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         textView.setText(text);
     }
 
-    //On nameable selected
-	@Override
-	public void onNameableSelected(Nameable nameable) {
-        if(nameable instanceof Lesson) {
-            Lesson lesson = (Lesson) nameable;
+    @Subscribe
+    public void onLessonSelected(BusEvent busEvent){
+        if(busEvent.getEvent() == Event.LESSON_SELECTED){
+            Lesson lesson = (Lesson) busEvent.getData();
             SessionData.setCurrentLesson(lesson);
             startActivity(new Intent(this, LessonActivity.class));
-        } else if(nameable instanceof IQuiz){
-            selectedQuiz = (IQuiz) nameable;
-            SessionData.setCurrentQuiz(selectedQuiz);
+            bus.unregister(this);
+        }
+    }
 
-            Dialog dialog = new PickQuizDialog(this);
-
-            //Subscribe for quiz-type-events
-            bus.register(this);
+    @Subscribe
+    public void onQuizSelected(BusEvent busEvent){
+        if(busEvent.getEvent() == Event.QUIZ_SELECTED){
+            Log.d("QUIZ_ACTIVITY", "Quiz is selected");
+            selectedQuiz = (IQuiz) busEvent.getData();
+            Dialog dialog= new PickQuizDialog(this);
 
             dialog.show();
             dialog.getWindow().setGravity(Gravity.CENTER);
         }
-	}
+    }
 
     @Subscribe
     public void onQuizTypeSelected(BusEvent busEvent) {
-        if(busEvent.getEvent() == Event.QUIZ_SELECTED) {
+        if(busEvent.getEvent() == Event.QUIZ_TYPE_SELECTED) {
+            Log.d("QUIZ_ACTIVITY", "Course");
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {
@@ -181,10 +203,8 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
             } else if(quizType == IQuiz.Type.NORMAL) {
                 SessionData.setCurrentQuiz(selectedQuiz);
             }
+            startActivity(new Intent(this, QuizActivity.class));
+            bus.unregister(this);
         }
-
-        bus.unregister(this);
-        startActivity(new Intent(this, QuizActivity.class));
-
     }
 }

@@ -39,7 +39,7 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onNormalClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            BusEvent event = new BusEvent(Event.QUIZ_SELECTED, IQuiz.Type.NORMAL);
+            BusEvent event = new BusEvent(Event.QUIZ_TYPE_SELECTED, IQuiz.Type.NORMAL);
             bus.post(event);
             dismiss();
         }
@@ -48,7 +48,7 @@ public class PickQuizDialog extends Dialog{
     private final View.OnClickListener onTimedClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            BusEvent event = new BusEvent(Event.QUIZ_SELECTED, IQuiz.Type.TIMED);
+            BusEvent event = new BusEvent(Event.QUIZ_TYPE_SELECTED, IQuiz.Type.TIMED);
             bus.post(event);
             dismiss();
         }

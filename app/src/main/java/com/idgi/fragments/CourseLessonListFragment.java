@@ -20,10 +20,8 @@ import java.util.List;
 
 
 public class CourseLessonListFragment extends Fragment {
-	private NameableSelectionBus bus;
 
     public CourseLessonListFragment() {
-		bus = new NameableSelectionBus();
     }
 
     @Override
@@ -37,7 +35,7 @@ public class CourseLessonListFragment extends Fragment {
 
     private void initializeList(View view) {
         List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
-        NameableAdapter adapter = new NameableAdapter(getContext().getApplicationContext(), lessons, this.bus);
+        NameableAdapter adapter = new NameableAdapter(getContext().getApplicationContext(), lessons);
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
@@ -53,7 +51,4 @@ public class CourseLessonListFragment extends Fragment {
         textView.setText(getResources().getString(R.string.course_no_lessons));
     }
 
-    public void addListener(NameableSelectionBus.Listener listener) {
-        bus.addListener(listener);
-    }
 }

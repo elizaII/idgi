@@ -1,6 +1,5 @@
 package com.idgi.recycleViews.viewHolder;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,8 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 public class SubjectViewHolder extends NameableViewHolder {
 
@@ -19,14 +19,15 @@ public class SubjectViewHolder extends NameableViewHolder {
 	public RelativeLayout listBackground;
 	private Nameable nameable;
 
-	public SubjectViewHolder(View view, NameableSelectionBus bus){
-		super(view, bus);
+	public SubjectViewHolder(View view){
+		super(view);
 		view.setOnClickListener(onViewClick);
 	}
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			broadcastSelection(nameable);
+			BusEvent nameableEvent = new BusEvent(Event.SUBJECT_SELECTED, nameable);
+			postToBus(nameableEvent);
 		}
 	};
 
@@ -42,8 +43,8 @@ public class SubjectViewHolder extends NameableViewHolder {
 		listBackground = (RelativeLayout) findViewById(R.id.list_background);
 	}
 
-	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent, NameableSelectionBus bus) {
+	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
-		return new SubjectViewHolder(view, bus);
+		return new SubjectViewHolder(view);
 	}
 }

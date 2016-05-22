@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Hat;
 import com.idgi.core.Nameable;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.event.NameableSelectionBus;
 
 import java.util.Locale;
@@ -22,14 +24,15 @@ public class HatViewHolder extends NameableViewHolder {
 	private TextView descriptionView;
 	private Hat hat;
 
-	public HatViewHolder(View view, NameableSelectionBus bus) {
-		super(view, bus);
+	public HatViewHolder(View view) {
+		super(view);
 		view.setOnClickListener(onViewClick);
 	}
 
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
-			broadcastSelection(hat);
+			BusEvent event = new BusEvent(Event.HAT_SELECTED, hat);
+			postToBus(event);
 		}
 	};
 
@@ -51,8 +54,8 @@ public class HatViewHolder extends NameableViewHolder {
 		descriptionView = (TextView) itemView.findViewById(R.id.hat_list_description);
 	}
 
-	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent, NameableSelectionBus bus) {
+	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
-		return new HatViewHolder(view, bus);
+		return new HatViewHolder(view);
 	}
 }
