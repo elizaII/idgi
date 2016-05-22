@@ -15,7 +15,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.R;
@@ -24,6 +23,7 @@ import com.idgi.activities.extras.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.StudentUser;
 import com.idgi.core.TimedQuiz;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.fragments.YoutubeFragment;
@@ -50,8 +50,6 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     private Button quizButton;
 
     private PickQuizDialog quizTypes;
-
-    private final EventBus bus = Application.getEventBus();
 
     private List<Comment> comments;
 
@@ -109,7 +107,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         quizTypes = new PickQuizDialog(this);
 
         //Subscribe for quiz-type-events
-        bus.register(this);
+        ApplicationBus.register(this);
 
         quizTypes.show();
         quizTypes.getWindow().setGravity(Gravity.CENTER);
@@ -182,7 +180,6 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
             startActivity(new Intent(this, QuizActivity.class));
             quizTypes.dismiss();
-            bus.unregister(this);
         }
 
     }

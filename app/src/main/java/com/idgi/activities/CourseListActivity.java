@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
- import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Course;
 import com.idgi.activities.extras.DrawerActivity;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.recycleViews.RecyclerViewUtility;
@@ -20,7 +21,6 @@ import java.util.List;
 
 public class CourseListActivity extends DrawerActivity {
     private List<Course> courses;
-    private final EventBus bus = Application.getEventBus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class CourseListActivity extends DrawerActivity {
         setContentView(R.layout.activity_course_list);
 
         //Subscribe for course clicks
-        bus.register(this);
+        ApplicationBus.register(this);
 
         String title = SessionData.getCurrentSubject().getName();
         super.initializeWithTitle(title);
@@ -49,7 +49,7 @@ public class CourseListActivity extends DrawerActivity {
     protected void onRestart(){
         super.onRestart();
 
-        bus.register(this);
+        ApplicationBus.register(this);
     }
 
     @Subscribe
@@ -58,7 +58,6 @@ public class CourseListActivity extends DrawerActivity {
             Course course = (Course) busEvent.getData();
             SessionData.setCurrentCourse(course);
             startActivity(new Intent(this, CourseActivity.class));
-            bus.unregister(this);
         }
     }
 }

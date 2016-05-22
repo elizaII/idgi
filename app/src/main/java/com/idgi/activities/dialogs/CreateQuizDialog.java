@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
+import com.idgi.event.ApplicationBus;
 import com.idgi.recycleViews.adapters.CreateQuestionAdapter;
 
 import java.util.ArrayList;
@@ -27,8 +27,6 @@ public class CreateQuizDialog extends Dialog {
     private CreateQuestionAdapter adapter;
     private Button add_question_button;
     private Button question_done_button;
-
-	private final EventBus bus = Application.getEventBus();
 
     private List<Question> questionList;
 	public List<String> questionNames;
@@ -45,7 +43,7 @@ public class CreateQuizDialog extends Dialog {
         setContentView(R.layout.create_quiz_dialog);
 
 		//Register as a subscriber
-		bus.register(this);
+		ApplicationBus.register(this);
 
         add_question_button = (Button) findViewById(R.id.add_question_button);
         question_done_button = (Button) findViewById(R.id.question_done_button);
@@ -87,7 +85,7 @@ public class CreateQuizDialog extends Dialog {
 			if (!questionList.isEmpty()) {
 				Quiz quiz = new Quiz();
 				quiz.addQuestions(questionList);
-				bus.post(quiz);
+				ApplicationBus.post(quiz);
 				dismiss();
 			}
 		}

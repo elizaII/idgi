@@ -4,12 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 
 import com.firebase.client.Firebase;
-import com.google.common.eventbus.EventBus;
+import com.idgi.core.StudentUser;
+import com.idgi.core.TeacherUser;
+import com.idgi.core.User;
 import com.idgi.services.FireDatabase;
 
 public class Application extends android.app.Application {
-
-	private static EventBus eventBus = null;
 
 	@Override
 	public void onCreate() {
@@ -21,14 +21,6 @@ public class Application extends android.app.Application {
 //		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
 
 		getEventBus().register(FireDatabase.getInstance());
-	}
-
-	public static synchronized EventBus getEventBus() {
-		if(eventBus == null) {
-			eventBus = new EventBus();
-		}
-
-		return eventBus;
 	}
 
 	private boolean connectedToInternet() {

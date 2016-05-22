@@ -14,13 +14,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.TimedQuiz;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.fragments.CourseInfoFragment;
@@ -40,14 +40,12 @@ public class CourseActivity extends DrawerActivity{
     private ViewPagerAdapter pagerAdapter;
     private IQuiz selectedQuiz;
 
-    private final EventBus bus = Application.getEventBus();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        bus.register(this);
+        ApplicationBus.register(this);
 
 		String courseName = SessionData.getCurrentCourse().getName();
         initializeWithTitle(courseName);
@@ -58,20 +56,7 @@ public class CourseActivity extends DrawerActivity{
     protected void onRestart() {
         super.onRestart();
 
-        bus.register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        //This stops this activity to listen to events,
-        //but it needs to register the bus again to remove
-        //nullPointerException.
-        //Don't need to unregister in handler-methods?
-        bus.register(this);
-        bus.unregister(this);
-
-        Log.d("QUIZ_ACTIVITY", "onStop is called");
-        super.onStop();
+        ApplicationBus.register(this);
     }
 
     private void setupViewPager() {
@@ -174,7 +159,6 @@ public class CourseActivity extends DrawerActivity{
             Lesson lesson = (Lesson) busEvent.getData();
             SessionData.setCurrentLesson(lesson);
             startActivity(new Intent(this, LessonActivity.class));
-            bus.unregister(this);
         }
     }
 
@@ -202,7 +186,6 @@ public class CourseActivity extends DrawerActivity{
                 SessionData.setCurrentQuiz(selectedQuiz);
             }
             startActivity(new Intent(this, QuizActivity.class));
-            bus.unregister(this);
         }
     }
 }

@@ -10,12 +10,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
 import com.idgi.application.Navigation;
 import com.idgi.application.SearchSuggestions;
+import com.idgi.event.ApplicationBus;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,6 +52,17 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 			toolbar.setTitle(title);
 
 		initializeDrawer();
+	}
+
+	@Override
+	protected void onStop() {
+		if(ApplicationBus.hasListener(this)) {
+			ApplicationBus.unregister(this);
+			Log.d("BUS", "Unregistred");
+		}
+		Log.d("BUS", "onStop is called");
+
+		super.onStop();
 	}
 
 	@Override

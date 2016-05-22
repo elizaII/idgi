@@ -7,12 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Nameable;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.recycleViews.RecyclerViewUtility;
@@ -33,8 +32,6 @@ public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
 
-    private final EventBus bus = Application.getEventBus();
-
     private static final String ACTIVITY_TAG = "SEARCH_ACTIVITY";
 
     @Override
@@ -42,7 +39,7 @@ public class SearchableActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchable);
 
-        bus.register(this);
+        ApplicationBus.register(this);
 
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
@@ -62,7 +59,7 @@ public class SearchableActivity extends DrawerActivity {
     protected void onRestart(){
         super.onRestart();
 
-        bus.register(this);
+        ApplicationBus.register(this);
     }
 
     private IDatabase getDatabase() {
@@ -103,7 +100,6 @@ public class SearchableActivity extends DrawerActivity {
             School school = (School) busEvent.getData();
             SessionData.setCurrentSchool(school);
             startActivity((new Intent(this, SubjectListActivity.class)));
-            bus.unregister(this);
             Log.d("search", "school");
         }
     }
@@ -114,7 +110,6 @@ public class SearchableActivity extends DrawerActivity {
             Subject subject = (Subject) busEvent.getData();
             SessionData.setCurrentSubject(subject);
             startActivity((new Intent(this, CourseListActivity.class)));
-            bus.unregister(this);
             Log.d("search", "subject");
         }
     }
@@ -125,7 +120,6 @@ public class SearchableActivity extends DrawerActivity {
             Course course = (Course) busEvent.getData();
             SessionData.setCurrentCourse(course);
             startActivity((new Intent(this, CourseActivity.class)));
-            bus.unregister(this);
             Log.d("search", "course");
         }
     }
@@ -136,7 +130,6 @@ public class SearchableActivity extends DrawerActivity {
             Lesson lesson = (Lesson) busEvent.getData();
             SessionData.setCurrentLesson(lesson);
             startActivity((new Intent(this, LessonActivity.class)));
-            bus.unregister(this);
             Log.d("search", "lesson");
         }
     }

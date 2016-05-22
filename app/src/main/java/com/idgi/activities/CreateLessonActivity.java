@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.R;
@@ -22,6 +21,7 @@ import com.idgi.core.Question;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.core.Video;
+import com.idgi.event.ApplicationBus;
 import com.idgi.services.FireDatabase;
 import com.idgi.session.SessionData;
 import com.idgi.core.ModelUtility;
@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class CreateLessonActivity extends AppCompatActivity{
 
-    /**
+    /*
      * The type of a list-item that has a name attribute
      */
     private enum ItemType {
@@ -52,15 +52,13 @@ public class CreateLessonActivity extends AppCompatActivity{
     private static IQuiz selectedQuiz;
     private static String lessonName, youtubeUrl;
 
-    private final EventBus bus = Application.getEventBus();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
 
         //Register as a subscriber
-        bus.register(this);
+        ApplicationBus.register(this);
 
         txtLessonName = (EditText) findViewById(R.id.lesson_name_editText);
         txtYouTubeUrl = (EditText) findViewById(R.id.youtube_url_editText);
@@ -437,7 +435,7 @@ public class CreateLessonActivity extends AppCompatActivity{
     public void finish(){
         super.finish();
 
-        bus.unregister(this);
+        ApplicationBus.unregister(this);
     }
 
     @Subscribe

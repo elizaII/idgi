@@ -14,6 +14,7 @@ import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
+import com.idgi.event.ApplicationBus;
 
 public class CreateQuestionDialog extends Dialog {
 
@@ -22,8 +23,6 @@ public class CreateQuestionDialog extends Dialog {
     private EditText txtQuizHint;
 	private EditText[] txtQuizAnswers = new EditText[4];
 	private Switch[] correctAnswerSwitches = new Switch[4];
-
-	private final EventBus bus = Application.getEventBus();
 
     public CreateQuestionDialog(Context context) {
         super(context);
@@ -84,16 +83,9 @@ public class CreateQuestionDialog extends Dialog {
 
 			updateAnswers(question);
 			updateHint(question);
-			bus.post(question);
+			ApplicationBus.post(question);
 			dismiss();
 		}
 	};
-
-	@Override
-	public void dismiss(){
-		super.dismiss();
-
-		bus.unregister(this);
-	}
 }
 

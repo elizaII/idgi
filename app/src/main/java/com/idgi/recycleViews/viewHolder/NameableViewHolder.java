@@ -4,15 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.common.eventbus.EventBus;
-import com.idgi.application.Application;
-import com.idgi.R;
 import com.idgi.core.Nameable;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 
 public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
-	private EventBus bus = Application.getEventBus();
 	private View rootView;
 
 	public NameableViewHolder(View view){
@@ -23,7 +19,7 @@ public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void postToBus(BusEvent nameable) {
-		bus.post(nameable);
+		ApplicationBus.post(nameable);
 	}
 
 	protected View findViewById(int id) {

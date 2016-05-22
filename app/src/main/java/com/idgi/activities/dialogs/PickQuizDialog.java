@@ -7,16 +7,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-import com.google.common.eventbus.EventBus;
-import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.IQuiz;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
 public class PickQuizDialog extends Dialog{
 
-    private final EventBus bus = Application.getEventBus();
     private Button normalQuizBtn, timedQuizBtn;
 
     public PickQuizDialog(Context context) {
@@ -40,7 +38,7 @@ public class PickQuizDialog extends Dialog{
         @Override
         public void onClick(View v) {
             BusEvent event = new BusEvent(Event.QUIZ_TYPE_SELECTED, IQuiz.Type.NORMAL);
-            bus.post(event);
+            ApplicationBus.post(event);
             dismiss();
         }
     };
@@ -49,7 +47,7 @@ public class PickQuizDialog extends Dialog{
         @Override
         public void onClick(View v) {
             BusEvent event = new BusEvent(Event.QUIZ_TYPE_SELECTED, IQuiz.Type.TIMED);
-            bus.post(event);
+            ApplicationBus.post(event);
             dismiss();
         }
     };
