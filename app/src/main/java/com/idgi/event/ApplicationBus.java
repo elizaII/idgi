@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Delegates all events to this class to decouple classes
+ * Facilitates communication between classes, which reduces coupling
  */
 public class ApplicationBus {
 
