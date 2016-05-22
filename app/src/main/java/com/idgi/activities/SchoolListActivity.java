@@ -14,7 +14,6 @@ import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
-import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.NameableAdapter;
 import com.idgi.services.FireDatabase;

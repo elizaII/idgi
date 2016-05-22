@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.viewHolder.NameableViewHolder;
 import com.idgi.recycleViews.viewHolder.ViewHolderFactory;
 

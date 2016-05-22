@@ -1,7 +1,5 @@
 package com.idgi.recycleViews.viewHolder;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Nameable;
 import com.idgi.event.BusEvent;
-import com.idgi.event.NameableSelectionBus;
 
 public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 	private EventBus bus = Application.getEventBus();

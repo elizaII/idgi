@@ -2,7 +2,6 @@ package com.idgi.recycleViews.viewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
 
 public class ViewHolderFactory {
 

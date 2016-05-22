@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.Nameable;
-import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.EmptyRecyclerView;
 import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.NameableAdapter;

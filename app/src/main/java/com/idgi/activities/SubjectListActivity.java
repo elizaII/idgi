@@ -9,6 +9,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.application.Application;
 import com.idgi.R;
+import com.idgi.core.Subject;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
