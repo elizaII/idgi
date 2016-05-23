@@ -64,7 +64,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
         initializeWithTitle(title);
 
-        if (SessionData.hasLoggedInUser())
+        if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser))
             initializePointsBar();
 
         if(lesson.hasQuiz()){
