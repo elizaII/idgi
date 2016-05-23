@@ -30,7 +30,7 @@ import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.application.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
 

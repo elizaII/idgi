@@ -5,7 +5,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.common.eventbus.Subscribe;
-import com.idgi.application.Config;
+import com.idgi.Config;
 import com.idgi.IBusEvent;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;

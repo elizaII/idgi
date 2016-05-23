@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
-import com.idgi.application.Config;
+import com.idgi.Config;
 import com.idgi.R;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
