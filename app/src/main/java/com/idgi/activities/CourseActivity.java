@@ -1,5 +1,6 @@
 package com.idgi.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -36,8 +37,6 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
 
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
-
-    private PickQuizDialog quizTypes;
     private IQuiz selectedQuiz;
 
     private final EventBus bus = Application.getEventBus();
@@ -162,10 +161,10 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
             selectedQuiz = (IQuiz) nameable;
             SessionData.setCurrentQuiz(selectedQuiz);
 
-            quizTypes = new PickQuizDialog(this);
+            Dialog dialog = new PickQuizDialog(this);
 
-            quizTypes.show();
-            quizTypes.getWindow().setGravity(Gravity.CENTER);
+            dialog.show();
+            dialog.getWindow().setGravity(Gravity.CENTER);
         }
 	}
 
@@ -177,8 +176,8 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
             SessionData.setCurrentQuiz(selectedQuiz);
         }
 
-        startActivity(new Intent(this, QuizActivity.class));
-        quizTypes.dismiss();
         bus.unregister(this);
+        startActivity(new Intent(this, QuizActivity.class));
+
     }
 }

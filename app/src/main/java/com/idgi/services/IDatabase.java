@@ -21,6 +21,6 @@ public interface IDatabase {
 	List<Lesson> getLessons(Course course);
 	List<Course> getCourses(Subject subject);
 	List<Comment> getComments(Lesson lesson);
-	void retrieveHats();
+	void retrieveHats(boolean isOfflineMode);
 	void retrieveAccounts();
 }

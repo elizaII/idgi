@@ -4,7 +4,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.common.eventbus.Subscribe;
 import com.idgi.Config;
+import com.idgi.IBusEvent;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
@@ -14,6 +16,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
+import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 
@@ -218,35 +221,30 @@ public class FireDatabase implements IDatabase {
 		} else {
 				schools = new ArrayList<>();
 
-				Firebase schoolRef = ref.child("schools");
-				addValueListener(schoolRef);
+				ref.child("schools").addValueEventListener(new ValueEventListener() {
+					@Override
+					public void onDataChange(DataSnapshot snapshot) {
+						for (DataSnapshot child : snapshot.getChildren()) {
+							String schoolKey = child.getKey();
+							if (isNewSchool(schoolKey)) {
+								School newSchool = child.getValue(School.class);
+								addNewSchool(newSchool);
+							} else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
+								School updatedSchool = child.getValue(School.class);
+								replaceSchool(schoolKey, updatedSchool);
+							}
+						}
+					}
+
+					@Override
+					public void onCancelled(FirebaseError error) {
+					}
+				});
 		}
 	}
 
 	private void addNewSchool(School school) {
 		schools.add(school);
-	}
-
-	private void addValueListener(Firebase ref) {
-		ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    String schoolKey = child.getKey();
-                    if (isNewSchool(schoolKey)) {
-                        School newSchool = child.getValue(School.class);
-                        addNewSchool(newSchool);
-                    } else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
-                        School updatedSchool = child.getValue(School.class);
-                        replaceSchool(schoolKey, updatedSchool);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
 	}
 
 	private boolean isNewSchool(String schoolKey) {
@@ -276,7 +274,7 @@ public class FireDatabase implements IDatabase {
 	}
 
     public void retrieveAccounts() {
-        accounts = new ArrayList<Account>();
+        accounts = new ArrayList<>();
 
         Firebase accountRef = ref.child("accounts");
 
@@ -297,15 +295,15 @@ public class FireDatabase implements IDatabase {
 	public void initialize(boolean hasInternetConnection) {
 		boolean isOfflineMode = !hasInternetConnection || Config.firebaseMode == Config.FirebaseMode.INACTIVE;
 		retrieveSchools(isOfflineMode);
-		retrieveHats();
+		retrieveHats(isOfflineMode);
         retrieveAccounts();
 	}
 
-    public void retrieveHats() {
-        if (Config.firebaseMode == Config.FirebaseMode.ACTIVE) {
+    public void retrieveHats(boolean isOfflineMode) {
+        if (!isOfflineMode) {
             hats = new ArrayList<>();
 
-            Firebase hatRef = new Firebase("https://scorching-torch-4835.firebaseio.com/hats");
+            Firebase hatRef = ref.child("hats");
 
             hatRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
@@ -323,4 +321,20 @@ public class FireDatabase implements IDatabase {
             hats = mock.getHats();
         }
     }
+
+	@Subscribe
+	public void updateUserHats(IBusEvent busEvent) {
+		System.out.println("TOTAL HATS: " + hats);
+		if (busEvent.getEvent() == IBusEvent.Event.POINTS_UPDATED) {
+			StudentUser user = (StudentUser) busEvent.getData();
+
+			List<Hat> earnedHats = new ArrayList<>();
+			for (Hat hat : hats)
+				if (user.getPoints() >= hat.pointRequirement())
+					earnedHats.add(hat);
+
+			user.giveHats(earnedHats);
+			System.out.println("HATS: " + user.getHats().size());
+		}
+	}
 }

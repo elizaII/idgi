@@ -1,50 +1,34 @@
 package com.idgi.activities;
 
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-
 import com.idgi.R;
-import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.core.Hat;
+import com.idgi.activities.extras.NameableListActivity;
+import com.idgi.core.Nameable;
 import com.idgi.core.StudentUser;
-import com.idgi.recycleViews.adapters.HatListAdapter;
-import com.idgi.services.FireDatabase;
+import com.idgi.core.User;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
-/**
- * Created by tove on 2016-05-15.
- */
-public class HatListActivity extends DrawerActivity {
-    private Toolbar toolbar;
-    private RecyclerView recycler;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager manager;
+public class HatListActivity extends NameableListActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected String getTitleName() {
+        return getResources().getString(R.string.title_activity_my_hats);
+    }
 
-        setContentView(R.layout.activity_hat_list);
+    @Override
+    protected List<? extends Nameable> getNameables() {
+        User user = SessionData.getLoggedInUser();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_my_hats));
+        if (user != null && user.getClass() == StudentUser.class)
+            return ((StudentUser) user).getHats();
+        else
+            return new ArrayList<>();
+    }
 
-        initializeDrawer();
-
-        StudentUser user = (StudentUser) SessionData.getLoggedInUser();
-
-        adapter = new HatListAdapter(this, user.getHats());
-
-        manager = new LinearLayoutManager(this);
-
-        recycler = (RecyclerView) findViewById(R.id.hat_list_recycler_view);
-        recycler.setAdapter(adapter);
-        recycler.setLayoutManager(manager);
+    @Override
+    public void onNameableSelected(Nameable nameable) {
+        return;
     }
 }

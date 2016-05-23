@@ -1,8 +1,6 @@
 package com.idgi.core;
 
-import android.media.Image;
-
-public class Hat {
+public class Hat implements Nameable {
 
     private int imageId;
     private String name;
@@ -12,6 +10,10 @@ public class Hat {
 
     public Hat () {
 
+    }
+
+    public Type getType() {
+        return Type.HAT;
     }
 
     public void setKey(String key) {
@@ -52,5 +54,9 @@ public class Hat {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int pointRequirement() {
+        return getPoints();
     }
 }

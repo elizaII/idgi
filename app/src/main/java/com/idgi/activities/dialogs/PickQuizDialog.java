@@ -41,6 +41,7 @@ public class PickQuizDialog extends Dialog{
         @Override
         public void onClick(View v) {
             bus.post(IQuiz.Type.NORMAL);
+            dismiss();
         }
     };
 
@@ -48,6 +49,7 @@ public class PickQuizDialog extends Dialog{
         @Override
         public void onClick(View v) {
             bus.post(IQuiz.Type.TIMED);
+            dismiss();
         }
     };
 

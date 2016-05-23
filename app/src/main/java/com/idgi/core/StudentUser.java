@@ -2,8 +2,8 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.firebase.client.Firebase;
-import com.idgi.services.FireDatabase;
+import com.idgi.Application;
+import com.idgi.IBusEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @JsonTypeName("student")
 public class StudentUser extends User{
 
-    private List<Hat> hats = new ArrayList<Hat>();
+    private List<Hat> hats = new ArrayList<>();
 
     private Statistics statistics;
 
@@ -34,12 +34,16 @@ public class StudentUser extends User{
 
     public void givePointsForQuiz(String quizID, int points) {
         statistics.updateQuizPoints(quizID, points);
-        giveHats();
+        postPointUpdate();
     }
 
     public void givePointsForViewingVideo(Video video, int points) {
         statistics.addVideoPoints(video, points);
-        giveHats();
+        postPointUpdate();
+    }
+
+    private void postPointUpdate() {
+        Application.getEventBus().post(pointsUpdatedEvent);
     }
 
     @JsonIgnore
@@ -48,26 +52,29 @@ public class StudentUser extends User{
     }
 
     public List<Hat> getHats() {
-        return hats;
+        return this.hats;
     }
 
-    public void giveHats() {
-        List<Hat> allHats = FireDatabase.getInstance().getHats();
-        for (Hat hat : allHats) {
-            if (getPoints() >= hat.getPoints()) {
-                addHat(hat);
-            }
-        }
-    }
-
-    public void addHat(Hat hat) {
-        if (!containsHat(hat)) {
-            hats.add(hat);
-        }
+    public void giveHats(List<Hat> hats) {
+        for (Hat hat : hats)
+            if (!this.hats.contains(hat))
+                this.hats.add(hat);
     }
 
     public boolean containsHat(Hat hat) {
         return hats.contains(hat);
     }
 
+    // TODO Use an actual implementation of BusEvent.
+    private IBusEvent pointsUpdatedEvent = new IBusEvent() {
+        @Override
+        public IBusEvent.Event getEvent() {
+            return IBusEvent.Event.POINTS_UPDATED;
+        }
+
+        @Override
+        public Object getData() {
+            return StudentUser.this;
+        }
+    };
 }

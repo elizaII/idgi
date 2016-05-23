@@ -25,7 +25,6 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
         View view = inflater.inflate(R.layout.list_row, parent, false);
 
         return new ViewHolder(view);
-
     }
 
 

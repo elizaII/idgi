@@ -27,28 +27,30 @@ public class CourseLessonListFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
-        List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
 
+        initializeList(view);
+        return view;
+    }
+
+    private void initializeList(View view) {
+        List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
         NameableAdapter adapter = new NameableAdapter(getContext().getApplicationContext(), lessons, this.bus);
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
 
+        setupEmptyListLayout(view, recycler);
+    }
+
+    private void setupEmptyListLayout(View view, EmptyRecyclerView recycler) {
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
         recycler.setEmptyView(emptyView);
 
         TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
         textView.setText(getResources().getString(R.string.course_no_lessons));
-
-        return view;
     }
 
     public void addListener(NameableSelectionBus.Listener listener) {

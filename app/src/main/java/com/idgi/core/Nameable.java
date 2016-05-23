@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public interface Nameable {
 	enum Type {
-		SCHOOL(0), SUBJECT(1), COURSE(2), LESSON(3), QUIZ(4);
+		SCHOOL(0), SUBJECT(1), COURSE(2), LESSON(3), QUIZ(4), HAT(5);
 
 		private int value;
 		private static Type[] values = values();

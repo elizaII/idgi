@@ -19,8 +19,6 @@
     <color name="colorAnswerButton">#FCE4EC </color>
     <color name="colorAnswerButtonSelected">#FFB74D</color>
     <color name="colorAnswerButtonCorrect">#43A047</color>
-    <color name="colorAnswerButtonIncorrect">#f44336</color>
-    <color name="colorAnswerButtonMissedCorrect">#26C6DA</color>
     <color name="colorAnswerButtonPressed">#FFE082</color>
     <color name="colorAnswerButtonBorder">#E91E63</color>
 

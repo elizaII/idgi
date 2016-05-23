@@ -41,6 +41,12 @@ public class CourseQuizListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course_quiz_list, container, false);
+
+        initializeList(view);
+        return view;
+    }
+
+    private void initializeList(View view) {
         List<Lesson> lessons = SessionData.getCurrentCourse().getLessons();
         ArrayList<IQuiz> quizzes = new ArrayList<>();
 
@@ -55,13 +61,15 @@ public class CourseQuizListFragment extends Fragment {
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
 
+        setupEmptyListLayout(view, recycler);
+    }
+
+    private void setupEmptyListLayout(View view, EmptyRecyclerView recycler) {
         View emptyView = view.findViewById(R.id.lesson_list_empty_view);
         recycler.setEmptyView(emptyView);
 
         TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
         textView.setText(getResources().getString(R.string.course_no_quizzes));
-
-        return view;
     }
 
     public void addListener(NameableSelectionBus.Listener listener) {
