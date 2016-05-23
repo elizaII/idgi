@@ -151,6 +151,7 @@ public class CourseActivity extends DrawerActivity implements NameableSelectionB
         textView.setText(text);
     }
 
+    //On nameable selected
 	@Override
 	public void onNameableSelected(Nameable nameable) {
         if(nameable instanceof Lesson) {
