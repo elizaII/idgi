@@ -1,8 +1,6 @@
 package com.idgi.event;
 
 import com.google.common.eventbus.EventBus;
-import com.idgi.Application;
-
 import java.util.ArrayList;
 import java.util.List;
 

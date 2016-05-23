@@ -20,7 +20,6 @@ public class Application extends android.app.Application {
 		//FireDatabase.getInstance().pushMockDataToFirebase();
 //		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
 
-		getEventBus().register(FireDatabase.getInstance());
 	}
 
 	private boolean connectedToInternet() {

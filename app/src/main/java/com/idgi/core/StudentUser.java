@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.idgi.application.Application;
 import com.idgi.IBusEvent;
+import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,8 @@ public class StudentUser extends User{
     }
 
     private void postPointUpdate() {
-        Application.getEventBus().post(pointsUpdatedEvent);
+        BusEvent pointsEvent = new BusEvent(Event.POINTS_UPDATED, StudentUser.this);
+        ApplicationBus.post(pointsEvent);
     }
 
     @JsonIgnore
@@ -65,16 +69,4 @@ public class StudentUser extends User{
         return hats.contains(hat);
     }
 
-    // TODO Use an actual implementation of BusEvent.
-    private IBusEvent pointsUpdatedEvent = new IBusEvent() {
-        @Override
-        public IBusEvent.Event getEvent() {
-            return IBusEvent.Event.POINTS_UPDATED;
-        }
-
-        @Override
-        public Object getData() {
-            return StudentUser.this;
-        }
-    };
 }

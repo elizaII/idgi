@@ -26,9 +26,4 @@ public class HatListActivity extends NameableListActivity {
         else
             return new ArrayList<>();
     }
-
-    @Override
-    public void onNameableSelected(Nameable nameable) {
-        return;
-    }
 }

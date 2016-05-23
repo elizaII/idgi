@@ -36,6 +36,13 @@ public class CourseListActivity extends DrawerActivity {
         initializeCourseList();
     }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+        ApplicationBus.register(this);
+    }
+
     private void initializeCourseList() {
         courses = SessionData.getCurrentSubject().getCourses();
 
@@ -43,13 +50,6 @@ public class CourseListActivity extends DrawerActivity {
         NameableAdapter adapter = new NameableAdapter(this, courses);
 
         RecyclerViewUtility.connect(this, recycler, adapter);
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-
-        ApplicationBus.register(this);
     }
 
     @Subscribe

@@ -15,7 +15,6 @@ import com.idgi.session.SessionData;
 import java.util.List;
 
 public class SubjectListActivity extends NameableListActivity {
-    private List<Subject> subjects;
 
 	@Override
 	protected String getTitleName() {

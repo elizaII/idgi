@@ -10,7 +10,6 @@ import com.idgi.core.Hat;
 import com.idgi.core.Nameable;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
-import com.idgi.event.NameableSelectionBus;
 
 import java.util.Locale;
 
