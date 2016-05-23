@@ -1,4 +1,4 @@
-package com.idgi.activities.extras;
+package com.idgi.application;
 
 import android.app.Activity;
 import android.content.Intent;

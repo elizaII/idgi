@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.idgi.Application;
+import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.activities.dialogs.SelectNameableDialog;
 import com.idgi.activities.dialogs.CreateQuizDialog;

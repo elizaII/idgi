@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.idgi.Application;
+import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.activities.extras.DialogFactory;
@@ -30,13 +30,11 @@ import com.idgi.Widgets.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.activities.extras.DrawerActivity;
-import com.idgi.Config;
+import com.idgi.application.Config;
 import com.idgi.session.SessionData;
 import com.idgi.recycleViews.adapters.ReplyAdapter;
 
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener{

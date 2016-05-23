@@ -1,43 +1,26 @@
 package com.idgi.activities.extras;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
-import com.idgi.activities.SearchableActivity;
-import com.idgi.core.Course;
-import com.idgi.core.Lesson;
-import com.idgi.core.Nameable;
-import com.idgi.core.School;
-import com.idgi.core.Subject;
-import com.idgi.services.FireDatabase;
-import com.idgi.services.IDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import com.idgi.application.Navigation;
+import com.idgi.application.SearchSuggestions;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 	private DrawerLayout drawer;
 	private Toolbar toolbar;
-	private SimpleCursorAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +72,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		searchView.setIconifiedByDefault(false);
 
-		initiateSearchSuggestions(searchView);
+		SearchSuggestions.initiateSearchSuggestions(searchView);
 
 		return true;
 	}
@@ -99,98 +82,5 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		Navigation.onMenuItemSelected(this, item);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
-	}
-
-	//Manual workaround for NoSQL database
-	private void initiateSearchSuggestions(final SearchView searchView) {
-		final String[] from = new String[]{SearchManager.SUGGEST_COLUMN_TEXT_1};
-		final int[] to = new int[]{android.R.id.text1};
-		adapter = new SimpleCursorAdapter(getBaseContext(),
-				android.R.layout.simple_list_item_2,
-				null,
-				from,
-				to,
-				CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-
-		searchView.setSuggestionsAdapter(adapter);
-
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				//Not used
-				return false;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				//provide adapter with data
-				populateAdapter(newText);
-				return true;
-			}
-		});
-
-		searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-			@Override
-			public boolean onSuggestionClick(int position) {
-				Cursor cursor = (Cursor) adapter.getItem(position);
-				String query = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1));
-				searchView.setQuery(query, true);
-				return true;
-			}
-
-			@Override
-			public boolean onSuggestionSelect(int position) {
-				return true;
-			}
-		});
-	}
-
-	//Provides the adapter with a cursor with correct data
-	private void populateAdapter(String query){
-		final MatrixCursor cursor = new MatrixCursor(new String[] {"_id", SearchManager.SUGGEST_COLUMN_TEXT_1});
-		IDatabase database = getDatabase();
-
-		//Objects matching the started query
-		ArrayList<Nameable> matches = new ArrayList<>();
-
-		List<School> schools = database.getSchools();
-		for (School school : schools) {
-			if (school.getName().toLowerCase(Locale.ENGLISH).startsWith(query)){
-				matches.add(school);
-			}
-
-			for (Subject subject : school.getSubjects()) {
-				if (subject.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
-					matches.add(subject);
-
-				for (Course course : subject.getCourses()) {
-					if (course.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
-						matches.add(course);
-
-					for (Lesson lesson : course.getLessons()) {
-						if (lesson.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
-							matches.add(lesson);
-					}
-				}
-			}
-		}
-
-		Integer i = 0;
-
-		for(Nameable nameable : matches){
-			ArrayList<String> row = new ArrayList<>();
-			row.add(i.toString());
-			row.add(nameable.getName());
-			i++;
-			cursor.addRow(row);
-		}
-
-		cursor.moveToFirst();
-		adapter.swapCursor(cursor);
-		adapter.notifyDataSetChanged();
-	}
-
-	private IDatabase getDatabase() {
-		return FireDatabase.getInstance();
 	}
 }

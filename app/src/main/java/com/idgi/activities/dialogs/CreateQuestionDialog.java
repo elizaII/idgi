@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.google.common.eventbus.EventBus;
-import com.idgi.Application;
+import com.idgi.application.Application;
 import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;

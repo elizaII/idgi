@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.idgi.Application;
+import com.idgi.application.Application;
 import com.idgi.activities.dialogs.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;

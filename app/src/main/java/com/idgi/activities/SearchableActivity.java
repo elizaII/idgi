@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.idgi.Config;
 import com.idgi.R;
 import com.idgi.activities.extras.DrawerActivity;
 import com.idgi.core.Nameable;
-import com.idgi.core.Quiz;
 import com.idgi.event.NameableSelectionBus;
 import com.idgi.recycleViews.RecyclerViewUtility;
 import com.idgi.recycleViews.adapters.NameableAdapter;
@@ -20,7 +18,6 @@ import com.idgi.core.School;
 import com.idgi.core.Subject;
 import com.idgi.services.FireDatabase;
 import com.idgi.services.IDatabase;
-import com.idgi.services.MockData;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
