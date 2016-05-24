@@ -81,6 +81,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         User user = createNewUser(email);
 
         Account account = new Account(email, password);
+
+        user.setEmail(email);
         account.setUser(user);
 
         FireDatabase.getInstance().pushAccount(account);
@@ -123,7 +125,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         if (v.getId() == R.id.createAccountButton) {
             if (formIsValid()) {
                 createAccount();
-            }
+            } else
+                Toast.makeText(this, R.string.create_account_unsuccessful_toast, Toast.LENGTH_LONG).show();
         }
     }
 

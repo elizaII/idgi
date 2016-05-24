@@ -84,10 +84,12 @@
     <string name="title_activity_quiz_result">Resultat</string>
 
     <!-- For CreateAccountActivity -->
-    <string name="createAccount_hint_name">Namn</string>
-    <string name="createAccount_hint_email">E-post</string>
+    <string name="createAccount_hint_name">Namn (Obligatoriskt)</string>
+    <string name="createAccount_hint_email">E-post (Obligatoriskt)</string>
     <string name="createAccount_hint_phone">Telefon</string>
     <string name="createAccount_btn_createAccount">Skapa konto</string>
+    <string name="createAccount_hint_password">Lösenord (Obligatoriskt)</string>
+    <string name="create_account_successful_toast">Ditt konto har skapats</string>
 
     <!-- Statistics -->
     <string name="statistics_completed_courses">Avklarade kurser</string>
@@ -175,5 +177,6 @@
     <string name="login_password_hint">Lösenord</string>
     <string name="login_text">Logga in</string>
     <string name="login_no_account">Skapa konto</string>
+    <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
 
 </resources>
