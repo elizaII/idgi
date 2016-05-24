@@ -1,6 +1,4 @@
-package com.idgi.application;
-
-import android.os.Build;
+package com.idgi;
 
 public final class Config {
 
@@ -21,8 +19,4 @@ public final class Config {
 	/* Points */
 	public static final int MAX_POINTS_FOR_VIDEO = 600;
 	public static final int POINTS_PER_TICK = 85;
-
-	public static int getMinSdk() {
-		return Build.VERSION.SDK_INT;
-	}
 }

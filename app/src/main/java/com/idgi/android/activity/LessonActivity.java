@@ -23,7 +23,6 @@ import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.StudentUser;
 import com.idgi.core.TimedQuiz;
-import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.android.fragment.YoutubeFragment;
@@ -32,7 +31,7 @@ import com.idgi.android.widget.CommentLayout;
 
 import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
-import com.idgi.application.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 import com.idgi.android.recycleView.adapters.ReplyAdapter;
 

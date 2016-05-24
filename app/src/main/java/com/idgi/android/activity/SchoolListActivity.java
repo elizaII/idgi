@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
+import com.idgi.android.ActivityType;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.event.BusEvent;

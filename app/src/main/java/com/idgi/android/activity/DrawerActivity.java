@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
+import com.idgi.android.ActivityType;
 import com.idgi.android.SearchSuggestions;
 import com.idgi.event.ApplicationBus;
 
@@ -100,5 +102,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		Navigation.onMenuItemSelected(this, item);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
+	}
+
+	@Subscribe
+	public void onStartActivity(ActivityType type) {
+		Navigation.navigateTo(this, type);
 	}
 }

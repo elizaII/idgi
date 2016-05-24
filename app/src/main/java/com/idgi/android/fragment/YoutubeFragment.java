@@ -10,7 +10,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.idgi.core.StudentUser;
 import com.idgi.core.Video;
-import com.idgi.application.Config;
+import com.idgi.Config;
 import com.idgi.session.SessionData;
 
 /**

@@ -15,8 +15,6 @@ import com.idgi.android.ActivityType;
 import com.idgi.android.widget.CommentLayout;
 import com.idgi.core.Comment;
 import com.idgi.event.ApplicationBus;
-import com.idgi.event.BusEvent;
-import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 public final class DialogFactory {
@@ -26,7 +24,7 @@ public final class DialogFactory {
 	}
 
 	public static Dialog createLoginRequiredDialog(final Context context) {
-		Dialog dialog = new Dialog(context);
+		final Dialog dialog = new Dialog(context);
 
 		View contentView = getContentView(context, R.layout.dialog_login_required);
 		dialog.setContentView(contentView);
@@ -35,8 +33,8 @@ public final class DialogFactory {
 
 		txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				BusEvent event = new BusEvent(Event.START_ACTIVITY, ActivityType.LOGIN);
-				ApplicationBus.post(event);
+				ApplicationBus.post(ActivityType.LOGIN);
+				dialog.dismiss();
 			}
 		});
 
