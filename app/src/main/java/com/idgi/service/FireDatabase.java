@@ -15,7 +15,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.event.BusEvent;
@@ -317,7 +317,7 @@ public class FireDatabase implements IDatabase {
 	public void updateUserHats(BusEvent busEvent) {
 		System.out.println("TOTAL HATS: " + hats);
 		if (busEvent.getEvent() == Event.POINTS_UPDATED) {
-			StudentUser user = (StudentUser) busEvent.getData();
+			Student user = (Student) busEvent.getData();
 
 			List<Hat> earnedHats = new ArrayList<>();
 			for (Hat hat : hats)

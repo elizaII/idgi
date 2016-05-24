@@ -2,7 +2,7 @@ package com.idgi.android.activity;
 
 import com.idgi.R;
 import com.idgi.core.Nameable;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.session.SessionData;
 
@@ -20,8 +20,8 @@ public class HatListActivity extends NameableListActivity {
     protected List<? extends Nameable> getNameables() {
         User user = SessionData.getLoggedInUser();
 
-        if (user != null && user.getClass() == StudentUser.class)
-            return ((StudentUser) user).getHats();
+        if (user != null && user.getClass() == Student.class)
+            return ((Student) user).getHats();
         else
             return new ArrayList<>();
     }

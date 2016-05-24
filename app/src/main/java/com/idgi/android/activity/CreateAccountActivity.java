@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.idgi.R;
 import com.idgi.core.Account;
-import com.idgi.core.StudentUser;
-import com.idgi.core.TeacherUser;
+import com.idgi.core.Student;
+import com.idgi.core.Teacher;
 import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
@@ -98,7 +98,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String accountType = getSelectedAccounType();
         boolean makeStudent = student.equals(accountType);
 
-        User user = makeStudent ? new StudentUser(name) : new TeacherUser(name);
+        User user = makeStudent ? new Student(name) : new Teacher(name);
         user.setPhoneNumber(getPhoneNumber());
         user.setEmail(email);
         user.saveEmailToLocalStorage(this);

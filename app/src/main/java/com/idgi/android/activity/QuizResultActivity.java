@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.core.IQuiz;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.session.SessionData;
 import com.idgi.android.recycleView.adapters.QuestionAdapter;
 
@@ -42,8 +42,8 @@ public class QuizResultActivity extends DrawerActivity {
 	}
 
 	private void awardPoints() {
-		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser)){
-			StudentUser student = (StudentUser) SessionData.getLoggedInUser();
+		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student)){
+			Student student = (Student) SessionData.getLoggedInUser();
 			student.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 		}
 	}

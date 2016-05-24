@@ -5,7 +5,7 @@ import com.idgi.core.Answer;
 import com.idgi.core.Hat;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.Video;
 
 import static org.junit.Assert.*;
@@ -20,7 +20,7 @@ public class StudentTest {
 	int point;
 	Video video;
 	String url;
-	StudentUser student;
+	Student student;
     Quiz quiz;
 //    private List<Hat> hats;
 
@@ -30,8 +30,8 @@ public class StudentTest {
 	@Before
 	public void setUp() {
 
-		student = new StudentUser("Namn");
-		student.setEmail("email");
+		studentUser = new Student("Namn");
+		studentUser.setEmail("email");
 
 		testHat1 = new Hat();
 		testHat1.setName("Testhatt 1");
@@ -56,7 +56,7 @@ public class StudentTest {
 
 	@Test
 	public void testAddPointsThroughQuiz() {
-		StudentUser user = new StudentUser("Test");
+		Student user = new Student("Test");
 
 		Quiz quiz = new Quiz();
 
@@ -105,7 +105,7 @@ public class StudentTest {
 
 	@Test
 	public void testContainsHat() {
-		StudentUser user = new StudentUser("Test");
+		Student user = new Student("Test");
 //		user.addHat(testHat1);
 
 //		assertTrue("Should contain testHat2", user.containsHat(testHat1));

@@ -4,15 +4,10 @@ import com.idgi.core.Account;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
-import com.idgi.core.Quiz;
 import com.idgi.core.School;
-import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
-
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class SessionData {
 	private static School currentSchool;

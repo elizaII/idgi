@@ -1,18 +1,13 @@
 package com.idgi.android.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.android.ActivityType;
-import com.idgi.core.StudentUser;
-import com.idgi.core.User;
-import com.idgi.event.Event;
+import com.idgi.core.Student;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
@@ -37,7 +32,7 @@ public class StartActivity extends DrawerActivity {
 		if (!SessionData.hasLoggedInUser())
 			setContentView(R.layout.activity_start_not_logged_in);
 		else {
-			if (SessionData.getLoggedInUser() instanceof StudentUser)
+			if (SessionData.getLoggedInUser() instanceof Student)
 				initializeForStudent();
 			else
 				initializeForTeacher();
