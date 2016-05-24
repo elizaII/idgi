@@ -24,10 +24,9 @@ public class TimedQuiz extends QuizDecorator {
     }
 
 
-    /**
-     * Creates a timed quiz with the time set to 5 seconds per question
-     * @param decoratedQuiz The normal quiz without a set time
-     */
+    /** Default constructor that creates a timed quiz
+     * with the time set to 5 seconds per question
+     * decoratedQuiz is the normal quiz without a set time */
     public TimedQuiz(IQuiz decoratedQuiz) {
         super(decoratedQuiz);
         int amountOfQuestions = getQuestions().size();
@@ -35,17 +34,14 @@ public class TimedQuiz extends QuizDecorator {
 
     }
 
-    /**
-     * Creates a quiz with a timer
-     * @param decoratedQuiz The normal quiz that doesn't have a set time
-     * @param time The time for the quiz in milliseconds
-     */
+    /* Creates a quiz with a timer where the time
+     * is counted in milliseconds */
     public TimedQuiz(IQuiz decoratedQuiz, int time){
         super(decoratedQuiz);
         this.time = time;
     }
 
-    public static TimedQuiz create(IQuiz quiz) {
+    public static TimedQuiz from(IQuiz quiz) {
         if(quiz instanceof Quiz){
             return new TimedQuiz(quiz);
         }

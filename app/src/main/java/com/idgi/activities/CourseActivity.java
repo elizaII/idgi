@@ -181,7 +181,7 @@ public class CourseActivity extends DrawerActivity{
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {
-                SessionData.setCurrentQuiz(TimedQuiz.create(selectedQuiz));
+                SessionData.setCurrentQuiz(TimedQuiz.from(selectedQuiz));
             } else if(quizType == IQuiz.Type.NORMAL) {
                 SessionData.setCurrentQuiz(selectedQuiz);
             }

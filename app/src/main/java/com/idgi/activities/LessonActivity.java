@@ -173,7 +173,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {
-                SessionData.setCurrentQuiz(TimedQuiz.create(SessionData.getCurrentQuiz()));
+                SessionData.setCurrentQuiz(TimedQuiz.from(SessionData.getCurrentQuiz()));
             } else if(quizType == IQuiz.Type.NORMAL) {
                 SessionData.setCurrentQuiz(lesson.getQuiz());
             }
