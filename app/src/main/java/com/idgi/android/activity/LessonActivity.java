@@ -188,5 +188,10 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Goddamn LessonActivity";
+	}
+
 }
 

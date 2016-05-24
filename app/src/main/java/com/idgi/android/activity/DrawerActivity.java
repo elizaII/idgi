@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -55,7 +54,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	@Override
 	protected void onStart() {
 		if(!ApplicationBus.hasListener(this)) {
-			System.out.println("ADDED");
 			ApplicationBus.register(this);
 		}
 
@@ -65,11 +63,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	@Override
 	protected void onStop() {
 		if(ApplicationBus.hasListener(this)) {
-			ApplicationBus.register(this);
+			//ApplicationBus.register(this);
 			ApplicationBus.unregister(this); //Sometimes it says this isn't registred
-			Log.d("BUS", "Unregistred");
 		}
-		Log.d("BUS", "onStop is called");
 
 		super.onStop();
 	}

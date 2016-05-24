@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
-import com.idgi.android.activity.CourseActivity;
-import com.idgi.android.activity.DrawerActivity;
 import com.idgi.core.Course;
-import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.android.recycleView.RecyclerViewUtility;
@@ -26,20 +23,10 @@ public class CourseListActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_list);
 
-        //Subscribe for course clicks
-        ApplicationBus.register(this);
-
         String title = SessionData.getCurrentSubject().getName();
         super.initializeWithTitle(title);
 
         initializeCourseList();
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-
-        ApplicationBus.register(this);
     }
 
     private void initializeCourseList() {

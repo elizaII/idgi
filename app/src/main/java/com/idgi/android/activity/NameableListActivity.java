@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
-import com.idgi.android.activity.DrawerActivity;
 import com.idgi.core.Nameable;
-import com.idgi.event.ApplicationBus;
 import com.idgi.android.recycleView.RecyclerViewUtility;
 import com.idgi.android.recycleView.adapters.NameableAdapter;
 
@@ -22,16 +20,12 @@ public abstract class NameableListActivity extends DrawerActivity {
         setContentView(getLayout());
 		initializeNameableList();
 
-		ApplicationBus.register(this);
-
         super.initializeWithTitle(getTitleName());
     }
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		ApplicationBus.register(this);
 	}
 
 	protected int getLayout() {

@@ -19,7 +19,6 @@ import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.TimedQuiz;
-import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.android.fragment.CourseInfoFragment;
@@ -43,18 +42,9 @@ public class CourseActivity extends DrawerActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        ApplicationBus.register(this);
-
 		String courseName = SessionData.getCurrentCourse().getName();
         initializeWithTitle(courseName);
         setupViewPager();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        ApplicationBus.register(this);
     }
 
     private void setupViewPager() {
