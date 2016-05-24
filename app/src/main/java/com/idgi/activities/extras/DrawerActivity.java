@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.idgi.R;
+import com.idgi.application.Application;
 import com.idgi.application.Navigation;
 import com.idgi.application.SearchSuggestions;
 import com.idgi.event.ApplicationBus;
@@ -57,7 +58,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	@Override
 	protected void onStop() {
 		if(ApplicationBus.hasListener(this)) {
-			ApplicationBus.unregister(this);
+			ApplicationBus.register(this);
+			ApplicationBus.unregister(this); //Sometimes it says this isn't registred
 			Log.d("BUS", "Unregistred");
 		}
 		Log.d("BUS", "onStop is called");
