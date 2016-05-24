@@ -9,34 +9,42 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.android.ActivityType;
 import com.idgi.core.StudentUser;
-import com.idgi.core.TeacherUser;
 import com.idgi.core.User;
+import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
+/*
+The entrance activity of the application.
+ */
 public class StartActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		if (SessionData.hasLoggedInUser()) {
-			loggedIn();
-			if (SessionData.getLoggedInUser() instanceof TeacherUser) {
-				enableTeacherFunctionality();
-			}
-		} else {
-			setContentView(R.layout.activity_start_not_logged_in);
-		}
+		initialize();
 
 		initializeWithTitle(getString(R.string.app_name));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
 	}
 
-	private void loggedIn() {
+	private void initialize() {
+		if (!SessionData.hasLoggedInUser())
+			setContentView(R.layout.activity_start_not_logged_in);
+		else {
+			if (SessionData.getLoggedInUser() instanceof StudentUser)
+				initializeForStudent();
+			else
+				initializeForTeacher();
+		}
+	}
+
+	private void initializeForStudent() {
 		setContentView(R.layout.activity_start_logged_in);
 		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
 
@@ -48,7 +56,7 @@ public class StartActivity extends DrawerActivity {
 			welcomeText.setText(welcomeMsg);
 	}
 
-	private void enableTeacherFunctionality(){
+	private void initializeForTeacher(){
 		FloatingActionButton createLessonButton = (FloatingActionButton)
 				findViewById(R.id.start_fab_create_lesson);
 
@@ -62,7 +70,7 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	public void onStartButtonClick(View view) {
-		startActivity(new Intent(this, BrowseActivity.class));
+		startActivity(new Intent(this, SchoolListActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 

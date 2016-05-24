@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/*
+Lets the teacher create a lesson. The teacher may also create a new school, subject and/or
+course in conjunction with creating the lesson. A quiz can also be added through this activity.
+ */
 public class CreateLessonActivity extends AppCompatActivity{
 
     /*
@@ -237,31 +241,13 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
     public void onAddQuizButtonClick(View view) {
-        CreateQuizDialog dialog = new CreateQuizDialog(this, questionList);
-        dialog.show();
+        (new CreateQuizDialog(this, questionList)).show();
     }
 
     public void onCreateLessonButtonClick(View view){
 
         if(isYoutubeLink(txtYouTubeUrl.getText().toString())){
-
-            String videoUrl = trimYoutubeLink(txtYouTubeUrl.getText().toString());
-            String lessonName = txtLessonName.getText().toString();
-
-            Video video = Video.from(videoUrl);
-
-
-            Lesson lesson = new Lesson(lessonName).withVideo(video);
-            if (selectedQuiz != null)
-                lesson = lesson.withQuiz(selectedQuiz);
-
-            selectedCourse.addLesson(lesson);
-
-            pushLesson(lesson);
-            SessionData.setCurrentLesson(lesson);
-
-            startActivity(new Intent(this, LessonActivity.class));
-            finish();
+            createLesson();
         } else{
 
             //Show dialog when user has given an invalid link
@@ -271,6 +257,26 @@ public class CreateLessonActivity extends AppCompatActivity{
                     .setPositiveButton(getString(R.string.ok),null)
                     .show();
         }
+    }
+
+    private void createLesson() {
+        String videoUrl = trimYoutubeLink(txtYouTubeUrl.getText().toString());
+        String lessonName = txtLessonName.getText().toString();
+
+        Video video = Video.from(videoUrl);
+
+
+        Lesson lesson = new Lesson(lessonName).withVideo(video);
+        if (selectedQuiz != null)
+            lesson = lesson.withQuiz(selectedQuiz);
+
+        selectedCourse.addLesson(lesson);
+
+        pushLesson(lesson);
+        SessionData.setCurrentLesson(lesson);
+
+        startActivity(new Intent(this, LessonActivity.class));
+        finish();
     }
 
     private void pushLesson(Lesson lesson) {
@@ -357,7 +363,7 @@ public class CreateLessonActivity extends AppCompatActivity{
 		btnAddQuiz.setText(text);
 	}
 
-	/* Returns a readable name of the ItemType from resources */
+	// Returns a localized name of the ItemType from resources
 	private String getItemTypeName(ItemType itemType) {
 		switch (itemType) {
 			case SCHOOL:
@@ -371,9 +377,8 @@ public class CreateLessonActivity extends AppCompatActivity{
 		return null;
 	}
 
-    /**
-     * Setting the link to the youtube url that was received from the youtube app
-     */
+
+    // Setting the link to the youtube url that was received from the youtube app
     private void insertYoutubeLink(Intent intent){
         String youtubeURL = intent.getStringExtra(Intent.EXTRA_TEXT);
         if(youtubeURL != null){

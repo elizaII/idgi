@@ -3,10 +3,10 @@ package com.idgi.core;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @JsonTypeName("teacher")
-public class Teacher extends User {
-    private Teacher() {super();}
+public class TeacherUser extends User {
+    private TeacherUser() {super();}
 
-    public Teacher(String name) {
+    public TeacherUser(String name) {
         super(name);
     }
 }

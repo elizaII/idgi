@@ -7,6 +7,10 @@
     <string name="course">kurs</string>
     <string name="answer">svar</string>
 
+    <string name="teacher">Lärare</string>
+    <string name="student">Student</string>
+
+
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="ok">OK</string>
@@ -147,6 +151,10 @@
     <string name="create_lesson_et_lesson_name">Namn på lektion</string>
     <string name="create_lesson_et_youtube_url">URL till youtube-klipp</string>
 
+    <!-- For CreateLessonActivity -->
+    <string name="create_account_hint_password">Lösenord</string>
+    <string name="create_account_successful_toast">Ditt konto har skapats</string>
+
     <!-- Searchable-->
     <string name="idgi">IDGI</string>
     <string name="search_hint">Sök</string>
@@ -158,8 +166,6 @@
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
     <string name="search_title">Sökresultat</string>
-    <string name="createAccount_hint_password">Lösenord</string>
-    <string name="create_account_successful_toast">Ditt konto har skapats</string>
     <string name="title_activity_browse_users">Hitta användare</string>
     <string name="browse_users_btn_name">Sök via namn</string>
     <string name="browse_users_btn_course">Sök via kurs</string>

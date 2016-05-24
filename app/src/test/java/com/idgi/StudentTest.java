@@ -1,8 +1,6 @@
 
 package com.idgi;
 
-import android.graphics.Point;
-
 import com.idgi.core.Answer;
 import com.idgi.core.Hat;
 import com.idgi.core.Question;
@@ -15,16 +13,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-public class StudentUserTest {
+public class StudentTest {
 
 	Hat testHat1;
 	Hat testHat2;
 	int point;
 	Video video;
 	String url;
-	StudentUser studentUser;
+	StudentUser student;
     Quiz quiz;
 //    private List<Hat> hats;
 
@@ -34,8 +30,8 @@ public class StudentUserTest {
 	@Before
 	public void setUp() {
 
-		studentUser = new StudentUser("Namn");
-		studentUser.setEmail("email");
+		student = new StudentUser("Namn");
+		student.setEmail("email");
 
 		testHat1 = new Hat();
 		testHat1.setName("Testhatt 1");
@@ -118,15 +114,15 @@ public class StudentUserTest {
 
 	@Test
 	public void testAddPointForVideo() {
-        assertFalse("Should not have points", studentUser.getPoints() > 0);
-        studentUser.givePointsForViewingVideo(video, point);
-		assertTrue("Should have points", studentUser.getPoints() > 0);
+        assertFalse("Should not have points", student.getPoints() > 0);
+        student.givePointsForViewingVideo(video, point);
+		assertTrue("Should have points", student.getPoints() > 0);
 	}
 
     @Test
     public void testAddPointForQuiz() {
-        assertFalse("Should not have points", studentUser.getPoints() > 0);
-        studentUser.givePointsForQuiz(quiz.getID(), point);
-        assertTrue("Should have points", studentUser.getPoints() > 0);
+        assertFalse("Should not have points", student.getPoints() > 0);
+        student.givePointsForQuiz(quiz.getID(), point);
+        assertTrue("Should have points", student.getPoints() > 0);
     }
 }

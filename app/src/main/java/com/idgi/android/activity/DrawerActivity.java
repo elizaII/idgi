@@ -18,10 +18,15 @@ import com.idgi.android.ActivityType;
 import com.idgi.android.SearchSuggestions;
 import com.idgi.event.ApplicationBus;
 
+/*
+The main template for Activity-classes; most of them extend this class.
+Handles default behavior and initialization of activities that include the navigation drawer.
+ */
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 	private DrawerLayout drawer;
 	private Toolbar toolbar;
+	private SearchView searchView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		}
 
 		super.onStart();
+
+		if (searchView != null)
+			SearchSuggestions.initiateSearchSuggestions(searchView);
 	}
 
 	@Override
@@ -88,7 +96,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		searchView.setIconifiedByDefault(false);
 

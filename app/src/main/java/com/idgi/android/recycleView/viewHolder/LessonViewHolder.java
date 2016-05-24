@@ -43,9 +43,20 @@ public class LessonViewHolder extends NameableViewHolder {
 		this.nameable = nameable;
 		nameTextView.setText(nameable.getName());
 		lessonThumbnail.initialize(Config.YOUTUBE_API_KEY, new YouTubeThumbnailView.OnInitializedListener() {
-			public void onInitializationSuccess(YouTubeThumbnailView view, YouTubeThumbnailLoader loader) {
+			public void onInitializationSuccess(YouTubeThumbnailView view, final YouTubeThumbnailLoader loader) {
 				Lesson lesson = (Lesson) nameable;
 				loader.setVideo(lesson.getVideo().getUrl());
+				loader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+					@Override
+					public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+						loader.release();
+					}
+
+					@Override
+					public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+
+					}
+				});
 			}
 
 			public void onInitializationFailure(YouTubeThumbnailView view, YouTubeInitializationResult result) {
@@ -64,5 +75,8 @@ public class LessonViewHolder extends NameableViewHolder {
 	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
 		return new LessonViewHolder(view);
+	}
+
+	public void destroy() {
 	}
 }

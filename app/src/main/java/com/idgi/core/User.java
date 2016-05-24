@@ -16,8 +16,8 @@ import java.util.ArrayList;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Student.class, name = "student"),
-        @JsonSubTypes.Type(value = Teacher.class, name = "teacher")
+        @JsonSubTypes.Type(value = StudentUser.class, name = "student"),
+        @JsonSubTypes.Type(value = TeacherUser.class, name = "teacher")
 })
 public abstract class User {
     private String name;

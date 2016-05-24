@@ -8,11 +8,12 @@ import android.view.MenuItem;
 import com.idgi.android.ActivityType;
 import com.idgi.R;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Handles the navigation between activities from the navigation drawer.
+/*
+ * Handles the navigation between activities, both from the navigation drawer and other areas.
  */
 public class Navigation {
 
@@ -40,7 +41,6 @@ public class Navigation {
         setTargetActivity(R.id.nav_statistics, ActivityType.STATISTICS, StatisticsActivity.class);
         setTargetActivity(R.id.nav_my_courses, ActivityType.MY_COURSES, MyCoursesActivity.class);
         setTargetActivity(R.id.nav_quiz, ActivityType.QUIZ, QuizActivity.class);
-        setTargetActivity(R.id.nav_browse, ActivityType.BROWSE, BrowseActivity.class);
         setTargetActivity(R.id.nav_browse_users, ActivityType.BROWSE_USERS, BrowseUsersActivity.class);
         setTargetActivity(R.id.nav_log_in, ActivityType.LOGIN, LoginActivity.class);
         setTargetActivity(R.id.nav_create_profile, ActivityType.CREATE_ACCOUNT, CreateAccountActivity.class);
@@ -49,6 +49,15 @@ public class Navigation {
     private static void setTargetActivity(int resource, ActivityType type, Class targetClass) {
         menuMap.put(resource, targetClass);
         activityMap.put(type, targetClass);
+    }
+
+    public static void navigateToListActivity(Context from, ActivityType type) {
+        switch (type) {
+            case SCHOOL_LIST:
+                break;
+            case SUBJECT_LIST:
+
+        }
     }
 
 }

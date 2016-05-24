@@ -16,6 +16,9 @@ import com.idgi.android.recycleView.adapters.QuestionAdapter;
 
 import java.util.Locale;
 
+/*
+Displays the result of a taken quiz. Also allows for the quiz to be retaken.
+ */
 public class QuizResultActivity extends DrawerActivity {
 
 	private IQuiz quiz;
@@ -40,8 +43,8 @@ public class QuizResultActivity extends DrawerActivity {
 
 	private void awardPoints() {
 		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser)){
-			StudentUser studentUser = (StudentUser) SessionData.getLoggedInUser();
-			studentUser.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
+			StudentUser student = (StudentUser) SessionData.getLoggedInUser();
+			student.givePointsForQuiz(quiz.getID(), quiz.getPointsEarned());
 		}
 	}
 

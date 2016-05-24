@@ -27,6 +27,9 @@ import com.idgi.android.widget.AnswerButton;
 
 import java.util.List;
 
+/*
+Handles quiz-taking.
+ */
 public class QuizActivity extends AppCompatActivity {
 
 	private IQuiz quiz;

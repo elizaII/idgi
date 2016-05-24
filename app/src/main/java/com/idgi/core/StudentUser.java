@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("student")
-public class Student extends User{
+public class StudentUser extends User{
 
     private List<Hat> hats = new ArrayList<>();
 
     private Statistics statistics;
 
-    private Student(){super();}
+    private StudentUser(){super();}
 
-    public Student(String name) {
+    public StudentUser(String name) {
         super(name);
         this.statistics = new Statistics();
     }
@@ -44,7 +44,7 @@ public class Student extends User{
     }
 
     private void postPointUpdate() {
-        BusEvent pointsEvent = new BusEvent(Event.POINTS_UPDATED, Student.this);
+        BusEvent pointsEvent = new BusEvent(Event.POINTS_UPDATED, StudentUser.this);
         ApplicationBus.post(pointsEvent);
     }
 

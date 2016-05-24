@@ -10,6 +10,10 @@ import com.idgi.android.recycleView.adapters.NameableAdapter;
 
 import java.util.List;
 
+/*
+Activities that only contain a list of Nameables extend this class.
+Note: getTitleName is not named getTitle due to superclass declaring a getTitle() as final.
+ */
 public abstract class NameableListActivity extends DrawerActivity {
 
 

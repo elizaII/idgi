@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.idgi.R;
 
-/**
- * Created by tove on 2016-05-21.
+/*
+Activity that lists all the registered Users.
  */
 public class BrowseUsersActivity extends DrawerActivity {
 
@@ -26,7 +26,7 @@ public class BrowseUsersActivity extends DrawerActivity {
     }
 
     public void onCourseButtonClick(View view){
-        startActivity(new Intent(this, SchoolListActivity.class));
-        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        /*startActivity(new Intent(this, SchoolListActivity.class));
+        overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);*/
     }
 }

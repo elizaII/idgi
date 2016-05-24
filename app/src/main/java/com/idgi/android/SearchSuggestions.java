@@ -7,6 +7,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.SearchView;
 
+import com.idgi.application.Application;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
@@ -73,6 +74,24 @@ public class SearchSuggestions {
     //Provides the adapter with a cursor with correct data
     private static void populateAdapter(String query){
         final MatrixCursor cursor = new MatrixCursor(new String[] {"_id", SearchManager.SUGGEST_COLUMN_TEXT_1});
+
+        List<Nameable> matches = getMatches(query);
+
+        for (int i = 0; i < matches.size(); ++i) {
+            Nameable nameable = matches.get(i);
+            ArrayList<String> row = new ArrayList<>();
+            row.add(Integer.toString(i));
+            row.add(nameable.getName());
+            cursor.addRow(row);
+        }
+
+        cursor.moveToFirst();
+        adapter.changeCursor(cursor);
+        //adapter.swapCursor(cursor);
+        adapter.notifyDataSetChanged();
+    }
+
+    public static List<Nameable> getMatches(String query) {
         IDatabase database = getDatabase();
 
         //Objects matching the started query
@@ -80,42 +99,33 @@ public class SearchSuggestions {
 
         List<School> schools = database.getSchools();
         for (School school : schools) {
-            if (school.getName().toLowerCase(Locale.ENGLISH).startsWith(query)){
+            if (filterAccepts(query, school.getName()))
                 matches.add(school);
-            }
 
             for (Subject subject : school.getSubjects()) {
-                if (subject.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
+                if (filterAccepts(query, subject.getName()))
                     matches.add(subject);
 
                 for (Course course : subject.getCourses()) {
-                    if (course.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
+                    if (filterAccepts(query, course.getName()))
                         matches.add(course);
 
                     for (Lesson lesson : course.getLessons()) {
-                        if (lesson.getName().toLowerCase(Locale.ENGLISH).startsWith(query))
+                        if (filterAccepts(query, lesson.getName()))
                             matches.add(lesson);
                     }
                 }
             }
         }
 
-        Integer i = 0;
+        return matches;
+    }
 
-        for(Nameable nameable : matches){
-            ArrayList<String> row = new ArrayList<>();
-            row.add(i.toString());
-            row.add(nameable.getName());
-            i++;
-            cursor.addRow(row);
-        }
-
-        cursor.moveToFirst();
-        adapter.swapCursor(cursor);
-        adapter.notifyDataSetChanged();
+    private static boolean filterAccepts(String query, String name) {
+        return name.toLowerCase(Locale.ENGLISH).contains(query.toLowerCase());
     }
 
     private static IDatabase getDatabase() {
-        return FireDatabase.getInstance();
+        return Application.getDatabase();
     }
 }

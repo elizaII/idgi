@@ -14,6 +14,9 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Shows the courses that a student has added to "My Courses".
+ */
 public class MyCoursesActivity extends DrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

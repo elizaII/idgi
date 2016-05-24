@@ -38,6 +38,9 @@ import com.idgi.android.recycleView.adapters.ReplyAdapter;
 
 import java.util.List;
 
+/*
+Activity that shows a single Lesson.
+ */
 public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener{
 
     private RecyclerView.Adapter adapter;
@@ -91,8 +94,8 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 		if (pointProgressBar != null) {
 			pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
             if(SessionData.getLoggedInUser() instanceof StudentUser){
-                StudentUser studentUser = (StudentUser) SessionData.getLoggedInUser();
-			    pointProgressBar.setProgress(studentUser.getPointsForVideo(SessionData.getCurrentVideo()));
+                StudentUser student = (StudentUser) SessionData.getLoggedInUser();
+			    pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
             }
 		}
     }
@@ -186,11 +189,5 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 				startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
-
-	@Override
-	public String toString() {
-		return "Goddamn LessonActivity";
-	}
-
 }
 

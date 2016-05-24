@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 
 import com.firebase.client.Firebase;
 import com.idgi.service.FireDatabase;
+import com.idgi.service.IDatabase;
 
 public class Application extends android.app.Application {
 
@@ -12,11 +13,12 @@ public class Application extends android.app.Application {
 	public void onCreate() {
 		super.onCreate();
 		Firebase.setAndroidContext(this);
-		//Firebase.getDefaultConfig().setPersistenceEnabled(true);
 		FireDatabase.getInstance().initialize(connectedToInternet());
 		//FireDatabase.getInstance().pushMockDataToFirebase();
-//		SessionData.setLoggedInUser(new StudentUser("Albus Dumbledore"));
+	}
 
+	public static IDatabase getDatabase() {
+		return FireDatabase.getInstance();
 	}
 
 	private boolean connectedToInternet() {

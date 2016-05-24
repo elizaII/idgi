@@ -16,7 +16,9 @@ import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
-
+/*
+Displays general information of the logged in User.
+ */
 public class ProfileActivity extends DrawerActivity {
 
     User user;
@@ -28,8 +30,6 @@ public class ProfileActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        String userEmail = User.getLoggedInUserEmail(this);
 
         name = (EditText) findViewById(R.id.profile_editText_name);
         txtAge = (EditText) findViewById(R.id.profile_editText_age);
@@ -100,12 +100,5 @@ public class ProfileActivity extends DrawerActivity {
     public void showMyHats(View view) {
         Intent intent = new Intent(this, HatListActivity.class);
         startActivity(intent);
-    }
-
-    public void showMyPoints(User user) {
-        user = SessionData.getLoggedInUser();
-        if (user instanceof StudentUser) {
-            ((StudentUser) user).getPoints();
-        }
     }
 }

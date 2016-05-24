@@ -31,6 +31,10 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Activity that presents a single Course. Shows the course's lessons, quizzes and information in
+different tabs.
+ */
 public class CourseActivity extends DrawerActivity{
 
     private ViewPager viewPager;
@@ -115,7 +119,8 @@ public class CourseActivity extends DrawerActivity{
         }
     }
 
-    private final ViewPager.OnPageChangeListener pageChangeListener =  new ViewPager.SimpleOnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener pageChangeListener =
+            new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
 
