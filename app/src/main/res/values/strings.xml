@@ -171,5 +171,9 @@
     <string name="browse_users_btn_course">Sök via kurs</string>
     <string name="list_user_name">Användare</string>
     <string name="course_no_users">Det finns inga användare här just nu.</string>
+    <string name="login_account_name_hint">Kontonamn</string>
+    <string name="login_password_hint">Lösenord</string>
+    <string name="login_text">Logga in</string>
+    <string name="login_no_account">Skapa konto</string>
 
 </resources>

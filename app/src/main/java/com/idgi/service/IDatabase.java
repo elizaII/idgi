@@ -1,5 +1,6 @@
 package com.idgi.service;
 
+import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
@@ -20,4 +21,5 @@ public interface IDatabase {
 	List<Comment> getComments(Lesson lesson);
 	void retrieveHats(boolean isOfflineMode);
 	void retrieveAccounts();
+	Account getAccount(String accountName, String password);
 }

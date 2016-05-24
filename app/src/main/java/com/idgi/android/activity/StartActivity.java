@@ -80,15 +80,8 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	public void onCreateAccountButtonClick(View view) {
-		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
-		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-		Drawable profilePicture = ContextCompat.getDrawable(this, R.drawable.yoda);
-
-		User user = new StudentUser("Yoda");
-		user.setEmail("test@gmail.com");
-		user.setAge(9);
-		user.setProfilePicture(profilePicture);
-		SessionData.setLoggedInUser(user);
+		startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
+		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onAccountButtonClick(View view) {

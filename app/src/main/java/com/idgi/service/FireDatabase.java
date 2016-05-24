@@ -82,16 +82,6 @@ public class FireDatabase implements IDatabase {
 		return users;
 	}
 
-	/* Push (add) an account to Firebase */
-	public void pushAccount(Account account) {
-		Firebase push = ref.child("accounts").push();
-
-		account.setKey(push.getKey());
-		push.setValue(account);
-
-		pushAccountInfo(account, push.getKey());
-	}
-
 	private void pushAccountInfo(Account account, String key) {
 		Firebase accountRef = ref.child("accountInfo").child(key);
 
@@ -336,6 +326,36 @@ public class FireDatabase implements IDatabase {
 
 			user.giveHats(earnedHats);
 			System.out.println("HATS: " + user.getHats().size());
+		}
+	}
+
+	public Account getAccount(String accountName, String password) {
+		for (Account account : accounts)
+			if (accountName.equals(account.getName()) || accountName.equals(account.getUser().getEmail()))
+				if (password.equals(account.getPassword()))
+					return account;
+
+		return null;
+	}
+
+	private boolean accountExists(Account newAccount) {
+		for (Account account : accounts)
+			if(account.equals(newAccount))
+				return true;
+
+		return false;
+	}
+
+	/* Push (add) an account to Firebase */
+	public void pushAccount(Account account) {
+		if (accountExists(account)) {
+			String path = String.format(Locale.ENGLISH, "accounts/%s", account.getKey());
+			ref.child(path).setValue(account);
+		} else {
+			Firebase push = ref.child("accounts").push();
+
+			account.setKey(push.getKey());
+			push.setValue(account);
 		}
 	}
 }
