@@ -6,7 +6,6 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.Config;
-import com.idgi.IBusEvent;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
@@ -19,6 +18,8 @@ import com.idgi.core.School;
 import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -323,9 +324,9 @@ public class FireDatabase implements IDatabase {
     }
 
 	@Subscribe
-	public void updateUserHats(IBusEvent busEvent) {
+	public void updateUserHats(BusEvent busEvent) {
 		System.out.println("TOTAL HATS: " + hats);
-		if (busEvent.getEvent() == IBusEvent.Event.POINTS_UPDATED) {
+		if (busEvent.getEvent() == Event.POINTS_UPDATED) {
 			StudentUser user = (StudentUser) busEvent.getData();
 
 			List<Hat> earnedHats = new ArrayList<>();

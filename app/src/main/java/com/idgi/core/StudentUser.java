@@ -2,8 +2,6 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.idgi.application.Application;
-import com.idgi.IBusEvent;
 import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
