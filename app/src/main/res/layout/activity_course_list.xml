@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
-    tools:context=".activities.CourseListActivity">
+    tools:context=".android.activities.CourseListActivity">
 
     <include layout ="@layout/app_bar_course_list"
         android:layout_width="match_parent"

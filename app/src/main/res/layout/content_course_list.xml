@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:showIn="@layout/app_bar_course_list"
-    tools:context=".activities.CourseListActivity">
+    tools:context=".android.activities.CourseListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/course_list_recycler_view"

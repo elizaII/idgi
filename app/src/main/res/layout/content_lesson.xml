@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_lesson"
-    tools:context=".activities.LessonActivity"
+    tools:context=".android.activities.LessonActivity"
     >
 
     <ScrollView
@@ -28,7 +28,7 @@
                 android:id="@+id/content_lesson_youtube_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.idgi.fragments.YoutubeFragment" />
+                android:name="com.idgi.android.fragments.YoutubeFragment" />
 
             <ProgressBar
                 android:visibility="gone"

@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.idgi.activities.BrowseActivity;
-import com.idgi.activities.BrowseUsersActivity;
-import com.idgi.activities.CreateAccountActivity;
-import com.idgi.activities.LoginActivity;
-import com.idgi.activities.MyCoursesActivity;
-import com.idgi.activities.ProfileActivity;
-import com.idgi.activities.QuizActivity;
+import com.idgi.android.activities.BrowseActivity;
+import com.idgi.android.activities.BrowseUsersActivity;
+import com.idgi.android.activities.CreateAccountActivity;
+import com.idgi.android.activities.LoginActivity;
+import com.idgi.android.activities.MyCoursesActivity;
+import com.idgi.android.activities.ProfileActivity;
+import com.idgi.android.activities.QuizActivity;
 import com.idgi.R;
-import com.idgi.activities.StartActivity;
-import com.idgi.activities.StatisticsActivity;
+import com.idgi.android.activities.StartActivity;
+import com.idgi.android.activities.StatisticsActivity;
 
 import java.util.HashMap;
 import java.util.Map;
