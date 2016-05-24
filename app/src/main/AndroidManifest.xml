@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".application.Application"
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +20,7 @@
             android:name="android.app.default_searchable"
             android:value=".activities.SearchableActivity" />
         <activity
-            android:name=".android.activities.StartActivity"
+            android:name=".android.activity.StartActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,59 +29,59 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".android.activities.QuizActivity"
+            android:name=".android.activity.QuizActivity"
             android:label="@string/title_activity_quiz" />
         <activity
-            android:name=".android.activities.SchoolListActivity"
+            android:name=".android.activity.SchoolListActivity"
             android:label="@string/title_activity_school_list" />
         <activity
-            android:name=".android.activities.SubjectListActivity"
+            android:name=".android.activity.SubjectListActivity"
             android:label="@string/title_activity_subject_list" />
         <activity
-            android:name=".android.activities.CourseListActivity"
+            android:name=".android.activity.CourseListActivity"
             android:label="@string/title_activity_course_list" />
         <activity
-            android:name=".android.activities.LoginActivity"
+            android:name=".android.activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
-            android:name=".android.activities.CreateAccountActivity"
+            android:name=".android.activity.CreateAccountActivity"
             android:label="@string/title_activity_create_account"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".android.activities.ProfileActivity"
+            android:name=".android.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".android.activities.LessonActivity"
+            android:name=".android.activity.LessonActivity"
             android:label="@string/title_activity_lesson"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".android.activities.BrowseActivity"
+            android:name=".android.activity.BrowseActivity"
             android:label="@string/title_activity_browse"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".android.activities.BrowseUsersActivity"
+            android:name=".android.activity.BrowseUsersActivity"
             android:label="@string/title_activity_browse"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".android.activities.UserListActivity"
+            android:name=".android.activity.UserListActivity"
             android:label="@string/title_activity_browse"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".android.activities.QuizResultActivity"
+            android:name=".android.activity.QuizResultActivity"
             android:label="@string/title_activity_quiz_result" />
-        <activity android:name=".android.activities.CourseActivity" />
-        <activity android:name=".android.activities.StatisticsActivity" />
-        <activity android:name=".android.activities.CreateLessonActivity">
+        <activity android:name=".android.activity.CourseActivity" />
+        <activity android:name=".android.activity.StatisticsActivity" />
+        <activity android:name=".android.activity.CreateLessonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".android.activities.MyCoursesActivity"/>
-        <activity android:name=".android.activities.SearchableActivity" >
+        <activity android:name=".android.activity.MyCoursesActivity"/>
+        <activity android:name=".android.activity.SearchableActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -90,7 +90,7 @@
         </activity>
 
         <activity
-            android:name=".android.activities.HatListActivity"
+            android:name=".android.activity.HatListActivity"
             android:label="@string/title_activity_my_hats"
             android:theme="@style/AppTheme" />
 
