@@ -39,6 +39,8 @@ public class QuizActivity extends AppCompatActivity {
 	private AnswerButton[] answerButtons;
     private ProgressBar timeProgressBar;
 
+	private static String NO_HINT;
+
 	private CountDownTimer timer;
 
 	private boolean isInTransition = false;
@@ -54,6 +56,9 @@ public class QuizActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
+
+		if (NO_HINT == null)
+			NO_HINT = getResources().getString(R.string.quiz_no_hint);
 
 		buttonContainer = (LinearLayout) findViewById(R.id.quiz_answer_container);
 
@@ -105,13 +110,19 @@ public class QuizActivity extends AppCompatActivity {
 		txtQuestion.setText(quiz.getCurrentQuestion().getText());
 		txtQuestion.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String text = quiz.getCurrentQuestion().getText();
+				String question = quiz.getCurrentQuestion().getText();
 				String hint = quiz.getCurrentQuestion().getHint();
+				hint = hint.isEmpty() ? NO_HINT : hint;
 
-				String newText = txtQuestion.getText().equals(text) ? hint : text;
+				String newText = isShowingQuestion() ? hint : question;
 				txtQuestion.setText(newText);
 			}
 		});
+	}
+
+	private boolean isShowingQuestion() {
+		String questionText = quiz.getCurrentQuestion().getText();
+		return txtQuestion.getText().equals(questionText);
 	}
 
 
@@ -159,6 +170,7 @@ public class QuizActivity extends AppCompatActivity {
 
 	private void showQuestion(Question question) {
 		txtQuestion.setText(question.getText());
+
 
 		createAnswerButtons(question);
 

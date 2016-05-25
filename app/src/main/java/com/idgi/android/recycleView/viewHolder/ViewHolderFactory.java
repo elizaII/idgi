@@ -2,11 +2,15 @@ package com.idgi.android.recycleView.viewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.idgi.core.Nameable;
+import com.idgi.core.NameableType;
 
+/*
+Factory for creating ViewHolders that can be used to visually present an Object in the GUI.
+ */
 public class ViewHolderFactory {
 
 	public static NameableViewHolder createNameableViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
-		switch (Nameable.Type.fromInteger(viewType)) {
+		switch (NameableType.fromInteger(viewType)) {
 			case SCHOOL:
 				return SchoolViewHolder.create(inflater, parent);
 			case SUBJECT:

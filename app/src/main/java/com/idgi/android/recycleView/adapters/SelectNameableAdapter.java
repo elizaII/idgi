@@ -8,17 +8,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import java.util.List;
 
 public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAdapter.ViewHolder> {
 
     private List<String> itemNames;
     private LayoutInflater inflater;
-
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public SelectNameableAdapter(Context context, List<String> itemNames){
         this.itemNames = itemNames;
@@ -54,11 +52,8 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
 
         public void onClick(View view){
             String itemName = textView.getText().toString();
-			pcs.firePropertyChange("listItemSelected", null, itemName);
+			BusEvent event = new BusEvent(Event.NAMEABLE_SELECTED, itemName);
+            ApplicationBus.post(event);
         }
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
     }
 }

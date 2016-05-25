@@ -2,7 +2,7 @@ package com.idgi.android;
 
 import java.io.Serializable;
 
-/**
+/*
  * Used as an argument for EventBus to communicate that the activity should be started.
  */
 @SuppressWarnings("serial")

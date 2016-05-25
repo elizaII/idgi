@@ -19,7 +19,9 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+Show a list of the quizzes available in a course.
+ */
 public class CourseQuizListFragment extends Fragment {
 
     public CourseQuizListFragment() {

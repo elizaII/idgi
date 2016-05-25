@@ -3,16 +3,15 @@ package com.idgi.session;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
-import com.idgi.core.Quiz;
 import com.idgi.core.School;
-import com.idgi.core.StudentUser;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
+/*
+Holds currently active data, like what school we've navigated to or the lesson
+we're currently looking at
+ */
 public class SessionData {
 	private static School currentSchool;
 	private static Course currentCourse;
@@ -38,13 +37,16 @@ public class SessionData {
 		currentCourse = course;
 	}
 
-	// TODO : Create actual implemenation of activeUser, probably through phone local storage?
 	public static void setLoggedInUser(User loggedInUser) {
 		SessionData.loggedInUser = loggedInUser;
 	}
 
 	public static boolean hasLoggedInUser(){
 		return loggedInUser != null;
+	}
+
+	public static User getLoggedInUser() {
+		return loggedInUser;
 	}
 
 	/* Returns the current quiz.
@@ -69,10 +71,6 @@ public class SessionData {
     public static Lesson getCurrentLesson() {
         return currentLesson;
     }
-
-	public static User getLoggedInUser() {
-		return loggedInUser;
-	}
 
 	public static School getCurrentSchool() {
 		return currentSchool;

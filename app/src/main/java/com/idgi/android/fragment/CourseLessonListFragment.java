@@ -17,7 +17,9 @@ import com.idgi.session.SessionData;
 
 import java.util.List;
 
-
+/*
+Shows the lessons of a course.
+ */
 public class CourseLessonListFragment extends Fragment {
 
     public CourseLessonListFragment() {

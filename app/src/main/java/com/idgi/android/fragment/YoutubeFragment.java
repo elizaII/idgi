@@ -13,15 +13,14 @@ import com.idgi.core.Video;
 import com.idgi.Config;
 import com.idgi.session.SessionData;
 
-/**
- * Use the {@link YoutubeFragment#newInstance} factory method to
- * create an instance of this fragment.
+/*
+Displays the YouTube video.
  */
 public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePlayer.OnInitializedListener{
 
     private FragmentListener listener;
 
-    //MUST be multiple of 2000
+    //MUST be multiple of 1000
     private static final int TIME_TO_GET_POINTS = 5 * 1000;
 
     private Handler handler = new Handler();
@@ -39,12 +38,6 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
         listener = (FragmentListener) context;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment YoutubeFragment.
-     */
     public static YoutubeFragment newInstance() {
         return new YoutubeFragment();
     }
@@ -162,7 +155,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 
     private void updateTimeSpentWatching() {
 		if (SessionData.hasLoggedInUser()) {
-			milliSecondsSpentWatching += 2000;
+			milliSecondsSpentWatching += 1000;
 			if (milliSecondsSpentWatching % TIME_TO_GET_POINTS == 0)
 				awardPoints(Config.POINTS_PER_TICK);
 		}

@@ -10,8 +10,6 @@ import com.idgi.core.Subject;
 import java.util.List;
 
 public interface IDatabase {
-
-	IQuiz getQuiz(String key);
 	void retrieveSchools(boolean isOfflineMode);
 	List<School> getSchools();
 	List<Subject> getSubjects(School school);

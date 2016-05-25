@@ -11,12 +11,14 @@ import com.idgi.core.Nameable;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
+/*
+Used to display a Subject in a list.
+ */
 public class SubjectViewHolder extends NameableViewHolder {
 
 	public static final int LAYOUT = R.layout.list_row;
 
 	public TextView nameTextView;
-	public RelativeLayout listBackground;
 	private Nameable nameable;
 
 	public SubjectViewHolder(View view){
@@ -40,7 +42,6 @@ public class SubjectViewHolder extends NameableViewHolder {
 	@Override
 	public void initialize() {
 		nameTextView = (TextView) findViewById(R.id.rowTextView);
-		listBackground = (RelativeLayout) findViewById(R.id.list_background);
 	}
 
 	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {

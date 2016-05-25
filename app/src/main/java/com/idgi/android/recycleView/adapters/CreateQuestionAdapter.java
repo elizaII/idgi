@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.idgi.R;
 
+
 public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAdapter.ViewHolder> {
 
     private List<String> data;

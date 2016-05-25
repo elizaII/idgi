@@ -20,6 +20,9 @@ import com.idgi.core.User;
 import java.util.List;
 import java.util.Locale;
 
+/*
+Used to list replies beneath top-level comments.
+ */
 public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.CommentHolder, ReplyAdapter.ReplyHolder> {
         private LayoutInflater inflater;
 

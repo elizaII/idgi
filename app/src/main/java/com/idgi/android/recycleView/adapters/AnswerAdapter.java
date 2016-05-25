@@ -3,6 +3,7 @@ package com.idgi.android.recycleView.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,9 @@ import com.idgi.core.Answer;
 
 import java.util.List;
 
+/*
+Used by the RecycleView that holds the Answers post-quiz.
+ */
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
 
 	private List<Answer> answers;
@@ -41,7 +45,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 		String text = answer.getText();
 		String feedbackText = getFeedbackText(answer.isSelected(), answer.isCorrect());
 
-
 		holder.answerTextView.setText(text);
 		holder.answerTextView.setTextColor(color);
 		holder.feedbackTextView.setText(feedbackText);
@@ -52,14 +55,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 	}
 
 	private int getColor(boolean correct) {
-		if (correct) {
-			if (Build.VERSION.SDK_INT >= 23)
-				return context.getResources().getColor(R.color.quizResultQuestionCorrectText, context.getTheme());
-			else
-				return context.getResources().getColor(R.color.quizResultQuestionCorrectText);
-		}
-		else
-			return Color.BLACK;
+		return correct ?
+				ContextCompat.getColor(context, R.color.quizResultQuestionCorrectText) :
+				Color.BLACK;
 	}
 
 	private String getFeedbackText(boolean selected, boolean correct) {

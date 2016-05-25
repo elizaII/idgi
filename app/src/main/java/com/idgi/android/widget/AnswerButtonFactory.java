@@ -9,6 +9,9 @@ import com.idgi.R;
 import com.idgi.android.widget.AnswerButton;
 import com.idgi.core.Answer;
 
+/*
+Encapsulates the AnswerButton creation logic
+ */
 public class AnswerButtonFactory {
 
 	private static LinearLayout.LayoutParams buttonLayoutParams = null;

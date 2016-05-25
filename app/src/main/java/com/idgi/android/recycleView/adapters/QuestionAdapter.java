@@ -17,6 +17,9 @@ import com.idgi.core.Question;
 
 import java.util.List;
 
+/*
+Used to list Questions.
+ */
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
 	private List<Question> questions;

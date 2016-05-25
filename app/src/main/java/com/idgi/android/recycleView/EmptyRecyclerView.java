@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
+/*
  * Taken from http://stackoverflow.com/questions/27414173/equivalent-of-listview-setemptyview-in-recyclerview
  * at 10/05/2016
+ *
+ * Allows for a different view to be displayed if a RecyclerView (list) is empty.
  */
 public class EmptyRecyclerView extends RecyclerView {
 	private View emptyView;

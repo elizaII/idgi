@@ -16,6 +16,8 @@ import com.idgi.android.dialog.CreateQuizDialog;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
+import com.idgi.core.Nameable;
+import com.idgi.core.NameableType;
 import com.idgi.core.Question;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
@@ -34,13 +36,6 @@ Lets the teacher create a lesson. The teacher may also create a new school, subj
 course in conjunction with creating the lesson. A quiz can also be added through this activity.
  */
 public class CreateLessonActivity extends AppCompatActivity{
-
-    /*
-     * The type of a list-item that has a name attribute
-     */
-    private enum ItemType {
-        SCHOOL, SUBJECT, COURSE
-    }
 
     private FireDatabase database = FireDatabase.getInstance();
     private EditText txtLessonName, txtYouTubeUrl;
@@ -122,21 +117,21 @@ public class CreateLessonActivity extends AppCompatActivity{
             txtYouTubeUrl.setText(youtubeUrl);
     }
     public void onClick(View view) {
-        final ItemType requestedType;
+        final NameableType requestedType;
 
 		List<String> itemList = null;
 
         switch (view.getId()) {
             case R.id.add_school_button:
-                requestedType = ItemType.SCHOOL;
+                requestedType = NameableType.SCHOOL;
 				itemList = schoolNames;
                 break;
             case R.id.add_subject_button:
-                requestedType = ItemType.SUBJECT;
+                requestedType = NameableType.SUBJECT;
 				itemList = subjectNames;
                 break;
             case R.id.add_course_button:
-                requestedType = ItemType.COURSE;
+                requestedType = NameableType.COURSE;
 				itemList = courseNames;
                 break;
             default:
@@ -147,7 +142,7 @@ public class CreateLessonActivity extends AppCompatActivity{
         showSelectionDialog(itemList, requestedType);
     }
 
-    private void showSelectionDialog(List<String> list, final ItemType requestedType) {
+    private void showSelectionDialog(List<String> list, final NameableType requestedType) {
         if (list != null) {
             SelectNameableDialog dialog = new SelectNameableDialog(this, getItemTypeName(requestedType), list);
             dialog.show();
@@ -160,7 +155,7 @@ public class CreateLessonActivity extends AppCompatActivity{
         }
     }
 
-    public void selectItem(String name, ItemType type) {
+    public void selectItem(String name, NameableType type) {
         if (name.length() > 0) {
             Button btnEnable = null;
             Button btnText = null;
@@ -293,7 +288,7 @@ public class CreateLessonActivity extends AppCompatActivity{
     public void setSelectedSchool(School school) {
         selectedSchool = school;
 
-        clearChildData(ItemType.SCHOOL);
+        clearChildData(NameableType.SCHOOL);
 
         refreshSubjects();
     }
@@ -304,7 +299,7 @@ public class CreateLessonActivity extends AppCompatActivity{
         if (selectedSchool != null)
             selectedSchool.addSubject(subject);
 
-        clearChildData(ItemType.SUBJECT);
+        clearChildData(NameableType.SUBJECT);
 
         refreshSubjects();
         refreshCourses();
@@ -316,7 +311,7 @@ public class CreateLessonActivity extends AppCompatActivity{
         if (selectedSubject != null)
             selectedSubject.addCourse(course);
 
-        clearChildData(ItemType.COURSE);
+        clearChildData(NameableType.COURSE);
         refreshCourses();
     }
 
@@ -326,7 +321,7 @@ public class CreateLessonActivity extends AppCompatActivity{
         selectedQuiz = quiz;
     }
 
-    private void clearChildData(ItemType type) {
+    private void clearChildData(NameableType type) {
         //No break is intentional, we want cascading behavior
         switch(type) {
             case SCHOOL:
@@ -340,9 +335,9 @@ public class CreateLessonActivity extends AppCompatActivity{
 
 	private void clearSubject() {
 		if (selectedSubject != null) {
-            CreateLessonActivity.selectedSubject = null;
+            selectedSubject = null;
 			courseNames.clear();
-			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "ämne");
+			String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), getResources().getString(R.string.subject));
 			btnAddSubject.setText(text);
 			btnAddCourse.setEnabled(false);
 		}
@@ -351,7 +346,7 @@ public class CreateLessonActivity extends AppCompatActivity{
     private void clearCourse() {
         CreateLessonActivity.selectedCourse = null;
 
-		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "kurs");
+		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), getResources().getString(R.string.course));
         btnAddCourse.setText(text);
 		btnAddQuiz.setEnabled(false);
     }
@@ -359,12 +354,12 @@ public class CreateLessonActivity extends AppCompatActivity{
 	private void clearQuiz() {
 		questionList.clear();
         CreateLessonActivity.selectedQuiz = null;
-		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), "quiz");
+		String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), getResources().getString(R.string.quiz));
 		btnAddQuiz.setText(text);
 	}
 
 	// Returns a localized name of the ItemType from resources
-	private String getItemTypeName(ItemType itemType) {
+	private String getItemTypeName(NameableType itemType) {
 		switch (itemType) {
 			case SCHOOL:
 				return getResources().getString(R.string.school);

@@ -1,5 +1,8 @@
 package com.idgi.core;
 
+/*
+Hats are used as reward upon reaching certain point milestones.
+ */
 public class Hat implements Nameable {
 
     private int imageId;
@@ -12,8 +15,8 @@ public class Hat implements Nameable {
 
     }
 
-    public Type getType() {
-        return Type.HAT;
+    public NameableType getType() {
+        return NameableType.HAT;
     }
 
     public void setKey(String key) {
@@ -56,6 +59,7 @@ public class Hat implements Nameable {
         this.description = description;
     }
 
+    /** Auxilliary method, equivalent to getPoints */
     public int pointRequirement() {
         return getPoints();
     }

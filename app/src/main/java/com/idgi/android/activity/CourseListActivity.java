@@ -18,7 +18,7 @@ import com.idgi.session.SessionData;
 
 import java.util.List;
 
-public class CourseListActivity extends NameableListActivity{
+public class CourseListActivity extends NameableListActivity {
 
     @Override
     protected String getTitleName() {

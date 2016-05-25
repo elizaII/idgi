@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
+/*
  * Manual workaround for search suggestions without
  * SQL-database.
  */
@@ -87,7 +87,6 @@ public class SearchSuggestions {
 
         cursor.moveToFirst();
         adapter.changeCursor(cursor);
-        //adapter.swapCursor(cursor);
         adapter.notifyDataSetChanged();
     }
 

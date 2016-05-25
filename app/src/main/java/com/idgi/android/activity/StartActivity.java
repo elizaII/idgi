@@ -89,6 +89,8 @@ public class StartActivity extends DrawerActivity {
 		user.setAge(9);
 		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
+
+		startActivity(new Intent(this, CreateLessonActivity.class));
 	}
 
 	public void onAccountButtonClick(View view) {

@@ -17,13 +17,15 @@ import com.idgi.core.Nameable;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
+/*
+Used to display a Lesson in a list.
+ */
 public class LessonViewHolder extends NameableViewHolder {
 
 	public static final int LAYOUT = R.layout.list_row_lesson;
 
 	public TextView nameTextView;
 	public YouTubeThumbnailView lessonThumbnail;
-	public RelativeLayout listBackground;
 	private Nameable nameable;
 
 	public LessonViewHolder(View view) {
@@ -69,14 +71,10 @@ public class LessonViewHolder extends NameableViewHolder {
 	public void initialize() {
 		nameTextView = (TextView) findViewById(R.id.rowTextView);
 		lessonThumbnail = (YouTubeThumbnailView) findViewById(R.id.lesson_thumbnail);
-		listBackground = (RelativeLayout) findViewById(R.id.list_background);
 	}
 
 	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {
 		View view = getLayout(inflater, parent, LAYOUT);
 		return new LessonViewHolder(view);
-	}
-
-	public void destroy() {
 	}
 }

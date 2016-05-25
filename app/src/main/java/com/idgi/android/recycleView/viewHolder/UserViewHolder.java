@@ -11,6 +11,9 @@ import com.idgi.core.Nameable;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
+/*
+Used to display a User in a list.
+ */
 public class UserViewHolder extends NameableViewHolder {
 
 	public static final int LAYOUT = R.layout.list_row;

@@ -8,6 +8,9 @@ import com.idgi.core.Nameable;
 import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 
+/*
+Template class for displaying Nameables in lists.
+ */
 public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 	private View rootView;
 

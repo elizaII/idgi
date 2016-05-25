@@ -5,6 +5,7 @@
     <string name="school">skola</string>
     <string name="subject">ämne</string>
     <string name="course">kurs</string>
+    <string name="quiz">quiz</string>
     <string name="answer">svar</string>
 
     <string name="teacher">Lärare</string>
@@ -17,6 +18,7 @@
 
     <string name="quiz_next_question">Nästa fråga</string>
     <string name="quiz_finish">Slutför</string>
+    <string name="quiz_no_hint">Det finns ingen ledtråd.</string>
 
 
     <!-- Strings related to login -->

@@ -17,6 +17,10 @@
         android:textColor="@color/colorAccent"
         android:layout_marginTop="@dimen/spacing_normal"
         android:text="@string/dialog_login_required_button_login"
-        android:layout_gravity="center"/>
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingEnd="@dimen/spacing_large"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 </LinearLayout>

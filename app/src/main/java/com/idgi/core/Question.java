@@ -13,8 +13,6 @@ import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Question implements ParentListItem {
-
-	private static final String NO_HINTS_MESSAGE = "There are no hints for this question.";
 	
 	private String text;
 	private String hint;
@@ -33,7 +31,7 @@ public class Question implements ParentListItem {
 	}
 
 	public Question(String text) {
-		this(text, NO_HINTS_MESSAGE, new ArrayList<Answer>());
+		this(text, "", new ArrayList<Answer>());
 	}
 
 	public void addAnswer(Answer answer) {

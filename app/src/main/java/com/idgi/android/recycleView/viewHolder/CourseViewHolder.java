@@ -19,6 +19,9 @@ import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
+/*
+Used to display a Course in a list.
+ */
 public class CourseViewHolder extends NameableViewHolder {
 
 	public static final int LAYOUT = R.layout.course_list_listitem_course;

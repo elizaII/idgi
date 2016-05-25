@@ -3,10 +3,13 @@ package com.idgi.android.activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
+import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.Nameable;
 import com.idgi.android.recycleView.RecyclerViewUtility;
 import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.event.BusEvent;
 
 import java.util.List;
 
@@ -43,5 +46,14 @@ public abstract class NameableListActivity extends DrawerActivity {
 		RecyclerView recycler = (RecyclerView) findViewById(R.id.activity_list_nameable_recycler_view);
 		NameableAdapter adapter = new NameableAdapter(this, getNameables());
 		RecyclerViewUtility.connect(this, recycler, adapter);
+	}
+
+	@Subscribe
+	public void onLoginRequiredEvent(BusEvent busEvent) {
+		switch (busEvent.getEvent()) {
+			case LOGIN_REQUIRED_DIALOG:
+				DialogFactory.createLoginRequiredDialog(this).show();
+				break;
+		}
 	}
 }

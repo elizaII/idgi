@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+A general adapter used by every list that displays Nameables.
+ */
 public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<? extends Nameable> nameables;

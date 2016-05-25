@@ -13,6 +13,9 @@ import com.idgi.event.Event;
 
 import java.util.Locale;
 
+/*
+Used to display a Hat in a list.
+ */
 public class HatViewHolder extends NameableViewHolder {
 
 	public static final int LAYOUT = R.layout.list_row_hat;

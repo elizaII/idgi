@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.recycleView.RecyclerViewUtility;
 import com.idgi.android.recycleView.adapters.SelectNameableAdapter;
+import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,7 +26,7 @@ import java.util.Locale;
 /*
 Dialog that presents a list of Nameables.
  */
-public class SelectNameableDialog extends Dialog implements PropertyChangeListener {
+public class SelectNameableDialog extends Dialog {
     private EditText txtCreateNew;
     private SelectNameableAdapter adapter;
     private List<String> itemNames;
@@ -43,6 +46,8 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.selection_dialog);
+
+		ApplicationBus.register(this);
 
 		loadResources();
 		initializeRecyclerView();
@@ -67,11 +72,9 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
 
 		adapter = new SelectNameableAdapter(getContext(), this.itemNames);
-		adapter.addPropertyChangeListener(this);
 		RecyclerViewUtility.connect(getContext(), recyclerView, adapter);
 	}
 
-    /* Triggers when you click an element in the list, like a School or Subject. */
     private final View.OnClickListener onCreateClick = new View.OnClickListener() {
         public void onClick(View view) {
             String itemText = txtCreateNew.getText().toString();
@@ -84,15 +87,21 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
 		this.selectedItemText = itemName;
 	}
 
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		switch(event.getPropertyName()) {
-			case "listItemSelected":
-				String itemText = (String) event.getNewValue();
-				setSelectedItemText(itemText);
+	@Subscribe
+	public void onNameableSelected(BusEvent busEvent) {
+		switch(busEvent.getEvent()) {
+			case NAMEABLE_SELECTED:
+				setSelectedItemText((String) busEvent.getData());
 				dismiss();
 				break;
+			default:
 		}
+	}
+
+	@Override
+	public void dismiss() {
+		ApplicationBus.unregister(this);
+		super.dismiss();
 	}
 
 	public String getSelectedItemText() {

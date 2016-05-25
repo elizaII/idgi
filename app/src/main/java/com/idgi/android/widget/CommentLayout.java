@@ -6,6 +6,9 @@ import android.widget.RelativeLayout;
 
 import com.idgi.core.Comment;
 
+/*
+Lets us access the Comment associated with a list-item representing a Comment.
+ */
 public class CommentLayout extends RelativeLayout {
 
 

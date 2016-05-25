@@ -26,6 +26,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+/*
+The currently used database implementation. Data is stored on a remote server as JSON.
+ */
 public class FireDatabase implements IDatabase {
 	private static volatile FireDatabase instance = null;
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
@@ -35,10 +38,6 @@ public class FireDatabase implements IDatabase {
 	private List<Hat> hats;
 
 	private List<String> schoolsIssuedForUpdateByKey = new ArrayList<>();
-
-	public IQuiz getQuiz(String key) {
-		return null;
-	}
 
 	/* Push (add) a school to Firebase */
 	public void pushSchool(School school) {
@@ -325,7 +324,6 @@ public class FireDatabase implements IDatabase {
 
 	@Subscribe
 	public void updateUserHats(BusEvent busEvent) {
-		System.out.println("TOTAL HATS: " + hats);
 		if (busEvent.getEvent() == Event.POINTS_UPDATED) {
 			StudentUser user = (StudentUser) busEvent.getData();
 
@@ -335,7 +333,6 @@ public class FireDatabase implements IDatabase {
 					earnedHats.add(hat);
 
 			user.giveHats(earnedHats);
-			System.out.println("HATS: " + user.getHats().size());
 		}
 	}
 }
