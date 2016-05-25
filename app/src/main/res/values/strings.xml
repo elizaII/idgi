@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">IDGI</string>
+    <string name="app_name_underscored"><u>IDGI</u></string>
+    <string name="start">Start</string>
 
     <!-- General -->
     <string name="school">skola</string>

@@ -3,6 +3,7 @@
                                         android:id="@+id/drawer_layout"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
+                                        android:background="@drawable/low_poly_background"
                                         android:fitsSystemWindows="true"
                                         layout="@style/AppTheme.Base">
 
@@ -13,27 +14,28 @@
 
         <include layout="@layout/app_bar"/>
 
-        <ImageView
+        <TextView
+            style="@style/StartTitle"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:id="@+id/imageView"
-            android:background="@drawable/temp_logo"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/app_name"/>
 
         <Button
-            style="@style/menu_button"
+            style="@style/start_menu_button"
             android:text="@string/start_btn_find_course"
             android:id="@+id/start_btn_browse"
             android:onClick="onStartButtonClick" />
 
         <Button
-            style="@style/menu_button"
+            style="@style/start_menu_button"
             android:text="@string/start_btn_log_in"
             android:id="@+id/start_btn_log_in"
             android:onClick="onLogInButtonClick" />
 
         <Button
-            style="@style/menu_button"
+            style="@style/start_menu_button"
             android:text="@string/start_btn_create_account"
             android:id="@+id/start_btn_create_account"
             android:onClick="onCreateAccountButtonClick" />
