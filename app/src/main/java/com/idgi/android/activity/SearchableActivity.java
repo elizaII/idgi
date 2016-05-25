@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchActivity extends DrawerActivity {
+public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
 
