@@ -42,6 +42,21 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	private void initializeForStudent() {
+		initializeWelcomeMessage();
+	}
+
+	private void initializeForTeacher(){
+		initializeWelcomeMessage();
+
+		FloatingActionButton createLessonButton = (FloatingActionButton)
+				findViewById(R.id.start_fab_create_lesson);
+
+		if(createLessonButton != null) {
+			createLessonButton.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void initializeWelcomeMessage() {
 		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
 
 		String welcomeMsg = String.format(Locale.ENGLISH,
@@ -50,14 +65,7 @@ public class StartActivity extends DrawerActivity {
 
 		if(welcomeText != null)
 			welcomeText.setText(welcomeMsg);
-	}
 
-	private void initializeForTeacher(){
-		FloatingActionButton createLessonButton = (FloatingActionButton)
-				findViewById(R.id.start_fab_create_lesson);
-
-		if(createLessonButton != null)
-			createLessonButton.setVisibility(View.VISIBLE);
 	}
 
 	@Override
