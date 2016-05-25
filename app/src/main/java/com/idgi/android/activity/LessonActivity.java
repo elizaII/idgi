@@ -19,7 +19,6 @@ import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.ActivityType;
 import com.idgi.android.dialog.PickQuizDialog;
-import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Student;
 import com.idgi.core.TimedQuiz;
