@@ -9,16 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <include
+      <!--  <include
             android:id="@+id/app_bar"
-            layout="@layout/app_bar"/>
+            layout="@layout/app_bar"/>-->
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_xLarge"
-            android:layout_below="@+id/app_bar">
+            android:padding="@dimen/spacing_xLarge">
+           // android:layout_below="@+id/app_bar"
 
             <TextView
                 android:layout_width="wrap_content"
@@ -27,13 +27,13 @@
                 android:textSize="@dimen/text_size_xLarge"
                 android:text="@string/app_name"/>
 
-            <ImageView
+   <!--         <ImageView
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:alpha="0.45"
                 android:layout_gravity="center"
-                android:src="@drawable/hat_black"
-                />
+                android:src="@drawable/vector_drawable_ic_face_black___px"
+                />-->
             <!--android:src="@drawable/vector_drawable_ic_face_black___px"-->
 
             <!-- Account name -->
@@ -42,13 +42,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+          <!--      <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/hat_black"/>
-
-                <android.support.design.widget.TextInputLayout
+-->                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -68,11 +67,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+<!--                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/hat_black"/>
+                    android:src="@drawable/vector_drawable_ic_lock_black___px"/>-->
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -113,7 +112,7 @@
 
     </RelativeLayout>
 
-    <include
-        layout="@layout/nav_drawer"/>
+<!--    <include
+        layout="@layout/nav_drawer"/>-->
 
 </android.support.v4.widget.DrawerLayout>

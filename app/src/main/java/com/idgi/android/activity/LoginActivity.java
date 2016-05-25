@@ -28,10 +28,9 @@ import android.widget.EditText;
 
 import com.idgi.R;
 import com.idgi.core.User;
-import com.idgi.android.activities.extras.DrawerActivity;
 import com.idgi.core.Account;
-import com.idgi.services.FireDatabase;
-import com.idgi.services.IDatabase;
+import com.idgi.service.FireDatabase;
+import com.idgi.service.IDatabase;
 import com.idgi.session.SessionData;
 
 /**

@@ -42,8 +42,7 @@
             android:label="@string/title_activity_course_list" />
         <activity
             android:name=".android.activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".android.activity.CreateAccountActivity"
             android:label="@string/title_activity_create_account"
