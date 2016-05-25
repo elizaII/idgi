@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"event", "data"})
 public class BusEvent {
 
-    private Event event;
-    private Object data;
+    private final Event event;
+    private final Object data;
 
     public BusEvent(Event event, Object data){
         this.event = event;
