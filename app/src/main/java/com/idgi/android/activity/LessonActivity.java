@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.ActivityType;
+import com.idgi.android.dialog.CommentReplyDialog;
+import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Student;
@@ -131,13 +133,14 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
 	private void showRequireLoginDialog() {
-		DialogFactory.createLoginRequiredDialog(this).show();
+        Dialog loginDialog = LoginRequiredDialog.createLoginRequiredDialog(this);
+        loginDialog.show();
 	}
 
 	private void showReplyDialog(View childView) {
 		final CommentLayout parentLayout = (CommentLayout) childView.getParent();
 
-		Dialog replyDialog = DialogFactory.createCommentReplyDialog(this, parentLayout);
+		Dialog replyDialog = CommentReplyDialog.createCommentReplyDialog(this, parentLayout);
 		replyDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			public void onDismiss(DialogInterface dialog) {
 				refreshComments();
