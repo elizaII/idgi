@@ -32,6 +32,8 @@ public class StartActivity extends DrawerActivity {
 		if (!SessionData.hasLoggedInUser())
 			setContentView(R.layout.activity_start_not_logged_in);
 		else {
+			setContentView(R.layout.activity_start_logged_in);
+
 			if (SessionData.getLoggedInUser() instanceof Student)
 				initializeForStudent();
 			else
@@ -40,7 +42,6 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	private void initializeForStudent() {
-		setContentView(R.layout.activity_start_logged_in);
 		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
 
 		String welcomeMsg = String.format(Locale.ENGLISH,
