@@ -19,7 +19,7 @@
         android:hardwareAccelerated="true">
         <meta-data
             android:name="android.app.default_searchable"
-            android:value=".android.activity.SearchActivity" />
+            android:value=".android.activity.SearchableActivity" />
         <activity
             android:name=".android.activity.StartActivity"
             android:label="@string/app_name">

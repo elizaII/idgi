@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/app_bar"
+            android:id="@+id/appbar"
             layout="@layout/app_bar"/>
 
             <android.support.v7.widget.RecyclerView
@@ -19,8 +19,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/searchable_recycler_view"
                 android:scrollbars="vertical"
-                android:padding="@dimen/spacing_normal"
-                android:layout_below="@+id/app_bar"/>
+                android:layout_below="@+id/appbar"/>
     </RelativeLayout>
 
     <include
