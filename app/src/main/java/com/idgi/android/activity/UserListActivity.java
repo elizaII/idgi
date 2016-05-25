@@ -1,22 +1,18 @@
 package com.idgi.android.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.idgi.R;
+import com.idgi.android.recycleView.RecyclerViewUtility;
+import com.idgi.android.recycleView.adapters.NameableAdapter;
 import com.idgi.core.User;
-import com.idgi.android.recycleView.adapters.UserListAdapter;
 import com.idgi.service.FireDatabase;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by tove on 2016-05-21.
- */
 public class UserListActivity extends DrawerActivity {
 
     @Override
@@ -24,18 +20,13 @@ public class UserListActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        initializeUserList();
         String title = getResources().getString(R.string.list_user_name);
         super.initializeWithTitle(title);
+
+        initializeUserList();
     }
 
     private void initializeUserList() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.list_user_name));
-
-        initializeDrawer();
-
         List<User> users = FireDatabase.getInstance().getUsers();
 
         Collections.sort(users, new Comparator<User>() {
@@ -45,13 +36,9 @@ public class UserListActivity extends DrawerActivity {
             }
         });
 
-        RecyclerView.Adapter adapter = new UserListAdapter(this, users);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        RecyclerView.Adapter adapter = new NameableAdapter(this, users);
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.user_list_recycler_view);
-        if (recycler != null) {
-            recycler.setAdapter(adapter);
-            recycler.setLayoutManager(manager);
-        }
+        RecyclerViewUtility.connect(this, recycler, adapter);
     }
 }

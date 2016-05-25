@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.android.recycleView.RecyclerViewUtility;
 import com.idgi.android.recycleView.adapters.SelectNameableAdapter;
 
 import java.beans.PropertyChangeEvent;
@@ -19,6 +20,9 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Locale;
 
+/*
+Dialog that presents a list of Nameables.
+ */
 public class SelectNameableDialog extends Dialog implements PropertyChangeListener {
     private EditText txtCreateNew;
     private SelectNameableAdapter adapter;
@@ -61,11 +65,10 @@ public class SelectNameableDialog extends Dialog implements PropertyChangeListen
 
 	private void initializeRecyclerView() {
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.param_list_recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		adapter = new SelectNameableAdapter(getContext(), this.itemNames);
 		adapter.addPropertyChangeListener(this);
-		recyclerView.setAdapter(adapter);
+		RecyclerViewUtility.connect(getContext(), recyclerView, adapter);
 	}
 
     /* Triggers when you click an element in the list, like a School or Subject. */

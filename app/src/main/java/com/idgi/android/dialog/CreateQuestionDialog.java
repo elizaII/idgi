@@ -14,6 +14,9 @@ import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.event.ApplicationBus;
 
+/*
+Dialog that is presented during the quiz creation process.
+ */
 public class CreateQuestionDialog extends Dialog {
 
     private Button btnCreateQuiz;

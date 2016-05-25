@@ -13,8 +13,10 @@ import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
-public class
-PickQuizDialog extends Dialog{
+/*
+Dialog for selecting which quiz type one wants to use.
+ */
+public class PickQuizDialog extends Dialog{
 
     private Button normalQuizBtn, timedQuizBtn;
 

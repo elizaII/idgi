@@ -19,7 +19,7 @@ import java.util.ArrayList;
         @JsonSubTypes.Type(value = StudentUser.class, name = "student"),
         @JsonSubTypes.Type(value = TeacherUser.class, name = "teacher")
 })
-public abstract class User {
+public abstract class User implements Nameable {
     private String name;
     private String email;
     private String phoneNumber;
@@ -107,5 +107,10 @@ public abstract class User {
     public static String getLoggedInUserEmail(Activity activity) {
         SharedPreferences sharedPref = activity.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         return sharedPref.getString("email", null);
+    }
+
+    @Override
+    public Type getType() {
+        return Type.USER;
     }
 }

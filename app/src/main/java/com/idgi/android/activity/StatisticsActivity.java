@@ -10,6 +10,9 @@ import com.idgi.session.SessionData;
 
 import java.util.Locale;
 
+/*
+Displays the statistics page for a User.
+ */
 public class StatisticsActivity extends DrawerActivity {
 	private TextView txtCompletedCourses, txtOngoingCourses, txtCompletedQuizAmount,
 			txtSeenVideosAmount, txtCommentAmount, txtPoints;

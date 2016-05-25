@@ -19,6 +19,9 @@ import com.idgi.android.recycleView.adapters.CreateQuestionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Dialog for creating a quiz during the lesson creation process.
+ */
 public class CreateQuizDialog extends Dialog {
 
     private RecyclerView.LayoutManager manager;

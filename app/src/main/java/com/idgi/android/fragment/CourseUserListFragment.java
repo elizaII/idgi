@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.android.recycleView.adapters.NameableAdapter;
 import com.idgi.core.User;
 import com.idgi.android.recycleView.EmptyRecyclerView;
 import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.UserListAdapter;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 
@@ -21,9 +21,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by tove on 2016-05-21.
- */
 public class CourseUserListFragment extends Fragment {
 
     public CourseUserListFragment() {
@@ -52,7 +49,7 @@ public class CourseUserListFragment extends Fragment {
             }
         });
 
-        UserListAdapter adapter = new UserListAdapter(getContext(), users);
+        NameableAdapter adapter = new NameableAdapter(getContext(), users);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.course_user_list_recycler_view);
