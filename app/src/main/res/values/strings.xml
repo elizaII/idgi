@@ -155,7 +155,6 @@
 
     <!-- For CreateLessonActivity -->
     <string name="create_account_hint_password">Lösenord</string>
-    <string name="create_account_successful_toast">Ditt konto har skapats</string>
 
     <!-- Searchable-->
     <string name="idgi">IDGI</string>
