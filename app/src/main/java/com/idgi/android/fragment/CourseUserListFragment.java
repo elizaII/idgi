@@ -58,7 +58,7 @@ public class CourseUserListFragment extends Fragment {
         View emptyView = view.findViewById(R.id.course_user_list_empty_view);
         recycler.setEmptyView(emptyView);
 
-        TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
+        TextView textView = (TextView) view.findViewById(R.id.list_empty_view_text);
         textView.setText(getResources().getString(R.string.course_no_users));
 
         return view;

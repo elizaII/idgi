@@ -26,7 +26,7 @@ public class MyCoursesActivity extends DrawerActivity {
 		String title = getResources().getString(R.string.title_activity_my_course);
 		initializeWithTitle(title);
 
-        TextView textView = (TextView) findViewById(R.id.lesson_list_empty_view_text);
+        TextView textView = (TextView) findViewById(R.id.list_empty_view_text);
 		if (textView != null)
         	textView.setText(getResources().getString(R.string.course_no_courses));
 

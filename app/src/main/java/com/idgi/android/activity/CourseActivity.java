@@ -142,7 +142,7 @@ public class CourseActivity extends DrawerActivity{
     /* Updates the text that is shown if a list is empty */
     private void updateEmptyTextInView(View view, String text) {
 
-        TextView textView = (TextView) view.findViewById(R.id.lesson_list_empty_view_text);
+        TextView textView = (TextView) view.findViewById(R.id.list_empty_view_text);
         textView.setText(text);
     }
 

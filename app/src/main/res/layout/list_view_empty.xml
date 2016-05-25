@@ -7,7 +7,7 @@ android:layout_height="match_parent">
     <!--Replaced source in ImageView-->
     <!--android:src="@drawable/vector_drawable_ic_sentiment_dissatisfied_black___px"-->
     <ImageView
-        android:id="@+id/lesson_list_empty_view_image"
+        android:id="@+id/list_empty_view_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
@@ -16,10 +16,10 @@ android:layout_height="match_parent">
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"/>
     <TextView
-        android:id="@+id/lesson_list_empty_view_text"
+        android:id="@+id/list_empty_view_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_large"
-        android:layout_below="@id/lesson_list_empty_view_image"
+        android:layout_below="@id/list_empty_view_image"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

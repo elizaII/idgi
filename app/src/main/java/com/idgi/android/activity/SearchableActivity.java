@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
+import com.idgi.android.recyclerview.EmptyRecyclerView;
 import com.idgi.core.Nameable;
 import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
@@ -50,8 +53,21 @@ public class SearchableActivity extends DrawerActivity {
 		NameableAdapter adapter = new NameableAdapter(this, searchResults);
 		RecyclerViewUtility.connect(this, recycler, adapter);
 
+        EmptyRecyclerView emptyRecyclerView = new EmptyRecyclerView(this);
+        RecyclerViewUtility.connect(this, emptyRecyclerView, adapter);
+
+        setupEmptyListLayout(emptyRecyclerView);
+
         String title = getResources().getString(R.string.search_title);
         super.initializeWithTitle(title);
+    }
+
+    private void setupEmptyListLayout(EmptyRecyclerView recycler) {
+        View emptyView = findViewById(R.id.lesson_list_empty_view);
+        recycler.setEmptyView(emptyView);
+
+        TextView textView = (TextView) findViewById(R.id.list_empty_view_text);
+        textView.setText(getResources().getString(R.string.search_no_matches));
     }
 
     @Override

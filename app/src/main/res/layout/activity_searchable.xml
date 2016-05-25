@@ -25,4 +25,7 @@
     <include
         layout="@layout/nav_drawer"/>
 
+    <include
+        layout="@layout/list_view_empty"/>
+
 </android.support.v4.widget.DrawerLayout>
