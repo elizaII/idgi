@@ -7,10 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.Course;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.User;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.session.SessionData;
@@ -27,6 +29,8 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	public CourseViewHolder(View view){
 		super(view);
+
+		addToCoursesButton.setOnClickListener(onAddToCoursesClick);
 		view.setOnClickListener(onViewClick);
 	}
 
@@ -49,13 +53,13 @@ public class CourseViewHolder extends NameableViewHolder {
 				if (course != null) {
 					currentUser.removeFromMyCourses(course);
 					button.setText(R.string.add_to_my_courses);
-					// TODO Subscribe adapter to events of this class and implement sending
-					// TODO of events in this class, so adapter can update itself when necessary.
-					//adapter.notifyDataSetChanged();
 				} else {
-					currentUser.addToMyCourses(course);
+					currentUser.addToMyCourses((Course) nameable);
 					button.setText(R.string.added_to_my_courses);
 				}
+			} else {
+				BusEvent event = new BusEvent(Event.LOGIN_REQUIRED_DIALOG, null);
+				ApplicationBus.post(event);
 			}
 		}
 	};
@@ -66,7 +70,6 @@ public class CourseViewHolder extends NameableViewHolder {
 		descriptionTextView = (TextView) findViewById(R.id.courseDescriptionTextView);
 		breadCrumbTextView = (TextView) findViewById(R.id.courseInformationTextView);
 		addToCoursesButton = (Button) findViewById(R.id.course_list_listitem_course_my_courses_button);
-		addToCoursesButton.setOnClickListener(onAddToCoursesClick);
 	}
 
 	@Override
@@ -78,8 +81,7 @@ public class CourseViewHolder extends NameableViewHolder {
 		setDescription(course.getDescription());
 		setBreadCrumb(course);
 
-		if (SessionData.hasLoggedInUser())
-			updateAddToCoursesButton(SessionData.getLoggedInUser(), course);
+		updateAddToCoursesButton(course);
 	}
 
 	private void setName(String name) {
@@ -93,12 +95,13 @@ public class CourseViewHolder extends NameableViewHolder {
 			descriptionTextView.setText(description);
 	}
 
-	private void updateAddToCoursesButton(User user, Course course) {
-		boolean hasCourse = user.hasCourse(course);
-		int resource = hasCourse ? R.string.added_to_my_courses : R.string.log_in_message;
+	private void updateAddToCoursesButton(Course course) {
+		User user = SessionData.getLoggedInUser();
+
+		boolean hasCourse = user != null && user.hasCourse(course);
+		int resource = hasCourse ? R.string.added_to_my_courses : R.string.add_to_my_courses;
 
 		addToCoursesButton.setText(resource);
-		addToCoursesButton.setEnabled(hasCourse);
 	}
 
 	private void setBreadCrumb(Course course) {
