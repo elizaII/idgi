@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.idgi.R;
+import com.idgi.core.Student;
 import com.idgi.core.User;
-import com.idgi.core.StudentUser;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
@@ -42,9 +42,9 @@ public class ProfileActivity extends DrawerActivity {
            txtAge.setText(user.getEmail());
 
 //      if (user.getType() == User.Type.Student) {
-           if (user instanceof StudentUser) {
+           if (user instanceof Student) {
                points = (TextView) findViewById(R.id.profile_textView_nrOfPoints);
-               points.setText(String.valueOf(((StudentUser) user).getPoints()));
+               points.setText(String.valueOf(((Student) user).getPoints()));
            }
        }
         initializeDrawer();

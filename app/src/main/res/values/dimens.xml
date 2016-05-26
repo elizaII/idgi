@@ -25,4 +25,7 @@
     <dimen name="spacing_xLarge">36dp</dimen>
     <dimen name="spacing_gargantuan">60dp</dimen>
     <dimen name="list_item_vertical_margin">5dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="text_elevation">6dp</dimen>
 </resources>

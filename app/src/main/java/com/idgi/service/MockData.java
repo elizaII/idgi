@@ -10,7 +10,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.core.School;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
@@ -165,7 +165,7 @@ public final class MockData {
 	}
 
 	private User getUser() {
-		User user = new StudentUser("Pelle");
+		User user = new Student("Pelle");
 		user.setEmail("pelles_mail@gmail.com");
 		user.setAge(9);
 

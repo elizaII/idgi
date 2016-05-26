@@ -1,5 +1,6 @@
 package com.idgi.session;
 
+import com.idgi.core.Account;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
@@ -16,8 +17,8 @@ public class SessionData {
 	private static School currentSchool;
 	private static Course currentCourse;
 	private static Lesson currentLesson;
-	private static User loggedInUser;
 	private static IQuiz currentQuiz;
+	private static Account loggedInAccount;
 
 	public static Subject getCurrentSubject() {
 		return currentSubject;
@@ -37,16 +38,15 @@ public class SessionData {
 		currentCourse = course;
 	}
 
-	public static void setLoggedInUser(User loggedInUser) {
-		SessionData.loggedInUser = loggedInUser;
-	}
+    public static User getLoggedInUser() {
+        return loggedInAccount.getUser();
+    }
 
-	public static boolean hasLoggedInUser(){
-		return loggedInUser != null;
-	}
-
-	public static User getLoggedInUser() {
-		return loggedInUser;
+    public static boolean hasLoggedInUser(){
+        if (loggedInAccount == null) {
+            return false;
+        }
+        return loggedInAccount.getUser() != null;
 	}
 
 	/* Returns the current quiz.
@@ -80,4 +80,11 @@ public class SessionData {
 		currentSchool = school;
 	}
 
+	public static void setLoggedInAccount(Account account) {
+		loggedInAccount = account;
+	}
+
+    public static Account getLoggedInAccount() {
+        return loggedInAccount;
+    }
 }

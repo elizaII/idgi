@@ -1,5 +1,7 @@
 package com.idgi.service;
 
+import android.util.Log;
+
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -15,7 +17,7 @@ import com.idgi.core.Lesson;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.event.BusEvent;
@@ -79,16 +81,6 @@ public class FireDatabase implements IDatabase {
         }
 
 		return users;
-	}
-
-	/* Push (add) an account to Firebase */
-	public void pushAccount(Account account) {
-		Firebase push = ref.child("accounts").push();
-
-		account.setKey(push.getKey());
-		push.setValue(account);
-
-		pushAccountInfo(account, push.getKey());
 	}
 
 	private void pushAccountInfo(Account account, String key) {
@@ -325,7 +317,7 @@ public class FireDatabase implements IDatabase {
 	@Subscribe
 	public void updateUserHats(BusEvent busEvent) {
 		if (busEvent.getEvent() == Event.POINTS_UPDATED) {
-			StudentUser user = (StudentUser) busEvent.getData();
+			Student user = (Student) busEvent.getData();
 
 			List<Hat> earnedHats = new ArrayList<>();
 			for (Hat hat : hats)
@@ -333,6 +325,36 @@ public class FireDatabase implements IDatabase {
 					earnedHats.add(hat);
 
 			user.giveHats(earnedHats);
+		}
+	}
+
+	public Account getAccount(String accountName, String password) {
+		for (Account account : accounts)
+			if (accountName.equals(account.getName()) || accountName.equals(account.getUser().getEmail()))
+				if (password.equals(account.getPassword()))
+					return account;
+
+		return null;
+	}
+
+	private boolean accountExists(Account newAccount) {
+		for (Account account : accounts)
+			if(account.equals(newAccount))
+				return true;
+
+		return false;
+	}
+
+	/* Push (add) an account to Firebase */
+	public void pushAccount(Account account) {
+		if (accountExists(account)) {
+			String path = String.format(Locale.ENGLISH, "accounts/%s", account.getKey());
+			ref.child(path).setValue(account);
+		} else {
+			Firebase push = ref.child("accounts").push();
+
+			account.setKey(push.getKey());
+			push.setValue(account);
 		}
 	}
 }

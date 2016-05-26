@@ -18,10 +18,11 @@ import android.widget.TextView;
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.ActivityType;
+import com.idgi.android.dialog.CommentReplyDialog;
+import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.android.dialog.PickQuizDialog;
-import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.IQuiz;
-import com.idgi.core.StudentUser;
+import com.idgi.core.Student;
 import com.idgi.core.TimedQuiz;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
@@ -65,7 +66,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
         initializeWithTitle(title);
 
-        if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof StudentUser))
+        if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student))
             initializePointsBar();
 
         if(lesson.hasQuiz()){
@@ -93,8 +94,9 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
 		if (pointProgressBar != null) {
 			pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
-            if(SessionData.getLoggedInUser() instanceof StudentUser){
-                StudentUser student = (StudentUser) SessionData.getLoggedInUser();
+
+            if(SessionData.getLoggedInUser() instanceof Student){
+                Student student = (Student) SessionData.getLoggedInUser();
 			    pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
             }
 		}
@@ -131,13 +133,14 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
 	private void showRequireLoginDialog() {
-		DialogFactory.createLoginRequiredDialog(this).show();
+        Dialog loginDialog = LoginRequiredDialog.createLoginRequiredDialog(this);
+        loginDialog.show();
 	}
 
 	private void showReplyDialog(View childView) {
 		final CommentLayout parentLayout = (CommentLayout) childView.getParent();
 
-		Dialog replyDialog = DialogFactory.createCommentReplyDialog(this, parentLayout);
+		Dialog replyDialog = CommentReplyDialog.createCommentReplyDialog(this, parentLayout);
 		replyDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			public void onDismiss(DialogInterface dialog) {
 				refreshComments();

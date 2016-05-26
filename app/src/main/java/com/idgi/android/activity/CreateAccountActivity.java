@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,26 +15,22 @@ import android.widget.Toast;
 
 import com.idgi.R;
 import com.idgi.core.Account;
-import com.idgi.core.StudentUser;
-import com.idgi.core.TeacherUser;
+import com.idgi.core.Student;
+import com.idgi.core.Teacher;
 import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 
-/*
-Activity for creating either a Student or a Teacher account.
- */
-public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
+    private static final String ACCOUNT_TYPE_STUDENT = "Student";
+    private static final String ACCOUNT_TYPE_TEACHER = "Lärare";
 
     private EditText nameText;
     private EditText phoneText;
     private EditText eMailText;
     private EditText passwordText;
-
-    private String student, teacher;
-
-    private Spinner accountTypeSpinner;
-
+    private String selectedAccountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,74 +39,65 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initialize();
-
-        Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
-        if (createAccountButton != null)
-            createAccountButton.setOnClickListener(this);
-    }
-
-    private void initialize() {
-        student = getResources().getString(R.string.student);
-        teacher = getResources().getString(R.string.teacher);
-
         nameText = (EditText) findViewById(R.id.nameText);
         phoneText = (EditText) findViewById(R.id.phoneText);
         eMailText = (EditText) findViewById(R.id.eMailText);
         passwordText = (EditText) findViewById(R.id.create_account_edittext_password);
 
-        initializeSpinner();
-    }
-
-    private void initializeSpinner() {
-        accountTypeSpinner = (Spinner) findViewById(R.id.create_account_spinner_account_type);
-        String[] items = new String[]{student, teacher};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        Spinner accountTypeSpinner = (Spinner) findViewById(R.id.create_account_spinner_account_type);
+        String[] items = new String[]{ACCOUNT_TYPE_STUDENT, ACCOUNT_TYPE_TEACHER};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         if (accountTypeSpinner != null) {
             accountTypeSpinner.setAdapter(adapter);
+            accountTypeSpinner.setOnItemSelectedListener(this);
 
             // Set default account type to Student.
             accountTypeSpinner.setSelection(0);
+            selectedAccountType = ACCOUNT_TYPE_STUDENT;
+        }
+
+        Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
+        if (createAccountButton != null) {
+            createAccountButton.setOnClickListener(this);
         }
     }
 
     public void createAccount() {
+        String name = this.nameText.getText().toString();
         String email = this.eMailText.getText().toString();
         String password = this.passwordText.getText().toString();
 
-        User user = createNewUser(email);
-
         Account account = new Account(email, password);
+
+        User user;
+        if (selectedAccountType.equals(ACCOUNT_TYPE_STUDENT)) {
+            user = new Student(name);
+        } else {
+            user = new Teacher(name);
+        }
+        user.setEmail(email);
         account.setUser(user);
 
+        String phone = phoneText.getText().toString();
+        if (phone.isEmpty()) {
+            user.setPhoneNumber("N/A");
+        } else {
+            user.setPhoneNumber(phone);
+        }
+
+        user.saveEmailToLocalStorage(this);
+
+        Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
+
         FireDatabase.getInstance().pushAccount(account);
-        SessionData.setLoggedInUser(user);
+        SessionData.setLoggedInAccount(account);
 
         Toast.makeText(this, R.string.create_account_successful_toast, Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(this, StartActivity.class));
     }
-
-    private User createNewUser(String email) {
-        String name = this.nameText.getText().toString();
-        String accountType = getSelectedAccounType();
-        boolean makeStudent = student.equals(accountType);
-
-        User user = makeStudent ? new StudentUser(name) : new TeacherUser(name);
-        user.setPhoneNumber(getPhoneNumber());
-        user.setEmail(email);
-        user.saveEmailToLocalStorage(this);
-
-        return user;
-    }
-
-    private String getPhoneNumber() {
-        String phoneNumber = phoneText.getText().toString();
-        return phoneNumber.isEmpty() ? "N/A" : phoneNumber;
-    }
-
     private boolean formIsValid() {
         if (nameText.getText().toString().equals("")) {
             return false;
@@ -127,7 +116,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public String getSelectedAccounType() {
-        return accountTypeSpinner.getSelectedItem().toString();
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedAccountType = (String) parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Do nothing.
     }
 }

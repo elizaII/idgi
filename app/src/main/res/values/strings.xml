@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">IDGI</string>
+    <string name="app_name_underscored"><u>IDGI</u></string>
+    <string name="start">Start</string>
 
     <!-- General -->
     <string name="school">skola</string>
@@ -86,10 +88,12 @@
     <string name="title_activity_quiz_result">Resultat</string>
 
     <!-- For CreateAccountActivity -->
-    <string name="createAccount_hint_name">Namn</string>
-    <string name="createAccount_hint_email">E-post</string>
+    <string name="createAccount_hint_name">Namn (Obligatoriskt)</string>
+    <string name="createAccount_hint_email">E-post (Obligatoriskt)</string>
     <string name="createAccount_hint_phone">Telefon</string>
     <string name="createAccount_btn_createAccount">Skapa konto</string>
+    <string name="createAccount_hint_password">Lösenord (Obligatoriskt)</string>
+    <string name="create_account_successful_toast">Ditt konto har skapats</string>
 
     <!-- Statistics -->
     <string name="statistics_completed_courses">Avklarade kurser</string>
@@ -155,7 +159,6 @@
 
     <!-- For CreateLessonActivity -->
     <string name="create_account_hint_password">Lösenord</string>
-    <string name="create_account_successful_toast">Ditt konto har skapats</string>
 
     <!-- Searchable-->
     <string name="idgi">IDGI</string>
@@ -173,5 +176,10 @@
     <string name="browse_users_btn_course">Sök via kurs</string>
     <string name="list_user_name">Användare</string>
     <string name="course_no_users">Det finns inga användare här just nu.</string>
+    <string name="login_account_name_hint">Kontonamn</string>
+    <string name="login_password_hint">Lösenord</string>
+    <string name="login_text">Logga in</string>
+    <string name="login_no_account">Skapa konto</string>
+    <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
 
 </resources>

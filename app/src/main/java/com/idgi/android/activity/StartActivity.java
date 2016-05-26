@@ -1,18 +1,13 @@
 package com.idgi.android.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.android.ActivityType;
-import com.idgi.core.StudentUser;
-import com.idgi.core.User;
-import com.idgi.event.Event;
+import com.idgi.core.Student;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
@@ -37,7 +32,9 @@ public class StartActivity extends DrawerActivity {
 		if (!SessionData.hasLoggedInUser())
 			setContentView(R.layout.activity_start_not_logged_in);
 		else {
-			if (SessionData.getLoggedInUser() instanceof StudentUser)
+			setContentView(R.layout.activity_start_logged_in);
+
+			if (SessionData.getLoggedInUser() instanceof Student)
 				initializeForStudent();
 			else
 				initializeForTeacher();
@@ -45,7 +42,21 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	private void initializeForStudent() {
-		setContentView(R.layout.activity_start_logged_in);
+		initializeWelcomeMessage();
+	}
+
+	private void initializeForTeacher(){
+		initializeWelcomeMessage();
+
+		FloatingActionButton createLessonButton = (FloatingActionButton)
+				findViewById(R.id.start_fab_create_lesson);
+
+		if(createLessonButton != null) {
+			createLessonButton.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void initializeWelcomeMessage() {
 		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
 
 		String welcomeMsg = String.format(Locale.ENGLISH,
@@ -54,14 +65,7 @@ public class StartActivity extends DrawerActivity {
 
 		if(welcomeText != null)
 			welcomeText.setText(welcomeMsg);
-	}
 
-	private void initializeForTeacher(){
-		FloatingActionButton createLessonButton = (FloatingActionButton)
-				findViewById(R.id.start_fab_create_lesson);
-
-		if(createLessonButton != null)
-			createLessonButton.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -80,8 +84,7 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	public void onCreateAccountButtonClick(View view) {
-		//startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
-		//overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+		/*
 		Drawable profilePicture = ContextCompat.getDrawable(this, R.drawable.yoda);
 
 		User user = new StudentUser("Yoda");
@@ -90,7 +93,10 @@ public class StartActivity extends DrawerActivity {
 		user.setProfilePicture(profilePicture);
 		SessionData.setLoggedInUser(user);
 
-		startActivity(new Intent(this, CreateLessonActivity.class));
+		startActivity(new Intent(this, CreateLessonActivity.class));*/
+
+		startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
+		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
 	public void onAccountButtonClick(View view) {
