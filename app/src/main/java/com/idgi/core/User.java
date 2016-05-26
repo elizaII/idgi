@@ -110,7 +110,7 @@ public abstract class User implements Nameable {
     }
 
     @Override
-    public Type getType() {
-        return Type.USER;
+    public NameableType getType() {
+        return NameableType.USER;
     }
 }

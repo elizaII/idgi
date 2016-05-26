@@ -60,7 +60,7 @@ public class Subject implements Nameable {
 
     @JsonIgnore
     @Override
-    public Type getType() {
-        return Type.SUBJECT;
+    public NameableType getType() {
+        return NameableType.SUBJECT;
     }
 }

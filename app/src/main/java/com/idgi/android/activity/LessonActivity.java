@@ -133,8 +133,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
 	private void showRequireLoginDialog() {
-        Dialog loginDialog = LoginRequiredDialog.createLoginRequiredDialog(this);
-        loginDialog.show();
+		new LoginRequiredDialog(this).show();
 	}
 
 	private void showReplyDialog(View childView) {

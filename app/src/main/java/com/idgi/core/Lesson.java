@@ -70,7 +70,7 @@ public class Lesson implements Nameable {
 
 	@JsonIgnore
 	@Override
-	public Type getType() {
-		return Type.LESSON;
+	public NameableType getType() {
+		return NameableType.LESSON;
 	}
 }

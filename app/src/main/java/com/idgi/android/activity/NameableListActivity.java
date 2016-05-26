@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
-import com.idgi.android.dialog.DialogFactory;
+import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.core.Nameable;
 import com.idgi.android.recycleView.RecyclerViewUtility;
 import com.idgi.android.recycleView.adapters.NameableAdapter;
@@ -52,7 +52,7 @@ public abstract class NameableListActivity extends DrawerActivity {
 	public void onLoginRequiredEvent(BusEvent busEvent) {
 		switch (busEvent.getEvent()) {
 			case LOGIN_REQUIRED_DIALOG:
-				DialogFactory.createLoginRequiredDialog(this).show();
+				new LoginRequiredDialog(this).show();
 				break;
 		}
 	}

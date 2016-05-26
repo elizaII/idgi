@@ -69,8 +69,8 @@ public class Course implements Nameable {
 
 	@Override
 	@JsonIgnore
-	public Type getType() {
-		return Type.COURSE;
+	public NameableType getType() {
+		return NameableType.COURSE;
 	}
 
 }

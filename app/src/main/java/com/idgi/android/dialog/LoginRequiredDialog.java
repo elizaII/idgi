@@ -12,35 +12,32 @@ import com.idgi.R;
 import com.idgi.android.ActivityType;
 import com.idgi.event.ApplicationBus;
 
-/**
- * Created by tove on 2016-05-25.
- */
-public class LoginRequiredDialog {
-    public static Dialog createLoginRequiredDialog(final Context context) {
-        final Dialog dialog = new Dialog(context);
+public class LoginRequiredDialog extends Dialog {
+
+
+    public LoginRequiredDialog(final Context context) {
+        super(context);
 
         View contentView = getContentView(context, R.layout.dialog_login_required);
-        dialog.setContentView(contentView);
+        setContentView(contentView);
 
         TextView txtLogin = (TextView) contentView.findViewById(R.id.dialog_login_required_login_text_view);
 
         txtLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ApplicationBus.post(ActivityType.LOGIN);
-                dialog.dismiss();
+                dismiss();
             }
         });
 
-        setStandardLayout(dialog);
-
-        return dialog;
+        setStandardLayout();
     }
-    private static void setStandardLayout(Dialog dialog) {
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    private void setStandardLayout() {
+        getWindow().setGravity(Gravity.CENTER);
+        getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     }
 
-    private static View getContentView(Context context, int resource) {
+    private View getContentView(Context context, int resource) {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         return inflater.inflate(resource, null);

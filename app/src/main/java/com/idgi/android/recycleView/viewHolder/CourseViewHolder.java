@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.android.dialog.DialogFactory;
 import com.idgi.core.Course;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;

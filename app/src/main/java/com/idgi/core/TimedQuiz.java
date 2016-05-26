@@ -88,7 +88,7 @@ public class TimedQuiz extends QuizDecorator {
     }
 
     @Override
-    public Nameable.Type getType() {
-        return Nameable.Type.QUIZ;
+    public NameableType getType() {
+        return NameableType.QUIZ;
     }
 }

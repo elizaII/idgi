@@ -74,8 +74,8 @@ public class School implements Nameable {
 
 	@Override
 	@JsonIgnore
-	public Type getType() {
-		return Type.SCHOOL;
+	public NameableType getType() {
+		return NameableType.SCHOOL;
 	}
 
 

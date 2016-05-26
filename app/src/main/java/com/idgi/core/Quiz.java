@@ -153,7 +153,7 @@ public class Quiz implements IQuiz{
 	}
 
 	@Override
-	public Nameable.Type getType() {
-		return Nameable.Type.QUIZ;
+	public NameableType getType() {
+		return NameableType.QUIZ;
 	}
 }

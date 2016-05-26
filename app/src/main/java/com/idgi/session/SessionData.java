@@ -39,7 +39,7 @@ public class SessionData {
 	}
 
     public static User getLoggedInUser() {
-        return loggedInAccount.getUser();
+        return loggedInAccount == null ? null : loggedInAccount.getUser();
     }
 
     public static boolean hasLoggedInUser(){
