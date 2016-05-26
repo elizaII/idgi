@@ -7,8 +7,8 @@ import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.core.Nameable;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
+import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.event.BusEvent;
 
 import java.util.List;

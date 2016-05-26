@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.idgi.R;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
+import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 

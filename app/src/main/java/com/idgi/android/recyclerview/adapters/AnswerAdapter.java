@@ -1,8 +1,7 @@
-package com.idgi.android.recycleView.adapters;
+package com.idgi.android.recyclerview.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

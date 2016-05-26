@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
-import com.idgi.android.recycleView.EmptyRecyclerView;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.android.recyclerview.EmptyRecyclerView;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
+import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;

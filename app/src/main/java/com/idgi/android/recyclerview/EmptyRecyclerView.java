@@ -1,4 +1,4 @@
-package com.idgi.android.recycleView;
+package com.idgi.android.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

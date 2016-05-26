@@ -34,7 +34,7 @@ import com.idgi.core.Comment;
 import com.idgi.core.Lesson;
 import com.idgi.Config;
 import com.idgi.session.SessionData;
-import com.idgi.android.recycleView.adapters.ReplyAdapter;
+import com.idgi.android.recyclerview.adapters.ReplyAdapter;
 
 
 import java.util.List;

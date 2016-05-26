@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.android.recycleView.EmptyRecyclerView;
+import com.idgi.android.recyclerview.EmptyRecyclerView;
 import com.idgi.core.Course;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
+import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;

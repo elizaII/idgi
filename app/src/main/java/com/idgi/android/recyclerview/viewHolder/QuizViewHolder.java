@@ -1,9 +1,8 @@
-package com.idgi.android.recycleView.viewHolder;
+package com.idgi.android.recyclerview.viewHolder;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.idgi.R;

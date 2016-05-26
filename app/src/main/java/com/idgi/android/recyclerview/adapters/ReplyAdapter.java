@@ -1,4 +1,4 @@
-package com.idgi.android.recycleView.adapters;
+package com.idgi.android.recyclerview.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -3,7 +3,6 @@ package com.idgi.android.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +12,11 @@ import android.widget.TextView;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.SelectNameableAdapter;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
+import com.idgi.android.recyclerview.adapters.SelectNameableAdapter;
 import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Locale;
 

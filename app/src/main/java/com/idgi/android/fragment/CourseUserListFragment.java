@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idgi.R;
-import com.idgi.android.recycleView.adapters.NameableAdapter;
+import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.core.User;
-import com.idgi.android.recycleView.EmptyRecyclerView;
-import com.idgi.android.recycleView.RecyclerViewUtility;
+import com.idgi.android.recyclerview.EmptyRecyclerView;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 

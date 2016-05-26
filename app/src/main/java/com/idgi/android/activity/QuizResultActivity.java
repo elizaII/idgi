@@ -12,7 +12,7 @@ import com.idgi.R;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Student;
 import com.idgi.session.SessionData;
-import com.idgi.android.recycleView.adapters.QuestionAdapter;
+import com.idgi.android.recyclerview.adapters.QuestionAdapter;
 
 import java.util.Locale;
 

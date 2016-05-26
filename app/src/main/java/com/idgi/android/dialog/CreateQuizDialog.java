@@ -14,7 +14,7 @@ import com.idgi.R;
 import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.event.ApplicationBus;
-import com.idgi.android.recycleView.adapters.CreateQuestionAdapter;
+import com.idgi.android.recyclerview.adapters.CreateQuestionAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
