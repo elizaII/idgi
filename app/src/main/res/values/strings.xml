@@ -158,7 +158,7 @@
     <string name="create_lesson_et_youtube_url">URL till youtube-klipp</string>
 
     <!-- For CreateLessonActivity -->
-    <string name="create_account_hint_password">Lösenord</string>
+    <string name="create_account_hint_password">Lösenord (Obligatoriskt)</string>
 
     <!-- Searchable-->
     <string name="idgi">IDGI</string>
@@ -181,5 +181,6 @@
     <string name="login_text">Logga in</string>
     <string name="login_no_account">Skapa konto</string>
     <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
+    <string name="create_account_hint_repeat_password">Repetera lösenord</string>
 
 </resources>

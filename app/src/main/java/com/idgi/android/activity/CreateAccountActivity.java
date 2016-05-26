@@ -32,6 +32,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private EditText passwordText;
     private String selectedAccountType;
 
+/*
+    private EditText firstName = (EditText)findViewById(R.id.create_account_edittext_name);
+    if (firstName
+            getText().toString().length() == 0 )
+            firstName.setError( "First name is required!" );
+*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +46,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        nameText = (EditText) findViewById(R.id.nameText);
-        phoneText = (EditText) findViewById(R.id.phoneText);
-        eMailText = (EditText) findViewById(R.id.eMailText);
+        nameText = (EditText) findViewById(R.id.create_account_edittext_name);
+        phoneText = (EditText) findViewById(R.id.create_account_edittext_phoneText);
+        eMailText = (EditText) findViewById(R.id.create_account_edittext_email);
         passwordText = (EditText) findViewById(R.id.create_account_edittext_password);
 
         Spinner accountTypeSpinner = (Spinner) findViewById(R.id.create_account_spinner_account_type);
@@ -58,7 +65,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             selectedAccountType = ACCOUNT_TYPE_STUDENT;
         }
 
-        Button createAccountButton = (Button) findViewById(R.id.createAccountButton);
+        Button createAccountButton = (Button) findViewById(R.id.create_account_btn_create_account);
         if (createAccountButton != null) {
             createAccountButton.setOnClickListener(this);
         }
@@ -109,7 +116,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.createAccountButton) {
+        if (v.getId() == R.id.create_account_btn_create_account) {
             if (formIsValid()) {
                 createAccount();
             }

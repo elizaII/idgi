@@ -19,7 +19,7 @@
         android:inputType="textPersonName"
         android:hint="@string/createAccount_hint_name"
         android:ems="10"
-        android:id="@+id/nameText"
+        android:id="@+id/create_account_edittext_name"
         android:layout_marginTop="49dp"
         android:allowUndo="false" />
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/eMailText"
+        android:id="@+id/create_account_edittext_email"
         android:hint="@string/createAccount_hint_email" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/phoneText"
+        android:id="@+id/create_account_edittext_phoneText"
         android:hint="@string/createAccount_hint_phone" />
 
     <EditText
@@ -46,10 +46,18 @@
         android:ems="10"
         android:id="@+id/create_account_edittext_password"
         android:hint="@string/create_account_hint_password" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/create_account_edittext_repeat_password"
+        android:hint="@string/create_account_hint_repeat_password" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:id="@+id/create_account_spinner_account_type"
         android:spinnerMode="dropdown" />
 
@@ -58,7 +66,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/createAccount_btn_createAccount"
-        android:id="@+id/createAccountButton"
+        android:id="@+id/create_account_btn_create_account"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         style="@style/menu_button"
