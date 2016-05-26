@@ -40,7 +40,7 @@ public class SchoolViewHolder extends NameableViewHolder {
 
 	@Override
 	public void initialize() {
-		nameTextView = (TextView) findViewById(R.id.rowTextView);
+		nameTextView = (TextView) findViewById(R.id.row_text_view);
 	}
 
 	public static NameableViewHolder create(LayoutInflater inflater, ViewGroup parent) {

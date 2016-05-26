@@ -68,7 +68,7 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	@Override
 	public void initialize() {
-		courseTextView = (TextView) findViewById(R.id.rowTextView);
+		courseTextView = (TextView) findViewById(R.id.row_text_view);
 		descriptionTextView = (TextView) findViewById(R.id.courseDescriptionTextView);
 		breadCrumbTextView = (TextView) findViewById(R.id.courseInformationTextView);
 		addToCoursesButton = (Button) findViewById(R.id.course_list_listitem_course_my_courses_button);

@@ -68,7 +68,7 @@ public class LessonViewHolder extends NameableViewHolder {
 
 	@Override
 	public void initialize() {
-		nameTextView = (TextView) findViewById(R.id.rowTextView);
+		nameTextView = (TextView) findViewById(R.id.row_text_view);
 		lessonThumbnail = (YouTubeThumbnailView) findViewById(R.id.lesson_thumbnail);
 	}
 

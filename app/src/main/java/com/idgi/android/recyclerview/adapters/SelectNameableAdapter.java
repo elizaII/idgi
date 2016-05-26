@@ -47,7 +47,7 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
         public ViewHolder(View view){
             super(view);
             view.setOnClickListener(this);
-            textView = (TextView) view.findViewById(R.id.rowTextView);
+            textView = (TextView) view.findViewById(R.id.row_text_view);
         }
 
         public void onClick(View view){

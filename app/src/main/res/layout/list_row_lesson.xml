@@ -19,7 +19,7 @@
 
     <!-- Video Title -->
     <TextView
-        android:id="@+id/rowTextView"
+        android:id="@+id/row_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/lesson_thumbnail"

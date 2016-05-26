@@ -47,7 +47,7 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            textView = (TextView) v.findViewById(R.id.rowTextView);
+            textView = (TextView) v.findViewById(R.id.row_text_view);
         }
 
         public void onClick(View view) {

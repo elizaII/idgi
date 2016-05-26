@@ -8,10 +8,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/list_border"
-    android:id="@+id/list_background">
+    android:id="@+id/list_card">
 
     <TextView
-        android:id="@+id/rowTextView"
+        android:id="@+id/row_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
@@ -45,7 +45,7 @@
         android:id="@+id/courseInformationTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/rowTextView"
+        android:layout_below="@+id/row_text_view"
         android:paddingLeft="@dimen/list_item_vertical_margin"
         android:paddingRight="@dimen/list_item_vertical_margin"/>
 
