@@ -80,7 +80,6 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	private void initializeForTeacher(){
-		initializeWelcomeMessage();
 
 		FloatingActionButton createLessonButton = (FloatingActionButton)
 				findViewById(R.id.start_fab_create_lesson);
