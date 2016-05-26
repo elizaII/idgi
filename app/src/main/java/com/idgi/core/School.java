@@ -42,6 +42,8 @@ public class School implements Nameable {
 	public void addSubject(Subject subject) {
 		if (!hasSubject(subject))
 			getSubjects().add(subject);
+
+		subject.setParentSchoolName(this.getName());
 	}
 
 	public boolean hasSubject(Subject subject) {

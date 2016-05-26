@@ -151,15 +151,14 @@ public class FireDatabase implements IDatabase {
 	 * Adds a lesson to a school
 	 * Throws IllegalArgumentException if there is no school with the given schoolKey
 	 */
-	public void pushLessonToSchool(Lesson lesson, String schoolKey, String subjectName, String courseName) {
-		School school = getSchoolByKey(schoolKey);
+	public void pushLessonToSchool(School school, Subject subject) {
 		if (school == null)
-			throw new IllegalArgumentException(String.format(Locale.ENGLISH, "There is no school with key: %s", schoolKey));
+			throw new IllegalArgumentException();
 
-		Subject subject = school.getSubject(subjectName);
-
-		if (subject == null)
+		/*if (subject == null)
 			subject = new Subject(subjectName);
+
+		school.addSubject(subject);
 
 		Course course = subject.getCourse(courseName);
 
@@ -169,13 +168,13 @@ public class FireDatabase implements IDatabase {
 		}
 
 		if (course.getLesson(lesson.getName()) == null)
-			course.addLesson(lesson);
+			course.addLesson(lesson);*/
 
-		int subjectIndex = findIndexForNameableByName(school.getSubjects(), subjectName);
-		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d", schoolKey, subjectIndex);
+		int subjectIndex = findIndexForNameableByName(school.getSubjects(), subject.getName());
+		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d", school.getKey(), subjectIndex);
 
 		ref.child(path).setValue(subject);
-		requestSchoolUpdate(schoolKey);
+		requestSchoolUpdate(school.getKey());
 	}
 
 	/** Returns the index of the first Nameable in the list with the given name.

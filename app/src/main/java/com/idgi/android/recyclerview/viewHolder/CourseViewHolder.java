@@ -107,7 +107,8 @@ public class CourseViewHolder extends NameableViewHolder {
 	}
 
 	private void setBreadCrumb(Course course) {
-		String breadCrumb = String.format(Locale.ENGLISH, "%s > %s", course.getParentSchool(), course.getParentSubject());
+		String breadCrumb = String.format(Locale.ENGLISH, "%s > %s", course.getParentSchoolName(), course.getParentSubjectName());
+		System.out.println(breadCrumb);
 		breadCrumbTextView.setText(breadCrumb);
 	}
 

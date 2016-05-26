@@ -11,8 +11,8 @@ public class Course implements Nameable {
 	private String name;
 	private List<Lesson> lessons;
 	private String description;
-	private String parentSubject;
-	private String parentSchool;
+	private String parentSubjectName;
+	private String parentSchoolName;
 
 	private Course() {}
 
@@ -20,8 +20,6 @@ public class Course implements Nameable {
 		this.name = name;
 		lessons = new ArrayList<>();
 		this.description= "";
-		this.parentSchool="no school";
-		this.parentSubject="no subject";
 	}
 
 	public void addLesson(Lesson lesson) {
@@ -51,20 +49,20 @@ public class Course implements Nameable {
 		this.description = description;
 	}
 
-	public String getParentSubject() {
-		return parentSubject;
+	public String getParentSubjectName() {
+		return parentSubjectName;
 	}
 
-	public void setParentSubject(String parentSubject) {
-		this.parentSubject = parentSubject;
+	public void setParentSubjectName(String parentSubjectName) {
+		this.parentSubjectName = parentSubjectName;
 	}
 
-	public String getParentSchool() {
-		return parentSchool;
+	public String getParentSchoolName() {
+		return parentSchoolName;
 	}
 
-	public void setParentSchool(String parentSchool) {
-		this.parentSchool = parentSchool;
+	public void setParentSchoolName(String parentSchoolName) {
+		this.parentSchoolName = parentSchoolName;
 	}
 
 	@Override

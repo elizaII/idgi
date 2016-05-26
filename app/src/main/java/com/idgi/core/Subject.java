@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Subject implements Nameable {
     private String name;
 
+    private String parentSchoolName;
+
     private ArrayList<Course> courses;
 
     private Subject() {}
@@ -37,8 +39,24 @@ public class Subject implements Nameable {
     }
 
     public void addCourse(Course course) {
-        if (!hasCourse(course))
+        if (!hasCourse(course)) {
             getCourses().add(course);
+            course.setParentSchoolName(this.parentSchoolName);
+            course.setParentSubjectName(this.getName());
+        }
+    }
+
+    public String getParentSchoolName() {
+        return parentSchoolName;
+    }
+
+    public void setParentSchoolName(String name) {
+        this.parentSchoolName = name;
+
+        if (courses != null) {
+            for (Course course : courses)
+                course.setParentSchoolName(name);
+        }
     }
 
     public boolean hasCourse(Course course) {

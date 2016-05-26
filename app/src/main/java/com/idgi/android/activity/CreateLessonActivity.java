@@ -267,16 +267,16 @@ public class CreateLessonActivity extends AppCompatActivity{
 
         selectedCourse.addLesson(lesson);
 
-        pushLesson(lesson);
+        pushSubject();
         SessionData.setCurrentLesson(lesson);
 
         startActivity(new Intent(this, LessonActivity.class));
         finish();
     }
 
-    private void pushLesson(Lesson lesson) {
+    private void pushSubject() {
         if (!isNewSchool(selectedSchool))
-            database.pushLessonToSchool(lesson, selectedSchool.getKey(), selectedSubject.getName(), selectedCourse.getName());
+            database.pushLessonToSchool(selectedSchool, selectedSubject);
         else
             database.pushSchool(selectedSchool);
     }
