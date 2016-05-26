@@ -170,10 +170,8 @@
     <string name="hat_points">%1$d poäng</string>
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
-    <string name="search_title">Sökresultat</string>
-    <string name="title_activity_browse_users">Hitta användare</string>
-    <string name="browse_users_btn_name">Sök via namn</string>
-    <string name="browse_users_btn_course">Sök via kurs</string>
+
+    <!-- Login and create account-->
     <string name="list_user_name">Användare</string>
     <string name="course_no_users">Det finns inga användare här just nu.</string>
     <string name="login_account_name_hint">Kontonamn</string>
@@ -182,6 +180,24 @@
     <string name="login_no_account">Skapa konto</string>
     <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
     <string name="create_account_hint_repeat_password">Repetera lösenord</string>
+
+    <!-- Search -->
+    <string name="search_title">Sökresultat</string>
     <string name="search_no_matches">Inga träffar</string>
+    <string name="browse_users_btn_name">Sök via namn</string>
+    <string name="browse_users_btn_course">Sök via kurs</string>
+    <string name="title_activity_browse_users">Hitta användare</string>
+
+    <!-- Drawer -->
+    <string name="drawer_home_page">Startsida</string>
+    <string name="drawer_profile">Profil</string>
+    <string name="drawer_statistics">Min Statistik</string>
+    <string name="drawer_my_courses">Mina kurser</string>
+    <string name="drawer_quiz">Quiz</string>
+    <string name="drawer_browse">Hitta kurser</string>
+    <string name="drawer_browse_users">Hitta användare</string>
+    <string name="drawer_account">Konto</string>
+    <string name="drawer_log_in">Logga in</string>
+    <string name="drawer_create_account">Skapa konto</string>
 
 </resources>

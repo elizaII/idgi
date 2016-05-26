@@ -5,45 +5,47 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_start"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_black_24dp"
             custom:activity="StartActivity"
-            android:title="Startsida" />
+            android:title="@string/drawer_home_page" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Profil" />
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/drawer_profile" />
         <item
             android:id="@+id/nav_statistics"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Min Statistik" />
+            android:icon="@drawable/ic_timeline_black_24dp"
+            android:title="@string/drawer_statistics" />
         <item
             android:id="@+id/nav_my_courses"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Mina kurser" />
+            android:icon="@drawable/ic_class_black_24dp"
+            android:title="@string/drawer_my_courses" />
         <item
             android:id="@+id/nav_quiz"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Quiz" />
+            android:icon="@drawable/ic_lightbulb_black_24dp"
+            android:title="@string/drawer_quiz" />
         <item
+            android:visible="false"
             android:id="@+id/nav_browse"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Hitta kurser" />
+            android:title="@string/drawer_browse" />
         <item
+            android:visible="false"
             android:id="@+id/nav_browse_users"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Hitta användare" />
+            android:title="@string/drawer_browse_users" />
     </group>
 
-    <item android:title="Konto">
+    <item android:title="@string/drawer_account">
         <menu>
             <item
                 android:id="@+id/nav_log_in"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Logga in" />
+                android:icon="@drawable/ic_lock_black_24dp"
+                android:title="@string/drawer_log_in" />
             <item
                 android:id="@+id/nav_create_profile"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Skapa konto" />
+                android:icon="@drawable/ic_person_add_black_24dp"
+                android:title="@string/drawer_create_account" />
         </menu>
     </item>
 
