@@ -49,13 +49,8 @@ public class ProfileActivity extends DrawerActivity {
            name.setText(user.getName());
            txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
            txtAge.setText(user.getEmail());
-
-//      if (user.getType() == User.Type.Student) {
-           if (user instanceof Student) {
-               points = (TextView) findViewById(R.id.profile_textView_nrOfPoints);
-               points.setText(String.valueOf(((Student) user).getPoints()));
-           }
        }
+
         initializeDrawer();
 
         initializeProfilePictureButton();
