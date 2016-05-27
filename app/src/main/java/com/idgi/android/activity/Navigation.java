@@ -1,12 +1,17 @@
 package com.idgi.android.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.idgi.android.ActivityType;
 import com.idgi.R;
+import com.idgi.android.dialog.LoginRequiredDialog;
+import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.session.SessionData;
 
 import java.io.Serializable;
@@ -19,6 +24,10 @@ import java.util.Map;
 public class Navigation {
 
     private static final int LOGIN_ITEMID = R.id.nav_log_in;
+    private static final int STATISTICS_ITEMID = R.id.nav_statistics;
+    private static final int PROFILE_ITEMID = R.id.nav_profile;
+    private static final int MY_COURSES_ITEMID = R.id.nav_my_courses;
+
 
 	/* Connects MenuItem-IDs to Activity classes */
 	private static Map<Integer, Class> menuMap = new HashMap<>();
@@ -31,7 +40,27 @@ public class Navigation {
         if (item.getItemId() == LOGIN_ITEMID && SessionData.hasLoggedInUser())
             SessionData.logout();
 
+        if (loginRequiredItemPressed(item)){
+            Dialog dialog= new LoginRequiredDialog(activity);
+            dialog.show();
+            dialog.getWindow().setGravity(Gravity.CENTER);
+            return;
+        }
+
         activity.startActivity(new Intent(activity, menuMap.get(item.getItemId())));
+    }
+
+    private static boolean loginRequiredItemPressed(MenuItem item){
+        if(item.getItemId() == PROFILE_ITEMID && !SessionData.hasLoggedInUser())
+            return true;
+
+        if(item.getItemId() == STATISTICS_ITEMID && !SessionData.hasLoggedInUser())
+            return true;
+
+        if(item.getItemId() == MY_COURSES_ITEMID && !SessionData.hasLoggedInUser())
+            return true;
+
+        return false;
     }
 
     public static void navigateTo(Context from, ActivityType to) {
