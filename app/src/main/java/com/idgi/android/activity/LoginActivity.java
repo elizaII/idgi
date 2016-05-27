@@ -1,39 +1,20 @@
 package com.idgi.android.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.idgi.R;
-import com.idgi.core.User;
 import com.idgi.core.Account;
 import com.idgi.service.FireDatabase;
 import com.idgi.service.IDatabase;
 import com.idgi.session.SessionData;
 
-/**
+/*
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends DrawerActivity{
@@ -41,6 +22,7 @@ public class LoginActivity extends DrawerActivity{
     private final IDatabase db = FireDatabase.getInstance();
 
     private EditText txtAccountName, txtPassword;
+    private TextView txtCreateAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +37,13 @@ public class LoginActivity extends DrawerActivity{
     private void initialize() {
         txtAccountName = (EditText) findViewById(R.id.login_txt_account_name);
         txtPassword = (EditText) findViewById(R.id.login_txt_account_password);
+        txtCreateAccount = (TextView) findViewById(R.id.login_txt_create_account);
+
+        txtCreateAccount.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+            }
+        });
     }
 
     private String getAccountName() {
@@ -71,6 +60,8 @@ public class LoginActivity extends DrawerActivity{
             SessionData.setLoggedInAccount(account);
             startActivity(new Intent(this, MyCoursesActivity.class));
             finish();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.login_wrong_account_or_password), Toast.LENGTH_SHORT).show();
         }
     }
 }
