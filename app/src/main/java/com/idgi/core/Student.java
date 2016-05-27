@@ -23,6 +23,14 @@ public class Student extends User{
         this.statistics = new Statistics();
     }
 
+    public Statistics getStatistics(){
+        return this.statistics;
+    }
+
+    public void setStatistics(Statistics statistics){
+        this.statistics = statistics;
+    }
+
     @JsonIgnore
     public int getStatistics(Statistics.Property property) {
         return statistics.get(property);
