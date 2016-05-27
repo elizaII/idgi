@@ -2,18 +2,27 @@ package com.idgi.android.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.idgi.ImageUtility;
 import com.idgi.R;
+import com.idgi.application.Application;
 import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.session.SessionData;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Locale;
 
 /*
@@ -48,6 +57,58 @@ public class ProfileActivity extends DrawerActivity {
            }
        }
         initializeDrawer();
+
+        initializeProfilePictureButton();
+
+        initializeProfilePicture();
+
+        handleIntent();
+    }
+
+    private void initializeProfilePicture() {
+        ImageView imageView = (ImageView) findViewById(R.id.lesson_listitem_comment_image_profile_picture);
+
+        User user = SessionData.getLoggedInUser();
+        if (user != null && imageView != null)
+            imageView.setImageBitmap(user.getProfilePicture());
+    }
+
+    private void initializeProfilePictureButton() {
+        Button button = (Button) findViewById(R.id.profile_btn_change_picture);
+        if (button != null)
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent galleryIntent = new Intent(Intent.ACTION_VIEW, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivity(galleryIntent);
+                }
+            });
+    }
+
+    private void handleIntent() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null && type.startsWith("image/")) {
+            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (imageUri != null) {
+                if (SessionData.hasLoggedInUser()) {
+                    // TODO AsyncTask for this?
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                        SessionData.getLoggedInUser().setProfilePicture(
+                                ImageUtility.drawableToBitmap(Drawable.createFromStream(
+                                        inputStream, imageUri.toString())));
+                        Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                    } catch (FileNotFoundException e) {
+                        SessionData.getLoggedInUser().setProfilePicture(
+                                ImageUtility.drawableToBitmap(getResources().
+                                        getDrawable(R.drawable.ic_account_circle_black_24dp)));
+                        Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                    }
+                }
+            }
+        }
     }
 
     private void enableInputField(EditText field) {

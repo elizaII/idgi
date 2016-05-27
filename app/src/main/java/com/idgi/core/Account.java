@@ -1,8 +1,5 @@
 package com.idgi.core;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
 	private User user;

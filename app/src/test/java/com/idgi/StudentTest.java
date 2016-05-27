@@ -30,8 +30,8 @@ public class StudentTest {
 	@Before
 	public void setUp() {
 
-		studentUser = new Student("Namn");
-		studentUser.setEmail("email");
+		student = new Student("Namn");
+		student.setEmail("email");
 
 		testHat1 = new Hat();
 		testHat1.setName("Testhatt 1");
@@ -47,9 +47,7 @@ public class StudentTest {
 
 		point = 1;
 
-		url = new String("urlen");
-
-		video = new Video(url);
+		video = new Video("urlen");
 
         quiz = new Quiz();
 	}

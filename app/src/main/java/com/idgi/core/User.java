@@ -3,6 +3,7 @@ package com.idgi.core;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,7 +27,7 @@ public abstract class User implements Nameable {
     private int age;
 
     @JsonIgnore
-    private Drawable profilePicture;
+    private Bitmap profilePicture;
 
     private ArrayList<Course> myCourses;
 
@@ -51,7 +52,7 @@ public abstract class User implements Nameable {
     }
 
     @JsonIgnore
-    public void setProfilePicture(Drawable profilePicture) {
+    public void setProfilePicture(Bitmap profilePicture) {
         this.profilePicture = profilePicture;
     }
 
@@ -93,7 +94,7 @@ public abstract class User implements Nameable {
     }
 
     @JsonIgnore
-    public Drawable getProfilePicture() {
+    public Bitmap getProfilePicture() {
         return profilePicture;
     }
 

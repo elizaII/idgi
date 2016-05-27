@@ -26,7 +26,7 @@ public class Answer {
 	public static Answer incorrect(String text) {
 		return new Answer(text);
 	}
-	
+
 	public String getText() {
 		return this.text;
 	}
@@ -34,23 +34,23 @@ public class Answer {
 	public void setSelected(boolean selected) {
 		this.isSelected = selected;
 	}
-	
+
 	public void setCorrect(boolean correct) {
 		this.isCorrect = correct;
 	}
-	
+
 	public boolean isSelected() {
 		return this.isSelected;
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		if (other == null) return false;
 		if (this == other) return true;
 		if (other.getClass() != this.getClass()) return false;
-		
+
 		Answer that = (Answer) other;
-		
+
 		return this.text.equals(that.text) && this.isSelected() == that.isSelected();
 	}
 

@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "761214997577",
+    "firebase_url": "https://scorching-torch-4835.firebaseio.com",
+    "project_id": "scorching-torch-4835",
+    "storage_bucket": "scorching-torch-4835.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761214997577:android:0e2d3f20300ce7f0",
+        "android_client_info": {
+          "package_name": "com.idgi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761214997577-lnjj6cct87n0euf8qr0ice3v2ttp9hjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idgi",
+            "certificate_hash": "1C2C2816B25E2A7FC1E2744E11ABD133815B1E12"
+          }
+        },
+        {
+          "client_id": "761214997577-t0oia3s6b4rafrq4123bcb2i2m247dhf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbwsfswR3cR_gUp1j-dnZBX1BKVZ-Dck4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

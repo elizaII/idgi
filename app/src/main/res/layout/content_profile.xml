@@ -52,15 +52,6 @@
         android:layout_alignParentStart="true" />
         </RelativeLayout>
 
-    <TextView
-        android:id="@+id/profile_textView_nrOfPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="showMyPoints"
-        android:layout_marginTop="36dp"
-        android:layout_below="@+id/profile_btn_myHats"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
     <Button
         android:id="@+id/profile_btn_myHats"
         style="@style/menu_button"
@@ -92,4 +83,14 @@
         android:textOn="@string/profile_btn_save"
         android:layout_below="@+id/profile_relativeLayout_editAge"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        style="@style/menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Byt profilbild"
+        android:id="@+id/profile_btn_change_picture"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="87dp"/>
 </RelativeLayout>

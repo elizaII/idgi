@@ -1,18 +1,32 @@
 package com.idgi.service;
 
-import android.util.Log;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.eventbus.Subscribe;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import com.idgi.ImageUtility;
+import com.idgi.R;
 import com.idgi.Config;
 import com.idgi.core.Account;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
 import com.idgi.core.Hat;
-import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
@@ -23,6 +37,8 @@ import com.idgi.core.User;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,12 +50,19 @@ The currently used database implementation. Data is stored on a remote server as
 public class FireDatabase implements IDatabase {
 	private static volatile FireDatabase instance = null;
 	private static Firebase ref = new Firebase("https://scorching-torch-4835.firebaseio.com");
+	private FirebaseStorage storage;
+	StorageReference storageRef;
 
 	private List<School> schools;
     private List<Account> accounts;
 	private List<Hat> hats;
 
 	private List<String> schoolsIssuedForUpdateByKey = new ArrayList<>();
+
+	private FireDatabase() {
+		storage = FirebaseStorage.getInstance();
+		storageRef = storage.getReference();
+	}
 
 	/* Push (add) a school to Firebase */
 	public void pushSchool(School school) {
@@ -206,31 +229,82 @@ public class FireDatabase implements IDatabase {
 		return school != null ? school : null;
 	}
 
+	public void saveProfilePicture(Account account) {
+		User user = account.getUser();
+		Bitmap bitmap = user.getProfilePicture();
+		String path = String.format(Locale.ENGLISH, "images/%s", account.getKey());
+		StorageReference ref = storageRef.child(path);
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		byte[] data = baos.toByteArray();
+
+
+
+		UploadTask uploadTask = ref.putBytes(data);
+		uploadTask.addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(@NonNull Exception exception) {
+				// Handle unsuccessful uploads
+			}
+		}).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+			@Override
+			public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+				// taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+				Uri downloadUrl = taskSnapshot.getDownloadUrl();
+			}
+		});
+	}
+
+	public void downloadProfilePicture(Context context, final Account account) {
+		String key = account.getKey();
+		String path = String.format(Locale.ENGLISH, "images/%s", key);
+
+		final Bitmap defaultImage = ImageUtility.drawableToBitmap(ContextCompat.getDrawable(context, R.drawable.ic_timeline_black_24dp));
+
+		storageRef.child(path).getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+			@Override
+			public void onSuccess(byte[] bytes) {
+				ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+				setProfilePicture(account.getUser(), BitmapFactory.decodeStream(stream));
+			}
+			}).addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(@NonNull Exception exception) {
+				setProfilePicture(account.getUser(), defaultImage);
+			}
+		});
+	}
+
+	private void setProfilePicture(User user, Bitmap picture) {
+		user.setProfilePicture(ImageUtility.scaleBitmapAndKeepRation(picture, 32, 32));
+	}
+
 	public void retrieveSchools(boolean isOfflineMode) {
 		if (isOfflineMode) {
 			schools = MockData.getInstance().createSchools();
 		} else {
-				schools = new ArrayList<>();
+			schools = new ArrayList<>();
 
-				ref.child("schools").addValueEventListener(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot snapshot) {
-						for (DataSnapshot child : snapshot.getChildren()) {
-							String schoolKey = child.getKey();
-							if (isNewSchool(schoolKey)) {
-								School newSchool = child.getValue(School.class);
-								addNewSchool(newSchool);
-							} else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
-								School updatedSchool = child.getValue(School.class);
-								replaceSchool(schoolKey, updatedSchool);
-							}
+			ref.child("schools").addValueEventListener(new com.firebase.client.ValueEventListener() {
+				@Override
+				public void onDataChange(com.firebase.client.DataSnapshot snapshot) {
+					for (com.firebase.client.DataSnapshot child : snapshot.getChildren()) {
+						String schoolKey = child.getKey();
+						if (isNewSchool(schoolKey)) {
+							School newSchool = child.getValue(School.class);
+							addNewSchool(newSchool);
+						} else if (schoolsIssuedForUpdateByKey.contains(schoolKey)) {
+							School updatedSchool = child.getValue(School.class);
+							replaceSchool(schoolKey, updatedSchool);
 						}
 					}
+				}
 
-					@Override
-					public void onCancelled(FirebaseError error) {
-					}
-				});
+				@Override
+				public void onCancelled(FirebaseError error) {
+				}
+			});
 		}
 	}
 
@@ -267,7 +341,7 @@ public class FireDatabase implements IDatabase {
     public void retrieveAccounts() {
         accounts = new ArrayList<>();
 
-        Firebase accountRef = ref.child("accounts");
+		Firebase accountRef = ref.child("accounts");
 
         accountRef.addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
@@ -294,7 +368,7 @@ public class FireDatabase implements IDatabase {
         if (!isOfflineMode) {
             hats = new ArrayList<>();
 
-            Firebase hatRef = ref.child("hats");
+			Firebase hatRef = ref.child("hats");
 
             hatRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {

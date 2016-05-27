@@ -14,7 +14,6 @@ public class Application extends android.app.Application {
 		super.onCreate();
 		Firebase.setAndroidContext(this);
 		FireDatabase.getInstance().initialize(connectedToInternet());
-		//FireDatabase.getInstance().pushMockDataToFirebase();
 	}
 
 	public static IDatabase getDatabase() {

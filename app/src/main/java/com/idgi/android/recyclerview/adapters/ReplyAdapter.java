@@ -1,6 +1,7 @@
 package com.idgi.android.recyclerview.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,23 +25,25 @@ import java.util.Locale;
 Used to list replies beneath top-level comments.
  */
 public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.CommentHolder, ReplyAdapter.ReplyHolder> {
-        private LayoutInflater inflater;
+    private LayoutInflater inflater;
+    private Context context;
 
     public ReplyAdapter(Context context, @NonNull List<? extends ParentListItem> parentListItem) {
             super(parentListItem);
+        this.context = context;
             inflater = LayoutInflater.from(context);
         }
 
         @Override
         public CommentHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
             View commentView = inflater.inflate(R.layout.lesson_listitem_comment, parentViewGroup, false);
-            return new CommentHolder(commentView);
+            return new CommentHolder(context, commentView);
         }
 
         @Override
         public ReplyHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
             View replyView = inflater.inflate(R.layout.list_row_reply, childViewGroup, false);
-            return new ReplyHolder(replyView);
+            return new ReplyHolder(context, replyView);
         }
 
         @Override
@@ -61,9 +64,11 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
         private TextView txtReply;
         private TextView txtAuthor;
         private ImageView imgProfilePicture;
+        private Context context;
 
-        public ReplyHolder(View itemView) {
+        public ReplyHolder(Context context, View itemView) {
             super(itemView);
+            this.context = context;
             txtReply = (TextView)itemView.findViewById(R.id.reply_text);
             txtAuthor =(TextView) itemView.findViewById(R.id.reply_author);
             imgProfilePicture = (ImageView) itemView.findViewById(R.id.reply_imageView_profilePicture);
@@ -73,7 +78,7 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
             txtReply.setText(reply.getText());
             txtAuthor.setText(reply.getAuthor().getName());
             if (reply.getAuthor().getProfilePicture() != null) {
-                imgProfilePicture.setImageDrawable(reply.getAuthor().getProfilePicture());
+                imgProfilePicture.setImageDrawable(new BitmapDrawable(context.getResources(), reply.getAuthor().getProfilePicture()));
                 imgProfilePicture.setBackground(null);
             }
         }
@@ -85,9 +90,11 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
         private ImageView imgProfilePicture;
         private View replyInfoLayout;
         private CommentLayout view;
+        private Context context;
 
-        public CommentHolder(View itemView) {
+        public CommentHolder(Context context, View itemView) {
             super(itemView);
+            this.context = context;
 
             txtComment = (TextView) load(R.id.lesson_listitem_comment_text);
             txtReplyAmount = (TextView) load(R.id.lesson_listitem_comment_reply_amount_text);
@@ -131,7 +138,7 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
             txtAuthor.setText(authorName);
 
             if (author != null && author.getProfilePicture() != null) {
-                imgProfilePicture.setImageDrawable(author.getProfilePicture());
+                imgProfilePicture.setImageDrawable(new BitmapDrawable(context.getResources(), author.getProfilePicture()));
                 imgProfilePicture.setBackground(null);
             }
         }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idgi.R;
+import com.idgi.application.Application;
 import com.idgi.core.Account;
 import com.idgi.service.FireDatabase;
 import com.idgi.service.IDatabase;
@@ -58,6 +59,7 @@ public class LoginActivity extends DrawerActivity{
         Account account = db.getAccount(getAccountName(), getPassword());
         if (account != null) {
             SessionData.setLoggedInAccount(account);
+            Application.getDatabase().downloadProfilePicture(this, SessionData.getLoggedInAccount());
             startActivity(new Intent(this, MyCoursesActivity.class));
             finish();
         } else {
