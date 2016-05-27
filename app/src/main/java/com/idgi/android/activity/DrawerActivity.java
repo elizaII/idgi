@@ -2,6 +2,7 @@ package com.idgi.android.activity;
 import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,19 +14,25 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.ActivityType;
 import com.idgi.android.SearchSuggestions;
+import com.idgi.core.User;
 import com.idgi.event.ApplicationBus;
 import com.idgi.session.SessionData;
+
+import java.util.Locale;
 
 /*
 The main template for Activity-classes; most of them extend this class.
 Handles default behavior and initialization of activities that include the navigation drawer.
  */
-public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 	private DrawerLayout drawer;
 	private Toolbar toolbar;
@@ -44,6 +51,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		setSupportActionBar(toolbar);
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 		drawer.addDrawerListener(toggle);
@@ -54,6 +62,26 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 			navigationView.setNavigationItemSelectedListener(this);
 			this.navigationMenu = navigationView.getMenu();
 		}
+
+		showLoggedInUser();
+	}
+
+	private void showLoggedInUser() {
+		TextView txtLoggedInUser = (TextView) findViewById(R.id.nav_drawer_user_name);
+
+
+		User user = SessionData.getLoggedInUser();
+		String text;
+		if (user != null) {
+			text = String.format(Locale.ENGLISH,
+					getResources().getString(R.string.nav_drawer_logged_in_as),
+					user.getName());
+		} else {
+			text = getResources().getString(R.string.nav_drawer_not_logged_in);
+		}
+
+		if (txtLoggedInUser != null)
+			txtLoggedInUser.setText(text);
 	}
 
 	protected void initializeWithTitle(String title) {
@@ -66,9 +94,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 	@Override
 	protected void onStart() {
-		if(!ApplicationBus.hasListener(this)) {
+		if(!ApplicationBus.hasListener(this))
 			ApplicationBus.register(this);
-		}
 
 		super.onStart();
 
@@ -78,10 +105,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 	@Override
 	protected void onStop() {
-		if(ApplicationBus.hasListener(this)) {
-			//ApplicationBus.register(this);
-			ApplicationBus.unregister(this); //Sometimes it says this isn't registred
-		}
+		if(ApplicationBus.hasListener(this))
+			ApplicationBus.unregister(this);
 
 		super.onStop();
 	}

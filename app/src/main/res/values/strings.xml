@@ -22,6 +22,10 @@
     <string name="quiz_finish">Slutför</string>
     <string name="quiz_no_hint">Det finns ingen ledtråd.</string>
 
+    <!-- Nav drawer -->
+    <string name="nav_drawer_not_logged_in">Ej inloggad.</string>
+    <string name="nav_drawer_logged_in_as">Inloggad som %1$s</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -31,7 +35,7 @@
     <string name="error_invalid_email">Ogiltig emailadress</string>
     <string name="error_invalid_password">Lösenordet har för få tecken</string>
     <string name="error_incorrect_password">Ogiltigt lösenord</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">Det här fältet är obligatoriskt.</string>
     <string name="permission_rationale">"Tillåt appen att komma åt kontakter för att kunna auto-komplettera email"
     </string>
 

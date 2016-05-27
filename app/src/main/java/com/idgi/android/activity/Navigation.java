@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.idgi.android.ActivityType;
 import com.idgi.R;
+import com.idgi.session.SessionData;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import java.util.Map;
  */
 public class Navigation {
 
+    private static final int LOGIN_ITEMID = R.id.nav_log_in;
+
 	/* Connects MenuItem-IDs to Activity classes */
 	private static Map<Integer, Class> menuMap = new HashMap<>();
     private static Map<ActivityType, Class> activityMap = new HashMap<>();
@@ -24,6 +27,9 @@ public class Navigation {
     public static void onMenuItemSelected(Activity activity, MenuItem item) {
         if (menuMap.isEmpty())
             initializeMaps();
+
+        if (item.getItemId() == LOGIN_ITEMID && SessionData.hasLoggedInUser())
+            SessionData.logout();
 
         activity.startActivity(new Intent(activity, menuMap.get(item.getItemId())));
     }

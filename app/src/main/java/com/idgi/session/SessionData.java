@@ -15,6 +15,7 @@ we're currently looking at
  */
 public class SessionData {
 	private static School currentSchool;
+	private static Subject currentSubject;
 	private static Course currentCourse;
 	private static Lesson currentLesson;
 	private static IQuiz currentQuiz;
@@ -27,8 +28,6 @@ public class SessionData {
 	public static void setCurrentSubject(Subject currentSubject) {
 		SessionData.currentSubject = currentSubject;
 	}
-
-	private static Subject currentSubject;
 
 	public static Course getCurrentCourse() {
 		return currentCourse;
@@ -43,10 +42,7 @@ public class SessionData {
     }
 
     public static boolean hasLoggedInUser(){
-        if (loggedInAccount == null) {
-            return false;
-        }
-        return loggedInAccount.getUser() != null;
+		return loggedInAccount != null && loggedInAccount.getUser() != null;
 	}
 
 	/* Returns the current quiz.
@@ -87,4 +83,8 @@ public class SessionData {
     public static Account getLoggedInAccount() {
         return loggedInAccount;
     }
+
+	public static void logout() {
+		loggedInAccount = null;
+	}
 }

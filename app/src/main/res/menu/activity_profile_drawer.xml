@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res/com.idgi">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_start"
             android:icon="@drawable/ic_home_black_24dp"
-            custom:activity="StartActivity"
             android:title="@string/drawer_home_page" />
         <item
             android:id="@+id/nav_profile"
@@ -49,5 +47,6 @@
                 android:title="@string/drawer_create_account" />
         </menu>
     </item>
+
 
 </menu>
