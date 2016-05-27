@@ -43,11 +43,11 @@ public class StatisticsActivity extends DrawerActivity {
 	}
 
 	private void loadStatistics(Student user) {
-		txtCompletedCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_COURSES)));
-		txtOngoingCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.ONGOING_COURSES)));
-		txtCompletedQuizAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMPLETED_QUIZZES)));
-		txtSeenVideosAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.SEEN_VIDEOS)));
-		txtCommentAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.COMMENTS)));
-		txtPoints.setText(String.format(Locale.ENGLISH, "%d", user.getStat(Statistics.Property.POINTS)));
+		txtCompletedCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.COMPLETED_COURSES)));
+		txtOngoingCourses.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.ONGOING_COURSES)));
+		txtCompletedQuizAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.COMPLETED_QUIZZES)));
+		txtSeenVideosAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.SEEN_VIDEOS)));
+		txtCommentAmount.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.COMMENTS)));
+		txtPoints.setText(String.format(Locale.ENGLISH, "%d", user.getStatistics(Statistics.Property.POINTS)));
 	}
 }

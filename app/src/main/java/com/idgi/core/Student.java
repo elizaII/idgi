@@ -24,7 +24,7 @@ public class Student extends User{
     }
 
     @JsonIgnore
-    public int getStat(Statistics.Property property) {
+    public int getStatistics(Statistics.Property property) {
         return statistics.get(property);
     }
 
