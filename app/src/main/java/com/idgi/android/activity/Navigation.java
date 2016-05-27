@@ -43,7 +43,7 @@ public class Navigation {
         setTargetActivity(R.id.nav_quiz, ActivityType.QUIZ, QuizActivity.class);
         setTargetActivity(R.id.nav_browse_users, ActivityType.BROWSE_USERS, BrowseUsersActivity.class);
         setTargetActivity(R.id.nav_log_in, ActivityType.LOGIN, LoginActivity.class);
-        setTargetActivity(R.id.nav_create_profile, ActivityType.CREATE_ACCOUNT, CreateAccountActivity.class);
+        setTargetActivity(R.id.nav_create_account, ActivityType.CREATE_ACCOUNT, CreateAccountActivity.class);
     }
 
     private static void setTargetActivity(int resource, ActivityType type, Class targetClass) {

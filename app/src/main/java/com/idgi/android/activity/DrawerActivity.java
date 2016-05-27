@@ -1,6 +1,8 @@
 package com.idgi.android.activity;
+import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,7 @@ import com.idgi.R;
 import com.idgi.android.ActivityType;
 import com.idgi.android.SearchSuggestions;
 import com.idgi.event.ApplicationBus;
+import com.idgi.session.SessionData;
 
 /*
 The main template for Activity-classes; most of them extend this class.
@@ -27,6 +30,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 	private DrawerLayout drawer;
 	private Toolbar toolbar;
 	private SearchView searchView;
+	private Menu navigationMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +50,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		toggle.syncState();
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-		if (navigationView != null)
+		if (navigationView != null) {
 			navigationView.setNavigationItemSelectedListener(this);
+			this.navigationMenu = navigationView.getMenu();
+		}
 	}
 
 	protected void initializeWithTitle(String title) {
@@ -103,6 +109,55 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 		SearchSuggestions.initiateSearchSuggestions(searchView);
 
 		return true;
+	}
+
+	/* Updates the menu before it's shown, every time it's shown. */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if(SessionData.hasLoggedInUser()) {
+			hideOption(R.id.nav_create_account);
+			showLogOut();
+		} else {
+			showOption(R.id.nav_create_account);
+			showLogIn();
+		}
+		return true;
+	}
+
+	@TargetApi(21)
+	private void showLogOut() {
+		setOptionTitle(R.id.nav_log_in, getResources().getString(R.string.log_out));
+		setOptionIcon(R.id.nav_log_in, getResources().getDrawable(R.drawable.icon_exit_black_24dp, null));
+	}
+
+	@TargetApi(21)
+	private void showLogIn() {
+		setOptionTitle(R.id.nav_log_in, getResources().getString(R.string.drawer_log_in));
+		setOptionIcon(R.id.nav_log_in, getResources().getDrawable(R.drawable.ic_lock_black_24dp, null));
+	}
+
+	private void hideOption(int id){
+		MenuItem item = navigationMenu.findItem(id);
+		if(item != null)
+			item.setVisible(false);
+	}
+
+	private void showOption(int id){
+		MenuItem item = navigationMenu.findItem(id);
+		if(item != null)
+			item.setVisible(true);
+	}
+
+	public void setOptionTitle(int id, String title) {
+		MenuItem item = navigationMenu.findItem(id);
+		if(item != null)
+			item.setTitle(title);
+	}
+
+	private void setOptionIcon(int id, Drawable drawable) {
+		MenuItem item = navigationMenu.findItem(id);
+		if(item != null)
+			item.setIcon(drawable);
 	}
 
 	@Override

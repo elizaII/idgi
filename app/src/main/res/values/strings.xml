@@ -199,5 +199,6 @@
     <string name="drawer_account">Konto</string>
     <string name="drawer_log_in">Logga in</string>
     <string name="drawer_create_account">Skapa konto</string>
+    <string name="log_out">Logga ut</string>
 
 </resources>
