@@ -20,7 +20,7 @@ public class AnswerButton extends Button {
 	private static final int DEFAULT_LOOK_SELECTED = R.drawable.answer_button_normal_selected;
 	private static final int CORRECT_LOOK_SELECTED = R.drawable.answer_button_correct_selected;
 
-	public static final int SELECTION_FADE_TIME = 400;
+	public static final int SELECTION_FADE_TIME = 100;
 	private static final int FADE_TIME_SHOW_ANSWER = 1000;
 
 	public enum DisplayMode {
@@ -68,7 +68,7 @@ public class AnswerButton extends Button {
 
 	private void updateTextColor() {
 		if (displayMode == DisplayMode.SHOW_ANSWER && answer.isCorrect())
-			this.setTextColor(ContextCompat.getColor(getContext(), R.color.colorQuizQuestionText));
+			this.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAnswerButtonText));
 		else
 			this.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAnswerButtonBorder));
 	}
