@@ -56,17 +56,13 @@ public class CourseActivity extends DrawerActivity{
 
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-		CourseLessonListFragment lessonListFragment = new CourseLessonListFragment();
-        CourseQuizListFragment quizListFragment = new CourseQuizListFragment();
-
-        pagerAdapter.addFragment(lessonListFragment, "Lessons");
-        pagerAdapter.addFragment(quizListFragment, "Quiz");
+        pagerAdapter.addFragment(new CourseLessonListFragment(), "Lessons");
+        pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
         pagerAdapter.addFragment(new CourseUserListFragment(), "Users");
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
-        //refreshViewPager();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
 		if (tabLayout != null)
@@ -158,7 +154,6 @@ public class CourseActivity extends DrawerActivity{
     @Subscribe
     public void onQuizSelected(BusEvent busEvent){
         if(busEvent.getEvent() == Event.QUIZ_SELECTED){
-            Log.d("QUIZ_ACTIVITY", "Quiz is selected");
             selectedQuiz = (IQuiz) busEvent.getData();
             Dialog dialog= new PickQuizDialog(this);
 
@@ -170,7 +165,6 @@ public class CourseActivity extends DrawerActivity{
     @Subscribe
     public void onQuizTypeSelected(BusEvent busEvent) {
         if(busEvent.getEvent() == Event.QUIZ_TYPE_SELECTED) {
-            Log.d("QUIZ_ACTIVITY", "Course");
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {
