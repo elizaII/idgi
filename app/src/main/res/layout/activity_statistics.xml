@@ -99,11 +99,6 @@
                 android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_marginStart="@dimen/spacing_normal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/vector_drawable_ic_videocam_white___px"
-                    android:layout_weight="1"/>
 
                 <ImageView
                     android:layout_width="24dp"
@@ -111,11 +106,6 @@
                     android:src="@drawable/vector_drawable_ic_school_white___px"
                     android:layout_weight="1"/>
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/vector_drawable_ic_comment_white___px"
-                    android:layout_weight="1"/>
 
             </LinearLayout>
 
