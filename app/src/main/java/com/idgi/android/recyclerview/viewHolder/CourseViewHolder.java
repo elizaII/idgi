@@ -55,10 +55,12 @@ public class CourseViewHolder extends NameableViewHolder {
 
 				if (course != null) {
 					student.removeFromMyCourses(course);
-					button.setText(R.string.add_to_my_courses);
+					button.setSelected(false);
+					//button.setText(R.string.add_to_my_courses);
 				} else {
 					student.addToMyCourses((Course) nameable);
-					button.setText(R.string.added_to_my_courses);
+					button.setSelected(true);
+					//button.setText(R.string.added_to_my_courses);
 				}
 			} else {
 				if (!SessionData.hasLoggedInUser()) {
@@ -102,11 +104,8 @@ public class CourseViewHolder extends NameableViewHolder {
 
 	private void updateAddToCoursesButton(Course course) {
 		Student student = SessionData.getUserAsStudent();
-
 		boolean hasCourse = student != null && student.hasCourse(course);
-		int resource = hasCourse ? R.string.added_to_my_courses : R.string.add_to_my_courses;
-
-		addToCoursesButton.setText(resource);
+		addToCoursesButton.setSelected(hasCourse);
 	}
 
 	private void setBreadCrumb(Course course) {
