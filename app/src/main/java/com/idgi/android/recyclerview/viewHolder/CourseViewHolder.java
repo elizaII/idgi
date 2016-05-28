@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.application.Application;
 import com.idgi.core.Course;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
@@ -56,11 +57,13 @@ public class CourseViewHolder extends NameableViewHolder {
 				if (course != null) {
 					student.removeFromMyCourses(course);
 					button.setSelected(false);
-					//button.setText(R.string.add_to_my_courses);
+					BusEvent event = new BusEvent(Event.SHOW_MSG_COURSE_REMOVED, null);
+					ApplicationBus.post(event);
 				} else {
 					student.addToMyCourses((Course) nameable);
 					button.setSelected(true);
-					//button.setText(R.string.added_to_my_courses);
+					BusEvent event = new BusEvent(Event.SHOW_MSG_COURSE_ADDED, null);
+					ApplicationBus.post(event);
 				}
 			} else {
 				if (!SessionData.hasLoggedInUser()) {
