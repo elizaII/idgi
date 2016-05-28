@@ -99,10 +99,10 @@ public class CourseViewHolder extends NameableViewHolder {
 	}
 
 	private void setDescription(String description) {
-		if (description == null)
-			descriptionTextView.setText(R.string.no_description);
-		else
+		if (description != null && !description.isEmpty())
 			descriptionTextView.setText(description);
+		else
+			descriptionTextView.setText(R.string.course_no_info);
 	}
 
 	private void updateAddToCoursesButton(Course course) {
