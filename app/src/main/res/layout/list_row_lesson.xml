@@ -5,28 +5,41 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:longClickable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:background="@drawable/list_border">
 
     <!-- Video Thumbnail -->
     <com.google.android.youtube.player.YouTubeThumbnailView
         android:id="@+id/lesson_thumbnail"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="124dp"
+        android:layout_height="70dp"
         android:scaleType="centerCrop"
         android:background="@android:color/black"
         android:layout_alignParentLeft="true"
-        android:layout_margin="2dp" />
+        android:layout_margin="10dp"/>
 
     <!-- Video Title -->
     <TextView
         android:id="@+id/row_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Test is too goddamn long and lalala"
         android:layout_toRightOf="@id/lesson_thumbnail"
         android:layout_alignTop="@id/lesson_thumbnail"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"/>
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="#FF666666"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="IDGI"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/row_text_view"
+        android:layout_alignLeft="@+id/row_text_view"
+        android:layout_alignStart="@+id/row_text_view"
+        android:textStyle="italic"/>
 
 </RelativeLayout>
