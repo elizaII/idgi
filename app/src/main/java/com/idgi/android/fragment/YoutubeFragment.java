@@ -11,14 +11,15 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.idgi.core.Student;
 import com.idgi.core.Video;
 import com.idgi.Config;
+import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 /*
 Displays the YouTube video.
  */
 public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePlayer.OnInitializedListener{
-
-    private FragmentListener listener;
 
     //MUST be multiple of 1000
     private static final int TIME_TO_GET_POINTS = 5 * 1000;
@@ -30,12 +31,6 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     private boolean videoPaused = true;
 
     public YoutubeFragment() {
-    }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        listener = (FragmentListener) context;
     }
 
     public static YoutubeFragment newInstance() {
@@ -161,12 +156,9 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
 		}
     }
 
-    public interface FragmentListener {
-        void onUpdatePoints(int value);
-    }
-
     private void updatePointProgressBar() {
 		int points = ((Student) SessionData.getLoggedInUser()).getPointsForVideo(SessionData.getCurrentVideo());
-        listener.onUpdatePoints(points);
+        BusEvent event = new BusEvent(Event.POINTS_UPDATED, points);
+        ApplicationBus.post(event);
     }
 }

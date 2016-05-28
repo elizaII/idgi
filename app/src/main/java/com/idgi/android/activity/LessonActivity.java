@@ -24,6 +24,7 @@ import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Student;
 import com.idgi.core.TimedQuiz;
+import com.idgi.core.User;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.android.fragment.YoutubeFragment;
@@ -42,7 +43,7 @@ import java.util.List;
 /*
 Activity that shows a single Lesson.
  */
-public class LessonActivity extends DrawerActivity implements YoutubeFragment.FragmentListener{
+public class LessonActivity extends DrawerActivity {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recycler;
@@ -90,16 +91,15 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     }
 
     private void initializePointsBar() {
+		User user = SessionData.getLoggedInUser();
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
 		if (pointProgressBar != null) {
-			if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student)) {
+			if (user != null && user instanceof Student) {
 				pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
 				pointProgressBar.setVisibility(View.VISIBLE);
 
-				if (SessionData.getLoggedInUser() instanceof Student) {
-					Student student = (Student) SessionData.getLoggedInUser();
-					pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
-				}
+				Student student = (Student) user;
+				pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
 			} else {
 				pointProgressBar.setVisibility(View.GONE);
 			}
@@ -153,16 +153,19 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 		replyDialog.show();
 	}
 
-    @Override
-    public void onUpdatePoints(int value) {
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            ObjectAnimator animation = ObjectAnimator.ofInt(pointProgressBar, "progress", value);
-            animation.setDuration(400);
-            animation.setInterpolator(new DecelerateInterpolator());
-            animation.start();
-        } else {
-            pointProgressBar.setProgress(value);
-        }
+	@Subscribe
+    public void onUpdatePoints(BusEvent busEvent) {
+		if (busEvent.getEvent().equals(Event.POINTS_UPDATED)) {
+			int value = (Integer) busEvent.getData();
+			if (android.os.Build.VERSION.SDK_INT >= 11) {
+				ObjectAnimator animation = ObjectAnimator.ofInt(pointProgressBar, "progress", value);
+				animation.setDuration(400);
+				animation.setInterpolator(new DecelerateInterpolator());
+				animation.start();
+			} else {
+				pointProgressBar.setProgress(value);
+			}
+		}
     }
 
     public void refreshComments(){
