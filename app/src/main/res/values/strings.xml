@@ -29,7 +29,7 @@
     <string name="nav_drawer_logged_in_as">Inloggad som %1$s</string>
 
     <!-- Course activity -->
-    <string name="course_no_users">Det finns inga användare här just nu.</string>
+    <string name="course_no_users">Det finns inga elever här just nu.</string>
 
 
     <!--
