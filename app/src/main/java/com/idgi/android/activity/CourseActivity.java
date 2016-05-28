@@ -56,10 +56,10 @@ public class CourseActivity extends DrawerActivity{
 
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        pagerAdapter.addFragment(new CourseLessonListFragment(), "Lessons");
+        pagerAdapter.addFragment(new CourseLessonListFragment(), "Lektioner");
         pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
         pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
-        pagerAdapter.addFragment(new CourseUserListFragment(), "Users");
+        pagerAdapter.addFragment(new CourseUserListFragment(), "Elever");
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
@@ -67,23 +67,6 @@ public class CourseActivity extends DrawerActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
 		if (tabLayout != null)
         	tabLayout.setupWithViewPager(viewPager);
-    }
-
-	// TODO remove? Not used as of writing this (17/05/2016)
-    /* Makes sure the appropriate values (like empty-list text message) are used */
-    private void refreshViewPager() {
-        //We do it this way since there's no refresh() equivalent method.
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                View view = pagerAdapter.getItem(1).getView();
-                if (view != null) {
-                    viewPager.setCurrentItem(1);
-                    viewPager.setCurrentItem(0);
-                }
-            }
-        }, 50);
-
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
