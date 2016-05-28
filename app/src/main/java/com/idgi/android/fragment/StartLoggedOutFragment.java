@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.idgi.R;
+import com.idgi.session.SessionData;
 
 public class StartLoggedOutFragment extends Fragment {
 
@@ -31,7 +32,10 @@ public class StartLoggedOutFragment extends Fragment {
         Button logIn = (Button) view.findViewById(R.id.start_btn_log_in);
         Button createAccount = (Button) view.findViewById(R.id.start_btn_create_account);
 
-        //animateViewSequentially(logo, findCourses, logIn, createAccount);
+        if (SessionData.isFirstRun()) {
+            animateViewSequentially(logo, findCourses, logIn, createAccount);
+            SessionData.setFirstRun(false);
+        }
     }
 
     private void animateViewSequentially(View... views) {
