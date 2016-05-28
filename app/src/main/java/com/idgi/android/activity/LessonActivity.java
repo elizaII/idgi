@@ -66,8 +66,7 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
 
         initializeWithTitle(title);
 
-        if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student))
-            initializePointsBar();
+		initializePointsBar();
 
         if(lesson.hasQuiz()){
             quizButton = (Button) findViewById(R.id.content_lesson_quiz_button);
@@ -93,12 +92,17 @@ public class LessonActivity extends DrawerActivity implements YoutubeFragment.Fr
     private void initializePointsBar() {
         pointProgressBar = (ProgressBar) findViewById(R.id.content_lesson_point_progress);
 		if (pointProgressBar != null) {
-			pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
+			if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student)) {
+				pointProgressBar.setMax(Config.MAX_POINTS_FOR_VIDEO);
+				pointProgressBar.setVisibility(View.VISIBLE);
 
-            if(SessionData.getLoggedInUser() instanceof Student){
-                Student student = (Student) SessionData.getLoggedInUser();
-			    pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
-            }
+				if (SessionData.getLoggedInUser() instanceof Student) {
+					Student student = (Student) SessionData.getLoggedInUser();
+					pointProgressBar.setProgress(student.getPointsForVideo(SessionData.getCurrentVideo()));
+				}
+			} else {
+				pointProgressBar.setVisibility(View.GONE);
+			}
 		}
     }
 

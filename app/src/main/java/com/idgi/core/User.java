@@ -22,7 +22,6 @@ import java.util.ArrayList;
 })
 public abstract class User implements Nameable {
     private String name;
-    private String email;
     private String phoneNumber;
     private int age;
 
@@ -46,9 +45,6 @@ public abstract class User implements Nameable {
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @JsonIgnore
@@ -80,9 +76,6 @@ public abstract class User implements Nameable {
         return getMyCourses().contains(course);
     }
 
-    public String getEmail(){
-        return this.email;
-    }
     public String getName(){
         return this.name;
     }
@@ -96,18 +89,6 @@ public abstract class User implements Nameable {
     @JsonIgnore
     public Bitmap getProfilePicture() {
         return profilePicture;
-    }
-
-    public void saveEmailToLocalStorage(Activity activity) {
-        SharedPreferences sharedPref = activity.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("email", email);
-        editor.apply();
-    }
-
-    public static String getLoggedInUserEmail(Activity activity) {
-        SharedPreferences sharedPref = activity.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-        return sharedPref.getString("email", null);
     }
 
     @Override

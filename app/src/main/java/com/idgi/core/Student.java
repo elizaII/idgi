@@ -10,25 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("student")
-public class Student extends User{
+public class Student extends User {
 
     private List<Hat> hats = new ArrayList<>();
 
     private Statistics statistics;
 
-    private Student(){super();}
+    private Student(){
+        super();
+    }
 
     public Student(String name) {
         super(name);
         this.statistics = new Statistics();
-    }
-
-    public Statistics getStatistics(){
-        return this.statistics;
-    }
-
-    public void setStatistics(Statistics statistics){
-        this.statistics = statistics;
     }
 
     @JsonIgnore
@@ -71,8 +65,19 @@ public class Student extends User{
                 this.hats.add(hat);
     }
 
-    public boolean containsHat(Hat hat) {
-        return hats.contains(hat);
+    @Override
+    public NameableType getType() {
+        return NameableType.STUDENT;
+    }
+
+    /** Only for JSON serializing. Do not use. */
+    public Statistics getStatistics(){
+        return this.statistics;
+    }
+
+    /** Only for JSON serializing. Do not use. */
+    public void setStatistics(Statistics statistics){
+        this.statistics = statistics;
     }
 
 }

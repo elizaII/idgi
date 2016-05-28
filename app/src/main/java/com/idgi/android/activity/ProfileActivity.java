@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.ToggleButton;
 import com.idgi.ImageUtility;
 import com.idgi.R;
 import com.idgi.application.Application;
+import com.idgi.core.Account;
 import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.session.SessionData;
@@ -29,11 +31,8 @@ import java.util.Locale;
 Displays general information of the logged in User.
  */
 public class ProfileActivity extends DrawerActivity {
-
-    User user;
     EditText name;
     EditText txtAge;
-    TextView points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +42,16 @@ public class ProfileActivity extends DrawerActivity {
         name = (EditText) findViewById(R.id.profile_editText_name);
         txtAge = (EditText) findViewById(R.id.profile_editText_age);
 
-        user = SessionData.getLoggedInUser();
+        Account account = SessionData.getLoggedInAccount();
 
-       if (user != null) {
-           name.setText(user.getName());
-           txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
-           txtAge.setText(user.getEmail());
+       if (account != null) {
+           User user = SessionData.getLoggedInUser();
+
+           if (user != null) {
+               name.setText(user.getName());
+               txtAge.setText(String.format(Locale.ENGLISH, "%d", user.getAge()));
+               txtAge.setText(account.getEmail());
+           }
        }
 
         initializeDrawer();
@@ -88,18 +91,20 @@ public class ProfileActivity extends DrawerActivity {
             Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (imageUri != null) {
                 if (SessionData.hasLoggedInUser()) {
-                    // TODO AsyncTask for this?
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                        SessionData.getLoggedInUser().setProfilePicture(
-                                ImageUtility.drawableToBitmap(Drawable.createFromStream(
-                                        inputStream, imageUri.toString())));
-                        Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
-                    } catch (FileNotFoundException e) {
-                        SessionData.getLoggedInUser().setProfilePicture(
-                                ImageUtility.drawableToBitmap(getResources().
-                                        getDrawable(R.drawable.ic_account_circle_black_24dp)));
-                        Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                    User user = SessionData.getLoggedInUser();
+                    if (user != null) {
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                            user.setProfilePicture(
+                                    ImageUtility.drawableToBitmap(Drawable.createFromStream(
+                                            inputStream, imageUri.toString())));
+                            Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                        } catch (FileNotFoundException e) {
+                            user.setProfilePicture(
+                                    ImageUtility.drawableToBitmap(ContextCompat.
+                                            getDrawable(this, R.drawable.ic_account_circle_black_24dp)));
+                            Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                        }
                     }
                 }
             }
@@ -122,6 +127,7 @@ public class ProfileActivity extends DrawerActivity {
     }
 
     private void saveInfo() {
+        User user = SessionData.getLoggedInUser();
         if (user != null) {
             user.setName(name.getText().toString());
             String ageText = txtAge.getText().toString();

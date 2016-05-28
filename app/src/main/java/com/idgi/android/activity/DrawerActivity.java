@@ -99,6 +99,9 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 
 		super.onStart();
 
+		//To have it update when user logs out.
+		initializeDrawer();
+
 		if (searchView != null)
 			SearchSuggestions.initiateSearchSuggestions(searchView);
 	}

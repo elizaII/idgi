@@ -13,18 +13,17 @@
         android:background="@drawable/quiz_result_question_background_correct">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="@dimen/text_size_large"
             android:textColor="@color/quizResultQuestionCorrectText"
-            android:text="Vad är 1 + 1?"
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/spacing_normal"
-            android:id="@+id/quiz_result_question_text"
-            android:layout_toRightOf="@+id/quiz_result_question_indicator"/>
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:id="@+id/quiz_result_question_text"/>
     </LinearLayout>
 
     <View

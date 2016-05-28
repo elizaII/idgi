@@ -1,6 +1,7 @@
 package com.idgi.service;
 
 import com.idgi.R;
+import com.idgi.core.Account;
 import com.idgi.core.Answer;
 import com.idgi.core.Comment;
 import com.idgi.core.Course;
@@ -124,7 +125,7 @@ public final class MockData {
 			}
 
 			buffer.append(".");
-			comments.add(new Comment(buffer.toString(), getUser()));
+			comments.add(new Comment(buffer.toString(), getAccount().getUser()));
 		}
         return comments;
 	}
@@ -164,9 +165,16 @@ public final class MockData {
 		return Arrays.asList(regularHat, cowboyHat, topHat, magicHat, catHat);
 	}
 
+	private Account getAccount() {
+		Account account = new Account("test", "123");
+		account.setUser(getUser());
+		account.setEmail("pelles_mail@gmail.com");
+
+		return account;
+	}
+
 	private User getUser() {
 		User user = new Student("Pelle");
-		user.setEmail("pelles_mail@gmail.com");
 		user.setAge(9);
 
 		return user;

@@ -33,6 +33,7 @@ import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.core.Student;
 import com.idgi.core.Subject;
+import com.idgi.core.Teacher;
 import com.idgi.core.User;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
@@ -106,11 +107,14 @@ public class FireDatabase implements IDatabase {
 		return users;
 	}
 
-	private void pushAccountInfo(Account account, String key) {
-		Firebase accountRef = ref.child("accountInfo").child(key);
+	private void pushAccountInfo(Account account) {
+		Firebase accountRef = ref.child("accounts").child(account.getKey());
 
 		accountRef.child("accountName").setValue(account.getName());
-		accountRef.child("email").setValue(account.getUser().getEmail());
+		accountRef.child("email").setValue(account.getEmail());
+		accountRef.child("password").setValue(account.getPassword());
+		accountRef.child("userType").setValue(account.getUser().getType().toString().toLowerCase(Locale.ENGLISH));
+		accountRef.child("key").setValue(account.getKey());
 	}
 
 	public School getSchool(String schoolName) {
@@ -245,13 +249,10 @@ public class FireDatabase implements IDatabase {
 		uploadTask.addOnFailureListener(new OnFailureListener() {
 			@Override
 			public void onFailure(@NonNull Exception exception) {
-				// Handle unsuccessful uploads
 			}
 		}).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 			@Override
 			public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-				// taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-				Uri downloadUrl = taskSnapshot.getDownloadUrl();
 			}
 		});
 	}
@@ -403,7 +404,7 @@ public class FireDatabase implements IDatabase {
 
 	public Account getAccount(String accountName, String password) {
 		for (Account account : accounts)
-			if (accountName.equals(account.getName()) || accountName.equals(account.getUser().getEmail()))
+			if (accountName.equals(account.getName()) || accountName.equals(account.getEmail()))
 				if (password.equals(account.getPassword()))
 					return account;
 

@@ -27,9 +27,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private static final String ACCOUNT_TYPE_TEACHER = "Lärare";
 
     private EditText nameText;
-    private EditText phoneText;
     private EditText eMailText;
     private EditText passwordText;
+    private EditText repeatPassordText;
     private String selectedAccountType;
 
 /*
@@ -47,13 +47,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         setSupportActionBar(toolbar);
 
         nameText = (EditText) findViewById(R.id.create_account_edittext_name);
-        phoneText = (EditText) findViewById(R.id.create_account_edittext_phoneText);
         eMailText = (EditText) findViewById(R.id.create_account_edittext_email);
         passwordText = (EditText) findViewById(R.id.create_account_edittext_password);
+        repeatPassordText = (EditText) findViewById(R.id.create_account_edittext_repeat_password);
 
         Spinner accountTypeSpinner = (Spinner) findViewById(R.id.create_account_spinner_account_type);
         String[] items = new String[]{ACCOUNT_TYPE_STUDENT, ACCOUNT_TYPE_TEACHER};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         if (accountTypeSpinner != null) {
@@ -72,31 +72,20 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     public void createAccount() {
-        String name = this.nameText.getText().toString();
+        String accountName = this.nameText.getText().toString();
         String email = this.eMailText.getText().toString();
         String password = this.passwordText.getText().toString();
 
-        Account account = new Account(email, password);
+        Account account = new Account(accountName, password);
 
         User user;
         if (selectedAccountType.equals(ACCOUNT_TYPE_STUDENT)) {
-            user = new Student(name);
+            user = new Student(accountName);
         } else {
-            user = new Teacher(name);
+            user = new Teacher(accountName);
         }
-        user.setEmail(email);
+        account.setEmail(email.isEmpty() ? "N/A" : email);
         account.setUser(user);
-
-        String phone = phoneText.getText().toString();
-        if (phone.isEmpty()) {
-            user.setPhoneNumber("N/A");
-        } else {
-            user.setPhoneNumber(phone);
-        }
-
-        user.saveEmailToLocalStorage(this);
-
-        Log.d("CreateAccountActivity", user.getName() + " " + user.getEmail());
 
         FireDatabase.getInstance().pushAccount(account);
         SessionData.setLoggedInAccount(account);
@@ -106,12 +95,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         startActivity(new Intent(this, StartActivity.class));
     }
     private boolean formIsValid() {
-        if (nameText.getText().toString().equals("")) {
-            return false;
-        } else if (eMailText.getText().toString().equals("")) {
-            return false;
-        }
-        return true;
+        String accountName = nameText.getText().toString();
+        String password = passwordText.getText().toString();
+        String repeatPassword = repeatPassordText.getText().toString();
+
+        return !accountName.isEmpty() && !password.isEmpty() && password.equals(repeatPassword);
     }
 
     @Override

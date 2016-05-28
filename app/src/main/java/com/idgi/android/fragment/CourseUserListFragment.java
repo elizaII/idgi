@@ -50,7 +50,6 @@ public class CourseUserListFragment extends Fragment {
         });
 
         NameableAdapter adapter = new NameableAdapter(getContext(), users);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.course_user_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);

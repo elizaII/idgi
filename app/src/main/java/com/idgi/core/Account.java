@@ -1,9 +1,10 @@
 package com.idgi.core;
 
 public class Account {
-
 	private User user;
+
 	private String name;
+	private String email;
 	private String password;
 	private String key;
 
@@ -20,6 +21,14 @@ public class Account {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail(){
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

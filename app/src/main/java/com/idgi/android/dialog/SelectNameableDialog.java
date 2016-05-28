@@ -63,6 +63,9 @@ public class SelectNameableDialog extends Dialog {
 		String hint = getContext().getResources().getString(R.string.dialog_select_nameable_hint);
 		txtCreateNew.setHint(String.format(Locale.ENGLISH, hint, itemTypeName));
 		btnCreateNew.setOnClickListener(onCreateClick);
+
+		String btnText = getContext().getResources().getString(R.string.dialog_select_nameable_create_new);
+		btnCreateNew.setText(String.format(Locale.ENGLISH, btnText, itemTypeName));
 	}
 
 	private void initializeRecyclerView() {

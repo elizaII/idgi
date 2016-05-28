@@ -6,7 +6,7 @@ import com.idgi.Config;
 
 import java.util.HashMap;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Statistics {
 
 	public enum Property {
@@ -17,6 +17,7 @@ public class Statistics {
 	private int totalPoints;
 
 	private HashMap<String, Integer> quizPoints = new HashMap<>();
+
 	private HashMap<String, Integer> videoPoints = new HashMap<>();
 
 	private HashMap<Property, Integer> propertyMap = new HashMap<>();
@@ -101,5 +102,48 @@ public class Statistics {
 		videoPoints.put(video.getUrl(), points);
 
 		addPoints(points - pointsBefore);
+	}
+
+
+	/* UNDER THIS: Getters and setters required for JSON serialization */
+
+	/** Only for JSON serialization. Do not use. */
+	public HashMap<String, Integer> getQuizPoints() {
+		return quizPoints;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public void setQuizPoints(HashMap<String, Integer> quizPoints) {
+		this.quizPoints = quizPoints;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public HashMap<String, Integer> getVideoPoints() {
+		return videoPoints;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public void setVideoPoints(HashMap<String, Integer> videoPoints) {
+		this.videoPoints = videoPoints;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public HashMap<Property, Integer> getPropertyMap() {
+		return propertyMap;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public void setPropertyMap(HashMap<Property, Integer> propertyMap) {
+		this.propertyMap = propertyMap;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public int getTotalPoints() {
+		return totalPoints;
+	}
+
+	/** Only for JSON serialization. Do not use. */
+	public void setTotalPoints(int totalPoints) {
+		this.totalPoints = totalPoints;
 	}
 }

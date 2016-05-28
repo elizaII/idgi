@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Student;
 import com.idgi.core.Teacher;
+import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 
@@ -27,22 +28,29 @@ public class StartActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		initialize();
+		initialize(true);
 
 		initializeWithTitle(getString(R.string.app_name));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 
 	}
 
-	private void initialize() {
+	private void initialize(boolean animate) {
 		if (!SessionData.hasLoggedInUser()) {
-			initializeForAnon();
+			initializeForAnon(animate);
 		} else {
-			initializeForLoggedIn();
+			initializeForLoggedIn(animate);
 		}
 	}
 
-	private void initializeForLoggedIn() {
+	@Override
+	public void onStart() {
+		initialize(false);
+
+		super.onStart();
+	}
+
+	private void initializeForLoggedIn(boolean animate) {
 		setContentView(R.layout.activity_start_logged_in);
 		initializeWelcomeMessage();
 
@@ -50,13 +58,14 @@ public class StartActivity extends DrawerActivity {
 		TextView welcomeTxt = (TextView) findViewById(R.id.start_txt_welcome);
 		Button findCourses = (Button) findViewById(R.id.start_btn_browse);
 
-		animateViewSequentially(logo, welcomeTxt, findCourses);
+		if (animate)
+			animateViewSequentially(logo, welcomeTxt, findCourses);
 
 		if (SessionData.getLoggedInUser() instanceof Teacher)
 			initializeForTeacher();
 	}
 
-	private void initializeForAnon() {
+	private void initializeForAnon(boolean animate) {
 		setContentView(R.layout.activity_start_not_logged_in);
 
 		TextView logo = (TextView) findViewById(R.id.start_title);
@@ -64,7 +73,8 @@ public class StartActivity extends DrawerActivity {
 		Button logIn = (Button) findViewById(R.id.start_btn_log_in);
 		Button createAccount = (Button) findViewById(R.id.start_btn_create_account);
 
-		animateViewSequentially(logo, findCourses, logIn, createAccount);
+		if (animate)
+			animateViewSequentially(logo, findCourses, logIn, createAccount);
 	}
 
 	private void animateViewSequentially(View... views) {
@@ -92,14 +102,16 @@ public class StartActivity extends DrawerActivity {
 
 	private void initializeWelcomeMessage() {
 		TextView welcomeText = (TextView) findViewById(R.id.start_txt_welcome);
+		User user = SessionData.getLoggedInUser();
 
-		String welcomeMsg = String.format(Locale.ENGLISH,
-				getResources().getString(R.string.start_txt_welcome_msg),
-				SessionData.getLoggedInUser().getName());
+		if (user != null) {
+			String welcomeMsg = String.format(Locale.ENGLISH,
+							getResources().getString(R.string.start_txt_welcome_msg),
+							user.getName());
 
-		if(welcomeText != null)
-			welcomeText.setText(welcomeMsg);
-
+			if (welcomeText != null)
+				welcomeText.setText(welcomeMsg);
+		}
 	}
 
 	public void onStartButtonClick(View view) {

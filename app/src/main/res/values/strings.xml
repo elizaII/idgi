@@ -9,6 +9,8 @@
     <string name="course">kurs</string>
     <string name="quiz">quiz</string>
     <string name="answer">svar</string>
+    <string name="name">namn</string>
+
 
     <string name="teacher">Lärare</string>
     <string name="student">Student</string>
@@ -26,8 +28,11 @@
     <string name="nav_drawer_not_logged_in">Ej inloggad.</string>
     <string name="nav_drawer_logged_in_as">Inloggad som %1$s</string>
 
+    <!-- Course activity -->
+    <string name="course_no_users">Det finns inga användare här just nu.</string>
 
-    <!-- Strings related to login -->
+
+    <!--
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Lösenord (frivilligt)</string>
     <string name="action_sign_in">Logga in</string>
@@ -37,7 +42,7 @@
     <string name="error_incorrect_password">Ogiltigt lösenord</string>
     <string name="error_field_required">Det här fältet är obligatoriskt.</string>
     <string name="permission_rationale">"Tillåt appen att komma åt kontakter för att kunna auto-komplettera email"
-    </string>
+    </string> -->
 
     <!-- SchoolListActivity -->
     <string name="list_school_title">Välj skola</string>
@@ -60,6 +65,7 @@
 
     <!-- LessonActivity -->
     <string name="go_to_quiz">Gå till quiz</string>
+    <string name="lesson_comments">Kommentarer</string>
 
     <!-- BrowseActivity -->
     <string name="browse_btn_subject">Sök via ämnen</string>
@@ -136,6 +142,8 @@
     <!-- Select nameable dialog -->
     <string name="dialog_select_nameable_title">Välj %1$s</string>
     <string name="dialog_select_nameable_hint">Skriv namn för att skapa %1$s</string>
+    <string name="dialog_select_nameable_create_new">Skapa ny %1$s</string>
+
 
     <!-- Create question dialog -->
     <string name="dialog_create_question_title">Skapa fråga</string>
@@ -160,8 +168,6 @@
     <string name="create_lesson_btn_add_course">Lägg till kurs</string>
     <string name="create_lesson_et_lesson_name">Namn på lektion</string>
     <string name="create_lesson_et_youtube_url">URL till youtube-klipp</string>
-
-    <!-- For CreateLessonActivity -->
     <string name="create_account_hint_password">Lösenord (Obligatoriskt)</string>
 
     <!-- Searchable-->
@@ -175,17 +181,19 @@
     <string name="title_activity_my_hats">Mina hattar</string>
     <string name="hat_name">Hattens namn</string>
 
-    <!-- Login and create account-->
+    <!-- Create account -->
     <string name="list_user_name">Användare</string>
-    <string name="course_no_users">Det finns inga användare här just nu.</string>
-    <string name="login_account_name_hint">Kontonamn</string>
-    <string name="login_password_hint">Lösenord</string>
-    <string name="login_text">Logga in</string>
-    <string name="login_no_account">Skapa konto</string>
     <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
-    <string name="create_account_hint_repeat_password">Repetera lösenord</string>
-    <string name="login_wrong_account_or_password">Fel användarnamn eller lösenord.</string>
+    <string name="create_account_hint_repeat_password">Bekräfta lösenord</string>
+    <string name="create_account_hint_email">E-postadress</string>
+    <string name="create_account_finish">Registrera mig!</string>
 
+    <!-- Login -->
+    <string name="login_account_name_hint">Användarnamn</string>
+    <string name="login_password_hint">Lösenord</string>
+    <string name="login_btn_text">Logga in</string>
+    <string name="login_no_account">Inte medlem än? Gå med!</string>
+    <string name="login_wrong_account_or_password">Fel användarnamn eller lösenord.</string>
 
     <!-- Search -->
     <string name="search_title">Sökresultat</string>

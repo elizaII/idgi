@@ -19,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Välj"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -30,11 +29,12 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:id="@+id/create_new_editText"
         android:layout_gravity="center_horizontal"
         android:textColor="#000"
-        android:hint="Skriv namn för att skapa ny"
+        android:inputType="textShortMessage"
+        android:hint="@string/name"
         android:layout_weight="1.60"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
@@ -50,7 +50,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:clickable="true"
-        android:text="Skapa ny"
         android:textColor="#000"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -63,10 +62,7 @@
         android:id="@+id/param_list_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
 
