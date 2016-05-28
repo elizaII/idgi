@@ -3,6 +3,7 @@ package com.idgi.android.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,10 @@ public class CourseInfoFragment extends Fragment {
             View emptyView = view.findViewById(R.id.course_info_empty);
             if(emptyView != null)
                 emptyView.setVisibility(View.INVISIBLE);
+        } else {
+            View infoCard = view.findViewById(R.id.fragment_course_info_card_info);
+            if(infoCard != null)
+                infoCard.setVisibility(View.INVISIBLE);
         }
 
     }
