@@ -9,6 +9,7 @@ import com.idgi.android.recyclerview.EmptyRecyclerView;
 import com.idgi.core.Course;
 import com.idgi.android.recyclerview.RecyclerViewUtility;
 import com.idgi.android.recyclerview.adapters.NameableAdapter;
+import com.idgi.core.Student;
 import com.idgi.session.SessionData;
 
 import java.util.ArrayList;
@@ -30,7 +31,9 @@ public class MyCoursesActivity extends DrawerActivity {
 		if (textView != null)
         	textView.setText(getResources().getString(R.string.course_no_courses));
 
-		List<Course> courses = SessionData.hasLoggedInUser() ? SessionData.getLoggedInUser().getMyCourses() : new ArrayList<Course>();
+		Student student = SessionData.getUserAsStudent();
+
+		List<Course> courses = student != null ? student.getMyCourses() : new ArrayList<Course>();
 
         EmptyRecyclerView recycler = (EmptyRecyclerView) findViewById(R.id.my_courses_list_recycler_view);
 		NameableAdapter adapter = new NameableAdapter(this, courses);

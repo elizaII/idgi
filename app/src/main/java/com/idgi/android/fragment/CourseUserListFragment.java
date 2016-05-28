@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.idgi.R;
 import com.idgi.android.recyclerview.adapters.NameableAdapter;
+import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.android.recyclerview.EmptyRecyclerView;
 import com.idgi.android.recyclerview.RecyclerViewUtility;
@@ -37,8 +38,11 @@ public class CourseUserListFragment extends Fragment {
 
         List<User> users = new ArrayList<>();
         for (User user : FireDatabase.getInstance().getUsers()) {
-            if (user.getMyCourses().contains(SessionData.getCurrentCourse())) {
-                users.add(user);
+            if (user.isStudent()) {
+                Student student = (Student) user;
+                if (student.getMyCourses().contains(SessionData.getCurrentCourse())) {
+                    users.add(student);
+                }
             }
         }
 

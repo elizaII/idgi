@@ -10,6 +10,7 @@ import com.idgi.R;
 import com.idgi.core.Course;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
+import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
@@ -46,22 +47,24 @@ public class CourseViewHolder extends NameableViewHolder {
 	private final View.OnClickListener onAddToCoursesClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			Button button = (Button) view;
+			Student student = SessionData.getUserAsStudent();
+			if (student != null) {
 
-			if (SessionData.hasLoggedInUser()) {
-				User currentUser = SessionData.getLoggedInUser();
 				String courseName = courseTextView.getText().toString();
-				Course course = ModelUtility.findByName(currentUser.getMyCourses(), courseName);
+				Course course = ModelUtility.findByName(student.getMyCourses(), courseName);
 
 				if (course != null) {
-					currentUser.removeFromMyCourses(course);
+					student.removeFromMyCourses(course);
 					button.setText(R.string.add_to_my_courses);
 				} else {
-					currentUser.addToMyCourses((Course) nameable);
+					student.addToMyCourses((Course) nameable);
 					button.setText(R.string.added_to_my_courses);
 				}
 			} else {
-				BusEvent event = new BusEvent(Event.LOGIN_REQUIRED_DIALOG, null);
-				ApplicationBus.post(event);
+				if (!SessionData.hasLoggedInUser()) {
+					BusEvent event = new BusEvent(Event.LOGIN_REQUIRED_DIALOG, null);
+					ApplicationBus.post(event);
+				}
 			}
 		}
 	};
@@ -98,9 +101,9 @@ public class CourseViewHolder extends NameableViewHolder {
 	}
 
 	private void updateAddToCoursesButton(Course course) {
-		User user = SessionData.getLoggedInUser();
+		Student student = SessionData.getUserAsStudent();
 
-		boolean hasCourse = user != null && user.hasCourse(course);
+		boolean hasCourse = student != null && student.hasCourse(course);
 		int resource = hasCourse ? R.string.added_to_my_courses : R.string.add_to_my_courses;
 
 		addToCoursesButton.setText(resource);

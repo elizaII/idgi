@@ -28,16 +28,10 @@ public abstract class User implements Nameable {
     @JsonIgnore
     private Bitmap profilePicture;
 
-    private ArrayList<Course> myCourses;
-
-    public User() {
-        myCourses = new ArrayList<>();
-    }
+    public User() {}
 
 	public User(String name){
 		this.name = name;
-
-        myCourses = new ArrayList<>();
 	}
 
     public void setName(String name) {
@@ -54,26 +48,6 @@ public abstract class User implements Nameable {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void addToMyCourses(Course course){
-        myCourses.add(course);
-    }
-
-    public void removeFromMyCourses(Course course){
-        myCourses.remove(course);
-    }
-
-    public ArrayList<Course> getMyCourses() {
-        return myCourses;
-    }
-
-    public void setMyCourses(ArrayList<Course> myCourses) {
-        this.myCourses = myCourses;
-    }
-
-    public boolean hasCourse(Course course) {
-        return getMyCourses().contains(course);
     }
 
     public String getName(){
@@ -94,5 +68,9 @@ public abstract class User implements Nameable {
     @Override
     public NameableType getType() {
         return NameableType.USER;
+    }
+
+    public boolean isStudent() {
+        return this instanceof Student;
     }
 }

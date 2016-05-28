@@ -27,7 +27,6 @@ import com.idgi.core.TimedQuiz;
 import com.idgi.core.User;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
-import com.idgi.android.fragment.YoutubeFragment;
 
 import com.idgi.android.widget.CommentLayout;
 
@@ -118,11 +117,13 @@ public class LessonActivity extends DrawerActivity {
     }
 
     public void onCommentButtonClick(View view) {
-		if (SessionData.hasLoggedInUser()) {
+		User user = SessionData.getLoggedInUser();
+		if (user != null) {
 			if (txtNewComment.getText().toString().length() != 0) {
 				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
 				txtNewComment.setText("");
 				refreshComments();
+				((Student) user).addComment();
 			}
 		} else {
 			showRequireLoginDialog();

@@ -15,14 +15,15 @@ public class Student extends User {
     private List<Hat> hats = new ArrayList<>();
 
     private Statistics statistics;
+    private ArrayList<Course> myCourses;
 
-    private Student(){
-        super();
+    private Student() {
     }
 
     public Student(String name) {
         super(name);
         this.statistics = new Statistics();
+        myCourses = new ArrayList<>();
     }
 
     @JsonIgnore
@@ -40,6 +41,10 @@ public class Student extends User {
         postPointUpdate();
     }
 
+    public void addComment() {
+        statistics.increment(Statistics.Property.COMMENTS);
+    }
+
     public void givePointsForViewingVideo(Video video, int points) {
         statistics.addVideoPoints(video, points);
         postPointUpdate();
@@ -55,6 +60,21 @@ public class Student extends User {
         return statistics.get(Statistics.Property.POINTS);
     }
 
+    public void addToMyCourses(Course course){
+        myCourses.add(course);
+    }
+
+    public void removeFromMyCourses(Course course){
+        myCourses.remove(course);
+    }
+
+    public ArrayList<Course> getMyCourses() {
+        if (myCourses == null)
+            myCourses = new ArrayList<>();
+
+        return myCourses;
+    }
+
     public List<Hat> getHats() {
         return this.hats;
     }
@@ -63,6 +83,10 @@ public class Student extends User {
         for (Hat hat : hats)
             if (!this.hats.contains(hat))
                 this.hats.add(hat);
+    }
+
+    public boolean hasCourse(Course course) {
+        return getMyCourses().contains(course);
     }
 
     @Override
@@ -78,6 +102,11 @@ public class Student extends User {
     /** Only for JSON serializing. Do not use. */
     public void setStatistics(Statistics statistics){
         this.statistics = statistics;
+    }
+
+    /** Only for JSON serializing. Do not use. */
+    public void setMyCourses(ArrayList<Course> myCourses) {
+        this.myCourses = myCourses;
     }
 
 }

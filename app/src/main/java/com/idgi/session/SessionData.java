@@ -5,6 +5,7 @@ import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.School;
+import com.idgi.core.Student;
 import com.idgi.core.Subject;
 import com.idgi.core.User;
 import com.idgi.core.Video;
@@ -43,6 +44,11 @@ public class SessionData {
 
     public static boolean hasLoggedInUser(){
 		return loggedInAccount != null && loggedInAccount.getUser() != null;
+	}
+
+	public static Student getUserAsStudent() {
+		User user = getLoggedInUser();
+		return user != null && user instanceof Student ? (Student) user : null;
 	}
 
 	/* Returns the current quiz.

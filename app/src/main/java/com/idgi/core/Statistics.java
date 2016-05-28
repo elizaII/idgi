@@ -1,12 +1,10 @@
 package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.idgi.Config;
 
 import java.util.HashMap;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Statistics {
 
 	public enum Property {
@@ -43,9 +41,20 @@ public class Statistics {
 		}
 	}
 
+	private void incrementSeenVideos() {
+		propertyMap.put(Property.SEEN_VIDEOS, propertyMap.get(Property.SEEN_VIDEOS) + 1);
+	}
+
+	private void incrementCompletedQuizzes() {
+		propertyMap.put(Property.COMPLETED_QUIZZES, propertyMap.get(Property.COMPLETED_QUIZZES) + 1);
+	}
+
 	//Updates the score for a quiz. If totalPoints are a new best score, updates user's total totalPoints.
 	public void updateQuizPoints(String quizID, int newScore) {
 		Integer oldScore = quizPoints.get(quizID);
+
+		if (!quizPoints.containsKey(quizID))
+			incrementCompletedQuizzes();
 
 		if (oldScore == null) {
 			quizPoints.put(quizID, 0);
@@ -57,6 +66,10 @@ public class Statistics {
 			quizPoints.put(quizID, newScore);
 			addPoints(diff);
 		}
+	}
+
+	public void increment(Property property) {
+		propertyMap.put(property, propertyMap.get(property) + 1);
 	}
 
 	private void addPoints(int amount) {
@@ -73,6 +86,7 @@ public class Statistics {
 		Integer currentPoints = getPointsEarnedForVideo(video);
 
 		if (currentPoints == null) {
+			incrementSeenVideos();
 			addViewedVideo(video);
 			currentPoints = 0;
 		}

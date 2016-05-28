@@ -9,6 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.idgi.core.Student;
+import com.idgi.core.User;
 import com.idgi.core.Video;
 import com.idgi.Config;
 import com.idgi.event.ApplicationBus;
@@ -140,10 +141,10 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     };
 
     private void awardPoints(int points) {
-		if (SessionData.hasLoggedInUser() && (SessionData.getLoggedInUser() instanceof Student)) {
+        Student student = SessionData.getUserAsStudent();
+		if (student != null) {
 			Toast.makeText(getActivity().getBaseContext(), "Points for you!", Toast.LENGTH_SHORT).show();
-            ((Student) SessionData.getLoggedInUser()).
-                    givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
+            student.givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
 			updatePointProgressBar();
 		}
     }
@@ -151,14 +152,19 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     private void updateTimeSpentWatching() {
 		if (SessionData.hasLoggedInUser()) {
 			milliSecondsSpentWatching += 1000;
-			if (milliSecondsSpentWatching % TIME_TO_GET_POINTS == 0)
-				awardPoints(Config.POINTS_PER_TICK);
+			if (milliSecondsSpentWatching > TIME_TO_GET_POINTS) {
+                awardPoints(Config.POINTS_PER_TICK);
+                milliSecondsSpentWatching = 0;
+            }
 		}
     }
 
     private void updatePointProgressBar() {
-		int points = ((Student) SessionData.getLoggedInUser()).getPointsForVideo(SessionData.getCurrentVideo());
-        BusEvent event = new BusEvent(Event.POINTS_UPDATED, points);
-        ApplicationBus.post(event);
+        Student student = SessionData.getUserAsStudent();
+        if (student != null) {
+            int points = student.getPointsForVideo(SessionData.getCurrentVideo());
+            BusEvent event = new BusEvent(Event.POINTS_UPDATED, points);
+            ApplicationBus.post(event);
+        }
     }
 }
