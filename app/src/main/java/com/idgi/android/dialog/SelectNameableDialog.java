@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
-import com.idgi.android.recycleView.RecyclerViewUtility;
-import com.idgi.android.recycleView.adapters.SelectNameableAdapter;
+import com.idgi.android.recyclerview.RecyclerViewUtility;
 import com.idgi.core.Course;
 import com.idgi.core.Nameable;
 import com.idgi.core.NameableType;
@@ -24,6 +23,7 @@ import com.idgi.event.BusEvent;
 
 import java.util.List;
 import java.util.Locale;
+import com.idgi.android.recyclerview.adapters.SelectNameableAdapter;
 
 /*
 Dialog that presents a list of Nameables.
@@ -70,7 +70,7 @@ public class SelectNameableDialog extends Dialog {
 		btnCreateNew.setOnClickListener(onCreateClick);
 
 		String btnText = getContext().getResources().getString(R.string.dialog_select_nameable_create_new);
-		btnCreateNew.setText(String.format(Locale.ENGLISH, btnText, itemTypeName));
+		btnCreateNew.setText(String.format(Locale.ENGLISH, btnText, getItemTypeName(type)));
 	}
 
 	private void initializeRecyclerView() {

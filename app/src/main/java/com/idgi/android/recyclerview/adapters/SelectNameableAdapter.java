@@ -1,4 +1,4 @@
-package com.idgi.android.recycleView.adapters;
+package com.idgi.android.recyclerview.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -49,7 +49,7 @@ public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAd
         public ViewHolder(View view){
             super(view);
             view.setOnClickListener(this);
-            textView = (TextView) view.findViewById(R.id.rowTextView);
+            textView = (TextView) view.findViewById(R.id.row_text_view);
         }
 
         public void onClick(View view){

@@ -33,7 +33,7 @@ import java.util.Locale;
 Lets the teacher create a lesson. The teacher may also create a new school, subject and/or
 course in conjunction with creating the lesson. A quiz can also be added through this activity.
  */
-public class CreateLessonActivityCopy extends AppCompatActivity{
+public class CreateLessonActivity extends AppCompatActivity{
 
     private FireDatabase db = FireDatabase.getInstance();
     private EditText txtLessonName, txtYouTubeUrl;
@@ -98,7 +98,7 @@ public class CreateLessonActivityCopy extends AppCompatActivity{
 
         selectedCourse.addLesson(lesson);
 
-        pushLesson(lesson);
+        pushSubject();
         SessionData.setCurrentLesson(lesson);
 
         startActivity(new Intent(this, LessonActivity.class));
@@ -109,7 +109,7 @@ public class CreateLessonActivityCopy extends AppCompatActivity{
         return new View.OnClickListener() {
             public void onClick(View v) {
                 List<? extends Nameable> nameables = getNameableList(type);
-                SelectNameableDialog dialog = new SelectNameableDialog(CreateLessonActivityNew.this, nameables, type);
+                SelectNameableDialog dialog = new SelectNameableDialog(CreateLessonActivity.this, nameables, type);
                 dialog.show();
                 dialog.setOnDismissListener(onSelectionDialogDismiss);
             }

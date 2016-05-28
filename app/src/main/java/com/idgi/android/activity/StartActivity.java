@@ -28,11 +28,10 @@ public class StartActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		initialize(true);
+		initialize(false);
 
 		initializeWithTitle(getString(R.string.app_name));
-		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
-
+		overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
 	}
 
 	private void initialize(boolean animate) {
@@ -45,8 +44,6 @@ public class StartActivity extends DrawerActivity {
 
 	@Override
 	public void onStart() {
-		initialize(false);
-
 		super.onStart();
 	}
 
@@ -91,7 +88,6 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	private void initializeForTeacher(){
-
 		FloatingActionButton createLessonButton = (FloatingActionButton)
 				findViewById(R.id.start_fab_create_lesson);
 
@@ -125,17 +121,6 @@ public class StartActivity extends DrawerActivity {
 	}
 
 	public void onCreateAccountButtonClick(View view) {
-		/*
-		Drawable profilePicture = ContextCompat.getDrawable(this, R.drawable.yoda);
-
-		User user = new StudentUser("Yoda");
-		user.setEmail("test@gmail.com");
-		user.setAge(9);
-		user.setProfilePicture(profilePicture);
-		SessionData.setLoggedInUser(user);
-
-		startActivity(new Intent(this, CreateLessonActivity.class));*/
-
 		startActivity(new Intent(StartActivity.this, CreateAccountActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
