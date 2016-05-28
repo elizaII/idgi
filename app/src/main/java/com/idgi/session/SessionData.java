@@ -22,6 +22,17 @@ public class SessionData {
 	private static IQuiz currentQuiz;
 	private static Account loggedInAccount;
 
+	private static boolean firstRun = true;
+
+
+	public static boolean isFirstRun() {
+		return firstRun;
+	}
+
+	public static void setFirstRun(boolean firstRun) {
+		SessionData.firstRun = firstRun;
+	}
+
 	public static Subject getCurrentSubject() {
 		return currentSubject;
 	}

@@ -41,7 +41,10 @@ public class StartLoggedInFragment extends Fragment {
         TextView welcomeTxt = (TextView) view.findViewById(R.id.start_txt_welcome);
         Button findCourses = (Button) view.findViewById(R.id.start_btn_browse);
 
-        //animateViewSequentially(logo, welcomeTxt, findCourses);
+        if (SessionData.isFirstRun()) {
+            animateViewSequentially(logo, welcomeTxt, findCourses);
+            SessionData.setFirstRun(false);
+        }
 
         if (SessionData.getLoggedInUser() instanceof Teacher)
             initializeForTeacher(view);
