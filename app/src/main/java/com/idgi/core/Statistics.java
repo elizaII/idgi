@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idgi.Config;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Statistics {
 
@@ -70,6 +71,14 @@ public class Statistics {
 
 	public void increment(Property property) {
 		propertyMap.put(property, propertyMap.get(property) + 1);
+	}
+
+	public void decrement(Property property) {
+		int current = propertyMap.get(property);
+		if (current <= 0)
+			throw new IllegalStateException(String.format(Locale.ENGLISH, "Amount of %s must be >= 0.", property.toString()));
+
+		propertyMap.put(property, current - 1);
 	}
 
 	private void addPoints(int amount) {

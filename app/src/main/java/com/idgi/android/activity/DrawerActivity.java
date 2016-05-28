@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,10 +46,10 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 	}
 
 	protected void initializeDrawer() {
-		if (toolbar == null)
+		if (toolbar == null) {
 			toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-		setSupportActionBar(toolbar);
+			setSupportActionBar(toolbar);
+		}
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -62,8 +63,6 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 			navigationView.setNavigationItemSelectedListener(this);
 			this.navigationMenu = navigationView.getMenu();
 		}
-
-		showLoggedInUser();
 	}
 
 	private void showLoggedInUser() {
@@ -86,24 +85,32 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 
 	protected void initializeWithTitle(String title) {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		if (toolbar != null)
+		if (toolbar != null) {
 			toolbar.setTitle(title);
+			setSupportActionBar(toolbar);
+		}
 
 		initializeDrawer();
 	}
 
 	@Override
 	protected void onStart() {
+
 		if(!ApplicationBus.hasListener(this))
 			ApplicationBus.register(this);
 
-		super.onStart();
-
 		//To have it update when user logs out.
-		initializeDrawer();
+		//initializeDrawer();
+
+		if (navigationMenu != null)
+			onPrepareOptionsMenu(navigationMenu);
 
 		if (searchView != null)
 			SearchSuggestions.initiateSearchSuggestions(searchView);
+
+		showLoggedInUser();
+
+		super.onStart();
 	}
 
 	@Override
@@ -149,7 +156,7 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 			showOption(R.id.nav_create_account);
 			showLogIn();
 		}
-		return true;
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@TargetApi(21)

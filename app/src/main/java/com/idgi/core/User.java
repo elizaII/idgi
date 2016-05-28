@@ -70,6 +70,7 @@ public abstract class User implements Nameable {
         return NameableType.USER;
     }
 
+    @JsonIgnore
     public boolean isStudent() {
         return this instanceof Student;
     }

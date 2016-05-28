@@ -62,10 +62,12 @@ public class Student extends User {
 
     public void addToMyCourses(Course course){
         myCourses.add(course);
+        statistics.increment(Statistics.Property.ONGOING_COURSES);
     }
 
     public void removeFromMyCourses(Course course){
         myCourses.remove(course);
+        statistics.decrement(Statistics.Property.ONGOING_COURSES);
     }
 
     public ArrayList<Course> getMyCourses() {

@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              tools:context="android.fragment.StartLoggedOutFragment">
+
+        <Button
+            style="@style/start_menu_button"
+            android:text="@string/start_btn_find_course"
+            android:id="@+id/start_btn_browse"
+            android:onClick="onStartButtonClick" />
+
+        <Button
+            style="@style/start_menu_button"
+            android:text="@string/start_btn_log_in"
+            android:id="@+id/start_btn_log_in"
+
+            android:onClick="onLogInButtonClick" />
+
+        <Button
+            style="@style/start_menu_button"
+            android:text="@string/start_btn_create_account"
+            android:id="@+id/start_btn_create_account"
+            android:onClick="onCreateAccountButtonClick" />
+
+</LinearLayout>
