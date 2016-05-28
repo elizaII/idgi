@@ -221,5 +221,6 @@
     <!-- Course list -->
     <string name="course_list_course_added">Tillagd i mina kurser</string>
     <string name="course_list_course_removed">Borttagen från mina kurser</string>
+    <string name="about">Om</string>
 
 </resources>
