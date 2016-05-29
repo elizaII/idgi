@@ -6,83 +6,82 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:longClickable="true"
-    android:background="@drawable/text_view_border">
+    android:background="@drawable/list_border">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/lesson_listitem_comment_text"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/comment_author"
-        android:layout_toRightOf="@+id/comment_author"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_alignBottom="@+id/comment_author" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/lesson_listitem_comment_image_profile_picture"
-        android:gravity="top"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/ic_account_circle_black_24dp"
-        android:contentDescription="@string/profile_picture"
-        android:maxHeight="80dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/spacing_xLarge"
-        android:layout_marginStart="@dimen/spacing_xLarge"
-        android:layout_alignLeft="@+id/lesson_listitem_comment_text"
-        android:layout_alignStart="@+id/lesson_listitem_comment_text"
-        android:layout_marginTop="4dp"
-        />
-    <ImageView
-        android:id="@+id/circle_crop"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/round"
-        android:contentDescription="@string/profile_description_profile_image_circle"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/lesson_listitem_comment_image_profile_picture"
-        android:layout_alignStart="@+id/lesson_listitem_comment_image_profile_picture"
-        android:layout_marginTop="4dp"/>
+        <!-- PROFILE PICTURE -->
+        <ImageView
+            android:id="@+id/lesson_listitem_comment_image_profile_picture"
+            android:gravity="top"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_account_circle_black_24dp"
+            android:contentDescription="@string/profile_picture"
+            android:maxHeight="80dp"
+            android:layout_marginTop="4dp" />
+        <ImageView
+            android:id="@+id/circle_crop"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/round"
+            android:contentDescription="@string/profile_description_profile_image_circle"
+            android:layout_marginTop="4dp"/>
 
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/comment_author"
-        android:textSize="25sp"
-        android:layout_below="@+id/lesson_listitem_comment_image_profile_picture"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
-        android:layout_alignWithParentIfMissing="false"
-        android:gravity="center|center_horizontal" />
+        <LinearLayout
+            android:id="@+id/lesson_listitem_linear_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- AUTHOR -->
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/comment_author"
+                android:gravity="center|center_horizontal"
+                android:text="AuthorName"/>
+
+            <!-- COMMENT -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TESTblablablablabsjkasnfjkewdnfvjkwenkjgvnefkvbnwjkdnvksvksdnvkja chjsbcfhjbfchbfchdsbfjehbfde"
+                android:id="@+id/lesson_listitem_comment_text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:textSize="15dp"/>
+
+            </LinearLayout>
+    </LinearLayout>
+
 
     <Button
+        android:visibility="invisible"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:text="@string/content_lesson_reply"
         android:id="@+id/lesson_listitem_comment_btn_reply"
-        android:layout_alignRight="@+id/lesson_listitem_comment_text"
-        android:layout_alignEnd="@+id/lesson_listitem_comment_text"
         android:onClick="onReplyButtonClick"
         android:layout_below="@+id/comment_author"
         android:enabled="true"
         android:clickable="false"
-        android:background="@color/colorButton" />
+        android:background="@color/colorButton"
+        android:layout_gravity="right"/>
 
+    <!-- REPLY -->
+
+    <!-- EXPANSION -->
     <RelativeLayout
         android:id="@+id/lesson_listitem_comment_view_to_expand_replies"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/lesson_listitem_comment_btn_reply"
-        android:layout_toStartOf="@+id/lesson_listitem_comment_btn_reply"
-        android:layout_below="@id/comment_author"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:background="@color/colorPrimary">
