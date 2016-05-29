@@ -31,4 +31,9 @@ public class Discussion {
 	public List<Comment> getComments() {
 		return this.comments;
 	}
+
+	/** Don't use. Only for JSON serialization. */
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 }

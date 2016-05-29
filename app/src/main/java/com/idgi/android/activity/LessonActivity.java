@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -21,7 +20,9 @@ import com.idgi.android.ActivityType;
 import com.idgi.android.dialog.CommentReplyDialog;
 import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.android.dialog.PickQuizDialog;
+import com.idgi.application.Main;
 import com.idgi.core.IQuiz;
+import com.idgi.core.NameableType;
 import com.idgi.core.Student;
 import com.idgi.core.TimedQuiz;
 import com.idgi.core.User;
@@ -81,6 +82,7 @@ public class LessonActivity extends DrawerActivity {
     private void initializeCommentView() {
         txtNewComment = (TextView) findViewById(R.id.lesson_new_comment_field);
         comments = lesson.getDiscussion().getComments();
+		System.out.println("Found " + comments.size() + " comments.");
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -105,7 +107,6 @@ public class LessonActivity extends DrawerActivity {
 		}
     }
 
-
     public void onToQuizButtonClick(View view) {
         IQuiz normalQuiz = lesson.getQuiz();
         SessionData.setCurrentQuiz(normalQuiz);
@@ -120,11 +121,14 @@ public class LessonActivity extends DrawerActivity {
 		User user = SessionData.getLoggedInUser();
 		if (user != null) {
 			if (txtNewComment.getText().toString().length() != 0) {
-				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
+				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser().getName()));
 				txtNewComment.setText("");
-				refreshComments();
-                if(user instanceof Student)
-    				((Student) user).addComment();
+
+
+				if (user.getType() == NameableType.STUDENT)
+					((Student) user).addCommentToStatistics();
+
+				Main.getDatabase().updateCurrentLesson();
 			}
 		} else {
 			showRequireLoginDialog();

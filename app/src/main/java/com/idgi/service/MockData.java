@@ -125,7 +125,7 @@ public final class MockData {
 			}
 
 			buffer.append(".");
-			comments.add(new Comment(buffer.toString(), getAccount().getUser()));
+			comments.add(new Comment(buffer.toString(), getAccount().getUser().getName()));
 		}
         return comments;
 	}

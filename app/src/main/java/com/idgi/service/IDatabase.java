@@ -20,10 +20,6 @@ used to improve the modular design of the application
 public interface IDatabase {
 	void retrieveSchools(boolean isOfflineMode);
 	List<School> getSchools();
-	List<Subject> getSubjects(School school);
-	List<Lesson> getLessons(Course course);
-	List<Course> getCourses(Subject subject);
-	List<Comment> getComments(Lesson lesson);
 	void retrieveHats(boolean isOfflineMode);
 	void downloadProfilePicture(Context context, final Account account);
 	void saveProfilePicture(Account account);

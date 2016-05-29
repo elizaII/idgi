@@ -44,7 +44,7 @@ public class Student extends User {
         postPointUpdate();
     }
 
-    public void addComment() {
+    public void addCommentToStatistics() {
         statistics.increment(Statistics.Property.COMMENTS);
     }
 

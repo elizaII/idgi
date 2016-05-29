@@ -16,7 +16,7 @@ public class Main extends android.app.Application {
 		FireDatabase.getInstance().initialize(connectedToInternet());
 	}
 
-	public static IDatabase getDatabase() {
+	public static FireDatabase getDatabase() {
 		return FireDatabase.getInstance();
 	}
 

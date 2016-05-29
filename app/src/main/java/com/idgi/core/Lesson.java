@@ -68,6 +68,7 @@ public class Lesson implements Nameable {
 
 	/** Does nothing. Only here for JSON serialization. */
 	public void setDiscussion(Discussion discussion) {
+		this.discussion = discussion;
 	}
 
 	@JsonIgnore

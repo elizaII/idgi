@@ -1,6 +1,7 @@
 package com.idgi.core;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +14,20 @@ public class Comment implements ParentListItem {
 	
 	private String text;
 	private List<Comment> replies;
-	private User author;
+	private String authorAccountName;
 
 
 	private Comment() {}
 
-	public Comment(String text, User author) {
+	public Comment(String text, String authorAccountName) {
 		this.text = text;
-		this.author = author;
+		this.authorAccountName = authorAccountName;
 		replies = new ArrayList<>();
 	}
 
 
-	public void addReply(String message, User sender) {
-		Comment reply = new Comment(message, sender);
-		//replies.add(0,reply);
+	public void addReply(String message, String senderAccountName) {
+		Comment reply = new Comment(message, senderAccountName);
 		replies.add(reply);
 	}
 	
@@ -35,22 +35,34 @@ public class Comment implements ParentListItem {
 		return this.text;
 	}
 
-	public User getAuthor() {
-		return author;
+	public String getAuthorAccountName() {
+		return authorAccountName;
+	}
+
+	public void setAuthorAccountName(String name) {
+		this.authorAccountName = name;
 	}
 
 	public List<Comment> getReplies() {
 		return replies;
 	}
 
-	public int getNumberOfReplies(){ return replies.size(); }
+	@JsonIgnore
+	public int getNumberOfReplies(){
+		if (replies == null)
+			replies = new ArrayList<>();
+
+		return replies.size();
+	}
 
 	@Override
+	@JsonIgnore
 	public List<Comment> getChildItemList() {
 		return getReplies();
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isInitiallyExpanded() {
 		return false;
 	}

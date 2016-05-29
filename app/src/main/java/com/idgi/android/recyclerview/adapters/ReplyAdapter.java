@@ -15,7 +15,10 @@ import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.idgi.R;
 import com.idgi.android.widget.CommentLayout;
+import com.idgi.application.Main;
 import com.idgi.core.Comment;
+import com.idgi.core.NameableType;
+import com.idgi.core.Student;
 import com.idgi.core.User;
 
 import java.util.List;
@@ -59,8 +62,8 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
                 Comment comment = (Comment)childListItem;
                 replyHolder.bind(comment);
         }
-    public static class ReplyHolder extends ChildViewHolder {
 
+    public static class ReplyHolder extends ChildViewHolder {
         private TextView txtReply;
         private TextView txtAuthor;
         private ImageView imgProfilePicture;
@@ -74,11 +77,13 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
             imgProfilePicture = (ImageView) itemView.findViewById(R.id.reply_imageView_profilePicture);
         }
 
-        public void bind(Comment reply ) {
+        public void bind(Comment reply) {
             txtReply.setText(reply.getText());
-            txtAuthor.setText(reply.getAuthor().getName());
-            if (reply.getAuthor().getProfilePicture() != null) {
-                imgProfilePicture.setImageDrawable(new BitmapDrawable(context.getResources(), reply.getAuthor().getProfilePicture()));
+            txtAuthor.setText(reply.getAuthorAccountName());
+            User user = Main.getDatabase().getUserByAccountName(reply.getAuthorAccountName());
+
+            if (user.getProfilePicture() != null) {
+                imgProfilePicture.setImageDrawable(new BitmapDrawable(context.getResources(), user.getProfilePicture()));
                 imgProfilePicture.setBackground(null);
             }
         }
@@ -122,7 +127,8 @@ public class ReplyAdapter extends ExpandableRecyclerAdapter<ReplyAdapter.Comment
 
         public void bind(Comment comment) {
             updateComment(comment);
-            updateAuthor(comment.getAuthor());
+            User user = Main.getDatabase().getUserByAccountName(comment.getAuthorAccountName());
+            updateAuthor(user);
         }
 
         private void updateComment(Comment comment) {

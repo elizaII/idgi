@@ -34,7 +34,7 @@ public class CommentReplyDialog {
             public void onClick(View v) {
                 String message = txtReply.getText().toString();
                 if (message.length() > 0)
-                    parentComment.addReply(message, SessionData.getLoggedInUser());
+                    parentComment.addReply(message, SessionData.getLoggedInUser().getName());
                 //parentLayout
 
                 dialog.dismiss();

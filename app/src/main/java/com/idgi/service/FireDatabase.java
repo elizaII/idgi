@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import com.idgi.event.ApplicationBus;
+import com.idgi.session.SessionData;
 import com.idgi.util.ImageUtility;
 import com.idgi.R;
 import com.idgi.Config;
@@ -274,6 +275,31 @@ public class FireDatabase implements IDatabase {
 				}
 			});
 		}
+	}
+
+	public User getUserByAccountName(String name) {
+		for (Account account : accounts)
+			if (account.getName().equals(name))
+				return account.getUser();
+
+		return null;
+	}
+
+	public void updateCurrentLesson() {
+		School school = SessionData.getCurrentSchool();
+		Subject subject = SessionData.getCurrentSubject();
+		Course course = SessionData.getCurrentCourse();
+		String schoolKey = school.getKey();
+		int subjectID = getIndexByName(school.getSubjects(), subject.getName());
+		int courseID = getIndexByName(subject.getCourses(), course.getName());
+		int lessonID = getIndexByName(course.getLessons(), SessionData.getCurrentLesson().getName());
+
+
+		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d/courses/%d/lessons/%d",
+				schoolKey, subjectID, courseID, lessonID);
+
+		Firebase lessonRef = ref.child(path);
+		lessonRef.setValue(SessionData.getCurrentLesson());
 	}
 
 	private void addNewSchool(School school) {
