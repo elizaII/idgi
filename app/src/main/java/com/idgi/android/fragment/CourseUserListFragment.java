@@ -2,7 +2,6 @@ package com.idgi.android.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.idgi.util.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class CourseUserListFragment extends Fragment {
@@ -35,7 +33,7 @@ public class CourseUserListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_course_user_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_nameable_list, container, false);
 
         List<User> users = new ArrayList<>();
         for (User user : FireDatabase.getInstance().getUsers()) {
@@ -51,10 +49,10 @@ public class CourseUserListFragment extends Fragment {
 
         NameableAdapter adapter = new NameableAdapter(getContext(), users);
 
-        EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.course_user_list_recycler_view);
+        EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.nameable_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
 
-        View emptyView = view.findViewById(R.id.course_user_list_empty_view);
+        View emptyView = view.findViewById(R.id.nameable_list_view_empty);
         recycler.setEmptyView(emptyView);
 
         TextView textView = (TextView) view.findViewById(R.id.list_empty_view_text);

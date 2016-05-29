@@ -23,7 +23,7 @@ public class ViewHolderFactory {
 				return QuizViewHolder.create(inflater, parent);
 			case HAT:
 				return HatViewHolder.create(inflater, parent);
-			case USER:
+			case USER: case STUDENT: case TEACHER:
 				return UserViewHolder.create(inflater, parent);
 			default:
 				return null;
