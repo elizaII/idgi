@@ -122,6 +122,8 @@ public class LessonActivity extends DrawerActivity {
 			if (txtNewComment.getText().toString().length() != 0) {
 				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser().getName()));
 				txtNewComment.setText("");
+				adapter = new ReplyAdapter(this, comments);
+				recycler.setAdapter(adapter);
 
 
 				if (user.getType() == NameableType.STUDENT)
