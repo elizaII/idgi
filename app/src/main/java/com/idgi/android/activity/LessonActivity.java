@@ -82,7 +82,6 @@ public class LessonActivity extends DrawerActivity {
     private void initializeCommentView() {
         txtNewComment = (TextView) findViewById(R.id.lesson_new_comment_field);
         comments = lesson.getDiscussion().getComments();
-		System.out.println("Found " + comments.size() + " comments.");
 
         recycler = (RecyclerView) findViewById(R.id.comment_list_recycler_view);
         recycler.setLayoutManager(new LinearLayoutManager(this));
