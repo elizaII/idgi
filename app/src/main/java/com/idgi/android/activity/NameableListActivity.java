@@ -54,6 +54,7 @@ public abstract class NameableListActivity extends DrawerActivity {
 			case LOGIN_REQUIRED_DIALOG:
 				new LoginRequiredDialog(this).show();
 				break;
+			default:
 		}
 	}
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.core.Hat;
 import com.idgi.core.Nameable;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
@@ -34,7 +35,7 @@ public class HatViewHolder extends NameableViewHolder {
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			BusEvent event = new BusEvent(Event.HAT_SELECTED, hat);
-			postToBus(event);
+			ApplicationBus.post(event);
 		}
 	};
 

@@ -7,13 +7,12 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.SearchView;
 
-import com.idgi.application.Application;
+import com.idgi.application.Main;
 import com.idgi.core.Course;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.core.Subject;
-import com.idgi.service.FireDatabase;
 import com.idgi.service.IDatabase;
 
 import java.util.ArrayList;
@@ -121,10 +120,10 @@ public class SearchSuggestions {
     }
 
     private static boolean filterAccepts(String query, String name) {
-        return name.toLowerCase(Locale.ENGLISH).contains(query.toLowerCase());
+        return name.toLowerCase(Locale.ENGLISH).contains(query.toLowerCase(Locale.ENGLISH));
     }
 
     private static IDatabase getDatabase() {
-        return Application.getDatabase();
+        return Main.getDatabase();
     }
 }

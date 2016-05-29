@@ -1,4 +1,4 @@
-package com.idgi;
+package com.idgi.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -31,10 +31,10 @@ public class ImageUtility {
 
 	/* Taken from http://stackoverflow.com/questions/15440647/scaled-bitmap-maintaining-aspect-ratio
 	 * 27/05/2016 */
-	public static Bitmap scaleBitmapAndKeepRation(Bitmap TargetBmp,int reqHeightInPixels,int reqWidthInPixels)
+	public static Bitmap scaleBitmapAndKeepRatio(Bitmap target, int height, int width)
 	{
 		Matrix m = new Matrix();
-		m.setRectToRect(new RectF(0, 0, TargetBmp.getWidth(), TargetBmp.getHeight()), new RectF(0, 0, reqWidthInPixels, reqHeightInPixels), Matrix.ScaleToFit.CENTER);
-		return Bitmap.createBitmap(TargetBmp, 0, 0, TargetBmp.getWidth(), TargetBmp.getHeight(), m, true);
+		m.setRectToRect(new RectF(0, 0, target.getWidth(), target.getHeight()), new RectF(0, 0, width, height), Matrix.ScaleToFit.CENTER);
+		return Bitmap.createBitmap(target, 0, 0, target.getWidth(), target.getHeight(), m, true);
 	}
 }

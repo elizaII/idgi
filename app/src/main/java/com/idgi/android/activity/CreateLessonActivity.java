@@ -169,6 +169,8 @@ public class CreateLessonActivity extends AppCompatActivity{
             case QUIZ:
                 btnAddQuiz.setText(getResources().getString(R.string.create_lesson_quiz_has_been_added));
                 selectedQuiz = (IQuiz) nameable;
+                break;
+            default:
         }
     }
 

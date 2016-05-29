@@ -16,6 +16,7 @@ import com.idgi.android.recyclerview.EmptyRecyclerView;
 import com.idgi.android.recyclerview.RecyclerViewUtility;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
+import com.idgi.util.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,12 +47,7 @@ public class CourseUserListFragment extends Fragment {
             }
         }
 
-        Collections.sort(users, new Comparator<User>() {
-            @Override
-            public int compare(User u1, User u2) {
-                return u1.getName().compareToIgnoreCase(u2.getName());
-            }
-        });
+        Collections.sort(users, Util.SORT_BY_NAME);
 
         NameableAdapter adapter = new NameableAdapter(getContext(), users);
 
