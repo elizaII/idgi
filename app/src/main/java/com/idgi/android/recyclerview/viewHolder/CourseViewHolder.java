@@ -33,6 +33,7 @@ public class CourseViewHolder extends NameableViewHolder {
 		super(view);
 
 		view.setOnClickListener(onViewClick);
+		addToCoursesButton.setOnClickListener(onAddToCoursesClick);
 	}
 
 	@Override
@@ -41,8 +42,6 @@ public class CourseViewHolder extends NameableViewHolder {
 		descriptionTextView = (TextView) findViewById(R.id.courseDescriptionTextView);
 		breadCrumbTextView = (TextView) findViewById(R.id.courseInformationTextView);
 		addToCoursesButton = (Button) findViewById(R.id.course_list_listitem_course_my_courses_button);
-
-		addToCoursesButton.setOnClickListener(onAddToCoursesClick);
 	}
 
 	@Override
