@@ -123,7 +123,8 @@ public class LessonActivity extends DrawerActivity {
 				comments.add(0, new Comment(txtNewComment.getText().toString(), SessionData.getLoggedInUser()));
 				txtNewComment.setText("");
 				refreshComments();
-				((Student) user).addComment();
+                if(user instanceof Student)
+    				((Student) user).addComment();
 			}
 		} else {
 			showRequireLoginDialog();
