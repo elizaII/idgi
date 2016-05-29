@@ -45,10 +45,6 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 		super.onCreate(savedInstanceState);
 	}
 
-	public DrawerActivity() {
-
-	}
-
 	protected void initializeDrawer() {
 		if (toolbar == null) {
 			toolbar = (Toolbar) findViewById(R.id.toolbar);

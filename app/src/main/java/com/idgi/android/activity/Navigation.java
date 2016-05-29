@@ -15,7 +15,10 @@ import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.session.SessionData;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -28,6 +31,7 @@ public class Navigation {
     private static final int PROFILE_ITEMID = R.id.nav_profile;
     private static final int MY_COURSES_ITEMID = R.id.nav_my_courses;
 
+    private static final List<Integer> LOGIN_REQUIRED_ITEMS = Arrays.asList(PROFILE_ITEMID, STATISTICS_ITEMID, MY_COURSES_ITEMID);
 
 	/* Connects MenuItem-IDs to Activity classes */
 	private static Map<Integer, Class> menuMap = new HashMap<>();
@@ -51,16 +55,7 @@ public class Navigation {
     }
 
     private static boolean loginRequiredItemPressed(MenuItem item){
-        if(item.getItemId() == PROFILE_ITEMID && !SessionData.hasLoggedInUser())
-            return true;
-
-        if(item.getItemId() == STATISTICS_ITEMID && !SessionData.hasLoggedInUser())
-            return true;
-
-        if(item.getItemId() == MY_COURSES_ITEMID && !SessionData.hasLoggedInUser())
-            return true;
-
-        return false;
+        return !SessionData.hasLoggedInUser() && LOGIN_REQUIRED_ITEMS.contains(item.getItemId());
     }
 
     public static void navigateTo(Context from, ActivityType to) {
@@ -84,15 +79,6 @@ public class Navigation {
     private static void setTargetActivity(int resource, ActivityType type, Class targetClass) {
         menuMap.put(resource, targetClass);
         activityMap.put(type, targetClass);
-    }
-
-    public static void navigateToListActivity(Context from, ActivityType type) {
-        switch (type) {
-            case SCHOOL_LIST:
-                break;
-            case SUBJECT_LIST:
-
-        }
     }
 
 }

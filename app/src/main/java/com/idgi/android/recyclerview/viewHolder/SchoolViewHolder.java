@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idgi.R;
 import com.idgi.core.ModelUtility;
 import com.idgi.core.Nameable;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.service.FireDatabase;
@@ -35,7 +36,7 @@ public class SchoolViewHolder extends NameableViewHolder {
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			BusEvent nameableEvent = new BusEvent(Event.SCHOOL_SELECTED, nameable);
-			postToBus(nameableEvent);
+			ApplicationBus.post(nameableEvent);
 		}
 	};
 

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,6 @@ public class CreateLessonActivity extends AppCompatActivity{
     private List<School> schools;
     private List<Subject> subjects;
     private List<Course> courses;
-    private ArrayList<Question> questions;
     private Button btnAddSchool, btnAddSubject, btnAddCourse, btnAddQuiz, btnCreateLesson;
 
     //These are static to preserve state if user navigates away and then returns
@@ -69,14 +69,13 @@ public class CreateLessonActivity extends AppCompatActivity{
         schools = db.getSchools();
         subjects = new ArrayList<>();
         courses = new ArrayList<>();
-        questions = new ArrayList<>();
 
         btnAddSchool.setOnClickListener(onAddItemButtonClick(NameableType.SCHOOL));
         btnAddSubject.setOnClickListener(onAddItemButtonClick(NameableType.SUBJECT));
         btnAddCourse.setOnClickListener(onAddItemButtonClick(NameableType.COURSE));
         btnCreateLesson.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                createLesson();
+            public void onClick(View view) {
+                onCreateLessonButtonClick();
             }
         });
 
@@ -125,8 +124,6 @@ public class CreateLessonActivity extends AppCompatActivity{
 
     private void selectSchool(School school) {
         selectedSchool = school;
-        if (!schools.contains(school))
-            schools.add(school);
 
         btnAddSchool.setText(school.getName());
         enableButton(btnAddSubject);
@@ -146,10 +143,14 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
     private void selectCourse(Course course) {
-        courses.add(course);
+        if (!courses.contains(course))
+            courses.add(course);
+
+        selectedCourse = course;
+
         btnAddCourse.setText(course.getName());
         enableViews(btnAddQuiz, txtLessonName, txtYouTubeUrl, btnCreateLesson);
-        clearQuiz();
+        //clearQuiz();
     }
 
     private void onNameableSelected(Nameable nameable) {
@@ -158,7 +159,7 @@ public class CreateLessonActivity extends AppCompatActivity{
 
         switch (nameable.getType()) {
             case SCHOOL:
-                selectSchool((School)nameable);
+                selectSchool((School) nameable);
                 break;
             case SUBJECT:
                 selectSubject((Subject) nameable);
@@ -197,7 +198,6 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
     private void clearQuiz() {
-        questions.clear();
         selectedQuiz = null;
         String text = String.format(Locale.ENGLISH, getResources().getString(R.string.create_lesson_add_item), getResources().getString(R.string.quiz));
         btnAddQuiz.setText(text);
@@ -250,10 +250,10 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
     public void onAddQuizButtonClick(View view) {
-        (new CreateQuizDialog(this, questions)).show();
+        (new CreateQuizDialog(this)).show();
     }
 
-    public void onCreateLessonButtonClick(View view){
+    public void onCreateLessonButtonClick(){
         if(YouTubeHelper.isYoutubeLink(txtYouTubeUrl.getText().toString()))
             createLesson();
         else
@@ -268,7 +268,7 @@ public class CreateLessonActivity extends AppCompatActivity{
     }
 
     private boolean isNewSchool(School school) {
-        return !db.getSchools().contains(school);
+        return !schools.contains(school);
     }
 
     // Setting the link to the youtube url that was received from the youtube app
