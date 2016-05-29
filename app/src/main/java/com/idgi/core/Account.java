@@ -1,5 +1,9 @@
 package com.idgi.core;
 
+/*
+Class representing an account that can be stored in
+the database
+ */
 public class Account {
 	private User user;
 

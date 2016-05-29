@@ -7,6 +7,9 @@ import com.idgi.session.SessionData;
 
 import java.util.List;
 
+/*
+Decorated Quiz with a set time for completion
+ */
 @JsonTypeName("timedQuiz")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimedQuiz extends QuizDecorator {

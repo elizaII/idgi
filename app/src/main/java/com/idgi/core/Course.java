@@ -8,8 +8,7 @@ import java.util.List;
 
 /*
 A Course is created by a Teacher and attended by Students. It contains Lessons.
-* */
-
+*/
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Course implements Nameable {
 	private String name;

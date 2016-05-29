@@ -1,7 +1,9 @@
 package com.idgi.core;
 
 import java.util.List;
-
+/*
+Implementation of Decorator Pattern, used to add quiz-modes.
+ */
 public abstract class QuizDecorator implements IQuiz {
     protected IQuiz decoratedQuiz;
 

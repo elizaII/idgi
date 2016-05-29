@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.idgi.R;
 
-
+/*
+Used for creating questions to a quiz
+ */
 public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAdapter.ViewHolder> {
 
     private List<String> data;
@@ -51,7 +53,7 @@ public class CreateQuestionAdapter extends RecyclerView.Adapter<CreateQuestionAd
         }
 
         public void onClick(View view) {
-
+            //Nothing done on click now
         }
     }
 }

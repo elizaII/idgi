@@ -1,7 +1,9 @@
 package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+/*
+Class representing a Lesson with a single video, and possibly a quiz
+ */
 public class Lesson implements Nameable {
 
 	private String name;

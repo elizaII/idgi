@@ -20,11 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-Show a list of the quizzes available in a course.
+Presents the quizzes available in the selected course.
  */
 public class CourseQuizListFragment extends Fragment {
 
     public CourseQuizListFragment() {
+        //Required empty constructor
     }
 
     @Override

@@ -50,8 +50,6 @@ public class QuizActivity extends AppCompatActivity {
 
 	private static final int BUTTONS_PER_ROW = 2;
 
-    private final String ACTIVITY_TAG ="QUIZ_ACTIVITY";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,10 +66,7 @@ public class QuizActivity extends AppCompatActivity {
 			initializeNextButton();
 			initializeQuestionView();
 			if(quiz instanceof TimedQuiz){
-				Log.d(ACTIVITY_TAG, "Is timed quiz");
 				initializeTimeBar((TimedQuiz) quiz);
-			} else {
-				Log.d(ACTIVITY_TAG, "Is not timed quiz");
 			}
 			createAnswerButtons(quiz.getCurrentQuestion());
 		} else {
@@ -273,7 +268,6 @@ public class QuizActivity extends AppCompatActivity {
             super(millisInFuture, countDownInterval);
             this.timedQuiz = timedQuiz;
             MAX_TIME = timedQuiz.getTime();
-            Log.d(ACTIVITY_TAG, "Timed quiz's time: " + MAX_TIME);
         }
 
         @Override
@@ -283,14 +277,11 @@ public class QuizActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            //Todo... change the time unit
             if((MAX_TIME - timeProgressBar.getProgress()) <= 10){
                 Toast.makeText(getBaseContext(), getString(R.string.quiz_out_of_time), Toast.LENGTH_LONG).show();
-                Log.d(ACTIVITY_TAG, "You failed!");
             }
             finishQuiz();
             timedQuiz.setRemainingTime(MAX_TIME - timeProgressBar.getProgress());
-            Log.d(ACTIVITY_TAG, "Remaining time: " + (MAX_TIME - timeProgressBar.getProgress()));
         }
     }
 }

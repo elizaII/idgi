@@ -1,7 +1,7 @@
 package com.idgi.core;
 
 /*
-Hats are used as reward upon reaching certain point milestones.
+Hats are used as reward upon reaching certain point milestones, like badges.
  */
 public class Hat implements Nameable {
 

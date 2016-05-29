@@ -12,7 +12,7 @@ import com.idgi.session.SessionData;
 import java.util.List;
 
 /*
-Lists subjects
+Lists all subjects of a school
  */
 public class SubjectListActivity extends NameableListActivity {
 

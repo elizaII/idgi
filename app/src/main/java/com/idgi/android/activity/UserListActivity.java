@@ -1,24 +1,17 @@
 package com.idgi.android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
-import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
 import com.idgi.android.recyclerview.RecyclerViewUtility;
 import com.idgi.android.recyclerview.adapters.NameableAdapter;
 import com.idgi.core.Nameable;
-import com.idgi.core.School;
 import com.idgi.core.User;
-import com.idgi.event.BusEvent;
-import com.idgi.event.Event;
 import com.idgi.service.FireDatabase;
-import com.idgi.session.SessionData;
 import com.idgi.util.Util;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /*

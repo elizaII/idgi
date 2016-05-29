@@ -13,6 +13,9 @@ import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 import java.util.List;
 
+/*
+Lists all the database's schools
+ */
 public class SchoolListActivity extends NameableListActivity{
 
 	@Override

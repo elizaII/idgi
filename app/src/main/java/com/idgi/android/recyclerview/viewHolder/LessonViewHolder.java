@@ -1,6 +1,5 @@
 package com.idgi.android.recyclerview.viewHolder;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class LessonViewHolder extends NameableViewHolder {
 			}
 
 			public void onInitializationFailure(YouTubeThumbnailView view, YouTubeInitializationResult result) {
-				Log.d("thumbnail", "Initialization didn't work");
+				throw new RuntimeException("Initialization for YouTubeThumbnail failed");
 			}
 		});
 	}

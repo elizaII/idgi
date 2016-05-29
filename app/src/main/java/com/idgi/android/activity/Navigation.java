@@ -26,6 +26,7 @@ import java.util.Map;
  */
 public class Navigation {
 
+    //menu items that has exceptional attributes, such as login required
     private static final int LOGIN_ITEMID = R.id.nav_log_in;
     private static final int STATISTICS_ITEMID = R.id.nav_statistics;
     private static final int PROFILE_ITEMID = R.id.nav_profile;

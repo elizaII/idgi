@@ -13,7 +13,10 @@ import com.idgi.core.Subject;
 import com.idgi.core.User;
 
 import java.util.List;
-
+/*
+Interface that separates logic in database from the application,
+used to improve the modular design of the application
+ */
 public interface IDatabase {
 	void retrieveSchools(boolean isOfflineMode);
 	List<School> getSchools();

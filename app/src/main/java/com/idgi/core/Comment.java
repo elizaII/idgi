@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
+/*
+Class representing comments for Lessons' videos
+ */
 public class Comment implements ParentListItem {
 	
 	private String text;

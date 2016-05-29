@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.session.SessionData;
 
+/*
+The variation of the start activity that is presented to non-logged in users
+ */
 public class StartLoggedOutFragment extends Fragment {
 
     @Override

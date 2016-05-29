@@ -1,5 +1,8 @@
 package com.idgi;
 
+/*
+Constants as configuration for the application
+ */
 public final class Config {
 
 	public enum FirebaseMode {

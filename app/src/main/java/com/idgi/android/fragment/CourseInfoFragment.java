@@ -14,7 +14,7 @@ import com.idgi.R;
 import com.idgi.session.SessionData;
 
 /*
-Holds info about a course.
+Presents info about the selected course.
  */
 public class CourseInfoFragment extends Fragment {
 
@@ -52,11 +52,8 @@ public class CourseInfoFragment extends Fragment {
     }
 
     private boolean currentCourseHasDescription(){
-        if(SessionData.getCurrentCourse().getDescription() != null &&
+        return (SessionData.getCurrentCourse().getDescription() != null &&
                 SessionData.getCurrentCourse().getDescription().length() > 0 &&
-                !SessionData.getCurrentCourse().getDescription().equals(getResources().getString(R.string.course_no_info)))
-            return true;
-
-        return false;
+                !SessionData.getCurrentCourse().getDescription().equals(getResources().getString(R.string.course_no_info)));
     }
 }

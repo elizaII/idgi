@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
-
+/*
+Class representing a subject in a school, that has a list of courses.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subject implements Nameable {
     private String name;

@@ -225,5 +225,11 @@
     <string name="profile_btn_my_hats">Mina hattar</string>
     <string name="quiz_dialog_timed">Med tid</string>
     <string name="quiz_dialog_normal">Normal</string>
+    <string name="tab_title_lessons">Lektioner</string>
+    <string name="tab_title_quiz">Quiz</string>
+    <string name="tab_title_info">Info</string>
+    <string name="tab_title_students">Elever</string>
+    <string name="video_playing">Playing!</string>
+    <string name="points_awarded">Points for you!</string>
 
 </resources>

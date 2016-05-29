@@ -2,6 +2,9 @@ package com.idgi.core;
 
 import java.util.List;
 
+/*
+Utility class used for finding objects in the model easily
+ */
 public final class ModelUtility {
 
 	private ModelUtility() throws InstantiationException {
