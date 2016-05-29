@@ -186,7 +186,7 @@
     <string name="create_account_unsuccessful_toast">Fyll i giltig information för att skapa konto</string>
     <string name="create_account_hint_repeat_password">Bekräfta lösenord</string>
     <string name="create_account_hint_email">E-postadress</string>
-    <string name="create_account_finish">Registrera mig!</string>
+    <string name="create_account_finish">Registrera</string>
 
     <!-- Login -->
     <string name="login_account_name_hint">Användarnamn</string>

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.eventbus.Subscribe;
 import com.idgi.R;
@@ -25,6 +26,8 @@ import com.idgi.android.ActivityType;
 import com.idgi.android.SearchSuggestions;
 import com.idgi.core.User;
 import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
@@ -205,5 +208,19 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 	@Subscribe
 	public void onStartActivity(ActivityType type) {
 		Navigation.navigateTo(this, type);
+	}
+
+	@Subscribe
+	public void onCourseAdded(BusEvent busEvent) {
+		if(busEvent.getEvent() == Event.SHOW_MSG_COURSE_ADDED) {
+			Toast.makeText(this, R.string.course_list_course_added, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Subscribe
+	public void onCourseRemoved(BusEvent busEvent) {
+		if(busEvent.getEvent() == Event.SHOW_MSG_COURSE_REMOVED) {
+			Toast.makeText(this, R.string.course_list_course_removed, Toast.LENGTH_SHORT).show();
+		}
 	}
 }
