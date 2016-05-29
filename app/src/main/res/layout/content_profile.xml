@@ -28,7 +28,9 @@
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/profile_editText_age"
@@ -38,7 +40,9 @@
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        />
 
     <ToggleButton
         style="@style/small_button"
