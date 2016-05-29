@@ -9,6 +9,8 @@
     android:background="@drawable/list_border">
 
     <LinearLayout
+        android:id="@+id/lesson_listitem_linear_layout"
+        android:padding="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,76 +25,53 @@
             android:contentDescription="@string/profile_picture"
             android:maxHeight="80dp"
             android:layout_marginTop="4dp" />
-        <ImageView
-            android:id="@+id/circle_crop"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/round"
-            android:contentDescription="@string/profile_description_profile_image_circle"
-            android:layout_marginTop="4dp"/>
 
         <LinearLayout
-            android:id="@+id/lesson_listitem_linear_layout"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <!-- AUTHOR -->
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/comment_author"
-                android:gravity="center|center_horizontal"
+                android:layout_marginBottom="5dp"
                 android:text="AuthorName"/>
 
             <!-- COMMENT -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TESTblablablablabsjkasnfjkewdnfvjkwenkjgvnefkvbnwjkdnvksvksdnvkja chjsbcfhjbfchbfchdsbfjehbfde"
                 android:id="@+id/lesson_listitem_comment_text"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
                 android:textSize="15dp"/>
 
             </LinearLayout>
     </LinearLayout>
 
 
-    <Button
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/content_lesson_reply"
-        android:id="@+id/lesson_listitem_comment_btn_reply"
-        android:onClick="onReplyButtonClick"
-        android:layout_below="@+id/comment_author"
-        android:enabled="true"
-        android:clickable="false"
-        android:background="@color/colorButton"
-        android:layout_gravity="right"/>
-
-    <!-- REPLY -->
-
     <!-- EXPANSION -->
     <RelativeLayout
         android:id="@+id/lesson_listitem_comment_view_to_expand_replies"
+        android:layout_below="@id/lesson_listitem_linear_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:background="@color/colorPrimary">
+        android:background="#e1e1e1">
 
         <TextView
             android:id="@+id/lesson_listitem_comment_reply_amount_text"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-
+            android:text="antal"
+            android:textSize="15sp"
             android:gravity="center"
             android:singleLine="true" />
         <TextView
@@ -104,9 +83,23 @@
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_toRightOf="@id/lesson_listitem_comment_reply_text"
             android:layout_toEndOf="@id/lesson_listitem_comment_reply_text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center_vertical"
             android:singleLine="true" />
+
+
+        <!-- REPLY -->
+        <Button
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/content_lesson_reply"
+            android:id="@+id/lesson_listitem_comment_btn_reply"
+            android:onClick="onReplyButtonClick"
+            android:enabled="true"
+            android:clickable="false"
+            android:background="@color/colorButton"
+            android:layout_gravity="bottom"/>
 
     </RelativeLayout>
 
