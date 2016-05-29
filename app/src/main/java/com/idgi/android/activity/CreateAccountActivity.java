@@ -23,7 +23,7 @@ import com.idgi.session.SessionData;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private static final String ACCOUNT_TYPE_STUDENT = "Student";
+    private static final String ACCOUNT_TYPE_STUDENT = "Elev";
     private static final String ACCOUNT_TYPE_TEACHER = "Lärare";
 
     private EditText nameText;

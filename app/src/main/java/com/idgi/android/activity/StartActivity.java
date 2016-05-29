@@ -49,7 +49,7 @@ public class StartActivity extends DrawerActivity {
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}
 
-	public void onLogInButtonClick(View view) {
+	public void onLoginButtonClick(View view) {
 		startActivity(new Intent(this, LoginActivity.class));
 		overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
 	}

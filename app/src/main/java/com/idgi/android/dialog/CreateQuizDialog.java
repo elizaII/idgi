@@ -15,6 +15,8 @@ import com.idgi.core.Question;
 import com.idgi.core.Quiz;
 import com.idgi.event.ApplicationBus;
 import com.idgi.android.recyclerview.adapters.CreateQuestionAdapter;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +35,9 @@ public class CreateQuizDialog extends Dialog {
     private List<Question> questionList;
 	public List<String> questionNames;
 
-    public CreateQuizDialog(Context context, List<Question> questionList) {
+    public CreateQuizDialog(Context context) {
         super(context);
-        this.questionList = questionList;
+		this.questionList = new ArrayList<>();
     }
 
     @Override
@@ -94,7 +96,10 @@ public class CreateQuizDialog extends Dialog {
 	};
 
 	@Subscribe
-	public void onQuestionCreated(Question question) {
-		updateQuestionList(question);
+	public void onQuestionCreated(BusEvent event) {
+		if (event.getEvent().equals(Event.QUESTION_ADDED)) {
+			updateQuestionList((Question) event.getData());
+			System.out.println("WE HAVE " + questionList.size() + " QUESTIONS.");
+		}
 	}
 }

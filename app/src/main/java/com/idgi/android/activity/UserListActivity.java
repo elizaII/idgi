@@ -15,6 +15,7 @@ import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
+import com.idgi.util.Util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,12 +37,7 @@ public class UserListActivity extends NameableListActivity {
     private void initializeUserList() {
         List<User> users = FireDatabase.getInstance().getUsers();
 
-        Collections.sort(users, new Comparator<User>() {
-            @Override
-            public int compare(User u1, User u2) {
-                return u1.getName().compareToIgnoreCase(u2.getName());
-            }
-        });
+        Collections.sort(users, Util.SORT_BY_NAME);
 
         RecyclerView.Adapter adapter = new NameableAdapter(this, users);
 

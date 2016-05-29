@@ -28,7 +28,7 @@ public class CourseLessonListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_course_lesson_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_nameable_list, container, false);
 
         initializeList(view);
         return view;
@@ -36,16 +36,16 @@ public class CourseLessonListFragment extends Fragment {
 
     private void initializeList(View view) {
         List<? extends Nameable> lessons = SessionData.getCurrentCourse().getLessons();
-        NameableAdapter adapter = new NameableAdapter(getContext().getApplicationContext(), lessons);
+        NameableAdapter adapter = new NameableAdapter(getContext(), lessons);
 
-        EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.lesson_list_recycler_view);
+        EmptyRecyclerView recycler = (EmptyRecyclerView) view.findViewById(R.id.nameable_list_recycler_view);
         RecyclerViewUtility.connect(getContext(), recycler, adapter);
 
         setupEmptyListLayout(view, recycler);
     }
 
     private void setupEmptyListLayout(View view, EmptyRecyclerView recycler) {
-        View emptyView = view.findViewById(R.id.lesson_list_empty_view);
+        View emptyView = view.findViewById(R.id.nameable_list_view_empty);
         recycler.setEmptyView(emptyView);
 
         TextView textView = (TextView) view.findViewById(R.id.list_empty_view_text);

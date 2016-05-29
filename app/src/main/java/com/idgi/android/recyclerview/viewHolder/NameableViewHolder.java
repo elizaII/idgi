@@ -21,10 +21,6 @@ public abstract class NameableViewHolder extends RecyclerView.ViewHolder {
 		initialize();
 	}
 
-	public void postToBus(BusEvent nameable) {
-		ApplicationBus.post(nameable);
-	}
-
 	protected View findViewById(int id) {
 		return rootView.findViewById(id);
 	}

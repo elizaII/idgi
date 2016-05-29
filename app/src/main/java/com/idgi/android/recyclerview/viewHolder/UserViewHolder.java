@@ -16,23 +16,13 @@ public class UserViewHolder extends NameableViewHolder {
 	public static final int LAYOUT = R.layout.list_row;
 
 	public TextView nameTextView;
-	private Nameable nameable;
 
 	public UserViewHolder(View view){
 		super(view);
-		view.setOnClickListener(onViewClick);
 	}
-
-
-	private final View.OnClickListener onViewClick = new View.OnClickListener() {
-		public void onClick(View view) {
-			// TODO Go to a user's profile if the user is clicked.
-		}
-	};
 
 	@Override
 	public void bind(Nameable nameable) {
-		this.nameable = nameable;
 		nameTextView.setText(nameable.getName());
 	}
 

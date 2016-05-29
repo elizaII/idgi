@@ -3,13 +3,13 @@
     android:layout_height="match_parent">
 
     <com.idgi.android.recyclerview.EmptyRecyclerView
-        android:id="@+id/lesson_list_recycler_view"
+        android:id="@+id/nameable_list_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <include layout="@layout/list_view_empty"
-        android:id="@+id/lesson_list_empty_view"/>
+        android:id="@+id/nameable_list_view_empty"/>
 
 
 </FrameLayout>

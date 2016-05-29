@@ -7,7 +7,7 @@ import com.firebase.client.Firebase;
 import com.idgi.service.FireDatabase;
 import com.idgi.service.IDatabase;
 
-public class Application extends android.app.Application {
+public class Main extends android.app.Application {
 
 	@Override
 	public void onCreate() {

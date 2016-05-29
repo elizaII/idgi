@@ -1,6 +1,7 @@
 
 package com.idgi;
 
+import com.idgi.core.Account;
 import com.idgi.core.Answer;
 import com.idgi.core.Hat;
 import com.idgi.core.Question;
@@ -29,9 +30,11 @@ public class StudentTest {
 
 	@Before
 	public void setUp() {
+		Account account = new Account("login", "password");
 
 		student = new Student("Namn");
-		student.setEmail("email");
+		account.setUser(student);
+		account.setEmail("email");
 
 		testHat1 = new Hat();
 		testHat1.setName("Testhatt 1");

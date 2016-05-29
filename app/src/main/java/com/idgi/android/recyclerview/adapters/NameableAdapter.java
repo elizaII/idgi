@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.idgi.core.Nameable;
 import com.idgi.android.recyclerview.viewHolder.NameableViewHolder;
 import com.idgi.android.recyclerview.viewHolder.ViewHolderFactory;
+import com.idgi.util.Util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +22,7 @@ public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private LayoutInflater inflater;
 
     public NameableAdapter(Context context, List<? extends Nameable> nameables){
-        Collections.sort(nameables, SORT_BY_NAME);
+        Collections.sort(nameables, Util.SORT_BY_NAME);
 
         this.nameables = nameables;
         inflater = LayoutInflater.from(context);
@@ -43,12 +44,6 @@ public class NameableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         NameableViewHolder nameableViewHolder = (NameableViewHolder) viewHolder;
         nameableViewHolder.bind(nameables.get(position));
     }
-
-    private final Comparator<Nameable> SORT_BY_NAME = new Comparator<Nameable>() {
-        public int compare(Nameable first, Nameable second) {
-            return first.getName().compareTo(second.getName());
-        }
-    };
 
     @Override
     public int getItemCount() {

@@ -2,7 +2,6 @@ package com.idgi.android.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,14 +11,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.idgi.ImageUtility;
+import com.idgi.util.ImageUtility;
 import com.idgi.R;
-import com.idgi.application.Application;
+import com.idgi.application.Main;
 import com.idgi.core.Account;
-import com.idgi.core.Student;
 import com.idgi.core.User;
 import com.idgi.session.SessionData;
 
@@ -98,12 +95,12 @@ public class ProfileActivity extends DrawerActivity {
                             user.setProfilePicture(
                                     ImageUtility.drawableToBitmap(Drawable.createFromStream(
                                             inputStream, imageUri.toString())));
-                            Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                            Main.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
                         } catch (FileNotFoundException e) {
                             user.setProfilePicture(
                                     ImageUtility.drawableToBitmap(ContextCompat.
                                             getDrawable(this, R.drawable.ic_account_circle_black_24dp)));
-                            Application.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
+                            Main.getDatabase().saveProfilePicture(SessionData.getLoggedInAccount());
                         }
                     }
                 }

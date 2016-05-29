@@ -37,7 +37,7 @@ public class CourseInfoFragment extends Fragment {
     }
 
     private void initializeInfoView(View view){
-        if(currentCourseHasDescription()) {
+       if(currentCourseHasDescription()) {
             TextView courseInfo = (TextView) view.findViewById(R.id.course_info_txt);
             courseInfo.setText(SessionData.getCurrentCourse().getDescription());
             View emptyView = view.findViewById(R.id.course_info_empty);

@@ -13,6 +13,7 @@ import com.idgi.Config;
 import com.idgi.R;
 import com.idgi.core.Lesson;
 import com.idgi.core.Nameable;
+import com.idgi.event.ApplicationBus;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 
@@ -35,7 +36,7 @@ public class LessonViewHolder extends NameableViewHolder {
 	private final View.OnClickListener onViewClick = new View.OnClickListener() {
 		public void onClick(View view) {
 			BusEvent nameableEvent = new BusEvent(Event.LESSON_SELECTED, nameable);
-			postToBus(nameableEvent);
+			ApplicationBus.post(nameableEvent);
 		}
 	};
 

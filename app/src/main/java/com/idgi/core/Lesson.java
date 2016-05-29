@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Lesson implements Nameable {
 
 	private String name;
-	private String id;
 	private Video video;
 	private Discussion discussion = new Discussion();
 	private IQuiz quiz;
 
+	/** Required for JSON serialization */
 	private Lesson() {}
 	
 	public Lesson(String name, Video video) {
@@ -64,7 +64,7 @@ public class Lesson implements Nameable {
 		return this.discussion;
 	}
 
-	/* Is likely to not have functionality. Here to please Firebase */
+	/** Does nothing. Only here for JSON serialization. */
 	public void setDiscussion(Discussion discussion) {
 	}
 

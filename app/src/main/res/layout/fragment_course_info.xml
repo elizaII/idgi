@@ -66,5 +66,4 @@
 
     <include layout="@layout/list_view_empty"
              android:id="@+id/course_info_empty"/>
-
 </FrameLayout>

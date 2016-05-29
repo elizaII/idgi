@@ -3,7 +3,6 @@ package com.idgi.service;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
@@ -14,13 +13,11 @@ import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.eventbus.Subscribe;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import com.idgi.ImageUtility;
+import com.idgi.util.ImageUtility;
 import com.idgi.R;
 import com.idgi.Config;
 import com.idgi.core.Account;
@@ -33,7 +30,6 @@ import com.idgi.core.Nameable;
 import com.idgi.core.School;
 import com.idgi.core.Student;
 import com.idgi.core.Subject;
-import com.idgi.core.Teacher;
 import com.idgi.core.User;
 import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
@@ -107,16 +103,6 @@ public class FireDatabase implements IDatabase {
 		return users;
 	}
 
-	private void pushAccountInfo(Account account) {
-		Firebase accountRef = ref.child("accounts").child(account.getKey());
-
-		accountRef.child("accountName").setValue(account.getName());
-		accountRef.child("email").setValue(account.getEmail());
-		accountRef.child("password").setValue(account.getPassword());
-		accountRef.child("userType").setValue(account.getUser().getType().toString().toLowerCase(Locale.ENGLISH));
-		accountRef.child("key").setValue(account.getKey());
-	}
-
 	public School getSchool(String schoolName) {
 		return ModelUtility.findByName(schools, schoolName);
 	}
@@ -182,21 +168,6 @@ public class FireDatabase implements IDatabase {
 		if (school == null)
 			throw new IllegalArgumentException();
 
-		/*if (subject == null)
-			subject = new Subject(subjectName);
-
-		school.addSubject(subject);
-
-		Course course = subject.getCourse(courseName);
-
-		if (course == null) {
-			course = new Course(courseName);
-			subject.addCourse(course);
-		}
-
-		if (course.getLesson(lesson.getName()) == null)
-			course.addLesson(lesson);*/
-
 		int subjectIndex = findIndexForNameableByName(school.getSubjects(), subject.getName());
 		String path = String.format(Locale.ENGLISH, "schools/%s/subjects/%d", school.getKey(), subjectIndex);
 
@@ -224,13 +195,6 @@ public class FireDatabase implements IDatabase {
 	/** Lets the listener for changes know which schools have been changed since last pull */
 	private void requestSchoolUpdate(String schoolKey) {
 		schoolsIssuedForUpdateByKey.add(schoolKey);
-	}
-
-	private School getSchoolByKey(String key) {
-		int i = findSchoolIndexByKey(key);
-		School school = schools.get(i);
-
-		return school != null ? school : null;
 	}
 
 	public void saveProfilePicture(Account account) {
@@ -278,7 +242,7 @@ public class FireDatabase implements IDatabase {
 	}
 
 	private void setProfilePicture(User user, Bitmap picture) {
-		user.setProfilePicture(ImageUtility.scaleBitmapAndKeepRation(picture, 32, 32));
+		user.setProfilePicture(ImageUtility.scaleBitmapAndKeepRatio(picture, 32, 32));
 	}
 
 	public void retrieveSchools(boolean isOfflineMode) {

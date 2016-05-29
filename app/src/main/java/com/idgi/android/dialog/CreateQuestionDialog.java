@@ -13,6 +13,8 @@ import com.idgi.R;
 import com.idgi.core.Answer;
 import com.idgi.core.Question;
 import com.idgi.event.ApplicationBus;
+import com.idgi.event.BusEvent;
+import com.idgi.event.Event;
 
 /*
 Dialog that is presented during the quiz creation process.
@@ -84,7 +86,8 @@ public class CreateQuestionDialog extends Dialog {
 
 			updateAnswers(question);
 			updateHint(question);
-			ApplicationBus.post(question);
+			BusEvent event = new BusEvent(Event.QUESTION_ADDED, question);
+			ApplicationBus.post(event);
 			dismiss();
 		}
 	};
