@@ -51,8 +51,8 @@ public class Student extends User {
     }
 
     private void postPointUpdate() {
-        BusEvent pointsEvent = new BusEvent(Event.POINTS_UPDATED, Student.this);
-        ApplicationBus.post(pointsEvent);
+        BusEvent event = new BusEvent(Event.POINTS_UPDATED, this);
+        ApplicationBus.post(event);
     }
 
     @JsonIgnore

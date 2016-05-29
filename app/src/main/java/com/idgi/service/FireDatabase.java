@@ -17,6 +17,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import com.idgi.event.ApplicationBus;
 import com.idgi.util.ImageUtility;
 import com.idgi.R;
 import com.idgi.Config;
@@ -59,6 +60,8 @@ public class FireDatabase implements IDatabase {
 	private FireDatabase() {
 		storage = FirebaseStorage.getInstance();
 		storageRef = storage.getReference();
+
+		ApplicationBus.register(this);
 	}
 
 	/* Push (add) a school to Firebase */
@@ -359,8 +362,10 @@ public class FireDatabase implements IDatabase {
 
 			List<Hat> earnedHats = new ArrayList<>();
 			for (Hat hat : hats)
-				if (user.getPoints() >= hat.pointRequirement())
+				if (user.getPoints() >= hat.pointRequirement()) {
 					earnedHats.add(hat);
+					System.out.println("You get a hat!");
+				}
 
 			user.giveHats(earnedHats);
 		}
