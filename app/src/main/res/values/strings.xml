@@ -222,5 +222,6 @@
     <string name="course_list_course_added">Tillagd i mina kurser</string>
     <string name="course_list_course_removed">Borttagen från mina kurser</string>
     <string name="about">Om</string>
+    <string name="profile_btn_my_hats">Mina hattar</string>
 
 </resources>
