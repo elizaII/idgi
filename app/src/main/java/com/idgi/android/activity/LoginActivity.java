@@ -60,7 +60,7 @@ public class LoginActivity extends DrawerActivity{
         if (account != null) {
             SessionData.setLoggedInAccount(account);
             Main.getDatabase().downloadProfilePicture(this, SessionData.getLoggedInAccount());
-            startActivity(new Intent(this, MyCoursesActivity.class));
+            startActivity(new Intent(this, StartActivity.class));
             finish();
         } else {
             Toast.makeText(this, getResources().getString(R.string.login_wrong_account_or_password), Toast.LENGTH_SHORT).show();
