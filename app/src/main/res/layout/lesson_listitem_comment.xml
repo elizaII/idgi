@@ -86,22 +86,21 @@
             android:gravity="center_vertical"
             android:singleLine="true" />
 
-
-        <!-- REPLY -->
-        <Button
-            android:layout_alignParentRight="true"
-            android:visibility="visible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/content_lesson_reply"
-            android:id="@+id/lesson_listitem_comment_btn_reply"
-            android:onClick="onReplyButtonClick"
-            android:enabled="true"
-            android:clickable="false"
-            android:background="@color/colorButton"
-            android:layout_gravity="bottom"/>
-
     </RelativeLayout>
 
+    <!-- REPLY -->
+    <Button
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/content_lesson_reply"
+        android:id="@+id/lesson_listitem_comment_btn_reply"
+        android:onClick="onReplyButtonClick"
+        android:enabled="true"
+        android:clickable="false"
+        android:background="@color/colorButton"
+        android:layout_gravity="bottom"/>
 
 </com.idgi.android.widget.CommentLayout>
