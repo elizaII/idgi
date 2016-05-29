@@ -9,6 +9,10 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Activity that shows a list of all of the "hats" that the current user has received after collecting points in the app.
+*/
+
 public class HatListActivity extends NameableListActivity {
 
     @Override

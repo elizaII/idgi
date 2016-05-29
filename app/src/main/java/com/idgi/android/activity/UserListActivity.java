@@ -21,6 +21,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+Activity that shows a list of the users.
+*/
+
 public class UserListActivity extends NameableListActivity {
 
     @Override

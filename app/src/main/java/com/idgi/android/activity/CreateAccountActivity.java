@@ -21,6 +21,8 @@ import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 
+/* Activity for the page where the user creates an account. */
+
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String ACCOUNT_TYPE_STUDENT = "Elev";

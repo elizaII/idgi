@@ -2,6 +2,7 @@ package com.idgi.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+/* Answers are components of the quizzes */
 
 @JsonIgnoreProperties({"selectedAndIncorrect", "deselectedAndCorrect"})
 public class Answer {

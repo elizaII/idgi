@@ -3,6 +3,10 @@ package com.idgi.core;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+A discussion is a component of a Lesson and consists of Comments.
+*/
+
 public class Discussion {
 
 	private boolean disabled;
