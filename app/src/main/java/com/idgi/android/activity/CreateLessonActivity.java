@@ -97,6 +97,8 @@ public class CreateLessonActivity extends AppCompatActivity{
 
         selectedCourse.addLesson(lesson);
 
+        selectedSubject.setParentSchoolName(selectedSchool.getName());
+
         pushSubject();
         SessionData.setCurrentLesson(lesson);
 
@@ -144,7 +146,7 @@ public class CreateLessonActivity extends AppCompatActivity{
 
     private void selectCourse(Course course) {
         if (!courses.contains(course))
-            courses.add(course);
+            selectedSubject.addCourse(course);
 
         selectedCourse = course;
 
