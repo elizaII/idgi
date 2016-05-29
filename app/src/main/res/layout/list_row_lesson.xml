@@ -11,8 +11,8 @@
     <!-- Video Thumbnail -->
     <com.google.android.youtube.player.YouTubeThumbnailView
         android:id="@+id/lesson_thumbnail"
-        android:layout_width="124dp"
-        android:layout_height="70dp"
+        android:layout_width="128dp"
+        android:layout_height="72dp"
         android:scaleType="centerCrop"
         android:background="@android:color/black"
         android:layout_alignParentLeft="true"
