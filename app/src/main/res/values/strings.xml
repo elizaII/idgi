@@ -223,5 +223,7 @@
     <string name="course_list_course_removed">Borttagen från mina kurser</string>
     <string name="about">Om</string>
     <string name="profile_btn_my_hats">Mina hattar</string>
+    <string name="quiz_dialog_timed">Med tid</string>
+    <string name="quiz_dialog_normal">Normal</string>
 
 </resources>
