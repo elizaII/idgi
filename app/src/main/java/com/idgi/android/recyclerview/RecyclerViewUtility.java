@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+/*
+Class for basic utility-functions that all RecyclerViews use
+ */
 public class RecyclerViewUtility {
 
 	// Connects an adapter to a RecyclerView and gives it a default LayoutManager

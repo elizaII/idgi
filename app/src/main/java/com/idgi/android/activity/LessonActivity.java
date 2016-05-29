@@ -106,7 +106,7 @@ public class LessonActivity extends DrawerActivity {
     }
 
 
-    public void onToQuizClick(View view) {
+    public void onToQuizButtonClick(View view) {
         IQuiz normalQuiz = lesson.getQuiz();
         SessionData.setCurrentQuiz(normalQuiz);
 
@@ -177,7 +177,6 @@ public class LessonActivity extends DrawerActivity {
     @Subscribe
     public void onQuizTypeSelected(BusEvent busEvent) {
         if(busEvent.getEvent() == Event.QUIZ_TYPE_SELECTED) {
-            Log.d("QUIZ_ACTIVITY", "Lesson");
             IQuiz.Type quizType = (IQuiz.Type) busEvent.getData();
 
             if(quizType == IQuiz.Type.TIMED) {

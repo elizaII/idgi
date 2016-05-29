@@ -34,8 +34,6 @@ public class SearchableActivity extends DrawerActivity {
 
     private ArrayList<Nameable> searchResults;
 
-    private static final String ACTIVITY_TAG = "SEARCH_ACTIVITY";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +41,7 @@ public class SearchableActivity extends DrawerActivity {
 
         ApplicationBus.register(this);
 
+        //Recieve the query from the action
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -67,7 +66,8 @@ public class SearchableActivity extends DrawerActivity {
         recycler.setEmptyView(emptyView);
 
         TextView textView = (TextView) findViewById(R.id.list_empty_view_text);
-        textView.setText(getResources().getString(R.string.search_no_matches));
+        if(textView != null)
+            textView.setText(getResources().getString(R.string.search_no_matches));
     }
 
     @Override
@@ -115,7 +115,6 @@ public class SearchableActivity extends DrawerActivity {
             School school = (School) busEvent.getData();
             SessionData.setCurrentSchool(school);
             startActivity((new Intent(this, SubjectListActivity.class)));
-            Log.d("search", "school");
         }
     }
 
@@ -125,7 +124,6 @@ public class SearchableActivity extends DrawerActivity {
             Subject subject = (Subject) busEvent.getData();
             SessionData.setCurrentSubject(subject);
             startActivity((new Intent(this, CourseListActivity.class)));
-            Log.d("search", "subject");
         }
     }
 
@@ -135,7 +133,6 @@ public class SearchableActivity extends DrawerActivity {
             Course course = (Course) busEvent.getData();
             SessionData.setCurrentCourse(course);
             startActivity((new Intent(this, CourseActivity.class)));
-            Log.d("search", "course");
         }
     }
 
@@ -145,7 +142,6 @@ public class SearchableActivity extends DrawerActivity {
             Lesson lesson = (Lesson) busEvent.getData();
             SessionData.setCurrentLesson(lesson);
             startActivity((new Intent(this, LessonActivity.class)));
-            Log.d("search", "lesson");
         }
     }
 }

@@ -15,7 +15,8 @@ import com.idgi.core.Comment;
 import com.idgi.session.SessionData;
 
 /**
- * Created by tove on 2016-05-26.
+ * Dialog that is presented when leaving a reply
+ * to someone's comment
  */
 public class CommentReplyDialog {
 

@@ -27,7 +27,7 @@ public class SearchSuggestions {
 
     private static SimpleCursorAdapter adapter;
 
-    public static void initiateSearchSuggestions(final SearchView searchView) {
+    public static void initializeSearchSuggestions(final SearchView searchView) {
         final String[] from = new String[]{SearchManager.SUGGEST_COLUMN_TEXT_1};
         final int[] to = new int[]{android.R.id.text1};
         adapter = new SimpleCursorAdapter(searchView.getContext(),

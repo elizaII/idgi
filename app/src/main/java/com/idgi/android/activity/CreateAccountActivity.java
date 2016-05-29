@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +20,10 @@ import com.idgi.core.User;
 import com.idgi.service.FireDatabase;
 import com.idgi.session.SessionData;
 
-/* Activity for the page where the user creates an account. */
+/*
+Activity for the page where the user creates an account.
+*/
+
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -31,15 +33,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private EditText nameText;
     private EditText eMailText;
     private EditText passwordText;
-    private EditText repeatPassordText;
+    private EditText repeatPasswordText;
     private String selectedAccountType;
-
-/*
-    private EditText firstName = (EditText)findViewById(R.id.create_account_edittext_name);
-    if (firstName
-            getText().toString().length() == 0 )
-            firstName.setError( "First name is required!" );
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         nameText = (EditText) findViewById(R.id.create_account_edittext_name);
         eMailText = (EditText) findViewById(R.id.create_account_edittext_email);
         passwordText = (EditText) findViewById(R.id.create_account_edittext_password);
-        repeatPassordText = (EditText) findViewById(R.id.create_account_edittext_repeat_password);
+        repeatPasswordText = (EditText) findViewById(R.id.create_account_edittext_repeat_password);
 
         Spinner accountTypeSpinner = (Spinner) findViewById(R.id.create_account_spinner_account_type);
         String[] items = new String[]{ACCOUNT_TYPE_STUDENT, ACCOUNT_TYPE_TEACHER};
@@ -99,7 +94,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private boolean formIsValid() {
         String accountName = nameText.getText().toString();
         String password = passwordText.getText().toString();
-        String repeatPassword = repeatPassordText.getText().toString();
+        String repeatPassword = repeatPasswordText.getText().toString();
 
         return !accountName.isEmpty() && !password.isEmpty() && password.equals(repeatPassword);
     }

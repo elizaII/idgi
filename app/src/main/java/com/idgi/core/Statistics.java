@@ -6,6 +6,9 @@ import com.idgi.Config;
 import java.util.HashMap;
 import java.util.Locale;
 
+/*
+Class representing statistics of users' achievements.
+ */
 public class Statistics {
 
 	public enum Property {

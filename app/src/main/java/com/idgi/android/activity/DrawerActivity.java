@@ -109,7 +109,7 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 			onPrepareOptionsMenu(navigationMenu);
 
 		if (searchView != null)
-			SearchSuggestions.initiateSearchSuggestions(searchView);
+			SearchSuggestions.initializeSearchSuggestions(searchView);
 
 		showLoggedInUser();
 
@@ -144,7 +144,7 @@ public abstract class DrawerActivity extends AppCompatActivity implements Naviga
 		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		searchView.setIconifiedByDefault(false);
 
-		SearchSuggestions.initiateSearchSuggestions(searchView);
+		SearchSuggestions.initializeSearchSuggestions(searchView);
 
 		return true;
 	}

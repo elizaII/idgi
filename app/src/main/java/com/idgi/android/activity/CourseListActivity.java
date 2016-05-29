@@ -12,7 +12,9 @@ import com.idgi.event.Event;
 import com.idgi.session.SessionData;
 
 import java.util.List;
-
+/*
+List of all courses in a subject
+ */
 public class CourseListActivity extends NameableListActivity {
 
     @Override

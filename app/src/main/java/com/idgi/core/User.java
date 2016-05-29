@@ -1,17 +1,14 @@
 package com.idgi.core;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.util.ArrayList;
-
+/*
+Common abstract class for all users, independent of type.
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,

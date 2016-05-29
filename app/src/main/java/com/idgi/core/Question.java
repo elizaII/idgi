@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/*
+Class representing a question in a Quiz
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Question implements ParentListItem {
 	

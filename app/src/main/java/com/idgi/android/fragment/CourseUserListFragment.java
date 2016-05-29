@@ -21,9 +21,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/*
+Presents the users that have saved the selected course
+ */
 public class CourseUserListFragment extends Fragment {
 
     public CourseUserListFragment() {
+        //Required empty constructor
     }
 
     @Override

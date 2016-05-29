@@ -6,7 +6,9 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
+/*
+Common utility that image-related issues might find helpful
+ */
 public class ImageUtility {
 
 	/* Taken from http://stackoverflow.com/questions/3035692/how-to-convert-a-drawable-to-a-bitmap

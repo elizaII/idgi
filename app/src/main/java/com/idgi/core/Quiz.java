@@ -9,7 +9,9 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+/*
+Standard Quiz-class with no added features
+ */
 @JsonTypeName("quiz")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quiz implements IQuiz{

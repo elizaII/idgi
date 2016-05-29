@@ -56,10 +56,10 @@ public class CourseActivity extends DrawerActivity{
 
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        pagerAdapter.addFragment(new CourseLessonListFragment(), "Lektioner");
-        pagerAdapter.addFragment(new CourseQuizListFragment(), "Quiz");
-        pagerAdapter.addFragment(new CourseInfoFragment(), "Info");
-        pagerAdapter.addFragment(new CourseUserListFragment(), "Elever");
+        pagerAdapter.addFragment(new CourseLessonListFragment(), getString(R.string.tab_title_lessons));
+        pagerAdapter.addFragment(new CourseQuizListFragment(), getString(R.string.tab_title_quiz));
+        pagerAdapter.addFragment(new CourseInfoFragment(), getString(R.string.tab_title_info));
+        pagerAdapter.addFragment(new CourseUserListFragment(), getString(R.string.tab_title_students));
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);

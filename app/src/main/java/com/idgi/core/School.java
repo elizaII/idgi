@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Class representing a school, used as base node in data-storage
+for nameables.
+ */
 public class School implements Nameable {
     private String name;
 

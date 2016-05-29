@@ -1,6 +1,5 @@
 package com.idgi.android.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -8,8 +7,8 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.idgi.R;
 import com.idgi.core.Student;
-import com.idgi.core.User;
 import com.idgi.core.Video;
 import com.idgi.Config;
 import com.idgi.event.ApplicationBus;
@@ -22,7 +21,7 @@ Displays the YouTube video.
  */
 public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePlayer.OnInitializedListener{
 
-    //MUST be multiple of 1000
+    //MUST be multiple of 1000, milliseconds
     private static final int TIME_TO_GET_POINTS = 5 * 1000;
 
     private Handler handler = new Handler();
@@ -54,7 +53,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
             if(currentVideo != null) {
                 youTubePlayer.cueVideo(currentVideo.getUrl());
             } else {
-                //Todo... better error-handling
+                //Standard video that works in case of failure
                 youTubePlayer.cueVideo("ZXilG7pH3is");
             }
         } else {
@@ -71,13 +70,12 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     private YouTubePlayer.PlaybackEventListener playbackListener = new YouTubePlayer.PlaybackEventListener() {
         @Override
         public void onPlaying() {
-            Toast.makeText(getActivity().getBaseContext(), "Playing!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getBaseContext(), R.string.video_playing, Toast.LENGTH_SHORT).show();
             videoPaused = false;
         }
 
         @Override
         public void onPaused() {
-            //Toast.makeText(getActivity().getBaseContext(), "Pausing.", Toast.LENGTH_SHORT).show();
             videoPaused = true;
         }
 
@@ -143,7 +141,7 @@ public class YoutubeFragment extends YouTubePlayerFragment implements YouTubePla
     private void awardPoints(int points) {
         Student student = SessionData.getUserAsStudent();
 		if (student != null) {
-			Toast.makeText(getActivity().getBaseContext(), "Points for you!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity().getBaseContext(), R.string.points_awarded, Toast.LENGTH_SHORT).show();
             student.givePointsForViewingVideo(SessionData.getCurrentVideo(), points);
 			updatePointProgressBar();
 		}

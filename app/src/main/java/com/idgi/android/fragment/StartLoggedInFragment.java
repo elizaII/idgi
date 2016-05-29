@@ -18,7 +18,9 @@ import com.idgi.core.User;
 import com.idgi.session.SessionData;
 
 import java.util.Locale;
-
+/*
+The variation of the start activity that is presented to logged in users
+ */
 public class StartLoggedInFragment extends Fragment {
 
         @Override

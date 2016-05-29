@@ -8,7 +8,10 @@ import com.idgi.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+The type of user that students will be. Student-related functionality
+only available to this type.
+ */
 @JsonTypeName("student")
 public class Student extends User {
 

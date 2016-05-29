@@ -1,5 +1,8 @@
 package com.idgi.core;
 
+/*
+Class representing a video that can be played in a Lesson.
+ */
 public class Video {
 
 	private final String url;

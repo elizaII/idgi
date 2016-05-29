@@ -14,6 +14,9 @@ import com.idgi.event.BusEvent;
 import com.idgi.event.Event;
 import java.util.List;
 
+/*
+Used to present data types for lesson creation
+ */
 public class SelectNameableAdapter extends RecyclerView.Adapter<SelectNameableAdapter.ViewHolder> {
 
     private List<? extends Nameable> nameables;

@@ -11,9 +11,11 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.android.ActivityType;
 import com.idgi.event.ApplicationBus;
-
+/*
+Dialog that is presented when a non-logged in user atttempts to
+interact with features that only works for logged in users
+ */
 public class LoginRequiredDialog extends Dialog {
-
 
     public LoginRequiredDialog(final Context context) {
         super(context);
