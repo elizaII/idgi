@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_lesson"
     tools:context=".android.activity.LessonActivity"
@@ -34,6 +35,7 @@
                 style="?android:attr/progressBarStyleHorizontal"/>
 
             <Button
+                android:layout_marginTop="10dp"
                 android:visibility="gone"
                 android:id="@+id/content_lesson_quiz_button"
                 android:text="@string/go_to_quiz"
@@ -44,12 +46,13 @@
                 android:layout_marginBottom="10dp" />
 
             <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="24sp"
                 android:text="@string/lesson_comments"
-                android:id="@+id/textView10"
-                android:textAlignment="center" />
+                android:id="@+id/textView10"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -57,24 +60,41 @@
                 android:layout_height="match_parent"
                 android:weightSum="1">
 
-                <EditText
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:id="@+id/lesson_new_comment_field"
-                    android:hint="@string/content_lesson_leave_comment"
-                    android:background="@drawable/text_view_border"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-                <Button
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/content_lesson_post_comment"
-                    android:id="@+id/button2"
-                    android:layout_gravity="end"
-                    android:onClick="onCommentButtonClick" />
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:contentDescription="@string/profile_picture"
+                        android:alpha="0.7"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_account_circle_black_24dp"/>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10">
+                        <EditText
+                            android:id="@+id/lesson_new_comment_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/content_lesson_leave_comment"
+                            android:inputType="textMultiLine|textCapSentences"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/content_lesson_btn_send"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_menu_send"
+                        android:onClick="onCommentButtonClick"
+                        android:layout_weight="0"
+                        android:layout_gravity="center|right"/>
+
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/comment_list_recycler_view"
