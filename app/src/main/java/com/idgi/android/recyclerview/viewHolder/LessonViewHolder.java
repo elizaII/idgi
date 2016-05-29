@@ -61,7 +61,7 @@ public class LessonViewHolder extends NameableViewHolder {
 			}
 
 			public void onInitializationFailure(YouTubeThumbnailView view, YouTubeInitializationResult result) {
-				throw new RuntimeException("Initialization for YouTubeThumbnail failed");
+				//do nothing, leave empty thumbnail
 			}
 		});
 	}
