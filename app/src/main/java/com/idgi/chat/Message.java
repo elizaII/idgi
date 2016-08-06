@@ -9,6 +9,7 @@ import java.util.Date;
 public class Message {
     private String mText;
     private String mSender;
+    private String mReceiver;
     private Date mDate;
 
     public Date getDate() {
@@ -33,5 +34,13 @@ public class Message {
 
     public String getText() {
         return mText;
+    }
+
+    public void setReceiver(String receiver) {
+        mReceiver = receiver;
+    }
+
+    public String getReceiver() {
+        return mReceiver;
     }
 }

@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.idgi.android.fragment.CourseChatFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_chat_list_view"
+            android:layout_above="@+id/activity_chat_edit_text_write_message">
+
+        </ListView>
+
+        <EditText
+            android:id="@+id/activity_chat_edit_text_write_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/chat_message"
+            android:layout_above="@+id/chat_btn_send"
+            />
+
+        <Button
+            android:id="@+id/chat_btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chat_btn_send"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/list_view_empty"
+        android:id="@+id/chat_empty"
+        android:visibility="gone" />
+
+</FrameLayout>

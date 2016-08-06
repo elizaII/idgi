@@ -6,8 +6,10 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -24,6 +26,7 @@ public class MessageHandler {
     private static final String TABLE_NAME = "chat";
     private static final String COLUMN_TEXT = "text";
     private static final String COLUMN_SENDER = "sender";
+    private static final String COLUMN_RECEIVER = "receiver";
 
     public interface MessagesListener {
         void onMessageAdded(Message message);
@@ -41,7 +44,8 @@ public class MessageHandler {
 
         HashMap<String, String> messageData = new HashMap<>();
         messageData.put(COLUMN_TEXT, message.getText());
-        messageData.put(COLUMN_SENDER, "Tove");
+        messageData.put(COLUMN_SENDER, message.getSender());
+        messageData.put(COLUMN_RECEIVER, message.getReceiver());
 
         sFirebaseClient.child(TABLE_NAME).child(dateString).setValue(messageData);
     }
@@ -64,6 +68,7 @@ public class MessageHandler {
             Message message = new Message();
             message.setText(messageData.get(COLUMN_TEXT));
             message.setSender(messageData.get(COLUMN_SENDER));
+            message.setReceiver(messageData.get(COLUMN_RECEIVER));
             try {
                 message.setDate(sDateFormat.parse(dataSnapshot.getKey()));
             }

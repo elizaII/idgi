@@ -16,7 +16,7 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
@@ -33,9 +33,25 @@
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/activity_chat_list_view">
+                    android:id="@+id/activity_chat_list_view"
+                    android:layout_above="@+id/activity_chat_edit_text_write_message">
 
                 </ListView>
+
+                <EditText
+                    android:id="@+id/activity_chat_edit_text_write_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/chat_message"
+                    android:layout_above="@+id/chat_btn_send"
+                    />
+
+                <Button
+                    android:id="@+id/chat_btn_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chat_btn_send"
+                    android:layout_alignParentBottom="true"/>
 
 
             </RelativeLayout>

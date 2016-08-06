@@ -15,7 +15,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.common.eventbus.Subscribe;
+import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.android.dialog.PickQuizDialog;
+import com.idgi.android.fragment.CourseChatFragment;
+import com.idgi.chat.ChatActivity;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.TimedQuiz;
@@ -60,13 +63,15 @@ public class CourseActivity extends DrawerActivity{
         pagerAdapter.addFragment(new CourseQuizListFragment(), getString(R.string.tab_title_quiz));
         pagerAdapter.addFragment(new CourseInfoFragment(), getString(R.string.tab_title_info));
         pagerAdapter.addFragment(new CourseUserListFragment(), getString(R.string.tab_title_students));
+        pagerAdapter.addFragment(new CourseChatFragment(), "Chatt");
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.course_tab_layout);
-		if (tabLayout != null)
-        	tabLayout.setupWithViewPager(viewPager);
+		if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -102,12 +107,12 @@ public class CourseActivity extends DrawerActivity{
             new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
-
             String messages[] = {
                     getResources().getString(R.string.course_no_lessons),
                     getResources().getString(R.string.course_no_quizzes),
                     getResources().getString(R.string.course_no_info),
-                    getResources().getString(R.string.course_no_users)
+                    getResources().getString(R.string.course_no_users),
+                    "Det finns ingen chatt här just nu."
             };
 
             String text = messages[position];
@@ -138,7 +143,7 @@ public class CourseActivity extends DrawerActivity{
     public void onQuizSelected(BusEvent busEvent){
         if(busEvent.getEvent() == Event.QUIZ_SELECTED){
             selectedQuiz = (IQuiz) busEvent.getData();
-            Dialog dialog= new PickQuizDialog(this);
+            Dialog dialog = new PickQuizDialog(this);
 
             dialog.show();
             dialog.getWindow().setGravity(Gravity.CENTER);

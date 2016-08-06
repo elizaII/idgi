@@ -231,5 +231,10 @@
     <string name="tab_title_students">Elever</string>
     <string name="video_playing">Playing!</string>
     <string name="points_awarded">Points for you!</string>
+    <string name="chat_message">Skriv ett meddelande</string>
+    <string name="chat_btn_send">Skicka meddelande</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
