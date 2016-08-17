@@ -42,16 +42,13 @@ public class MessageHandler {
         Date date = message.getDate();
         String dateString = sDateFormat.format(date);
 
+        //Creates a HashMap with information from saved message to send to FireBase
         HashMap<String, String> messageData = new HashMap<>();
         messageData.put(COLUMN_TEXT, message.getText());
         messageData.put(COLUMN_SENDER, message.getSender());
         messageData.put(COLUMN_RECEIVER, message.getReceiver());
 
         sFirebaseClient.child(TABLE_NAME).child(dateString).setValue(messageData);
-    }
-
-    public static void stop(FirebaseMessagesListener listener) {
-        sFirebaseClient.removeEventListener(listener);
     }
 
     public static class FirebaseMessagesListener implements ChildEventListener {
@@ -75,7 +72,6 @@ public class MessageHandler {
             catch (Exception e) {
                 Log.d(TAG, "Couldn't parse data: " + e.getLocalizedMessage());
             }
-
             msgListener.onMessageAdded(message);
         }
 

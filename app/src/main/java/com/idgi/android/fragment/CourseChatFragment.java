@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.idgi.R;
 import com.idgi.android.activity.CourseActivity;
 import com.idgi.android.dialog.LoginRequiredDialog;
-import com.idgi.chat.ChatActivity;
 import com.idgi.chat.Message;
 import com.idgi.chat.MessageHandler;
 import com.idgi.session.SessionData;
@@ -28,9 +27,9 @@ import com.idgi.session.SessionData;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CourseChatFragment extends Fragment implements View.OnClickListener, MessageHandler.MessagesListener {
+public class CourseChatFragment extends Fragment implements MessageHandler.MessagesListener {
 
-    public static final String TAG = ChatActivity.class.getSimpleName();
+    public static final String TAG = CourseChatFragment.class.getSimpleName();
     public static final String USER_EXTRA = "USER";
 
     private ArrayList<Message> mMessages;
@@ -40,14 +39,11 @@ public class CourseChatFragment extends Fragment implements View.OnClickListener
     private EditText mInputField;
     private Button mSendButton;
 
-    private String mRecipient;
-    private Date mLastMessageDate = new Date();
-    private String mId;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course_chat, container, false);
 
+        // Creates a login dialog if user is not logged in
         if (SessionData.getLoggedInUser() == null) {
             Dialog dialog = new LoginRequiredDialog(getContext());
             dialog.show();
@@ -56,9 +52,8 @@ public class CourseChatFragment extends Fragment implements View.OnClickListener
             return view;
         }
 
+        // Connects CourseChatFragment to MessageHandler
         MessageHandler.addMessagesListener(this);
-
-        mRecipient = SessionData.getCurrentCourse().getName();
 
         mListView = (ListView) view.findViewById(R.id.activity_chat_list_view);
         mMessages = new ArrayList<>();
@@ -88,9 +83,6 @@ public class CourseChatFragment extends Fragment implements View.OnClickListener
 
         return view;
     }
-
-    @Override
-    public void onClick(View v) {}
 
     @Override
     public void onMessageAdded(Message message) {
@@ -136,5 +128,4 @@ public class CourseChatFragment extends Fragment implements View.OnClickListener
             return convertView;
         }
     }
-
 }

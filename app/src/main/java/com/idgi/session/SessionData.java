@@ -1,6 +1,5 @@
 package com.idgi.session;
 
-import com.idgi.chat.ChatActivity;
 import com.idgi.core.Account;
 import com.idgi.core.Course;
 import com.idgi.core.IQuiz;
@@ -22,7 +21,6 @@ public class SessionData {
 	private static Lesson currentLesson;
 	private static IQuiz currentQuiz;
 	private static Account loggedInAccount;
-	private static ChatActivity currentChat;
 
 	private static boolean firstRun = true;
 
@@ -93,14 +91,6 @@ public class SessionData {
 
 	public static void setCurrentSchool(School school) {
 		currentSchool = school;
-	}
-
-	public static ChatActivity getCurrentChat() {
-		return currentChat;
-	}
-
-	public static void setCurrentChat(ChatActivity chat) {
-		currentChat = chat;
 	}
 
 	public static void setLoggedInAccount(Account account) {

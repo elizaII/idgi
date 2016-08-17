@@ -18,7 +18,6 @@ import com.google.common.eventbus.Subscribe;
 import com.idgi.android.dialog.LoginRequiredDialog;
 import com.idgi.android.dialog.PickQuizDialog;
 import com.idgi.android.fragment.CourseChatFragment;
-import com.idgi.chat.ChatActivity;
 import com.idgi.core.IQuiz;
 import com.idgi.core.Lesson;
 import com.idgi.core.TimedQuiz;
